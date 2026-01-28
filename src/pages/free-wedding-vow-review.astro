@@ -1,0 +1,785 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import Wrapper from "@/components/fundations/containers/Wrapper.astro"
+import Text from "@/components/fundations/elements/Text.astro"
+import BlogCard from "@/components/blog/BlogCard.astro"
+import VowsNextStepCard from "@/components/VowsNextStepCard.astro"
+import SendToAIReview from "@/components/SendToAIReview.astro"
+import { getCollection } from "astro:content"
+
+// Get recent posts for the bottom section
+const posts = (await getCollection("posts"))
+	.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
+	.slice(0, 4)
+---
+
+<BaseLayout>
+	<Fragment slot="head">
+		<title>Free Wedding Vow Review - Length, Timing & Cliché Checker | vows.you</title>
+		<meta name="description" content="Check your wedding vows for ideal length, read time, and cringy clichés. Highlights weak phrases with rewrite suggestions. Privacy-first and fully in-browser." />
+		<link rel="canonical" href="https://vows.you/free-wedding-vow-review" />
+	</Fragment>
+
+	<section>
+		<Wrapper variant="standard" class="pt-32 pb-8">
+			<!-- Header -->
+			<header class="max-w-3xl mb-12">
+				<p class="text-sm font-medium uppercase tracking-wide text-accent-500 mb-4">
+					Wedding Vow Analyzer
+				</p>
+				<Text tag="h1" variant="displayMD" class="font-serif font-medium tracking-tight text-base-900 mb-6">
+					Free Wedding Vow Review
+				</Text>
+				<Text tag="p" variant="textLG" class="text-base-600 leading-relaxed">
+					Paste your wedding vows to check length and read time, and detect clichéd or vague wording like "you are my rock" or "forever and always". Click highlights for better options and prompts to make it sound like you.
+				</Text>
+				<p class="text-sm text-base-500 mt-4 flex items-center gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+					</svg>
+					We value your privacy. This text never leaves your computer.
+				</p>
+			</header>
+
+			<!-- Main Tool Area -->
+			<div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+				<!-- Left Column: Input + Preview -->
+				<div class="space-y-6">
+					<!-- Input Header -->
+					<div class="rounded-2xl border border-base-200 bg-base-50/50 p-4 flex items-center justify-between flex-wrap gap-4">
+						<h2 class="text-lg font-medium text-base-800" id="text-input-label">
+							Analyze your vows for clichés
+						</h2>
+						<div class="flex items-center gap-4">
+							<select
+								id="mode-select"
+								class="text-sm px-3 py-1.5 rounded-lg bg-base-100 border border-base-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+								aria-label="Analysis mode"
+							>
+								<option value="vows" selected>Wedding vows (stricter)</option>
+								<option value="speech">Officiant / speech (looser)</option>
+							</select>
+							<button
+								id="reset-btn"
+								type="button"
+								class="hidden text-sm px-3 py-1.5 rounded-lg bg-base-100 border border-base-200 hover:bg-base-200 transition-colors cursor-pointer"
+							>
+								Reset
+							</button>
+						</div>
+					</div>
+
+					<!-- Textarea -->
+					<textarea
+						id="text-input"
+						aria-labelledby="text-input-label"
+						class="w-full min-h-[260px] md:min-h-[320px] rounded-2xl border border-base-200 bg-white p-5 text-base leading-relaxed shadow-sm focus:outline-none focus:ring-2 focus:ring-accent-500/30 resize-y"
+						placeholder="Paste your wedding vows here…"
+						spellcheck="true"
+					></textarea>
+
+					<!-- Highlighted Preview -->
+					<div class="space-y-4">
+						<div class="flex items-center justify-between">
+							<h2 class="text-lg font-medium text-base-800">
+								Highlighted Preview
+							</h2>
+							<span class="text-sm text-base-500">
+								Click a highlight for suggestions
+							</span>
+						</div>
+						
+						<!-- Legend -->
+						<div class="flex flex-wrap gap-4 text-sm font-medium">
+							<span class="flex items-center gap-1.5">
+								<span class="w-3 h-3 rounded weak--high-preview"></span>
+								High severity
+							</span>
+							<span class="flex items-center gap-1.5">
+								<span class="w-3 h-3 rounded weak--med-preview"></span>
+								Medium severity
+							</span>
+							<span class="flex items-center gap-1.5">
+								<span class="w-3 h-3 rounded weak--low-preview"></span>
+								Low severity
+							</span>
+						</div>
+
+						<div
+							id="highlight-preview"
+							class="min-h-[180px] whitespace-pre-wrap rounded-2xl border border-base-200 bg-base-50/50 p-5 text-base leading-relaxed"
+						>
+							Your highlighted preview will appear here.
+						</div>
+					</div>
+				</div>
+
+				<!-- Right Column: Stats + Panels -->
+				<div class="space-y-6">
+					<!-- Next Step Card -->
+					<VowsNextStepCard toolName="free-wedding-vow-review" />
+
+					<!-- Summary Statistics -->
+					<div class="space-y-3">
+						<h3 class="text-lg font-medium text-base-800">
+							Analysis Summary
+						</h3>
+						<div class="rounded-2xl border border-base-200 bg-base-50/50 p-4">
+							<div class="grid grid-cols-2 gap-4">
+								<div>
+									<p class="text-2xl font-bold text-base-700" data-stat="total-words">0</p>
+									<p class="text-sm text-base-500 mt-0.5">Words</p>
+								</div>
+								<div>
+									<p class="text-2xl font-bold text-base-700" data-stat="read-time">0:00</p>
+									<p class="text-sm text-base-500 mt-0.5">Read Time</p>
+								</div>
+								<div>
+									<p class="text-2xl font-bold text-base-700" data-stat="weak-hits">0</p>
+									<p class="text-sm text-base-500 mt-0.5">Weak Phrases</p>
+								</div>
+								<div>
+									<p class="text-2xl font-bold text-base-700" data-stat="unique-phrases">0</p>
+									<p class="text-sm text-base-500 mt-0.5">Unique Issues</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Severity Rating -->
+					<div class="space-y-3">
+						<h3 class="text-sm font-medium text-base-500">
+							Overall Rating
+						</h3>
+						<div id="severity-card" class="rounded-2xl border border-base-200 bg-base-50/50 p-4">
+							<div class="flex items-center justify-between">
+								<div>
+									<p class="text-3xl font-bold" data-stat="severity-label">--</p>
+									<p class="text-sm text-base-500 mt-0.5" data-stat="severity-description">Paste vows to analyze</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Length Guidance -->
+					<div class="space-y-3">
+						<h3 class="text-sm font-medium text-base-500">
+							Length Guidance
+						</h3>
+						<div class="rounded-2xl border border-base-200 bg-base-50/50 p-4">
+							<p class="text-sm text-base-600" data-stat="length-guidance">
+								Paste your vows to get length feedback.
+							</p>
+						</div>
+					</div>
+
+					<!-- Category Breakdown -->
+					<div class="space-y-3">
+						<h3 class="text-sm font-medium text-base-500">
+							Issues by Category
+						</h3>
+						<div id="category-breakdown" class="rounded-2xl border border-base-200 bg-base-50/50 p-4 space-y-2">
+							<p class="text-sm text-base-500">No issues detected yet.</p>
+						</div>
+					</div>
+
+					<!-- Top 5 Issues -->
+					<div class="space-y-3">
+						<h3 class="text-sm font-medium text-base-500">
+							Top Issues to Fix
+						</h3>
+						<div id="top-phrases" class="rounded-2xl border border-base-200 bg-base-50/50 p-4 space-y-3">
+							<p class="text-sm text-base-500">No issues detected yet.</p>
+						</div>
+					</div>
+
+					<!-- Insights Section -->
+					<div id="insights-section" class="space-y-3">
+						<h3 class="text-sm font-medium text-base-500">
+							Insights
+						</h3>
+						<div class="rounded-2xl border border-base-200 bg-base-50/50 p-4 space-y-4">
+							<p class="text-lg font-semibold text-base-700" data-stat="insights-headline">
+								Paste vows to analyze
+							</p>
+							<div id="insights-bullets" class="space-y-1 text-sm text-base-600">
+							</div>
+							<div id="insights-actions" class="space-y-1 text-sm text-base-700">
+							</div>
+						</div>
+					</div>
+
+					<!-- Fix This Panel -->
+					<div id="fix-panel" class="hidden space-y-3">
+						<div class="flex items-center justify-between">
+							<h3 class="text-sm font-medium text-base-500">
+								Fix This Phrase
+							</h3>
+							<button
+								id="close-fix-panel"
+								type="button"
+								class="text-sm px-2 py-1 rounded-lg bg-base-100 hover:bg-base-200 transition-colors cursor-pointer"
+								aria-label="Close fix panel"
+							>
+								×
+							</button>
+						</div>
+						<div class="rounded-2xl border border-base-200 bg-base-50/50 p-4 space-y-4">
+							<div>
+								<p class="text-xs uppercase tracking-wide text-base-500 mb-1">Phrase</p>
+								<p class="text-lg font-semibold text-base-800" id="fix-phrase-text"></p>
+							</div>
+							<div>
+								<p class="text-xs uppercase tracking-wide text-base-500 mb-1">Why it's a cliché</p>
+								<p class="text-sm text-base-600" id="fix-why"></p>
+							</div>
+							<div>
+								<p class="text-xs uppercase tracking-wide text-base-500 mb-2">Try these instead</p>
+								<div id="fix-suggestions" class="flex flex-wrap gap-2"></div>
+							</div>
+							<div>
+								<p class="text-xs uppercase tracking-wide text-base-500 mb-2">Ask yourself</p>
+								<ul id="fix-prompts" class="text-sm text-base-600 space-y-1 list-disc list-inside"></ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- Send to AI Review -->
+					<SendToAIReview toolId="free-wedding-vow-review" />
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- Tooltip for hover -->
+	<div
+		id="tooltip"
+		class="fixed z-50 hidden max-w-xs p-3 rounded-xl shadow-lg border border-base-200 bg-white text-sm"
+		role="tooltip"
+	>
+		<p class="font-semibold text-base-800 mb-1" id="tooltip-title"></p>
+		<p class="text-base-600 mb-2" id="tooltip-why"></p>
+		<p class="text-xs text-base-500">Click for suggestions</p>
+	</div>
+
+	<!-- Recent Posts Section -->
+	<section class="mt-24 pb-24">
+		<Wrapper variant="standard">
+			<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900">
+				Enjoying the Vow Review?
+			</Text>
+			<Text tag="p" variant="textBase" class="text-base-600 mb-12 mt-2">
+				Check out our latest guides on writing wedding vows that sound like you.
+			</Text>
+			<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 gap-y-12">
+				{posts.map((post) => <BlogCard post={post} />)}
+			</div>
+			<a 
+				href="/guides" 
+				class="inline-flex items-center gap-2 mt-8 text-accent-600 hover:text-accent-700 font-medium transition-colors"
+			>
+				Read All Guides
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M5 12h14"/>
+					<path d="m12 5 7 7-7 7"/>
+				</svg>
+			</a>
+		</Wrapper>
+	</section>
+
+	<!-- Global styles for dynamic highlight elements -->
+	<style is:global>
+		/* Weak phrase highlight styles */
+		.weak-phrase {
+			cursor: pointer;
+			border-radius: 2px;
+			transition: all 0.15s ease;
+		}
+
+		.weak-phrase:hover {
+			filter: brightness(0.9);
+		}
+
+		.weak-phrase:focus {
+			outline: 2px solid var(--color-accent-500);
+			outline-offset: 1px;
+		}
+
+		/* High severity - red */
+		.weak--high {
+			background-color: #FEE2E2;
+			text-decoration: underline;
+			text-decoration-color: #EF4444;
+			text-decoration-thickness: 2px;
+			text-underline-offset: 2px;
+		}
+
+		/* Medium severity - amber */
+		.weak--med {
+			background-color: #FEF3C7;
+			text-decoration: underline;
+			text-decoration-color: #F59E0B;
+			text-decoration-thickness: 2px;
+			text-underline-offset: 2px;
+		}
+
+		/* Low severity - blue */
+		.weak--low {
+			background-color: #DBEAFE;
+			text-decoration: underline;
+			text-decoration-color: #3B82F6;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 2px;
+		}
+
+		/* Legend preview swatches */
+		.weak--high-preview {
+			background-color: #FEE2E2;
+			border: 1px solid #EF4444;
+		}
+
+		.weak--med-preview {
+			background-color: #FEF3C7;
+			border: 1px solid #F59E0B;
+		}
+
+		.weak--low-preview {
+			background-color: #DBEAFE;
+			border: 1px solid #3B82F6;
+		}
+
+		/* Severity color classes */
+		.severity-great {
+			color: #16A34A;
+		}
+
+		.severity-fair {
+			color: #D97706;
+		}
+
+		.severity-weak {
+			color: #DC2626;
+		}
+
+		/* Category badge */
+		.category-badge {
+			display: inline-flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0.25rem 0.5rem;
+			border-radius: 0.375rem;
+			font-size: 0.875rem;
+			background-color: rgb(0 0 0 / 0.05);
+		}
+
+		/* Suggestion chip */
+		.suggestion-chip {
+			display: inline-block;
+			padding: 0.25rem 0.75rem;
+			border-radius: 9999px;
+			font-size: 0.875rem;
+			font-weight: 500;
+			background-color: #DBEAFE;
+			color: #1D4ED8;
+		}
+	</style>
+
+	<script>
+		import type { AnalysisMode, VowAnalysis, VowMatchSpan, TopPhraseEntry } from '../lib/vowReview/types'
+		import { findWeakSpans } from '../lib/vowReview/matcher'
+		import { analyzeText, emptyAnalysis, getSeverityBucketDisplay, getCategoryDisplayName } from '../lib/vowReview/scorer'
+		import { renderHighlightedText } from '../lib/vowReview/render'
+
+		// Window globals for cross-component communication
+		// Using 'any' to avoid TS conflicts with multiple declarations
+		const win = window as any
+
+		// DOM elements
+		const input = document.getElementById('text-input') as HTMLTextAreaElement | null
+		const preview = document.getElementById('highlight-preview') as HTMLElement | null
+		const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement | null
+		const modeSelect = document.getElementById('mode-select') as HTMLSelectElement | null
+		const tooltip = document.getElementById('tooltip') as HTMLElement | null
+		const tooltipTitle = document.getElementById('tooltip-title') as HTMLElement | null
+		const tooltipWhy = document.getElementById('tooltip-why') as HTMLElement | null
+
+		// Stat elements
+		const totalWordsEl = document.querySelector('[data-stat="total-words"]') as HTMLElement | null
+		const readTimeEl = document.querySelector('[data-stat="read-time"]') as HTMLElement | null
+		const weakHitsEl = document.querySelector('[data-stat="weak-hits"]') as HTMLElement | null
+		const uniquePhrasesEl = document.querySelector('[data-stat="unique-phrases"]') as HTMLElement | null
+		const severityLabelEl = document.querySelector('[data-stat="severity-label"]') as HTMLElement | null
+		const severityDescEl = document.querySelector('[data-stat="severity-description"]') as HTMLElement | null
+		const lengthGuidanceEl = document.querySelector('[data-stat="length-guidance"]') as HTMLElement | null
+
+		// Content elements
+		const categoryBreakdown = document.getElementById('category-breakdown') as HTMLElement | null
+		const topPhrasesEl = document.getElementById('top-phrases') as HTMLElement | null
+		const insightsHeadlineEl = document.querySelector('[data-stat="insights-headline"]') as HTMLElement | null
+		const insightsBulletsEl = document.getElementById('insights-bullets') as HTMLElement | null
+		const insightsActionsEl = document.getElementById('insights-actions') as HTMLElement | null
+
+		// Fix panel elements
+		const fixPanel = document.getElementById('fix-panel') as HTMLElement | null
+		const closePanelBtn = document.getElementById('close-fix-panel') as HTMLButtonElement | null
+		const fixPhraseText = document.getElementById('fix-phrase-text') as HTMLElement | null
+		const fixWhy = document.getElementById('fix-why') as HTMLElement | null
+		const fixSuggestions = document.getElementById('fix-suggestions') as HTMLElement | null
+		const fixPrompts = document.getElementById('fix-prompts') as HTMLElement | null
+
+		// Initialize global state
+		win.__vowReviewAnalysis = emptyAnalysis()
+		win.__vowReviewMode = 'vows'
+
+		/**
+		 * Get current analysis mode.
+		 */
+		function getMode(): AnalysisMode {
+			return (modeSelect?.value as AnalysisMode) || 'vows'
+		}
+
+		/**
+		 * Update stats display.
+		 */
+		function updateStats(analysis: VowAnalysis): void {
+			if (totalWordsEl) {
+				totalWordsEl.textContent = analysis.totalWords.toLocaleString()
+			}
+			if (readTimeEl) {
+				readTimeEl.textContent = analysis.readTimeLabel
+			}
+			if (weakHitsEl) {
+				weakHitsEl.textContent = analysis.weakHits.toLocaleString()
+			}
+			if (uniquePhrasesEl) {
+				uniquePhrasesEl.textContent = analysis.uniqueWeakPhrases.toLocaleString()
+			}
+			if (lengthGuidanceEl) {
+				lengthGuidanceEl.textContent = analysis.lengthGuidance
+			}
+
+			// Update severity rating
+			const severityDisplay = getSeverityBucketDisplay(analysis.severityBucket)
+			if (severityLabelEl) {
+				severityLabelEl.textContent = severityDisplay.label
+				severityLabelEl.className = `text-3xl font-bold severity-${analysis.severityBucket}`
+			}
+			if (severityDescEl) {
+				severityDescEl.textContent = severityDisplay.description
+			}
+		}
+
+		/**
+		 * Update category breakdown.
+		 */
+		function updateCategoryBreakdown(analysis: VowAnalysis): void {
+			if (!categoryBreakdown) return
+
+			const categories = Object.entries(analysis.categoryCounts)
+				.filter(([, count]) => count > 0)
+				.sort(([, a], [, b]) => b - a)
+
+			if (categories.length === 0) {
+				categoryBreakdown.innerHTML = '<p class="text-sm text-base-500">No issues detected yet.</p>'
+				return
+			}
+
+			categoryBreakdown.innerHTML = categories
+				.map(([category, count]) => `
+					<div class="category-badge w-full">
+						<span>${getCategoryDisplayName(category)}</span>
+						<span class="font-semibold">${count}</span>
+					</div>
+				`)
+				.join('')
+		}
+
+		/**
+		 * Update top phrases list.
+		 */
+		function updateTopPhrases(topPhrases: TopPhraseEntry[]): void {
+			if (!topPhrasesEl) return
+
+			if (topPhrases.length === 0) {
+				topPhrasesEl.innerHTML = '<p class="text-sm text-base-500">No issues detected yet.</p>'
+				return
+			}
+
+			topPhrasesEl.innerHTML = topPhrases
+				.map((phrase, index) => `
+					<div class="flex items-start gap-2">
+						<span class="text-base-400 font-mono text-sm">${index + 1}.</span>
+						<div class="flex-1">
+							<p class="font-medium text-base-800">"${escapeHtml(phrase.displayText)}"${phrase.count > 1 ? ` <span class="text-base-500">(${phrase.count}×)</span>` : ''}</p>
+							<p class="text-xs text-base-500 mt-0.5">
+								Try: ${phrase.suggestions.slice(0, 3).join(', ')}
+							</p>
+						</div>
+					</div>
+				`)
+				.join('')
+		}
+
+		/**
+		 * Update insights section.
+		 */
+		function updateInsights(analysis: VowAnalysis): void {
+			if (insightsHeadlineEl) {
+				insightsHeadlineEl.textContent = analysis.insights.headline
+			}
+
+			if (insightsBulletsEl) {
+				insightsBulletsEl.innerHTML = analysis.insights.bullets
+					.map(bullet => `<p class="text-base-600">• ${escapeHtml(bullet)}</p>`)
+					.join('')
+			}
+
+			if (insightsActionsEl) {
+				if (analysis.insights.actionSteps.length > 0) {
+					insightsActionsEl.innerHTML = `
+						<p class="font-medium text-base-700 mt-2">Action steps:</p>
+						${analysis.insights.actionSteps.map((step, i) => `<p>${i + 1}. ${escapeHtml(step)}</p>`).join('')}
+					`
+				} else {
+					insightsActionsEl.innerHTML = ''
+				}
+			}
+		}
+
+		/**
+		 * Show fix panel for a phrase.
+		 */
+		function showFixPanel(span: VowMatchSpan): void {
+			if (!fixPanel || !fixPhraseText || !fixWhy || !fixSuggestions || !fixPrompts) return
+
+			fixPhraseText.textContent = span.text
+			fixWhy.textContent = span.why
+
+			fixSuggestions.innerHTML = span.suggestions
+				.slice(0, 6)
+				.map(s => `<span class="suggestion-chip">${escapeHtml(s)}</span>`)
+				.join('')
+
+			fixPrompts.innerHTML = span.proofPrompts
+				.slice(0, 4)
+				.map(p => `<li>${escapeHtml(p)}</li>`)
+				.join('')
+
+			fixPanel.classList.remove('hidden')
+		}
+
+		/**
+		 * Hide fix panel.
+		 */
+		function hideFixPanel(): void {
+			if (fixPanel) {
+				fixPanel.classList.add('hidden')
+			}
+		}
+
+		/**
+		 * Show tooltip near an element.
+		 */
+		function showTooltip(element: HTMLElement, span: VowMatchSpan): void {
+			if (!tooltip || !tooltipTitle || !tooltipWhy) return
+
+			tooltipTitle.textContent = span.text
+			tooltipWhy.textContent = span.why
+
+			// Position tooltip near element
+			const rect = element.getBoundingClientRect()
+			const tooltipRect = tooltip.getBoundingClientRect()
+
+			let left = rect.left
+			let top = rect.bottom + 8
+
+			// Keep tooltip in viewport
+			if (left + 300 > window.innerWidth) {
+				left = window.innerWidth - 310
+			}
+			if (top + tooltipRect.height > window.innerHeight) {
+				top = rect.top - tooltipRect.height - 8
+			}
+
+			tooltip.style.left = `${left}px`
+			tooltip.style.top = `${top}px`
+			tooltip.classList.remove('hidden')
+		}
+
+		/**
+		 * Hide tooltip.
+		 */
+		function hideTooltip(): void {
+			if (tooltip) {
+				tooltip.classList.add('hidden')
+			}
+		}
+
+		/**
+		 * Escape HTML to prevent XSS.
+		 */
+		function escapeHtml(str: string): string {
+			const div = document.createElement('div')
+			div.textContent = str
+			return div.innerHTML
+		}
+
+		/**
+		 * Render the highlighted preview.
+		 */
+		function renderPreview(text: string, mode: AnalysisMode): VowAnalysis {
+			if (!preview) return emptyAnalysis()
+
+			// Handle empty input
+			if (!text.trim()) {
+				preview.textContent = 'Your highlighted preview will appear here.'
+				return emptyAnalysis()
+			}
+
+			try {
+				// Find weak spans
+				const spans = findWeakSpans(text, mode)
+
+				// Render highlighted text
+				const fragment = renderHighlightedText(text, spans)
+				preview.replaceChildren(fragment)
+
+				// Add event listeners to weak phrases
+				const weakPhrases = preview.querySelectorAll('.weak-phrase')
+				weakPhrases.forEach((el) => {
+					const htmlEl = el as HTMLElement
+
+					// Hover events
+					htmlEl.addEventListener('mouseenter', () => {
+						const spanData: VowMatchSpan = {
+							start: parseInt(htmlEl.dataset.start || '0'),
+							end: parseInt(htmlEl.dataset.end || '0'),
+							text: htmlEl.textContent || '',
+							phraseKey: htmlEl.dataset.phraseKey || '',
+							category: htmlEl.dataset.category as VowMatchSpan['category'],
+							severityWeight: parseInt(htmlEl.dataset.weight || '1') as VowMatchSpan['severityWeight'],
+							why: htmlEl.dataset.why || '',
+							suggestions: JSON.parse(htmlEl.dataset.suggestions || '[]'),
+							proofPrompts: JSON.parse(htmlEl.dataset.proofPrompts || '[]'),
+						}
+						showTooltip(htmlEl, spanData)
+					})
+
+					htmlEl.addEventListener('mouseleave', () => {
+						hideTooltip()
+					})
+
+					// Click event
+					htmlEl.addEventListener('click', () => {
+						const spanData: VowMatchSpan = {
+							start: parseInt(htmlEl.dataset.start || '0'),
+							end: parseInt(htmlEl.dataset.end || '0'),
+							text: htmlEl.textContent || '',
+							phraseKey: htmlEl.dataset.phraseKey || '',
+							category: htmlEl.dataset.category as VowMatchSpan['category'],
+							severityWeight: parseInt(htmlEl.dataset.weight || '1') as VowMatchSpan['severityWeight'],
+							why: htmlEl.dataset.why || '',
+							suggestions: JSON.parse(htmlEl.dataset.suggestions || '[]'),
+							proofPrompts: JSON.parse(htmlEl.dataset.proofPrompts || '[]'),
+						}
+						hideTooltip()
+						showFixPanel(spanData)
+					})
+
+					// Keyboard accessibility
+					htmlEl.addEventListener('keydown', (e: KeyboardEvent) => {
+						if (e.key === 'Enter' || e.key === ' ') {
+							e.preventDefault()
+							htmlEl.click()
+						}
+					})
+				})
+
+				// Compute analysis
+				return analyzeText(text, spans, mode)
+			} catch {
+				// Fallback: show plain text on error
+				preview.textContent = text
+				return emptyAnalysis()
+			}
+		}
+
+		/**
+		 * Main update function.
+		 */
+		function update(): void {
+			if (!input) return
+
+			const text = input.value
+			const mode = getMode()
+
+			// Render preview and get analysis
+			const analysis = renderPreview(text, mode)
+
+			// Store globally
+			win.__vowReviewAnalysis = analysis
+			win.__vowReviewMode = mode
+
+			// Update UI
+			updateStats(analysis)
+			updateCategoryBreakdown(analysis)
+			updateTopPhrases(analysis.topPhrases)
+			updateInsights(analysis)
+
+			// Show/hide reset button
+			if (resetBtn) {
+				resetBtn.classList.toggle('hidden', !text.trim())
+			}
+
+			// Hide fix panel when text changes
+			hideFixPanel()
+		}
+
+		/**
+		 * Reset handler.
+		 */
+		function reset(): void {
+			if (!input) return
+			input.value = ''
+			update()
+			input.focus()
+		}
+
+		// Debounce with requestAnimationFrame
+		let frameId = 0
+		function scheduleUpdate(): void {
+			if (frameId) return
+			frameId = requestAnimationFrame(() => {
+				frameId = 0
+				update()
+			})
+		}
+
+		// Event listeners
+		if (input) {
+			input.addEventListener('input', scheduleUpdate)
+		}
+
+		if (modeSelect) {
+			modeSelect.addEventListener('change', update)
+		}
+
+		if (resetBtn) {
+			resetBtn.addEventListener('click', reset)
+		}
+
+		if (closePanelBtn) {
+			closePanelBtn.addEventListener('click', hideFixPanel)
+		}
+
+		// Hide tooltip when clicking outside
+		document.addEventListener('click', (e) => {
+			if (tooltip && !tooltip.contains(e.target as Node)) {
+				hideTooltip()
+			}
+		})
+
+		// Initialize on load
+		update()
+	</script>
+</BaseLayout>

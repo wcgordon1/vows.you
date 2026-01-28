@@ -1,0 +1,335 @@
+---
+/**
+ * SendToAIReview.astro
+ * A card component that allows users to send their text + analysis results to external AI services.
+ * Shows only when user has input and results are available.
+ */
+
+interface Props {
+	toolId: string
+}
+
+const { toolId } = Astro.props
+---
+
+<div
+	id="send-to-ai-review"
+	class="hidden relative p-4 rounded-2xl border border-base-200 bg-gradient-to-br from-accent-50/50 to-sand-100/50 mt-3 opacity-0 translate-y-2 transition-all duration-250 ease-out"
+	data-tool={toolId}
+	role="complementary"
+	aria-label="Send to AI Review"
+>
+	<div class="flex items-start gap-3 mb-4">
+		<div class="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-accent-500 to-accent-600 text-white flex-shrink-0" aria-hidden="true">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="18"
+				height="18"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<path d="M12 8V4H8"></path>
+				<rect width="16" height="12" x="4" y="8" rx="2"></rect>
+				<path d="M2 14h2"></path>
+				<path d="M20 14h2"></path>
+				<path d="M15 13v2"></path>
+				<path d="M9 13v2"></path>
+			</svg>
+		</div>
+		<div>
+			<h4 class="text-base font-semibold text-base-900">Send to AI Review</h4>
+			<p class="text-sm text-base-500 mt-0.5">Get a second opinion with ChatGPT, Perplexity, or Claude.</p>
+		</div>
+	</div>
+
+	<div class="flex flex-wrap gap-2">
+		<button
+			type="button"
+			class="ai-review-btn inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-br from-accent-500 to-accent-600 text-white shadow-sm hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer"
+			data-provider="chatgpt"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+			</svg>
+			ChatGPT
+		</button>
+		<button
+			type="button"
+			class="ai-review-btn inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-base-100 text-base-700 hover:bg-base-200 active:scale-[0.98] transition-all cursor-pointer"
+			data-provider="perplexity"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<circle cx="11" cy="11" r="8"></circle>
+				<path d="m21 21-4.3-4.3"></path>
+			</svg>
+			Perplexity
+		</button>
+		<button
+			type="button"
+			class="ai-review-btn inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-base-100 text-base-700 hover:bg-base-200 active:scale-[0.98] transition-all cursor-pointer"
+			data-provider="claude"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.54"></path>
+				<path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.54"></path>
+			</svg>
+			Claude
+		</button>
+	</div>
+</div>
+
+<script>
+	/**
+	 * SendToAIReview client-side behavior.
+	 * Builds prompts and handles provider button clicks.
+	 */
+
+	const card = document.getElementById('send-to-ai-review') as HTMLElement | null
+	const input = document.getElementById('text-input') as HTMLTextAreaElement | null
+	const toolId = card?.dataset.tool || 'free-wedding-vow-review'
+	const win = window as any
+
+	// Memoization
+	let lastInputText = ''
+	let lastResultsRef: any = null
+	let cachedPrompt = ''
+
+	/**
+	 * Build the AI review prompt with vow-specific content.
+	 */
+	function buildPrompt(): string {
+		if (!input) return ''
+
+		const text = input.value
+		const analysis = win.__vowReviewAnalysis
+		const mode = win.__vowReviewMode || 'vows'
+
+		// Return cached if nothing changed
+		if (text === lastInputText && analysis === lastResultsRef && cachedPrompt) {
+			return cachedPrompt
+		}
+
+		if (!analysis || !text.trim()) {
+			return ''
+		}
+
+		// Build tool outputs summary
+		const lines: string[] = []
+		lines.push(`mode: "${mode}"`)
+		lines.push(`severityLabel: "${analysis.severityBucket}"`)
+		lines.push('')
+		lines.push('stats:')
+		lines.push(`  totalWords: ${analysis.totalWords}`)
+		lines.push(`  readTime: "${analysis.readTimeLabel}"`)
+		lines.push(`  readTimeSeconds: ${analysis.readTimeSeconds}`)
+		lines.push(`  lengthBucket: "${analysis.lengthBucket}"`)
+		lines.push(`  weakPhrasesFound: ${analysis.weakHits}`)
+		lines.push(`  uniqueIssues: ${analysis.uniqueWeakPhrases}`)
+		lines.push('')
+		lines.push(`lengthGuidance: "${analysis.lengthGuidance}"`)
+		lines.push('')
+
+		// Category breakdown
+		const categories = Object.entries(analysis.categoryCounts || {})
+			.filter(([, count]) => (count as number) > 0)
+		if (categories.length > 0) {
+			lines.push('categoryBreakdown:')
+			categories.forEach(([cat, count]) => {
+				lines.push(`  ${cat}: ${count}`)
+			})
+			lines.push('')
+		}
+
+		// Top phrases
+		if (analysis.topPhrases && analysis.topPhrases.length > 0) {
+			lines.push('topWeakPhrases (worst first):')
+			analysis.topPhrases.slice(0, 10).forEach((p: any, i: number) => {
+				const suggestions = (p.suggestions || []).slice(0, 3).join(', ')
+				lines.push(`  ${i + 1}. "${p.displayText}" (${p.count}x, ${p.category})`)
+				lines.push(`     why: ${p.why}`)
+				if (suggestions) {
+					lines.push(`     suggestions: ${suggestions}`)
+				}
+			})
+			lines.push('')
+		}
+
+		// Insights
+		if (analysis.insights) {
+			lines.push(`insightsHeadline: "${analysis.insights.headline}"`)
+			if (analysis.insights.actionSteps && analysis.insights.actionSteps.length > 0) {
+				lines.push('actionSteps:')
+				analysis.insights.actionSteps.slice(0, 5).forEach((step: string, i: number) => {
+					lines.push(`  ${i + 1}. ${step}`)
+				})
+			}
+		}
+
+		const toolOutputsSummary = lines.join('\n')
+
+		// Build complete prompt
+		const prompt = `---
+ROLE:
+You are an expert wedding vow writer and writing coach. You help couples write personal, heartfelt vows that sound like them—not like every other wedding.
+
+TASK:
+Review the wedding vows below using the tool outputs provided. Then:
+1) Identify the 5 most harmful clichés or generic phrases that make these vows sound like everyone else's.
+2) Propose exact rewrites for each that keep the writer's voice but add specificity and personality.
+3) Suggest 2-3 specific memories, promises, or inside references they could add.
+4) Ensure the final vows land in the target time range (1:30–2:15 is ideal for most ceremonies).
+
+CONSTRAINTS:
+- Do not invent memories or details—suggest what KIND of detail to add.
+- Keep their voice and tone; don't make it sound like someone else.
+- Clichés aren't bad, they're just missed opportunities for personalization.
+- Every generic phrase should become specific: names, places, dates, inside jokes, sensory details.
+- If something traditional (like "till death do us part") is used, suggest adding one personal detail alongside it.
+
+INPUT TEXT (THEIR WEDDING VOWS):
+<<<
+${text}
+>>>
+
+TOOL: Free Wedding Vow Review
+ANALYSIS MODE: ${mode === 'vows' ? 'Wedding vows (stricter)' : 'Officiant speech (looser)'}
+
+TOOL OUTPUTS (DO NOT IGNORE):
+${toolOutputsSummary}
+
+REQUESTED OUTPUT FORMAT:
+1. **Top 5 Clichés to Fix** (with exact rewrites)
+2. **Suggested Additions** (specific memories/promises to add)
+3. **Improved Full Rewrite** (complete vows with all fixes applied)
+4. **Quick Tips** (3 actionable next steps)
+
+If helpful, suggest how to refine these vows inside vows.you with prompts + structure.
+---`
+
+		cachedPrompt = prompt
+		lastInputText = text
+		lastResultsRef = analysis
+
+		return prompt
+	}
+
+	/**
+	 * Track analytics event.
+	 */
+	function trackEvent(event: string, properties: Record<string, unknown> = {}): void {
+		if (win.posthog?.capture) {
+			win.posthog.capture(event, properties)
+		}
+	}
+
+	/**
+	 * Show the card with animation.
+	 */
+	function showCard(): void {
+		if (!card) return
+		card.classList.remove('hidden')
+		void card.offsetHeight
+		card.classList.add('opacity-100', 'translate-y-0')
+		card.classList.remove('opacity-0', 'translate-y-2')
+	}
+
+	/**
+	 * Hide the card.
+	 */
+	function hideCard(): void {
+		if (!card) return
+		card.classList.remove('opacity-100', 'translate-y-0')
+		card.classList.add('opacity-0', 'translate-y-2')
+		setTimeout(() => {
+			if (!card.classList.contains('opacity-100')) {
+				card.classList.add('hidden')
+			}
+		}, 250)
+	}
+
+	/**
+	 * Update card visibility.
+	 */
+	function updateVisibility(): void {
+		if (!input || !card) return
+		
+		const hasInput = input.value.trim().length > 0
+		const analysis = win.__vowReviewAnalysis
+		const hasResults = analysis && analysis.totalWords > 0
+
+		if (hasInput && hasResults) {
+			showCard()
+		} else {
+			hideCard()
+		}
+	}
+
+	/**
+	 * Handle provider button clicks.
+	 */
+	function handleProviderClick(provider: string): void {
+		const prompt = buildPrompt()
+		if (!prompt) return
+
+		trackEvent('ai_review_button_clicked', {
+			provider,
+			toolId,
+			pathname: window.location.pathname,
+		})
+
+		const encoded = encodeURIComponent(prompt)
+		
+		let url = ''
+		switch (provider) {
+			case 'chatgpt':
+				url = `https://chatgpt.com/?q=${encoded}`
+				break
+			case 'perplexity':
+				url = `https://www.perplexity.ai/search?q=${encoded}`
+				break
+			case 'claude':
+				url = `https://claude.ai/new?q=${encoded}`
+				break
+		}
+
+		if (url) {
+			window.open(url, '_blank', 'noopener')
+		}
+	}
+
+	// Set up button handlers
+	if (card) {
+		const buttons = card.querySelectorAll('.ai-review-btn')
+		buttons.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const provider = (btn as HTMLElement).dataset.provider
+				if (provider) {
+					handleProviderClick(provider)
+				}
+			})
+		})
+	}
+
+	// Listen for input changes
+	if (input) {
+		input.addEventListener('input', () => {
+			setTimeout(updateVisibility, 100)
+		})
+	}
+
+	// Watch for analysis updates
+	const statsEl = document.querySelector('[data-stat="total-words"]')
+	if (statsEl) {
+		const observer = new MutationObserver(() => {
+			setTimeout(updateVisibility, 50)
+		})
+		observer.observe(statsEl, { childList: true, characterData: true, subtree: true })
+	}
+
+	// Initial check
+	setTimeout(updateVisibility, 100)
+</script>
