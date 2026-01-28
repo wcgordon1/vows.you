@@ -96,11 +96,11 @@ import GoogleColor from "@/components/fundations/icons/GoogleColor.astro";
             </div>
           </div>
           <div class="flex flex-col gap-2">
-            <Button size="base" variant="accent" gap="sm" type="submit">
+            <Button size="base" variant="accent" gap="sm" type="submit" data-ph-event="auth_sign_up_clicked">
               Create account
             </Button>
 
-            <Button size="base" variant="muted" gap="sm" type="button">
+            <Button size="base" variant="muted" gap="sm" type="button" data-ph-event="auth_google_sign_up_clicked">
               <GoogleColor />
               Continue with Google
             </Button>
@@ -112,6 +112,7 @@ import GoogleColor from "@/components/fundations/icons/GoogleColor.astro";
           <a
             href="/sign-in"
             class="font-medium text-accent-500 hover:text-base-500"
+            data-ph-event="auth_sign_in_link_clicked"
           >
             Sign in
           </a>

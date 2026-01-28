@@ -122,11 +122,11 @@ const postsCollection = defineCollection({
 });
 
 export const collections = {
-team,
-customers,
-changelog,
-legal,
-helpcenter,
-postsCollection,
-integrations,
+  team,
+  customers,
+  changelog,
+  legal,
+  helpcenter,
+  posts: postsCollection,
+  integrations,
 };
