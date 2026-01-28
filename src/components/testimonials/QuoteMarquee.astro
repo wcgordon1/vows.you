@@ -21,21 +21,21 @@ const quotes = [
 <section>
   <Wrapper variant="standard" class="relative overflow-hidden border-t">
     <div class="relative flex items-center py-6 overflow-hidden">
-      <div class="flex animate-marquee gap-8 whitespace-nowrap">
+      <div class="flex gap-8 whitespace-nowrap" style="animation: marquee 45s linear infinite;">
         {
           quotes.map((quote) => (
-            <span class="text-sm text-base-400 italic">"{quote}"</span>
+            <span class="text-sm text-base-600 italic">"{quote}"</span>
           ))
         }
         {
           quotes.map((quote) => (
-            <span class="text-sm text-base-400 italic">"{quote}"</span>
+            <span class="text-sm text-base-600 italic">"{quote}"</span>
           ))
         }
       </div>
     </div>
     <div
-      class="absolute inset-0 w-full bg-linear-45 from-white via-transparent to-white pointer-events-none"
+      class="absolute inset-0 w-full bg-gradient-to-r from-white from-5% via-transparent to-white to-95% pointer-events-none"
     >
     </div>
   </Wrapper>
