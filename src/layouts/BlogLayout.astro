@@ -22,7 +22,7 @@ const relatedPosts = allPosts.filter((post) =>
 
 // Structured data
 const SITE_URL = "https://vows.you";
-const postUrl = `${SITE_URL}/blog/posts/${slug || Astro.url.pathname.split("/").filter(Boolean).pop()}`;
+const postUrl = `${SITE_URL}/guides/${slug || Astro.url.pathname.split("/").filter(Boolean).pop()}`;
 const pubDateISO = new Date(frontmatter.pubDate).toISOString();
 // Fallback image if local image can't resolve to absolute URL
 const fallbackImage = `${SITE_URL}/og-image.jpg`;
@@ -146,7 +146,7 @@ const blogPostingSchema = {
                     in
                     {frontmatter.tags.map((tag) => (
                       <>
-                        <a href={`/blog/tags/${tag}`} class="capitalize ">
+                        <a href={`/guides/tags/${tag}`} class="capitalize ">
                           {tag}
                         </a>
                       </>

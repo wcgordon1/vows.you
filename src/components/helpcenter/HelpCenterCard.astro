@@ -11,7 +11,7 @@ import CreditCard from "@/components/fundations/icons/CreditCard.astro";
 
 // Content
 const { page, description, url, iconId } = {
-  url: "/helpcenter/" + Astro.props.post.slug,
+  url: "/support/" + Astro.props.post.slug,
   page: Astro.props.post.data.page,
   description: Astro.props.post.data.description,
   iconId: Astro.props.post.data.iconId || "info-circle", // Default icon if not provided
