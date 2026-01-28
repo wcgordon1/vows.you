@@ -16,6 +16,6 @@ const { page } = Astro.props;
 const { Content } = await page.render();
 ---
 
-<HelpcenterLayout frontmatter={page.data}>
+<HelpcenterLayout frontmatter={page.data} slug={page.slug}>
   <Content />
 </HelpcenterLayout>

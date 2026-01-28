@@ -19,6 +19,7 @@ const { hideNav = false, hideFooter = false } = Astro.props;
 >
   <head>
     <BaseHead />
+    <slot name="head" />
   </head>
   <body class="relative flex flex-col bg-white min-h-svh">
     { !hideNav && <Navigation /> }

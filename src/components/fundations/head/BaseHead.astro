@@ -3,16 +3,53 @@ import Seo from "@/components/fundations/head/Seo.astro";
 import Meta from "@/components/fundations/head/Meta.astro";
 import Fonts from "@/components/fundations/head/Fonts.astro";
 import Favicons from "@/components/fundations/head/Favicons.astro";
+import JsonLd from "@/components/fundations/head/JsonLd.astro";
 // Scripts
 import Fuse from "@/components/fundations/scripts/Fuse.astro";
 // Analytics
 import PostHog from "@/components/posthog.astro";
 import PostHogEvents from "@/components/posthog-events.astro";
+
+// Site-wide structured data
+const SITE_URL = "https://vows.you";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
+  name: "vows.you",
+  url: SITE_URL,
+  logo: {
+    "@type": "ImageObject",
+    url: `${SITE_URL}/logo.svg`,
+    width: 124,
+    height: 118,
+  },
+  sameAs: [
+    SITE_URL,
+    "https://linkedin.com/company/vows-you/",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: "vows.you",
+  description: "Get guided prompts and structure to write personal, meaningful wedding vows. No blank page panic. Your voice, just clearer.",
+  publisher: {
+    "@id": `${SITE_URL}/#organization`,
+  },
+};
 ---
 <Seo />
 <Meta />
 <Fonts />
 <Favicons />
+<!-- Structured Data -->
+<JsonLd data={organizationSchema} />
+<JsonLd data={websiteSchema} />
 <!-- Scripts -->
 <Fuse />
 <!-- Analytics -->

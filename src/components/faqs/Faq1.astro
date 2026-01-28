@@ -1,6 +1,7 @@
 ---
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
 const faqs = [
   {
     question: "How long should wedding vows be?",
@@ -43,6 +44,20 @@ const faqs = [
       "Give yourself at least a few weeks. Starting early means less stress and more time to find the right words.",
   },
 ];
+
+// FAQPage structured data
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
 ---
 
 <section class="border-t border-base-200 border-dashed">
@@ -88,4 +103,5 @@ const faqs = [
       </div>
     </div>
   </Wrapper>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 </section>
