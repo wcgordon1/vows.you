@@ -1,0 +1,42 @@
+---
+// Fundations
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const quotes = [
+  "Finally found my words.",
+  "I cried writing them.",
+  "Everyone was in tears.",
+  "Worth every minute.",
+  "My partner loved it.",
+  "So much easier than expected.",
+  "Felt like me.",
+  "Our guests still talk about it.",
+  "No writer's block.",
+  "Captured our story perfectly.",
+  "I actually enjoyed writing them.",
+  "Better than I imagined.",
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="relative overflow-hidden border-t">
+    <div class="relative flex items-center py-6 overflow-hidden">
+      <div class="flex animate-marquee gap-8 whitespace-nowrap">
+        {
+          quotes.map((quote) => (
+            <span class="text-sm text-base-400 italic">"{quote}"</span>
+          ))
+        }
+        {
+          quotes.map((quote) => (
+            <span class="text-sm text-base-400 italic">"{quote}"</span>
+          ))
+        }
+      </div>
+    </div>
+    <div
+      class="absolute inset-0 w-full bg-linear-45 from-white via-transparent to-white pointer-events-none"
+    >
+    </div>
+  </Wrapper>
+</section>
