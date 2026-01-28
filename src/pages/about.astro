@@ -1,0 +1,201 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import Team from "@/images/assets/team.jpeg";
+import Logo from "@/components/assets/Logo.astro";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import BlogCard from "@/components/blog/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("posts");
+const values = [
+  {
+    title: "Clarity over cleverness",
+    body: "Your vows should be clear and true, not filled with fancy phrases that don't sound like you. We help you find the simple words that say exactly what you mean.",
+  },
+  {
+    title: "Honesty matters",
+    body: "The best vows come from honest reflection. We ask questions that help you get to the heart of what your relationship means to you.",
+  },
+  {
+    title: "Inclusive by design",
+    body: "Love is love. Our prompts are gender-neutral and work for every couple. Your vows should reflect your relationship, whoever you are.",
+  },
+  {
+    title: "Calm confidence",
+    body: "Writing vows can feel overwhelming. We're here to make the process feel manageable, even enjoyable. By the time you're done, you'll feel ready.",
+  },
+];
+const howItWorks = [
+  {
+    name: "1. Answer prompts",
+    title: "We ask thoughtful questions about your relationship, your partner, and what you want to say.",
+  },
+  {
+    name: "2. Build structure",
+    title: "Your answers become the building blocks of your vows. We help you organize them into a natural flow.",
+  },
+  {
+    name: "3. Refine and practice",
+    title: "Edit, polish, and practice reading aloud until your vows feel just right.",
+  },
+];
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="pt-32 pb-12">
+      <div class="max-w-xl mx-auto text-balance">
+        <div class="p-4 bg-sand-100 w-fit rounded-xl">
+          <Logo class="h-8 text-base-900" />
+        </div>
+        <Text
+          tag="h1"
+          variant="displayMD"
+          class="mt-12 font-serif font-medium tracking-tight text-black"
+        >
+          Write vows that sound like you
+        </Text>
+        <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+          Wedding vows are one of the most personal things you'll ever write. But staring at a blank page can feel impossible. We built vows.you to help.
+        </Text>
+        <Text tag="p" variant="textBase" class="mt-8 text-base-500">
+          We started vows.you because we saw too many people struggling with this moment. They wanted to say something meaningful, but didn't know where to start. Generic templates felt hollow. Last-minute panic led to vows that didn't capture what they really felt.
+          <br />
+          <br />
+          So we created something different.
+          <br />
+          <br />
+          vows.you uses thoughtful prompts to help you uncover the stories, memories, and promises that matter most. We guide you through structure and tone so your vows flow naturally. And we give you tools to practice until you feel confident.
+          <br />
+          <br />
+          The result? Vows that sound like you. Personal, not generic. Words you'll be proud to say out loud.
+        </Text>
+      </div>
+    </Wrapper>
+    <Wrapper variant="standard" class="pt-12 pb-4 border-t">
+      <div class="max-w-xl mx-auto text-center text-balance">
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-black"
+        >
+          Your voice matters
+        </Text>
+        <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+          We don't write your vows for you. We help you find the words that are already inside you. Because the best vows come from your own heart and your own story.
+        </Text>
+      </div>
+      <Image
+        src={Team}
+        alt="Couple holding hands at a wedding ceremony"
+        loading="eager"
+        decoding="async"
+        class="object-cover object-center w-full mt-8 max-h-150 rounded-xl"
+      />
+    </Wrapper>
+    <Wrapper variant="standard" class="py-12 border-t border-dashed">
+      <div class="max-w-xl mx-auto text-balance">
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-black"
+        >
+          What we believe
+        </Text>
+        <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+          These principles guide everything we build.
+        </Text>
+        <div class="mt-12 grid grid-cols-2 md:Grid-cols-2 gap-8" role="list">
+          {
+            values.map(({ title, body }) => {
+              const id = title.replace(/\s+/g, "-").toLowerCase();
+
+              return (
+                <article
+                  role="listitem"
+                  class="flex flex-col"
+                  aria-labelledby={`${id}-title`}
+                >
+                  <header>
+                    <Text
+                      tag="h3"
+                      variant="textBase"
+                      id={`${id}-title`}
+                      class="font-medium text-base-900"
+                    >
+                      {title}
+                    </Text>
+                    <p class="mt-2 text-sm text-base-500">{body}</p>
+                  </header>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </Wrapper>
+    <Wrapper variant="standard" class="py-12 border-t border-dashed">
+      <div class="max-w-xl mx-auto text-balance">
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-black"
+        >
+          How it works
+        </Text>
+        <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+          Three simple steps to vows you'll be proud of.
+        </Text>
+        <ul role="list" class="flex flex-col mt-8 divide-y divide-base-200">
+          {
+            howItWorks.map(({ name, title }) => (
+              <li class="flex flex-col py-4">
+                <Text
+                  tag="h3"
+                  variant="textBase"
+                  class="font-medium text-base-900"
+                >
+                  {name}
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-1 text-base-500">
+                  {title}
+                </Text>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Wrapper>
+  </section>
+  <section class="border-t border-base-200 border-dashed">
+    <Wrapper variant="standard" class="py-12">
+      <div class="flex flex-col items-center justify-between md:flex-row">
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-black"
+        >
+          Guides for writing vows
+        </Text>
+        <Button
+          isLink
+          href="/blog"
+          size="sm"
+          variant="muted"
+          class="md:ml-auto"
+        >
+          See all guides
+        </Button>
+      </div>
+      <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        {allPosts.slice(0, 3).map((post) => <BlogCard post={post} />)}
+      </div>
+    </Wrapper>
+  </section></BaseLayout
+>

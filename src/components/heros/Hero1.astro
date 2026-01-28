@@ -1,0 +1,41 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import Dashboard from "@/images/assets/dashboard.jpg";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section>
+  <Wrapper variant="standard" class="pt-32 pb-4">
+    <div class="text-center text-balance">
+      <Text
+        tag="h1"
+        variant="displayMD"
+        class="font-serif font-medium tracking-tight text-black"
+      >
+        Write wedding vows that actually sound like you
+      </Text>
+      <Text
+        tag="p"
+        variant="textBase"
+        class="max-w-xl mx-auto mt-4 text-base-500"
+      >
+        Get structure, prompts, and gentle guidance to help you say what you mean. No blank page panic. Just your voice, clearer.
+      </Text>
+    </div>
+    <div
+      class="flex flex-wrap items-center justify-center w-full mt-10 just gap-2"
+    >
+      <Button isLink size="sm" variant="accent" href="#pricing-section">Start writing</Button>
+      <Button isLink size="sm" variant="muted" href="/blog">See examples</Button>
+    </div>
+    <Image
+      src={Dashboard}
+      alt="Notebook with handwritten wedding vows on a linen surface"
+      class="w-full h-auto mt-8 rounded-xl"
+    />
+  </Wrapper>
+</section>

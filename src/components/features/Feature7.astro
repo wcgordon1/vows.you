@@ -1,0 +1,124 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+// Icons
+import Code from "@/components/fundations/icons/Code.astro";
+import Brain from "@/components/fundations/icons/Brain.astro";
+import Report from "@/components/fundations/icons/Report.astro";
+import Stacked from "@/components/fundations/icons/Stacked.astro";
+import Persist from "@/components/fundations/icons/Persist.astro";
+import Filters from "@/components/fundations/icons/Filters.astro";
+import Settings from "@/components/fundations/icons/Settings.astro";
+import WaveSquare from "@/components/fundations/icons/WaveSquare.astro";
+
+const features = [
+  {
+    id: "prompts",
+    title: "Guided prompts",
+    description:
+      "Answer questions about your relationship, and watch your vows take shape. No staring at a blank page.",
+    icon: Brain,
+  },
+  {
+    id: "structure",
+    title: "Natural structure",
+    description:
+      "Opening, heart, promises, closing. We help you organize your thoughts into a flow that feels right.",
+    icon: WaveSquare,
+  },
+  {
+    id: "tone",
+    title: "Your authentic tone",
+    description:
+      "Funny, poetic, heartfelt, simple. Find the voice that sounds like you, not a wedding template.",
+    icon: Report,
+  },
+  {
+    id: "timing",
+    title: "Perfect timing",
+    description:
+      "Know exactly how long your vows will take to read aloud. No surprises at the altar.",
+    icon: Persist,
+  },
+  {
+    id: "practice",
+    title: "Practice tools",
+    description:
+      "Read through your vows with timing feedback. Build confidence before the ceremony.",
+    icon: Filters,
+  },
+  {
+    id: "drafts",
+    title: "Unlimited drafts",
+    description:
+      "Write, rewrite, revise. Save multiple versions until you find the words that feel perfect.",
+    icon: Code,
+  },
+  {
+    id: "export",
+    title: "Easy export",
+    description:
+      "Print your vows or save them to your phone. Have them ready however you need them.",
+    icon: Stacked,
+  },
+  {
+    id: "private",
+    title: "Kept private",
+    description:
+      "Your vows are personal. We take your privacy seriously and treat your words with care.",
+    icon: Settings,
+  },
+  {
+    id: "inclusive",
+    title: "For every couple",
+    description:
+      "Gender-neutral prompts and inclusive language. Vows that reflect your relationship, whoever you are.",
+    icon: Settings,
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="pt-12 pb-4 border-t">
+    <div class="max-w-xl mx-auto text-center text-balance">
+      <Text
+        tag="h2"
+        variant="displaySM"
+        class="font-serif font-medium tracking-tight text-black"
+      >
+        Say it with confidence
+      </Text>
+      <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+        Your vows deserve more than a last-minute scramble. We give you the tools to write, practice, and deliver words you are proud of.
+      </Text>
+    </div>
+    <div
+      class="items-center mt-12 text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
+    >
+      {
+        features.map((feature) => {
+          const Icon = feature.icon;
+          return (
+            <div class="group">
+              <div class="inline-flex p-4 mx-auto rounded-lg bg-sand-100  duration-300 group-hover:-rotate-12 group-hover:-translate-y-2 w-fit">
+                <Icon size="base" class=" text-accent-500" />
+              </div>
+              <Text
+                tag="h3"
+                variant="textSM"
+                class="mt-4 font-medium text-base-900"
+              >
+                {feature.title}
+              </Text>
+              <Text tag="p" variant="textSM" class="mt-2 text-base-500">
+                {feature.description}
+              </Text>
+            </div>
+          );
+        })
+      }
+    </div>
+  </Wrapper>
+</section>

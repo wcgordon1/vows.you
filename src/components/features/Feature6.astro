@@ -1,0 +1,152 @@
+---
+// Assets
+import { Code } from "astro:components";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const tabs = ["opening", "promises", "memories", "closing"];
+
+const labelMap = {
+  opening: "vow-opening.txt",
+  promises: "vow-promises.txt",
+  memories: "vow-memories.txt",
+  closing: "vow-closing.txt",
+};
+
+const codeBlocks = [
+  {
+    id: "opening",
+    lang: "txt",
+    code: `[Your name], from the moment I met you,
+I knew something had changed.
+
+You walked into my life and suddenly
+everything made a little more sense.
+
+Today, in front of everyone we love,
+I want to tell you what you mean to me.`,
+  },
+  {
+    id: "promises",
+    lang: "txt",
+    code: `I promise to be your partner in all things.
+To celebrate your wins like they're my own.
+To hold your hand through the hard days.
+
+I promise to keep laughing at your jokes,
+even the ones I've heard a hundred times.
+
+I promise to build a life with you
+that's full of adventure, kindness, and love.`,
+  },
+  {
+    id: "memories",
+    lang: "txt",
+    code: `I think about our first trip together,
+how we got lost and ended up somewhere better.
+
+I think about the night you stayed up with me
+when I couldn't sleep, just talking until dawn.
+
+These moments remind me why I chose you,
+and why I'll keep choosing you, every day.`,
+  },
+  {
+    id: "closing",
+    lang: "txt",
+    code: `You are my favorite person.
+My best friend. My home.
+
+I can't wait to see what we build together.
+
+I love you, and I always will.`,
+  },
+];
+---
+
+<section class="overflow-hidden">
+  <Wrapper variant="standard" class="pt-12 pb-4 border-t">
+    <div class="text-center text-balance">
+      <Text
+        tag="h2"
+        variant="displaySM"
+        class="font-serif font-medium tracking-tight text-black"
+      >
+        See what your vows could look like
+      </Text>
+      <Text
+        tag="p"
+        variant="textSM"
+        class="max-w-xl mx-auto mt-4 text-base-500"
+      >
+        Each section builds on the last. Opening, promises, memories, closing. By the end, you have vows that feel true to you.
+      </Text>
+    </div>
+
+    <div
+      class="flex flex-col mt-8 overflow-hidden divide-y divide-sand-50 bg-sand-100 rounded-xl"
+    >
+      <div class="p-4 bg-sand-100">
+        <div class="flex items-center gap-1">
+          <div class="size-2 rounded-full bg-[#ff421e]"></div>
+          <div class="size-2 rounded-full bg-[#60beff]"></div>
+          <div class="size-2 rounded-full bg-[#e3962d]"></div>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-3 lg:divide-x lg:divide-sand-50"
+      >
+        <div class="flex flex-col p-4 gap-2">
+          {
+            tabs.map((lang, i) => {
+              return (
+                <button
+                  class="text-xs text-left cursor-pointer text-base-500"
+                  id={`tab-${lang}`}
+                  data-tab={lang}
+                >
+                  {labelMap[lang]}
+                </button>
+              );
+            })
+          }
+        </div>
+        <div class="lg:col-span-2">
+          {
+            codeBlocks.map(({ id, lang, code }, index) => (
+              <div id={`content-${id}`} class={index === 0 ? "" : "hidden"}>
+                <div class="h-full overflow-hidden  divide-y divide-sand-50">
+                  <Code
+                    lang={lang}
+                    theme="css-variables"
+                    class="h-full p-4 pl-2 text-xs scrollbar-hide"
+                    code={code}
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      const tabs = ["opening", "promises", "memories", "closing"];
+
+      tabs.forEach((lang) => {
+        const button = document.getElementById(`tab-${lang}`);
+        button.addEventListener("click", () => {
+          tabs.forEach((l) => {
+            document.getElementById(`tab-${l}`).classList.remove("opacity-100");
+            document.getElementById(`tab-${l}`).classList.add("opacity-50");
+            document.getElementById(`content-${l}`).classList.add("hidden");
+          });
+
+          button.classList.remove("opacity-50");
+          button.classList.add("opacity-100");
+          document.getElementById(`content-${lang}`).classList.remove("hidden");
+        });
+      });
+    </script>
+  </Wrapper>
+</section>

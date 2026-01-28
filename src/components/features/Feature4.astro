@@ -1,0 +1,182 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import List from "@/components/fundations/icons/List.astro";
+import Analytics from "@/components/fundations/icons/Analytics.astro";
+import UsersGroup from "@/components/fundations/icons/UsersGroup.astro";
+---
+
+<section>
+  <Wrapper variant="standard" class="flex flex-col py-12 border-t gap-24">
+    <div class="items-start grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div class="flex flex-col justify-between h-full text-balance gap-4">
+        <div class="inline-flex p-4 rounded-lg bg-sand-100 w-fit">
+          <List size="base" class="text-accent-600" />
+        </div>
+        <div>
+          <Text
+            tag="h2"
+            variant="displaySM"
+            class="font-serif font-medium tracking-tight text-black"
+          >
+            Organize your thoughts
+          </Text>
+          <Text tag="p" variant="textBase" class="max-w-xl mt-4 text-base-500">
+            Memories, promises, inside jokes. We help you gather all the pieces and organize them into vows that flow naturally.
+          </Text>
+          <div class="flex mt-4">
+            <Button isLink size="sm" variant="accent" href="#pricing-section">Start writing</Button>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden="true"
+        class="p-8 pb-0 pr-0 overflow-hidden bg-sand-100 rounded-xl group"
+      >
+        <div
+          class="max-w-md p-4 mx-auto -mb-1 -mr-1 bg-white rounded-tl-xl shadow-sm outline outline-sand-500/10"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="inline-flex p-4 rounded-lg bg-sand-100 duration-300 group-hover:-rotate-12 group-hover:-translate-y-2"
+            >
+              <UsersGroup size="sm" />
+            </div>
+            <div>
+              <p class="text-sm text-base-500">Your Draft</p>
+              <p class="text-base font-medium text-base-900">
+                Wedding Vows
+              </p>
+            </div>
+          </div>
+          <div
+            class="pt-4 mt-4 border-t grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 border-base-100 gap-y-8"
+          >
+            <div>
+              <p class="text-sm text-base-500">Word count</p>
+              <p class="text-base font-medium text-base-900">312</p>
+            </div>
+            <div>
+              <p class="text-sm text-base-500">Read time</p>
+              <p class="text-base font-medium text-base-900">2 min</p>
+            </div>
+            <div>
+              <p class="text-sm text-base-500">Tone</p>
+              <p class="text-base font-medium text-base-900">Heartfelt</p>
+            </div>
+            <div>
+              <p class="text-sm text-base-500">Structure</p>
+              <p class="text-base font-medium text-base-900">Complete</p>
+            </div>
+            <div>
+              <p class="text-sm text-base-500">Opening</p>
+              <p class="text-base font-medium text-base-900">Done</p>
+            </div>
+            <div>
+              <p class="text-sm text-base-500">Promises</p>
+              <p class="text-base font-medium text-base-900">4</p>
+            </div>
+            <div>
+              <p class="text-sm text-base-500">Memories</p>
+              <p class="text-base font-medium text-base-900">3</p>
+            </div>
+            <div>
+              <p class="text-sm text-base-500">Practice runs</p>
+              <p class="text-base font-medium text-base-900">2</p>
+            </div>
+            <div>
+              <p class="text-sm text-base-500">Closing</p>
+              <p class="text-base font-medium text-base-900">Done</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="items-center grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div
+        class="flex flex-col justify-between h-full text-balance gap-4 lg:order-last"
+      >
+        <div class="inline-flex p-4 rounded-lg bg-sand-100 w-fit">
+          <Analytics size="base" class="text-accent-600" />
+        </div>
+        <div>
+          <Text
+            tag="h2"
+            variant="displaySM"
+            class="font-serif font-medium tracking-tight text-black"
+          >
+            Ceremony-ready timing
+          </Text>
+          <Text tag="p" variant="textBase" class="max-w-xl mt-4 text-base-500">
+            Know exactly how long your vows will take to read. Practice mode helps you pace yourself so you feel confident on the day.
+          </Text>
+          <div class="flex mt-4">
+            <Button isLink size="sm" variant="accent" href="#pricing-section">Start writing</Button>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden="true"
+        class="p-8 pb-0 pl-0 overflow-hidden bg-sand-100 rounded-xl group"
+      >
+        <div class="flex flex-col gap-4">
+          <div
+            class="p-6 bg-white shadow rounded-r-xl outline outline-sand-500/10"
+          >
+            <p class="text-sm text-base-500">Read time</p>
+            <p class="mt-2 text-4xl font-medium text-base-900">2:15</p>
+            <div class="mt-6 space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="size-3 rounded-full group-hover:-translate-x-2 duration-300 bg-[#5aab69]"
+                  ></span>
+                  <span class="text-sm text-base-600">Opening</span>
+                </div>
+                <span class="text-sm font-medium text-base-900">0:30</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="size-3 rounded-full group-hover:-translate-x-2 duration-300 bg-[#ff421e]"
+                  ></span>
+                  <span class="text-sm text-base-600">Closing</span>
+                </div>
+                <span class="text-sm font-medium text-base-900">0:25</span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="p-6 -mb-1 bg-white shadow rounded-tr-xl outline outline-sand-500/10"
+          >
+            <p class="text-sm text-base-500">Progress</p>
+            <p class="mt-2 text-4xl font-medium text-base-900">85%</p>
+            <div class="mt-6 space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="size-3 rounded-full group-hover:-translate-x-2 duration-300 bg-[#60beff]"
+                  ></span>
+                  <span class="text-sm text-base-600">Promises</span>
+                </div>
+                <span class="text-sm font-medium text-base-900">4 of 4</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="size-3 rounded-full group-hover:-translate-x-2 duration-300 bg-[#e3962d]"
+                  ></span>
+                  <span class="text-sm text-base-600">Memories</span>
+                </div>
+                <span class="text-sm font-medium text-base-900">3 of 3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

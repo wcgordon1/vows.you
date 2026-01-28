@@ -1,0 +1,91 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const faqs = [
+  {
+    question: "How long should wedding vows be?",
+    answer:
+      "Most vows are between 1 and 3 minutes when read aloud. We help you track your timing so you can hit the right length for your ceremony.",
+  },
+  {
+    question: "What if I'm not a good writer?",
+    answer:
+      "You don't need to be. Our prompts ask you questions about your relationship, and your answers become the building blocks of your vows. We help you organize them into something beautiful.",
+  },
+  {
+    question: "Should our vows be the same length?",
+    answer:
+      "They don't have to be identical, but similar lengths help the ceremony flow. Aim for the same general range, and you'll be in good shape.",
+  },
+  {
+    question: "Can I write funny vows?",
+    answer:
+      "Absolutely. Humor can be a wonderful part of your vows. We help you balance funny moments with heartfelt ones so it all feels genuine.",
+  },
+  {
+    question: "What if I cry while reading them?",
+    answer:
+      "Totally normal. Practice reading them aloud beforehand. Pausing is okay. Taking a breath is okay. Your partner and guests will understand.",
+  },
+  {
+    question: "Is my writing private?",
+    answer:
+      "We take your privacy seriously. Your vows are personal, and we treat them that way.",
+  },
+  {
+    question: "Can I save multiple drafts?",
+    answer:
+      "Yes. Write, rewrite, and refine at your own pace. We save your work so you can come back whenever inspiration strikes.",
+  },
+  {
+    question: "When should I start writing my vows?",
+    answer:
+      "Give yourself at least a few weeks. Starting early means less stress and more time to find the right words.",
+  },
+];
+---
+
+<section class="border-t border-base-200 border-dashed">
+  <Wrapper variant="standard" class="pt-12 pb-4">
+    <div class="max-w-xl mx-auto text-center text-balance">
+      <Text
+        tag="h2"
+        variant="displaySM"
+        class="font-serif font-medium text-black"
+      >
+        Frequently asked questions
+      </Text>
+
+      <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+        Common questions about writing wedding vows
+      </Text>
+
+      <div class="relative w-full mx-auto mt-12 space-y-4">
+        {
+          faqs.map((faq) => (
+            <details class="text-left cursor-pointer group">
+              <summary class="flex items-center justify-between w-full pb-1 text-left select-none  text-base-600 hover:text-accent-500">
+                {faq.question}
+                <svg
+                  class="w-5 h-5 duration-300 ease-out text-accent-500 transform group-open:-rotate-45"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 6v12m6-6H6"
+                  />
+                </svg>
+              </summary>
+              <div class="py-4 pt-2 text-base-500">{faq.answer}</div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>

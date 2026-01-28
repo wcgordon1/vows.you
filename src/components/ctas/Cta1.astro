@@ -1,0 +1,30 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+---
+
+<section class="border-t border-base-200 border-dashed">
+  <Wrapper variant="standard" class="py-4 lg:border-x lg:border-base-200">
+    <div class="p-8 py-24 text-center rounded-xl bg-accent-500">
+      <div class="text-balance">
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="font-serif font-medium text-white"
+        >
+          Your voice, just clearer
+        </Text>
+        <Text tag="p" variant="textLG" class="mt-2 text-white/80">
+          No blank page panic. No generic templates. Just guided prompts that help you write vows that sound like you.
+        </Text>
+      </div>
+      <div class="flex justify-center mt-8">
+        <Button isLink gap="sm" size="base" variant="muted" href="#pricing-section">
+          Start writing
+        </Button>
+      </div>
+    </div>
+  </Wrapper>
+</section>
