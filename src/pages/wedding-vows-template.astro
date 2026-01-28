@@ -23,7 +23,7 @@ import { promiseSuggestions, closingOptions } from "@/lib/vowTemplate"
 					Wedding Vows Template
 				</Text>
 				<Text tag="p" variant="textLG" class="text-base-600 leading-relaxed">
-					Answer a few prompts. We'll generate a vow that sounds like you—clear, modern, and about two minutes long.
+					Answer a few prompts. We'll generate a vow that sounds like you... clear, modern, and about two minutes long.
 				</Text>
 				<p class="text-sm text-base-500 mt-4 flex items-center gap-2">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
@@ -390,7 +390,7 @@ import { promiseSuggestions, closingOptions } from "@/lib/vowTemplate"
 							<div class="flex items-center justify-between gap-4">
 								<div>
 									<p class="text-sm font-medium text-base-700">Share this vow</p>
-									<p class="text-xs text-base-500 mt-0.5">Links include your answers. Only share if you're comfortable.</p>
+									<p class="text-xs text-base-500 mt-0.5">Links include your vows and answers. Only share if you're comfortable.</p>
 								</div>
 								<button
 									id="share-btn"
@@ -402,7 +402,10 @@ import { promiseSuggestions, closingOptions } from "@/lib/vowTemplate"
 										<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
 										<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
 									</svg>
-									<span id="share-btn-text">Copy Link</span>
+									<span id="share-btn-text">
+										<span class="block md:hidden">Copy</span>
+										<span class="hidden md:inline">Copy Link</span>
+									</span>
 								</button>
 							</div>
 							<p id="share-error" class="hidden text-sm text-amber-600 mt-2"></p>
