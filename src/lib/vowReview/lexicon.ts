@@ -15,7 +15,14 @@ export const vowLexicon: VowLexiconItem[] = [
 	// ============================================================
 	{
 		key: 'from_the_moment',
-		patterns: [/\bfrom\s+the\s+(?:very\s+)?(?:first\s+)?moment\s+(?:I|i)\s+(?:saw|met|laid\s+eyes\s+on)\s+you\b/gi],
+		patterns: [
+			// Full phrase variations
+			/\bfrom\s+the\s+(?:very\s+)?(?:first\s+)?moment\s+(?:I|i|we)\s+(?:saw|met|laid\s+eyes\s+on|first\s+met)\b/gi,
+			// Simpler base pattern - "from the moment" followed by common continuations
+			/\bfrom\s+the\s+(?:very\s+)?(?:first\s+)?moment\s+(?:I|i|we)\b/gi,
+			// Even simpler - just "from the moment" as a sentence starter
+			/\bfrom\s+the\s+(?:very\s+)?(?:first\s+)?moment\b/gi,
+		],
 		category: 'cliche_opening',
 		why: 'This opening is used in countless vows and romantic movies. It can feel impersonal without a specific detail.',
 		suggestions: [
