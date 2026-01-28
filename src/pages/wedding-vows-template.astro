@@ -1,0 +1,1118 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import Wrapper from "@/components/fundations/containers/Wrapper.astro"
+import Text from "@/components/fundations/elements/Text.astro"
+import { promiseSuggestions, closingOptions } from "@/lib/vowTemplate"
+---
+
+<BaseLayout>
+	<Fragment slot="head">
+		<title>Wedding Vows Template (Free) - Ceremony-Ready in Minutes</title>
+		<meta name="description" content="Answer a few prompts and generate a simple, personal wedding vow. Download as PDF or DOCX. Privacy-first and fully in-browser." />
+		<link rel="canonical" href="https://vows.you/wedding-vows-template" />
+	</Fragment>
+
+	<section>
+		<Wrapper variant="standard" class="pt-32 pb-8">
+			<!-- Header -->
+			<header class="max-w-3xl mb-12">
+				<p class="text-sm font-medium uppercase tracking-wide text-accent-500 mb-4">
+					Ceremony-ready in minutes
+				</p>
+				<Text tag="h1" variant="displayMD" class="font-serif font-medium tracking-tight text-base-900 mb-6">
+					Wedding Vows Template
+				</Text>
+				<Text tag="p" variant="textLG" class="text-base-600 leading-relaxed">
+					Answer a few prompts. We'll generate a vow that sounds like you—clear, modern, and about two minutes long.
+				</Text>
+				<p class="text-sm text-base-500 mt-4 flex items-center gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+					</svg>
+					Your answers stay in your browser. Nothing is sent to a server.
+				</p>
+			</header>
+
+			<!-- Main Tool Area -->
+			<div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+				<!-- Left Column: Stepper + Preview -->
+				<div class="space-y-6 min-w-0">
+					<!-- Start Screen -->
+					<div id="start-screen" class="rounded-2xl border border-base-200 bg-white p-8 text-center">
+						<div class="max-w-md mx-auto">
+							<div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-accent-100 to-accent-50 flex items-center justify-center">
+								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent-600">
+									<path d="M12 20h9"></path>
+									<path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+								</svg>
+							</div>
+							<h2 class="text-xl font-semibold text-base-900 mb-3">Ready to write your vows?</h2>
+							<p class="text-base-600 mb-6">Answer 10 quick prompts and we'll generate a personal, ceremony-ready vow for you.</p>
+							<button
+								id="start-btn"
+								type="button"
+								class="inline-flex items-center justify-center h-12 px-8 rounded-full text-base font-semibold text-white bg-accent-500 hover:bg-accent-600 transition-colors cursor-pointer"
+								data-ph-event="template_started"
+							>
+								Start Writing
+							</button>
+							<p class="text-sm text-base-400 mt-4">Takes about 5 minutes</p>
+						</div>
+					</div>
+
+					<!-- Stepper Container -->
+					<div id="stepper-container" class="hidden rounded-2xl border border-base-200 bg-white">
+						<!-- Step Indicator -->
+						<div class="px-6 py-4 border-b border-base-100 flex items-center justify-between">
+							<span class="text-sm font-medium text-base-500">
+								Step <span id="current-step">1</span> / 10
+							</span>
+							<div class="flex gap-1">
+								{Array.from({ length: 10 }).map((_, i) => (
+									<div
+										class="step-dot w-2 h-2 rounded-full bg-base-200 transition-colors"
+										data-step={i}
+									/>
+								))}
+							</div>
+						</div>
+
+						<!-- Step Content -->
+						<div class="p-6">
+							<!-- Step 1: Partner Name -->
+							<div class="step-content" data-step="0">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">What's your partner's name?</h3>
+								<p class="text-sm text-base-500 mb-4">Leave blank to keep it generic (e.g., "my love").</p>
+								<input
+									type="text"
+									id="input-partner-name"
+									class="w-full h-12 px-4 rounded-xl border border-base-200 bg-white text-base focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+									placeholder="Their name (optional)"
+								/>
+							</div>
+
+							<!-- Step 2: Variant -->
+							<div class="step-content hidden" data-step="1">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">Choose a voice</h3>
+								<p class="text-sm text-base-500 mb-4">Choose the voice that fits you best. Anyone can use either.</p>
+								<div class="space-y-3">
+									<label class="flex items-center gap-3 p-4 rounded-xl border border-base-200 hover:border-accent-300 cursor-pointer transition-colors has-[:checked]:border-accent-500 has-[:checked]:bg-accent-50/50">
+										<input type="radio" name="variant" value="for-her" class="w-5 h-5 text-accent-500 focus:ring-accent-500" checked />
+										<span class="font-medium text-base-800">For Her</span>
+									</label>
+									<label class="flex items-center gap-3 p-4 rounded-xl border border-base-200 hover:border-accent-300 cursor-pointer transition-colors has-[:checked]:border-accent-500 has-[:checked]:bg-accent-50/50">
+										<input type="radio" name="variant" value="for-him" class="w-5 h-5 text-accent-500 focus:ring-accent-500" />
+										<span class="font-medium text-base-800">For Him</span>
+									</label>
+								</div>
+							</div>
+
+							<!-- Step 3: Tone -->
+							<div class="step-content hidden" data-step="2">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">Pick your tone</h3>
+								<p class="text-sm text-base-500 mb-4">This shapes the overall feel of your vow.</p>
+								<div class="space-y-3">
+									<label class="flex items-center gap-3 p-4 rounded-xl border border-base-200 hover:border-accent-300 cursor-pointer transition-colors has-[:checked]:border-accent-500 has-[:checked]:bg-accent-50/50">
+										<input type="radio" name="tone" value="heartfelt" class="w-5 h-5 text-accent-500 focus:ring-accent-500" checked />
+										<div>
+											<span class="font-medium text-base-800">Heartfelt</span>
+											<p class="text-sm text-base-500">Warm, emotional, and sincere</p>
+										</div>
+									</label>
+									<label class="flex items-center gap-3 p-4 rounded-xl border border-base-200 hover:border-accent-300 cursor-pointer transition-colors has-[:checked]:border-accent-500 has-[:checked]:bg-accent-50/50">
+										<input type="radio" name="tone" value="modern-minimal" class="w-5 h-5 text-accent-500 focus:ring-accent-500" />
+										<div>
+											<span class="font-medium text-base-800">Modern Minimal</span>
+											<p class="text-sm text-base-500">Clean, direct, and understated</p>
+										</div>
+									</label>
+									<label class="flex items-center gap-3 p-4 rounded-xl border border-base-200 hover:border-accent-300 cursor-pointer transition-colors has-[:checked]:border-accent-500 has-[:checked]:bg-accent-50/50">
+										<input type="radio" name="tone" value="funny-light" class="w-5 h-5 text-accent-500 focus:ring-accent-500" />
+										<div>
+											<span class="font-medium text-base-800">Funny & Light</span>
+											<p class="text-sm text-base-500">Playful with heart underneath</p>
+										</div>
+									</label>
+								</div>
+							</div>
+
+							<!-- Step 4: Humor Toggle -->
+							<div class="step-content hidden" data-step="3">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">Add a light moment?</h3>
+								<p class="text-sm text-base-500 mb-4">We can add one light, sweet line to your vows. Nothing roast-y—just a smile.</p>
+								<label class="flex items-center gap-3 p-4 rounded-xl border border-base-200 hover:border-accent-300 cursor-pointer transition-colors has-[:checked]:border-accent-500 has-[:checked]:bg-accent-50/50">
+									<input type="checkbox" id="input-humor" class="w-5 h-5 rounded text-accent-500 focus:ring-accent-500" />
+									<span class="font-medium text-base-800">Yes, add one light line</span>
+								</label>
+							</div>
+
+							<!-- Step 5: How You Met -->
+							<div class="step-content hidden" data-step="4">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">How did you two meet?</h3>
+								<p class="text-sm text-base-500 mb-4">1–2 sentences. Keep it simple—the where, when, or what drew you in.</p>
+								<textarea
+									id="input-how-met"
+									class="w-full h-32 px-4 py-3 rounded-xl border border-base-200 bg-white text-base leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+									placeholder="We met at a coffee shop in Brooklyn. You were reading my favorite book..."
+								></textarea>
+							</div>
+
+							<!-- Step 6: Favorite Memory -->
+							<div class="step-content hidden" data-step="5">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">What's your favorite shared moment?</h3>
+								<p class="text-sm text-base-500 mb-4">2–4 sentences. A trip, a quiet evening, a silly inside joke—something that's just yours.</p>
+								<textarea
+									id="input-favorite-memory"
+									class="w-full h-36 px-4 py-3 rounded-xl border border-base-200 bg-white text-base leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+									placeholder="I'll never forget that night we got lost in Paris and ended up dancing in the rain..."
+								></textarea>
+							</div>
+
+							<!-- Step 7: I Knew I Loved You When -->
+							<div class="step-content hidden" data-step="6">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">I knew I loved you when...</h3>
+								<p class="text-sm text-base-500 mb-4">1–2 sentences. What moment made it click?</p>
+								<textarea
+									id="input-knew-loved"
+									class="w-full h-28 px-4 py-3 rounded-xl border border-base-200 bg-white text-base leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+									placeholder="...you showed up at 3am with soup when I was sick, no questions asked."
+								></textarea>
+							</div>
+
+							<!-- Step 8: Three Qualities -->
+							<div class="step-content hidden" data-step="7">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">Three qualities you admire in them</h3>
+								<p class="text-sm text-base-500 mb-4">What do you love about who they are?</p>
+								<div class="space-y-3">
+									<input
+										type="text"
+										id="input-quality-1"
+										class="w-full h-12 px-4 rounded-xl border border-base-200 bg-white text-base focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+										placeholder="e.g., kindness"
+									/>
+									<input
+										type="text"
+										id="input-quality-2"
+										class="w-full h-12 px-4 rounded-xl border border-base-200 bg-white text-base focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+										placeholder="e.g., sense of humor"
+									/>
+									<input
+										type="text"
+										id="input-quality-3"
+										class="w-full h-12 px-4 rounded-xl border border-base-200 bg-white text-base focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+										placeholder="e.g., patience"
+									/>
+								</div>
+							</div>
+
+							<!-- Step 9: Promises -->
+							<div class="step-content hidden" data-step="8">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">Choose 3 promises</h3>
+								<p class="text-sm text-base-500 mb-4">Select exactly 3 that feel right for you.</p>
+								<div class="space-y-2 max-h-64 overflow-y-auto pr-2">
+									{promiseSuggestions.map((promise) => (
+										<label class="promise-option flex items-start gap-3 p-3 rounded-xl border border-base-200 hover:border-accent-300 cursor-pointer transition-colors has-[:checked]:border-accent-500 has-[:checked]:bg-accent-50/50">
+											<input
+												type="checkbox"
+												name="promises"
+												value={promise.key}
+												data-text={promise.text}
+												class="promise-checkbox w-5 h-5 mt-0.5 rounded text-accent-500 focus:ring-accent-500"
+											/>
+											<span class="text-sm text-base-700">{promise.text}</span>
+										</label>
+									))}
+								</div>
+								<p id="promise-count" class="text-sm text-base-500 mt-3">0 of 3 selected</p>
+								<div class="mt-4 pt-4 border-t border-base-100">
+									<label class="text-sm font-medium text-base-700">Add your own promise (optional)</label>
+									<input
+										type="text"
+										id="input-custom-promise"
+										class="w-full h-10 px-3 mt-2 rounded-lg border border-base-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+										placeholder="I promise to..."
+									/>
+								</div>
+							</div>
+
+							<!-- Step 10: Future + Closing -->
+							<div class="step-content hidden" data-step="9">
+								<h3 class="text-lg font-semibold text-base-900 mb-2">What are you excited to build together?</h3>
+								<p class="text-sm text-base-500 mb-4">1–2 sentences about your future.</p>
+								<textarea
+									id="input-future"
+									class="w-full h-24 px-4 py-3 rounded-xl border border-base-200 bg-white text-base leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-accent-500/30"
+									placeholder="I can't wait to travel the world with you, build a home together..."
+								></textarea>
+								<div class="mt-6">
+									<label class="text-sm font-medium text-base-700 mb-3 block">How do you want to close?</label>
+									<div class="space-y-2">
+										{closingOptions.map((option, i) => (
+											<label class="flex items-center gap-3 p-3 rounded-xl border border-base-200 hover:border-accent-300 cursor-pointer transition-colors has-[:checked]:border-accent-500 has-[:checked]:bg-accent-50/50">
+												<input
+													type="radio"
+													name="closing"
+													value={option.key}
+													class="w-5 h-5 text-accent-500 focus:ring-accent-500"
+													checked={i === 0}
+												/>
+												<span class="text-sm text-base-700">{option.label}</span>
+											</label>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Navigation -->
+						<div class="px-6 py-4 border-t border-base-100 flex items-center justify-between">
+							<button
+								id="back-btn"
+								type="button"
+								class="hidden h-10 px-5 rounded-full text-sm font-medium text-base-600 bg-base-100 hover:bg-base-200 transition-colors cursor-pointer"
+							>
+								Back
+							</button>
+							<div class="flex-1"></div>
+							<button
+								id="next-btn"
+								type="button"
+								class="h-10 px-6 rounded-full text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors cursor-pointer"
+							>
+								Next
+							</button>
+							<button
+								id="generate-btn"
+								type="button"
+								class="hidden h-10 px-6 rounded-full text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors cursor-pointer"
+							>
+								Generate Vow
+							</button>
+						</div>
+					</div>
+
+					<!-- Output Section -->
+					<div id="output-section" class="hidden space-y-6">
+						<!-- Generated Vow Preview (Editable) -->
+						<div class="rounded-2xl border border-base-200 bg-white p-6">
+							<div class="flex items-center justify-between mb-4">
+								<h3 class="text-lg font-semibold text-base-900">Your Vow</h3>
+								<div class="flex items-center gap-4 text-sm text-base-500">
+									<span><strong id="stat-words">0</strong> words</span>
+									<span><strong id="stat-time">0:00</strong> read time</span>
+								</div>
+							</div>
+							<p class="text-xs text-base-500 mb-3 flex items-center gap-1.5">
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M12 20h9"/>
+									<path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+								</svg>
+								Click to edit your vow directly
+							</p>
+							<textarea
+								id="vow-preview"
+								class="w-full min-h-[200px] text-base leading-relaxed text-base-700 font-serif bg-transparent border-none resize-none focus:outline-none focus:ring-0 overflow-hidden"
+								spellcheck="true"
+							></textarea>
+							<p id="length-warning" class="hidden text-sm text-amber-600 mt-4 flex items-center gap-2">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+									<path d="M12 9v4"/><path d="M12 17h.01"/>
+								</svg>
+								<span id="length-warning-text"></span>
+							</p>
+						</div>
+
+						<!-- Action Buttons -->
+						<div class="flex flex-wrap gap-3">
+							<button
+								id="regenerate-btn"
+								type="button"
+								class="h-10 px-5 rounded-full text-sm font-medium text-base-700 bg-base-100 hover:bg-base-200 transition-colors cursor-pointer flex items-center gap-2"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/>
+									<path d="M21 3v5h-5"/>
+								</svg>
+								Regenerate
+							</button>
+							<button
+								id="edit-btn"
+								type="button"
+								class="h-10 px-5 rounded-full text-sm font-medium text-base-700 bg-base-100 hover:bg-base-200 transition-colors cursor-pointer flex items-center gap-2"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M12 20h9"/>
+									<path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+								</svg>
+								Edit Answers
+							</button>
+							<button
+								id="copy-btn"
+								type="button"
+								class="h-10 px-5 rounded-full text-sm font-medium text-base-700 bg-base-100 hover:bg-base-200 transition-colors cursor-pointer flex items-center gap-2"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+									<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+								</svg>
+								<span id="copy-btn-text">Copy</span>
+							</button>
+							<button
+								id="pdf-btn"
+								type="button"
+								class="h-10 px-5 rounded-full text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors cursor-pointer flex items-center gap-2"
+								data-ph-event="pdf_downloaded"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+									<polyline points="7 10 12 15 17 10"/>
+									<line x1="12" x2="12" y1="15" y2="3"/>
+								</svg>
+								Download PDF
+							</button>
+							<button
+								id="docx-btn"
+								type="button"
+								class="h-10 px-5 rounded-full text-sm font-medium text-base-700 bg-base-100 hover:bg-base-200 transition-colors cursor-pointer flex items-center gap-2"
+								data-ph-event="docx_downloaded"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+									<polyline points="14 2 14 8 20 8"/>
+								</svg>
+								Download DOCX
+							</button>
+						</div>
+
+						<!-- Share Link -->
+						<div class="rounded-2xl border border-base-200 bg-base-50/50 p-4">
+							<div class="flex items-center justify-between gap-4">
+								<div>
+									<p class="text-sm font-medium text-base-700">Share this vow</p>
+									<p class="text-xs text-base-500 mt-0.5">Links include your answers. Only share if you're comfortable.</p>
+								</div>
+								<button
+									id="share-btn"
+									type="button"
+									class="h-9 px-4 rounded-lg text-sm font-medium text-base-700 bg-white border border-base-200 hover:bg-base-100 transition-colors cursor-pointer flex items-center gap-2"
+									data-ph-event="share_link_copied"
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+										<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+										<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+									</svg>
+									<span id="share-btn-text">Copy Link</span>
+								</button>
+							</div>
+							<p id="share-error" class="hidden text-sm text-amber-600 mt-2"></p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Right Column: Drafts Panel + Product Mention -->
+				<div class="space-y-6 min-w-0">
+					<!-- Saved Drafts Panel -->
+					<div id="drafts-panel" class="hidden rounded-2xl border border-base-200 bg-white p-5">
+						<div class="flex items-center justify-between mb-4">
+							<h3 class="text-base font-semibold text-base-900">Saved Drafts</h3>
+							<button
+								id="clear-drafts-btn"
+								type="button"
+								class="text-xs text-base-500 hover:text-base-700 cursor-pointer"
+							>
+								Clear all
+							</button>
+						</div>
+						<div id="drafts-list" class="space-y-2 max-h-80 overflow-y-auto"></div>
+						<p class="text-xs text-base-400 mt-4">Saved locally in your browser (localStorage).</p>
+					</div>
+
+					<!-- Product Mention Card -->
+					<div class="rounded-2xl border border-base-200 bg-gradient-to-br from-accent-50/50 to-sand-100/50 p-5">
+						<div class="flex items-start gap-3 mb-4">
+							<div class="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 text-white flex-shrink-0">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M12 20h9"></path>
+									<path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+								</svg>
+							</div>
+							<div>
+								<h4 class="text-base font-semibold text-base-900">Want guided prompts + practice mode?</h4>
+								<p class="text-sm text-base-500 mt-1">Vows gives you deeper prompts, structure, and a way to practice reading your vows aloud.</p>
+							</div>
+						</div>
+						<a
+							href="https://www.vows.you/"
+							target="_blank"
+							rel="noopener"
+							class="h-10 px-5 rounded-full text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 transition-colors cursor-pointer flex items-center justify-center gap-2"
+						>
+							Try Vows →
+						</a>
+					</div>
+
+					<!-- Tips Card -->
+					<div class="rounded-2xl border border-base-200 bg-base-50/50 p-5">
+						<h4 class="text-sm font-semibold text-base-700 mb-3">Tips for Great Vows</h4>
+						<ul class="space-y-2 text-sm text-base-600">
+							<li class="flex items-start gap-2">
+								<span class="text-accent-500 mt-0.5">•</span>
+								<span>Keep it 1.5–2.5 minutes when read aloud</span>
+							</li>
+							<li class="flex items-start gap-2">
+								<span class="text-accent-500 mt-0.5">•</span>
+								<span>Include at least one specific memory</span>
+							</li>
+							<li class="flex items-start gap-2">
+								<span class="text-accent-500 mt-0.5">•</span>
+								<span>Make your promises actionable</span>
+							</li>
+							<li class="flex items-start gap-2">
+								<span class="text-accent-500 mt-0.5">•</span>
+								<span>Practice reading aloud before the ceremony</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+</BaseLayout>
+
+<script>
+	import type { VowFormAnswers, GeneratedVow, SavedDraft, TemplateVariant, VowTone, ClosingStyle } from '@/lib/vowTemplate/types'
+	import { defaultFormAnswers } from '@/lib/vowTemplate/types'
+	import { promiseSuggestions } from '@/lib/vowTemplate/sentenceBank'
+	import { generateVow, regenerateVow } from '@/lib/vowTemplate/generator'
+	import {
+		getDrafts,
+		saveDraft,
+		clearAllDrafts,
+		saveCurrentAnswers,
+		loadCurrentAnswers,
+		saveCurrentStep,
+		loadCurrentStep,
+		formatDraftDate,
+		getToneLabel,
+		getVariantLabel,
+	} from '@/lib/vowTemplate/draftStore'
+	import {
+		hasSharePayload,
+		getSharePayloadFromUrl,
+		clearSharePayloadFromUrl,
+		copyShareUrl,
+		hasVowTextParam,
+		getVowTextFromUrl,
+		clearVowTextFromUrl,
+		copyVowShareUrl,
+		// Simple ?vows= param
+		hasSimpleVowsParam,
+		getSimpleVowsFromUrl,
+		clearSimpleVowsFromUrl,
+		copySimpleVowsUrl,
+	} from '@/lib/vowTemplate/shareLink'
+	import { countWords, formatReadTime, getReadTimeSeconds } from '@/lib/vowTemplate/length'
+	import { downloadPdf } from '@/lib/vowTemplate/downloadPdf'
+	import { downloadDocx } from '@/lib/vowTemplate/downloadDocx'
+
+	// State
+	let currentStep = 0
+	let answers: VowFormAnswers = { ...defaultFormAnswers }
+	let currentVow: GeneratedVow | null = null
+	let hasGenerated = false
+
+	// Elements
+	const startScreen = document.getElementById('start-screen') as HTMLElement
+	const stepperContainer = document.getElementById('stepper-container') as HTMLElement
+	const outputSection = document.getElementById('output-section') as HTMLElement
+	const draftsPanel = document.getElementById('drafts-panel') as HTMLElement
+
+	const startBtn = document.getElementById('start-btn') as HTMLButtonElement
+	const backBtn = document.getElementById('back-btn') as HTMLButtonElement
+	const nextBtn = document.getElementById('next-btn') as HTMLButtonElement
+	const generateBtn = document.getElementById('generate-btn') as HTMLButtonElement
+
+	const currentStepEl = document.getElementById('current-step') as HTMLElement
+	const stepDots = document.querySelectorAll('.step-dot') as NodeListOf<HTMLElement>
+	const stepContents = document.querySelectorAll('.step-content') as NodeListOf<HTMLElement>
+
+	const vowPreview = document.getElementById('vow-preview') as HTMLTextAreaElement
+	const statWords = document.getElementById('stat-words') as HTMLElement
+	const statTime = document.getElementById('stat-time') as HTMLElement
+	const lengthWarning = document.getElementById('length-warning') as HTMLElement
+	const lengthWarningText = document.getElementById('length-warning-text') as HTMLElement
+
+	const regenerateBtn = document.getElementById('regenerate-btn') as HTMLButtonElement
+	const editBtn = document.getElementById('edit-btn') as HTMLButtonElement
+	const copyBtn = document.getElementById('copy-btn') as HTMLButtonElement
+	const copyBtnText = document.getElementById('copy-btn-text') as HTMLElement
+	const pdfBtn = document.getElementById('pdf-btn') as HTMLButtonElement
+	const docxBtn = document.getElementById('docx-btn') as HTMLButtonElement
+	const shareBtn = document.getElementById('share-btn') as HTMLButtonElement
+	const shareBtnText = document.getElementById('share-btn-text') as HTMLElement
+	const shareError = document.getElementById('share-error') as HTMLElement
+
+	const draftsList = document.getElementById('drafts-list') as HTMLElement
+	const clearDraftsBtn = document.getElementById('clear-drafts-btn') as HTMLButtonElement
+
+	const promiseCheckboxes = document.querySelectorAll('.promise-checkbox') as NodeListOf<HTMLInputElement>
+	const promiseCount = document.getElementById('promise-count') as HTMLElement
+
+	// Initialize
+	function init() {
+		// Check for simple ?vows= param first (human-readable URL-encoded text)
+		if (hasSimpleVowsParam()) {
+			const vowText = getSimpleVowsFromUrl()
+			if (vowText) {
+				// Show the shared vow directly without generating
+				const words = countWords(vowText)
+				const readTimeSecs = getReadTimeSeconds(words)
+				currentVow = {
+					text: vowText,
+					wordCount: words,
+					readTimeSeconds: readTimeSecs,
+					readTimeLabel: formatReadTime(readTimeSecs),
+					seed: 0,
+				}
+				hasGenerated = true
+				clearSimpleVowsFromUrl()
+				showOutput()
+				updateDraftsPanel()
+				return
+			}
+		}
+
+		// Check for compressed v= param (legacy/alternative)
+		if (hasVowTextParam()) {
+			const vowText = getVowTextFromUrl()
+			if (vowText) {
+				const words = countWords(vowText)
+				const readTimeSecs = getReadTimeSeconds(words)
+				currentVow = {
+					text: vowText,
+					wordCount: words,
+					readTimeSeconds: readTimeSecs,
+					readTimeLabel: formatReadTime(readTimeSecs),
+					seed: 0,
+				}
+				hasGenerated = true
+				clearVowTextFromUrl()
+				showOutput()
+				updateDraftsPanel()
+				return
+			}
+		}
+
+		// Check for full share payload (d= param with answers)
+		if (hasSharePayload()) {
+			const payload = getSharePayloadFromUrl()
+			if (payload) {
+				answers = payload.a
+				currentVow = generateVow(answers, payload.s)
+				hasGenerated = true
+				clearSharePayloadFromUrl()
+				showOutput()
+				updateDraftsPanel()
+				return
+			}
+		}
+
+		// Load saved state
+		const savedAnswers = loadCurrentAnswers()
+		if (savedAnswers) {
+			answers = savedAnswers
+			populateFormFromAnswers()
+		}
+
+		const savedStep = loadCurrentStep()
+		if (savedStep > 0) {
+			currentStep = savedStep
+			showStepper()
+		}
+
+		updateDraftsPanel()
+	}
+
+	// Show stepper
+	function showStepper() {
+		startScreen.classList.add('hidden')
+		stepperContainer.classList.remove('hidden')
+		outputSection.classList.add('hidden')
+		updateStepUI()
+	}
+
+	// Show output
+	function showOutput() {
+		startScreen.classList.add('hidden')
+		stepperContainer.classList.add('hidden')
+		outputSection.classList.remove('hidden')
+
+		if (currentVow) {
+			vowPreview.value = currentVow.text
+			statWords.textContent = String(currentVow.wordCount)
+			statTime.textContent = currentVow.readTimeLabel
+
+			if (currentVow.lengthWarning) {
+				lengthWarning.classList.remove('hidden')
+				lengthWarningText.textContent = currentVow.lengthWarning
+			} else {
+				lengthWarning.classList.add('hidden')
+			}
+
+			// Auto-resize textarea after content is set
+			requestAnimationFrame(autoResizeTextarea)
+		}
+
+		// Show drafts panel after first generation
+		if (hasGenerated) {
+			draftsPanel.classList.remove('hidden')
+		}
+	}
+
+	// Get current vow text from textarea (may have been edited by user)
+	function getCurrentVowText(): string {
+		return vowPreview.value || ''
+	}
+
+	// Auto-resize textarea to fit content
+	function autoResizeTextarea() {
+		vowPreview.style.height = 'auto'
+		vowPreview.style.height = vowPreview.scrollHeight + 'px'
+	}
+
+	// Update stats when user edits the vow
+	function updateStatsFromText(text: string) {
+		const words = countWords(text)
+		const readTimeSecs = getReadTimeSeconds(words)
+		statWords.textContent = String(words)
+		statTime.textContent = formatReadTime(readTimeSecs)
+
+		// Update currentVow to reflect edits
+		if (currentVow) {
+			currentVow.text = text
+			currentVow.wordCount = words
+			currentVow.readTimeSeconds = readTimeSecs
+			currentVow.readTimeLabel = formatReadTime(readTimeSecs)
+		}
+
+		// Auto-resize textarea
+		autoResizeTextarea()
+	}
+
+	// Update step UI
+	function updateStepUI() {
+		currentStepEl.textContent = String(currentStep + 1)
+
+		// Update step dots
+		stepDots.forEach((dot, i) => {
+			if (i < currentStep) {
+				dot.classList.remove('bg-base-200')
+				dot.classList.add('bg-accent-500')
+			} else if (i === currentStep) {
+				dot.classList.remove('bg-base-200')
+				dot.classList.add('bg-accent-300')
+			} else {
+				dot.classList.remove('bg-accent-500', 'bg-accent-300')
+				dot.classList.add('bg-base-200')
+			}
+		})
+
+		// Show/hide step content
+		stepContents.forEach((content, i) => {
+			if (i === currentStep) {
+				content.classList.remove('hidden')
+			} else {
+				content.classList.add('hidden')
+			}
+		})
+
+		// Show/hide nav buttons
+		backBtn.classList.toggle('hidden', currentStep === 0)
+		nextBtn.classList.toggle('hidden', currentStep === 9)
+		generateBtn.classList.toggle('hidden', currentStep !== 9)
+
+		// Save current step
+		saveCurrentStep(currentStep)
+	}
+
+	// Collect answers from form
+	function collectAnswers() {
+		// Partner name
+		const partnerNameInput = document.getElementById('input-partner-name') as HTMLInputElement
+		answers.partnerName = partnerNameInput.value.trim()
+
+		// Variant
+		const variantRadio = document.querySelector('input[name="variant"]:checked') as HTMLInputElement
+		if (variantRadio) {
+			answers.variant = variantRadio.value as TemplateVariant
+		}
+
+		// Tone
+		const toneRadio = document.querySelector('input[name="tone"]:checked') as HTMLInputElement
+		if (toneRadio) {
+			answers.tone = toneRadio.value as VowTone
+		}
+
+		// Humor
+		const humorCheckbox = document.getElementById('input-humor') as HTMLInputElement
+		answers.includeHumor = humorCheckbox.checked
+
+		// How met
+		const howMetInput = document.getElementById('input-how-met') as HTMLTextAreaElement
+		answers.howMet = howMetInput.value.trim()
+
+		// Favorite memory
+		const favoriteMemoryInput = document.getElementById('input-favorite-memory') as HTMLTextAreaElement
+		answers.favoriteMemory = favoriteMemoryInput.value.trim()
+
+		// Knew loved when
+		const knewLovedInput = document.getElementById('input-knew-loved') as HTMLTextAreaElement
+		answers.knewLovedWhen = knewLovedInput.value.trim()
+
+		// Qualities
+		const quality1 = document.getElementById('input-quality-1') as HTMLInputElement
+		const quality2 = document.getElementById('input-quality-2') as HTMLInputElement
+		const quality3 = document.getElementById('input-quality-3') as HTMLInputElement
+		answers.qualities = [
+			quality1.value.trim(),
+			quality2.value.trim(),
+			quality3.value.trim(),
+		]
+
+		// Promises
+		const selectedPromises: string[] = []
+		promiseCheckboxes.forEach((checkbox) => {
+			if (checkbox.checked) {
+				selectedPromises.push(checkbox.dataset.text || '')
+			}
+		})
+		answers.selectedPromises = [
+			selectedPromises[0] || '',
+			selectedPromises[1] || '',
+			selectedPromises[2] || '',
+		]
+
+		// Custom promise
+		const customPromiseInput = document.getElementById('input-custom-promise') as HTMLInputElement
+		answers.customPromise = customPromiseInput.value.trim()
+
+		// Future
+		const futureInput = document.getElementById('input-future') as HTMLTextAreaElement
+		answers.futureTogether = futureInput.value.trim()
+
+		// Closing
+		const closingRadio = document.querySelector('input[name="closing"]:checked') as HTMLInputElement
+		if (closingRadio) {
+			answers.closingStyle = closingRadio.value as ClosingStyle
+		}
+
+		// Save to localStorage
+		saveCurrentAnswers(answers)
+	}
+
+	// Populate form from answers
+	function populateFormFromAnswers() {
+		// Partner name
+		const partnerNameInput = document.getElementById('input-partner-name') as HTMLInputElement
+		partnerNameInput.value = answers.partnerName
+
+		// Variant
+		const variantRadio = document.querySelector(`input[name="variant"][value="${answers.variant}"]`) as HTMLInputElement
+		if (variantRadio) variantRadio.checked = true
+
+		// Tone
+		const toneRadio = document.querySelector(`input[name="tone"][value="${answers.tone}"]`) as HTMLInputElement
+		if (toneRadio) toneRadio.checked = true
+
+		// Humor
+		const humorCheckbox = document.getElementById('input-humor') as HTMLInputElement
+		humorCheckbox.checked = answers.includeHumor
+
+		// How met
+		const howMetInput = document.getElementById('input-how-met') as HTMLTextAreaElement
+		howMetInput.value = answers.howMet
+
+		// Favorite memory
+		const favoriteMemoryInput = document.getElementById('input-favorite-memory') as HTMLTextAreaElement
+		favoriteMemoryInput.value = answers.favoriteMemory
+
+		// Knew loved when
+		const knewLovedInput = document.getElementById('input-knew-loved') as HTMLTextAreaElement
+		knewLovedInput.value = answers.knewLovedWhen
+
+		// Qualities
+		const quality1 = document.getElementById('input-quality-1') as HTMLInputElement
+		const quality2 = document.getElementById('input-quality-2') as HTMLInputElement
+		const quality3 = document.getElementById('input-quality-3') as HTMLInputElement
+		quality1.value = answers.qualities[0]
+		quality2.value = answers.qualities[1]
+		quality3.value = answers.qualities[2]
+
+		// Promises
+		promiseCheckboxes.forEach((checkbox) => {
+			const text = checkbox.dataset.text || ''
+			checkbox.checked = answers.selectedPromises.includes(text)
+		})
+		updatePromiseCount()
+
+		// Custom promise
+		const customPromiseInput = document.getElementById('input-custom-promise') as HTMLInputElement
+		customPromiseInput.value = answers.customPromise
+
+		// Future
+		const futureInput = document.getElementById('input-future') as HTMLTextAreaElement
+		futureInput.value = answers.futureTogether
+
+		// Closing
+		const closingRadio = document.querySelector(`input[name="closing"][value="${answers.closingStyle}"]`) as HTMLInputElement
+		if (closingRadio) closingRadio.checked = true
+	}
+
+	// Update promise count
+	function updatePromiseCount() {
+		const checkedCount = document.querySelectorAll('.promise-checkbox:checked').length
+		promiseCount.textContent = `${checkedCount} of 3 selected`
+
+		if (checkedCount > 3) {
+			promiseCount.classList.add('text-amber-600')
+			promiseCount.classList.remove('text-base-500')
+		} else if (checkedCount === 3) {
+			promiseCount.classList.add('text-green-600')
+			promiseCount.classList.remove('text-base-500', 'text-amber-600')
+		} else {
+			promiseCount.classList.remove('text-green-600', 'text-amber-600')
+			promiseCount.classList.add('text-base-500')
+		}
+	}
+
+	// Enforce exactly 3 promises
+	promiseCheckboxes.forEach((checkbox) => {
+		checkbox.addEventListener('change', () => {
+			const checkedBoxes = document.querySelectorAll('.promise-checkbox:checked')
+			if (checkedBoxes.length > 3) {
+				checkbox.checked = false
+			}
+			updatePromiseCount()
+		})
+	})
+
+	// Generate vow
+	function doGenerate() {
+		collectAnswers()
+		currentVow = generateVow(answers)
+		hasGenerated = true
+
+		// Save draft
+		saveDraft(answers, currentVow.text, currentVow.wordCount, currentVow.seed)
+
+		// Track completion on first generation
+		if (typeof window !== 'undefined' && (window as any).posthog) {
+			;(window as any).posthog.capture('template_completed')
+		}
+
+		showOutput()
+		updateDraftsPanel()
+	}
+
+	// Update drafts panel
+	function updateDraftsPanel() {
+		const drafts = getDrafts()
+
+		if (drafts.length === 0) {
+			draftsList.innerHTML = '<p class="text-sm text-base-500">No saved drafts yet.</p>'
+			return
+		}
+
+		draftsList.innerHTML = drafts
+			.map(
+				(draft) => `
+			<div class="p-3 rounded-xl bg-base-50 border border-base-100" data-draft-id="${draft.id}">
+				<div class="flex items-center justify-between mb-1">
+					<span class="text-xs text-base-500">${formatDraftDate(draft.savedAt)}</span>
+					<span class="text-xs font-medium text-base-600">${draft.wordCount} words</span>
+				</div>
+				<div class="flex items-center justify-between">
+					<span class="text-sm text-base-700">${getToneLabel(draft.tone)} • ${getVariantLabel(draft.variant)}</span>
+					<button
+						type="button"
+						class="load-draft-btn text-xs font-medium text-accent-600 hover:text-accent-700 cursor-pointer"
+						data-draft-id="${draft.id}"
+					>
+						Load
+					</button>
+				</div>
+			</div>
+		`
+			)
+			.join('')
+
+		// Add click handlers for load buttons
+		document.querySelectorAll('.load-draft-btn').forEach((btn) => {
+			btn.addEventListener('click', (e) => {
+				const target = e.target as HTMLElement
+				const draftId = target.dataset.draftId
+				const draft = drafts.find((d) => d.id === draftId)
+				if (draft) {
+					loadDraft(draft)
+				}
+			})
+		})
+	}
+
+	// Load a draft
+	function loadDraft(draft: SavedDraft) {
+		answers = draft.answers
+		currentVow = {
+			text: draft.vowText,
+			wordCount: draft.wordCount,
+			readTimeSeconds: Math.round((draft.wordCount / 140) * 60),
+			readTimeLabel: formatTime(Math.round((draft.wordCount / 140) * 60)),
+			seed: draft.seed,
+		}
+		hasGenerated = true
+		populateFormFromAnswers()
+		showOutput()
+	}
+
+	// Format time helper
+	function formatTime(seconds: number): string {
+		const mins = Math.floor(seconds / 60)
+		const secs = seconds % 60
+		return `${mins}:${secs.toString().padStart(2, '0')}`
+	}
+
+	// Event handlers
+	startBtn.addEventListener('click', () => {
+		showStepper()
+	})
+
+	backBtn.addEventListener('click', () => {
+		collectAnswers()
+		if (currentStep > 0) {
+			currentStep--
+			updateStepUI()
+		}
+	})
+
+	nextBtn.addEventListener('click', () => {
+		collectAnswers()
+		if (currentStep < 9) {
+			currentStep++
+			updateStepUI()
+		}
+	})
+
+	generateBtn.addEventListener('click', doGenerate)
+
+	regenerateBtn.addEventListener('click', () => {
+		collectAnswers()
+		currentVow = regenerateVow(answers)
+		saveDraft(answers, currentVow.text, currentVow.wordCount, currentVow.seed)
+		showOutput()
+		updateDraftsPanel()
+	})
+
+	editBtn.addEventListener('click', () => {
+		currentStep = 0
+		showStepper()
+	})
+
+	copyBtn.addEventListener('click', async () => {
+		const vowText = getCurrentVowText()
+		if (!vowText) return
+		try {
+			await navigator.clipboard.writeText(vowText)
+			copyBtnText.textContent = 'Copied!'
+			setTimeout(() => {
+				copyBtnText.textContent = 'Copy'
+			}, 2000)
+		} catch {
+			copyBtnText.textContent = 'Failed'
+			setTimeout(() => {
+				copyBtnText.textContent = 'Copy'
+			}, 2000)
+		}
+	})
+
+	pdfBtn.addEventListener('click', () => {
+		const vowText = getCurrentVowText()
+		if (!vowText) return
+		const result = downloadPdf(vowText, {
+			partnerName: answers.partnerName || undefined,
+		})
+		if (!result.success) {
+			alert(result.error)
+		}
+	})
+
+	docxBtn.addEventListener('click', async () => {
+		const vowText = getCurrentVowText()
+		if (!vowText) return
+		const result = await downloadDocx(vowText, {
+			partnerName: answers.partnerName || undefined,
+		})
+		if (!result.success) {
+			alert(result.error)
+		}
+	})
+
+	shareBtn.addEventListener('click', async () => {
+		const vowText = getCurrentVowText()
+		if (!vowText) return
+		// Share the actual vow text using simple ?vows= param (preserves line breaks)
+		const result = await copySimpleVowsUrl(vowText)
+		if (result.success) {
+			shareBtnText.textContent = 'Copied!'
+			shareError.classList.add('hidden')
+			setTimeout(() => {
+				shareBtnText.textContent = 'Copy Link'
+			}, 2000)
+		} else {
+			shareError.textContent = result.error
+			shareError.classList.remove('hidden')
+		}
+	})
+
+	// Update stats when user edits the vow textarea
+	vowPreview.addEventListener('input', () => {
+		updateStatsFromText(vowPreview.value)
+	})
+
+	clearDraftsBtn.addEventListener('click', () => {
+		if (confirm('Clear all saved drafts? This cannot be undone.')) {
+			clearAllDrafts()
+			updateDraftsPanel()
+		}
+	})
+
+	// Keyboard navigation
+	document.addEventListener('keydown', (e) => {
+		// Only handle when stepper is visible
+		if (stepperContainer.classList.contains('hidden')) return
+
+		const activeElement = document.activeElement
+		const isTextarea = activeElement?.tagName === 'TEXTAREA'
+
+		if (e.key === 'Enter') {
+			// Shift+Enter in textarea = newline (default behavior)
+			if (isTextarea && e.shiftKey) return
+
+			// Enter in textarea without shift = do nothing (allow normal behavior)
+			if (isTextarea && !e.shiftKey) return
+
+			// Enter elsewhere = next step
+			e.preventDefault()
+			if (currentStep === 9) {
+				doGenerate()
+			} else {
+				collectAnswers()
+				currentStep++
+				updateStepUI()
+			}
+		}
+	})
+
+	// Initialize on load
+	init()
+</script>
