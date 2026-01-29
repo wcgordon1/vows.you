@@ -20,7 +20,10 @@ const allPosts = allPostsUnsorted.sort(
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Wedding Vow Writing Guides | vows.you"
+  description="Tips, examples, and advice for writing wedding vows that sound like you. Learn how to structure, personalize, and deliver vows you'll be proud of."
+>
   <section>
     <Wrapper variant="standard" class="pt-32 pb-4">
       <div class="max-w-xl text-balance">

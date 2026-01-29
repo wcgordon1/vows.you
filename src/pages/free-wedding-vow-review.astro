@@ -5,20 +5,91 @@ import Text from "@/components/fundations/elements/Text.astro"
 import BlogCard from "@/components/blog/BlogCard.astro"
 import VowsNextStepCard from "@/components/VowsNextStepCard.astro"
 import SendToAIReview from "@/components/SendToAIReview.astro"
+import JsonLd from "@/components/fundations/head/JsonLd.astro"
 import { getCollection } from "astro:content"
 
 // Get recent posts for the bottom section
 const posts = (await getCollection("posts"))
 	.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
 	.slice(0, 4)
+
+const SITE_URL = "https://vows.you";
+
+// HowTo structured data for the vow review tool
+const howToSchema = {
+	"@context": "https://schema.org",
+	"@type": "HowTo",
+	"name": "How to Review Your Wedding Vows for Length and Clichés",
+	"description": "Check your wedding vows for ideal length, read time, and cringy clichés. Get suggestions to make your vows more personal.",
+	"image": `${SITE_URL}/og-image.jpg`,
+	"totalTime": "PT2M",
+	"estimatedCost": {
+		"@type": "MonetaryAmount",
+		"currency": "USD",
+		"value": "0"
+	},
+	"tool": {
+		"@type": "HowToTool",
+		"name": "vows.you Wedding Vow Review Tool"
+	},
+	"step": [
+		{
+			"@type": "HowToStep",
+			"position": 1,
+			"name": "Paste your vows",
+			"text": "Copy and paste your wedding vows into the text area to begin the analysis."
+		},
+		{
+			"@type": "HowToStep",
+			"position": 2,
+			"name": "Choose analysis mode",
+			"text": "Select whether you're analyzing wedding vows (stricter) or an officiant speech (looser standards)."
+		},
+		{
+			"@type": "HowToStep",
+			"position": 3,
+			"name": "Review highlighted issues",
+			"text": "See highlighted weak phrases and clichés with severity indicators. Click any highlight for suggestions."
+		},
+		{
+			"@type": "HowToStep",
+			"position": 4,
+			"name": "Get personalization suggestions",
+			"text": "Click on highlighted phrases to get specific rewrite suggestions and prompts to make them more personal."
+		}
+	]
+};
+
+// WebApplication structured data
+const webAppSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebApplication",
+	"name": "Wedding Vow Review & Cliché Checker",
+	"url": `${SITE_URL}/free-wedding-vow-review`,
+	"applicationCategory": "LifestyleApplication",
+	"operatingSystem": "Web",
+	"offers": {
+		"@type": "Offer",
+		"price": "0",
+		"priceCurrency": "USD"
+	},
+	"description": "Free wedding vow analyzer. Check length, read time, and detect clichéd phrases. Get suggestions to make your vows more personal.",
+	"featureList": [
+		"Word count and read time analysis",
+		"Cliché and weak phrase detection",
+		"Severity-based highlighting",
+		"Rewrite suggestions",
+		"Privacy-first (browser-only)"
+	]
+};
 ---
 
-<BaseLayout>
-	<Fragment slot="head">
-		<title>Free Wedding Vow Review - Length, Timing & Cliché Checker | vows.you</title>
-		<meta name="description" content="Check your wedding vows for ideal length, read time, and cringy clichés. Highlights weak phrases with rewrite suggestions. Privacy-first and fully in-browser." />
-		<link rel="canonical" href="https://vows.you/free-wedding-vow-review" />
-	</Fragment>
+<BaseLayout
+	title="Free Wedding Vow Review - Length, Timing & Cliché Checker | vows.you"
+	description="Check your wedding vows for ideal length, read time, and cringy clichés. Highlights weak phrases with rewrite suggestions. Privacy-first and fully in-browser."
+>
+	<JsonLd slot="head" data={howToSchema} />
+	<JsonLd slot="head" data={webAppSchema} />
 
 	<section>
 		<Wrapper variant="standard" class="pt-32 pb-8">
@@ -323,8 +394,32 @@ const posts = (await getCollection("posts"))
 		</footer>
 	</aside>
 
+	<!-- Related Tools Section -->
+	<section class="mt-24 border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-12">
+			<div class="max-w-xl mx-auto text-center">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900">
+					Need help writing your vows?
+				</Text>
+				<Text tag="p" variant="textBase" class="mt-4 text-base-500">
+					Our free wedding vows template guides you through prompts to generate ceremony-ready vows in minutes.
+				</Text>
+				<a
+					href="/wedding-vows-template"
+					class="inline-flex items-center gap-2 mt-6 px-6 py-3 text-sm font-semibold text-white bg-accent-500 rounded-full hover:bg-accent-600 transition-colors"
+				>
+					Try Free Vows Template
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 12h14"/>
+						<path d="m12 5 7 7-7 7"/>
+					</svg>
+				</a>
+			</div>
+		</Wrapper>
+	</section>
+
 	<!-- Recent Posts Section -->
-	<section class="mt-24 pb-24">
+	<section class="pb-24">
 		<Wrapper variant="standard">
 			<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900">
 				Enjoying the Vow Review?

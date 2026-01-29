@@ -1,26 +1,62 @@
 ---
 import { AstroSeo } from "@astrolib/seo";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+}
+
+const SITE_URL = "https://vows.you";
+
+// Defaults
+const defaultTitle = "vows.you — Write wedding vows that sound like you";
+const defaultDescription = "Get guided prompts and structure to write personal, meaningful wedding vows. No blank page panic. Your voice, just clearer.";
+const defaultOgImage = `${SITE_URL}/og-image.jpg`;
+
+// Props with fallbacks
+const {
+  title = defaultTitle,
+  description = defaultDescription,
+  canonical: canonicalProp,
+  ogImage = defaultOgImage,
+  ogType = "website",
+  noindex = false,
+} = Astro.props;
+
+// Derive canonical from current URL if not explicitly provided
+const derivedCanonical = canonicalProp
+  ? canonicalProp
+  : new URL(Astro.url.pathname, Astro.site || SITE_URL).toString().replace(/\/$/, "") || SITE_URL;
+
+// Ensure OG image is absolute URL
+const absoluteOgImage = ogImage.startsWith("http") ? ogImage : `${SITE_URL}${ogImage.startsWith("/") ? "" : "/"}${ogImage}`;
 ---
 
 <AstroSeo
-  title="vows.you — Write wedding vows that sound like you"
-  description="Get guided prompts and structure to write personal, meaningful wedding vows. No blank page panic. Your voice, just clearer."
-  canonical="https://vows.you"
+  title={title}
+  description={description}
+  canonical={derivedCanonical}
+  noindex={noindex}
+  nofollow={noindex}
   openGraph={{
-    url: "https://vows.you",
-    title: "vows.you — Write wedding vows that sound like you",
-    description: "Get guided prompts and structure to write personal, meaningful wedding vows. No blank page panic. Your voice, just clearer.",
+    url: derivedCanonical,
+    title: title,
+    description: description,
     images: [
       {
-        url: "https://vows.you/og-image.jpg",
+        url: absoluteOgImage,
         width: 1200,
         height: 630,
-        alt: "vows.you - Write wedding vows that sound like you",
+        alt: title,
         type: "image/jpeg",
       },
     ],
     site_name: "vows.you",
-    type: "website",
+    type: ogType,
     locale: "en_US",
   }}
   twitter={{

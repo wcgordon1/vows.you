@@ -12,7 +12,10 @@ import { getCollection } from "astro:content";
 const allCustomers = await getCollection("customers");
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Couples Who Found Their Words | vows.you"
+  description="See how couples have used vows.you to write vows they're proud of. Real stories from real weddings."
+>
   <section>
     <Wrapper variant="standard" class="pt-32 pb-4">
       <div class="max-w-xl text-balance">

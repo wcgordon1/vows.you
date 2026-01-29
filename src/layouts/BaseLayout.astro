@@ -7,10 +7,31 @@ import BaseHead from "@/components/fundations/head/BaseHead.astro";
 import Footer from "@/components/global/Footer.astro";
 import Navigation from "@/components/global/Navigation.astro";
 
+interface Props {
+  hideNav?: boolean;
+  hideFooter?: boolean;
+  // SEO props
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+}
+
 // Hides nav and footer on selected screens by passing
 // the hideNav and hideFooter props
 // <BaseLayout hideNav={true} hideFooter={true}>
-const { hideNav = false, hideFooter = false } = Astro.props;
+const {
+  hideNav = false,
+  hideFooter = false,
+  title,
+  description,
+  canonical,
+  ogImage,
+  ogType,
+  noindex = false,
+} = Astro.props;
 ---
 
 <html
@@ -18,7 +39,14 @@ const { hideNav = false, hideFooter = false } = Astro.props;
   class="scroll-smooth selection:bg-sand-100 selection:text-accent-500"
 >
   <head>
-    <BaseHead />
+    <BaseHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      ogType={ogType}
+      noindex={noindex}
+    />
     <slot name="head" />
   </head>
   <body class="relative flex flex-col bg-white min-h-svh">

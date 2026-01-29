@@ -6,17 +6,52 @@ import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import JsonLd from "@/components/fundations/head/JsonLd.astro";
 // Icons
 import ChevronRight from "@/components/fundations/icons/ChevronRight.astro";
-const { frontmatter } = Astro.props;
+const { frontmatter, slug } = Astro.props;
+
+const SITE_URL = "https://vows.you";
+const pageUrl = `${SITE_URL}/changelog/${slug}`;
+
 // Breadcrumbs Data
 const breadcrumbs = [
   { label: "Home", href: "/" },
   { label: frontmatter.page, href: "#" },
 ];
+
+// BreadcrumbList structured data
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: SITE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Changelog",
+      item: `${SITE_URL}/changelog`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: frontmatter.page,
+      item: pageUrl,
+    },
+  ],
+};
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={`${frontmatter.page} | Changelog | vows.you`}
+  description={`Update: ${frontmatter.page}`}
+>
+  <JsonLd slot="head" data={breadcrumbSchema} />
   <section>
     <Wrapper variant="standard" class="pt-32 pb-4">
       <div class="max-w-xl mx-auto text-balance">

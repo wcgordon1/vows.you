@@ -1,0 +1,9 @@
+# robots.txt for vows.you
+User-agent: *
+Allow: /
+
+# Disallow system/utility pages
+Disallow: /system/
+
+# Sitemap
+Sitemap: https://vows.you/sitemap-index.xml

@@ -75,7 +75,10 @@ const faqSchema = frontmatter.faq?.length
   : null;
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={`${frontmatter.page} | Support | vows.you`}
+  description={frontmatter.description}
+>
   <JsonLd slot="head" data={breadcrumbSchema} />
   {faqSchema && <JsonLd slot="head" data={faqSchema} />}
   <section>

@@ -21,5 +21,10 @@ export default defineConfig({
     drafts: true
   },
   site: 'https://vows.you',
-  integrations: [ sitemap(), mdx()]
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/system/'),
+    }),
+    mdx()
+  ]
 });

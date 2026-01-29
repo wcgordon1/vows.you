@@ -2,15 +2,92 @@
 import BaseLayout from "@/layouts/BaseLayout.astro"
 import Wrapper from "@/components/fundations/containers/Wrapper.astro"
 import Text from "@/components/fundations/elements/Text.astro"
+import JsonLd from "@/components/fundations/head/JsonLd.astro"
 import { promiseSuggestions, closingOptions } from "@/lib/vowTemplate"
+
+const SITE_URL = "https://vows.you";
+
+// HowTo structured data for the vow template tool
+const howToSchema = {
+	"@context": "https://schema.org",
+	"@type": "HowTo",
+	"name": "How to Write Wedding Vows Using Our Free Template",
+	"description": "Answer a few prompts and generate a simple, personal wedding vow. Download as PDF or DOCX. Privacy-first and fully in-browser.",
+	"image": `${SITE_URL}/og-image.jpg`,
+	"totalTime": "PT5M",
+	"estimatedCost": {
+		"@type": "MonetaryAmount",
+		"currency": "USD",
+		"value": "0"
+	},
+	"tool": {
+		"@type": "HowToTool",
+		"name": "vows.you Wedding Vows Template"
+	},
+	"step": [
+		{
+			"@type": "HowToStep",
+			"position": 1,
+			"name": "Enter your partner's name",
+			"text": "Optionally enter your partner's name to personalize the vow, or leave blank for a generic address."
+		},
+		{
+			"@type": "HowToStep",
+			"position": 2,
+			"name": "Choose your voice and tone",
+			"text": "Select a voice style and tone that fits your personality - heartfelt, modern minimal, or funny & light."
+		},
+		{
+			"@type": "HowToStep",
+			"position": 3,
+			"name": "Share your story",
+			"text": "Answer prompts about how you met, your favorite memory together, and when you knew you were in love."
+		},
+		{
+			"@type": "HowToStep",
+			"position": 4,
+			"name": "Add qualities and promises",
+			"text": "List three qualities you admire in your partner and choose three promises you want to make."
+		},
+		{
+			"@type": "HowToStep",
+			"position": 5,
+			"name": "Generate and download",
+			"text": "Generate your personalized vow, edit it to perfection, and download as PDF or DOCX."
+		}
+	]
+};
+
+// WebApplication structured data
+const webAppSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebApplication",
+	"name": "Wedding Vows Template Generator",
+	"url": `${SITE_URL}/wedding-vows-template`,
+	"applicationCategory": "LifestyleApplication",
+	"operatingSystem": "Web",
+	"offers": {
+		"@type": "Offer",
+		"price": "0",
+		"priceCurrency": "USD"
+	},
+	"description": "Free wedding vow template generator. Answer prompts to create personalized, ceremony-ready vows. Download as PDF or DOCX.",
+	"featureList": [
+		"Guided prompts for vow writing",
+		"Multiple tone options",
+		"PDF and DOCX download",
+		"Privacy-first (browser-only)",
+		"Save and edit drafts"
+	]
+};
 ---
 
-<BaseLayout>
-	<Fragment slot="head">
-		<title>Wedding Vows Template (Free) - Ceremony-Ready in Minutes</title>
-		<meta name="description" content="Answer a few prompts and generate a simple, personal wedding vow. Download as PDF or DOCX. Privacy-first and fully in-browser." />
-		<link rel="canonical" href="https://vows.you/wedding-vows-template" />
-	</Fragment>
+<BaseLayout
+	title="Wedding Vows Template (Free) - Ceremony-Ready in Minutes | vows.you"
+	description="Answer a few prompts and generate a simple, personal wedding vow. Download as PDF or DOCX. Privacy-first and fully in-browser."
+>
+	<JsonLd slot="head" data={howToSchema} />
+	<JsonLd slot="head" data={webAppSchema} />
 
 	<section>
 		<Wrapper variant="standard" class="pt-32 pb-8">
@@ -478,6 +555,30 @@ import { promiseSuggestions, closingOptions } from "@/lib/vowTemplate"
 						</ul>
 					</div>
 				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- Related Tools Section -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-12">
+			<div class="max-w-xl mx-auto text-center">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900">
+					Already have vows? Check them for clichés
+				</Text>
+				<Text tag="p" variant="textBase" class="mt-4 text-base-500">
+					Paste your vows into our free analyzer to check length, timing, and detect overused phrases.
+				</Text>
+				<a
+					href="/free-wedding-vow-review"
+					class="inline-flex items-center gap-2 mt-6 px-6 py-3 text-sm font-semibold text-white bg-accent-500 rounded-full hover:bg-accent-600 transition-colors"
+				>
+					Try Free Vow Review
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 12h14"/>
+						<path d="m12 5 7 7-7 7"/>
+					</svg>
+				</a>
 			</div>
 		</Wrapper>
 	</section>

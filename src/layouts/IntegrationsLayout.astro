@@ -7,20 +7,55 @@ import BaseLayout from "./BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import JsonLd from "@/components/fundations/head/JsonLd.astro";
 // Icons
 import Check from "@/components/fundations/icons/Check.astro";
 import ChevronRight from "@/components/fundations/icons/ChevronRight.astro";
 // Content
-const { frontmatter } = Astro.props;
+const { frontmatter, slug } = Astro.props;
+
+const SITE_URL = "https://vows.you";
+const pageUrl = `${SITE_URL}/integrations/${slug}`;
+
 // Breadcrumbs Data
 const breadcrumbs = [
   { label: "Home", href: "/" },
   { label: "Integrations", href: "/integrations" },
   { label: frontmatter.integration, href: "#" },
 ];
+
+// BreadcrumbList structured data
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: SITE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Integrations",
+      item: `${SITE_URL}/integrations`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: frontmatter.integration,
+      item: pageUrl,
+    },
+  ],
+};
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={`${frontmatter.integration} Integration | vows.you`}
+  description={frontmatter.description}
+>
+  <JsonLd slot="head" data={breadcrumbSchema} />
   <!-- Modal -->
   <div
     id="modal"

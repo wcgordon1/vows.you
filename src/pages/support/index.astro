@@ -13,7 +13,10 @@ import { getCollection } from "astro:content";
 const allEntries = await getCollection("helpcenter");
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Guides & Support | vows.you"
+  description="Find answers to common questions about writing vows and using vows.you. Get the help you need to write vows you'll be proud of."
+>
   <section>
     <Wrapper variant="standard" class="pt-32 pb-4">
       <div class="max-w-xl mx-auto text-center text-balance">

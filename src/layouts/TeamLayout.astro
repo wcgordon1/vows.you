@@ -18,7 +18,10 @@ const relatedPosts = allPosts.filter((post) => post.data.team === teamSlug);
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={`${frontmatter.name} | Team | vows.you`}
+  description={frontmatter.role || `${frontmatter.name} at vows.you`}
+>
   <section>
     <Wrapper variant="standard" class="pt-32 pb-4">
       <div class="max-w-md mx-auto text-center text-balance">
