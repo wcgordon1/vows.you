@@ -23,7 +23,7 @@ details:
 logo:
   url: "../../images/customers/1.svg"
   alt: "vows.you"
-avatar:ß
+avatar:
   url: "../../images/team/2.jpeg"
   alt: "Happy couple using vows.you"
 ---
