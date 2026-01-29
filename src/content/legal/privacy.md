@@ -1,90 +1,147 @@
 ---
-page: Privacy
-pubDate: 2024-01-01
+page: Privacy Policy
+pubDate: 2025-01-26
 ---
-If you are a California resident, the California Consumer Privacy Act, as amended by the California Privacy Rights Act of 2020 (“**CCPA**”), requires us to provide some additional information to California residents. This Section only applies to you if you are a California resident, although please note that this information and the rights afforded herein are the same as offered to our other users in our main Privacy Policy. This Section does not apply to personal information we collect from our employees and job applicants in their capacity as employees and job applicants, as such information practices are described in separate policies.
 
-The following chart details these activities:
+This Privacy Policy explains how Vows.you (“we,” “us,” or “our”) collects, uses, stores, and protects your information when you use our website and services (the “Service”).
 
-**Category of personal information**
+By accessing or using Vows.you, you agree to the collection and use of information as described in this Privacy Policy.
 
-**Purposes of use**
+---
 
-**Categories of Third Parties Information**
+## 1. Information We Collect
 
-**Categories of Third Parties**
+### a. Information You Provide Directly
 
-Contact information (such as your full name, phone number, email address)
+We collect information you choose to provide, including:
 
-Provide the Services; Communicate with you; Analyze use of and improve the services; With your consent; Comply with law or defend our legal rights; Security/fraud prevention
+- Name and email address  
+- Account or contact information  
+- Text, prompts, or content you submit  
+- **Voice recordings**, if you choose to use voice cloning or voice-related features  
 
-Affiliated entities; Service providers; Entities for legal purposes
+Providing this information is voluntary, but some features may not function without it.
 
-We do not share/sell
+---
 
-Customer service interaction information (including optional surveys and when you ask for help)
+### b. Voice Data and Voice Cloning
 
-Provide the Services; Communicate with you; Analyze use of and improve the services; With your consent; Comply with law or defend our legal rights; Security/fraud prevention
+If you **choose to clone your voice**, we will:
 
-Affiliated entities; Service providers; Entities for legal purposes
+- Record or receive voice samples you submit  
+- Store those recordings securely  
+- Use those recordings to **train and generate AI voice models** on your behalf  
 
-We do not share/sell
+Voice data is processed **only to provide the requested feature**. We do not use your voice for advertising or unrelated purposes.
 
-Product interaction information
+Voice data may be processed by trusted third-party service providers, including **ElevenLabs**, solely for voice synthesis and model training.
 
-Provide the Services; Communicate with you; Analyze use of and improve the services; With your consent; Comply with law or defend our legal rights; Security/fraud prevention
+---
 
-Affiliated entities; Service providers; Entities for legal purposes
+### c. Automatically Collected Information
 
-We do not share/sell
+When you use the Service, we may automatically collect certain information, including:
 
-Internet network and device information (such as mobile device information, IP address, and information about your interaction with the services)
+- IP address  
+- Device type and browser  
+- Pages viewed and usage activity  
+- General analytics data  
 
-Provide the Services; Analyze use of and improve the services; With your consent; Comply with law or defend our legal rights; Security/fraud prevention
+This information helps us operate, secure, and improve the Service.
 
-Affiliated entities; Service providers; Entities for legal purposes;
+---
 
-We do not share/sell
+## 2. How We Use Your Information
 
-Login information (such as your username and password)
+We use your information to:
 
-Provide the Services; Comply with law or defend our legal rights; Security/fraud prevention; Comply with law or defend our legal rights
+- Provide and operate the Service  
+- Create and manage user accounts  
+- Generate AI outputs you request  
+- Train voice models **only when you explicitly opt in**  
+- Improve features, performance, and reliability  
+- Communicate with you about updates or support  
+- Comply with legal obligations  
 
-Affiliated entities; Service providers; Entities for legal purposes
+---
 
-We do not share/sell
+## 3. Data Sharing and Disclosure
 
-Professional or employment information (such as the name and address of the company you work for and your title)
+We do **not sell your personal data**.
 
-Provide the Services; Communicate with you; Analyze use of and improve the services; With your consent; Comply with law or defend our legal rights; Security/fraud prevention
+We may share information only in the following circumstances:
 
-Affiliated entities; Service providers; Entities for legal purposes;
+- With **service providers** that help us operate the Service (for example, ElevenLabs for voice processing)  
+- To comply with **legal requirements**, court orders, or lawful requests  
+- To protect the rights, safety, or security of Vows.you or others  
+- In connection with a **business transfer** such as a merger or acquisition (you will be notified if applicable)  
 
-We do not share/sell
+All third-party providers are required to protect your data and use it only for authorized purposes.
 
-Other information (any other information you choose to provide directly to us, including optional profile photos)
+---
 
-Provide the Services; Communicate with you; Analyze use of and improve the services; With your consent; Comply with law or defend our legal rights; Security/fraud prevention
+## 4. Data Retention
 
-Affiliated entities; Service providers; Entities for legal purposes;
+We retain personal information only for as long as necessary to:
 
-We do not sell/share
+- Provide the Service  
+- Fulfill the purposes described in this Privacy Policy  
+- Comply with legal and regulatory obligations  
 
-For more information about each category of personal information, purpose of use, and third parties to which we disclose personal information, please see the "What we collect and why," and "When we access or disclose you information" sections of our Privacy Policy.
+You may request deletion of your personal data, including voice recordings, subject to technical and legal limitations.
 
-**Your Choices Regarding “Sharing” and “Selling”**: You have the right to opt out of our sale/sharing of your personal information for purposes of online analytics and advertising. Currently, we do not sell or share your data as defined by the CCPA and we have not done so over the past 12 months from the effective date of this Privacy Policy.
+---
 
-**Other CCPA Rights.** If we ever offer any financial incentives in exchange for your personal information, we will provide you with appropriate information about such incentives.
+## 5. Your Rights and Choices
 
-The CCPA also allows you to limit the use or disclosure of your “sensitive personal information” (as defined in the CCPA) if your sensitive personal information is used for certain purposes. Please note that we do not use or disclose sensitive personal information other than for business purposes for which you cannot opt out under the CCPA.
+Depending on your location, you may have the right to:
 
-Please see the “Your rights with respect to your information” section of our Policy above for information about the additional rights you have with respect to your personal information under California law and how to exercise them.
+- Access the personal data we hold about you  
+- Correct inaccurate or incomplete information  
+- Request deletion of your data  
+- Withdraw consent for voice data processing  
+- Object to certain data uses  
 
-Retention of Your Personal Information. Please see the “Retention Of Your Information” section belowof our Privacy Policy for more information.
+To exercise these rights, please contact us at **support@vows.you**.
 
-Shine the Light Disclosure
---------------------------
+---
 
-The California "Shine the Light" law gives residents of California the right under certain circumstances to request information from us regarding the manner in which we disclose certain categories of personal information (as defined in the Shine the Light law) with third parties for their direct marketing purposes. We currently do not disclose your personal information to third parties for their own direct marketing purposes.
+## 6. Data Security
 
+We use reasonable administrative, technical, and organizational safeguards to protect your information.
 
+While no system can guarantee absolute security, we work to prevent unauthorized access, loss, or misuse of data.
+
+---
+
+## 7. Children’s Privacy
+
+Vows.you is not intended for children under the age of 13 (or the minimum age required by local law).
+
+We do not knowingly collect personal data from children.
+
+---
+
+## 8. International Data Transfers
+
+Your information may be processed and stored in countries outside of your country of residence.
+
+By using the Service, you consent to the transfer of information in accordance with this Privacy Policy.
+
+---
+
+## 9. Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time.
+
+When we do, we will update the “Last updated” date at the top of this page. Continued use of the Service after changes means you accept the updated Policy.
+
+---
+
+## 10. Contact Us
+
+If you have any questions or concerns about this Privacy Policy, please contact us:
+
+**Vows.you**  
+Website: https://www.vows.you/  
+Email: support@vows.you

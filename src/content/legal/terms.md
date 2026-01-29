@@ -1,77 +1,166 @@
 ---
-page: Terms
-pubDate: 2024-01-01
+page: Terms & Conditions
+pubDate:  2026-01-26
 ---
-This privacy policy sets out how Unwrapped AB collects, processes and uses your Personal Information through your use of our Services.
 
-### Definitions
+These Terms and Conditions (“Terms”) govern your access to and use of **Vows.you** (the “Service”), operated by Vows.you (“we,” “us,” or “our”).
 
-### DPO
+By accessing or using the Service, you agree to be bound by these Terms. If you do not agree, do not use the Service.
 
-DPO means Data Protection Officer, and is the person specifically appointed by us to deal with your enquiries with respect to this privacy policy and your Personal Information.
+---
 
-Personal Information means any identifying information about you. This includes, but is not limited to, the following: cookies and usage data.
+## 1. The Service
 
-Services means all services provided by Michael Alexander Web Agency to you, including (but not limited to) this Website.
+Vows.you provides tools that help users create, edit, and generate wedding vows and related content, including optional AI-powered features such as voice-related functionality.
 
-Website means this website and all websites, applications and communications that post a link to this Privacy Policy.
+The Service is provided for personal, non-commercial use unless otherwise stated.
 
-### Personal Information Collection
+---
 
-We only collect and use Personal Information to the extent necessary to provide you with the Services. We collect Personal Information for the Website to provide you with a better online experience.
+## 2. Eligibility
 
-### Personal Information Retention
+You must be at least 18 years old (or the age of majority in your jurisdiction) to use the Service.
 
-We keep Personal Information for the shortest time necessary to provide you with Services and to meet all our legal and compliance obligations. To determine this retention period, we take into account (i) the nature of the Personal Information gathered; and (ii) the nature of our legal and compliance obligations. All Personal Information no longer required by us is destroyed and/or erased.
+By using the Service, you represent that you meet this requirement.
 
-### Personal Data from Third Parties
+---
 
-We may, from time to time, obtain Personal Information from third parties to enable us to better tailor our Services to you (Third Party Personal Information). When we obtain Third Party Personal Information, we will notify you within one month. If we use or share Third Party Personal Information, we will notify you immediately.
+## 3. User Accounts
 
-### Your Rights
+Some features may require creating an account.
 
-With respect to Personal Information we hold, you have the following rights:
+You are responsible for:
+- Maintaining the confidentiality of your account credentials  
+- All activity that occurs under your account  
 
-*   Access: You may request from us access to your data that we hold on you.
+We reserve the right to suspend or terminate accounts that violate these Terms.
 
-    li
-*   Rectification: If the data we hold on you is inaccurate, you may request that we correct it. If the data we hold is incomplete, you may request that we complete it.
-*   Erasure: Subject to certain conditions, you may request that we erase all of the data we hold on you. li Restrictions: Subject to certain conditions, you may request that we restrict the processing of data we hold on you.
-*   Portability: Subject to certain conditions, you may request that we transfer all the data we hold on you to a third party (including yourself).
-*   Objections: Subject to certain conditions, you may object to us processing the data we hold on you.
+---
 
-### Social Media
+## 4. User Content
 
-You may choose to engage with our Services through a variety of social media sites and platforms, for example Facebook, Instagram and Twitter. When you interact with our Services through these social media platforms, you may allow us to receive Personal Information on how you are interacting with our Services. This will depend on your privacy settings on each social media site and platform. The data we are provided by you through your interaction with our Services on social media sites and platforms will be used by us subject to the terms of this privacy policy. Depending on your social media site’s privacy settings, your Personal Information may become public to a community of users if you choose to engage with our Services through these platforms. For further information on how you can customize your privacy settings on social media sites and how those sites handle your privacy, please refer to the privacy policy of each particular social media site.
+### a. Content You Submit
 
-### Minors
+You retain ownership of the text, recordings, and other content you submit to the Service (“User Content”).
 
-We do not knowingly collect information on children under the age of 16 (“Child”). If you become aware that a Child has provided us with Personal Information, please contact us. If we become aware that we have collected Personal Information from a Child without their parent's verifiable authorization to access our Services, we will take steps to remove that information from our servers.
+By submitting User Content, you grant Vows.you a **limited, non-exclusive, royalty-free license** to use, store, process, and display your content **solely to operate and provide the Service**.
 
-### Third Party Links
+---
 
-Our website contains links to other third-party websites not owned or managed by Unwrapped. This privacy policy applies to this website only. If you click a link to a third-party website, the privacy policy of that website will apply. We highly recommend that you read the privacy policies of other websites as they may be different from ours.
+### b. Voice Content and Consent
 
-### Payment Vendors
+If you choose to use voice-related features, including voice cloning:
 
-You can make payments via our website. Our vendors are listed below:
+- You confirm that the voice recordings are **your own voice** or that you have full legal permission to use them  
+- You grant Vows.you permission to process those recordings to generate AI voice outputs for you  
+- You understand that voice data may be processed by third-party providers (such as ElevenLabs) solely to deliver the feature  
 
-*   Paypal
+You may withdraw consent by discontinuing use of the feature and contacting support, subject to technical limitations.
 
-Their privacy policy can be viewed [here](https://www.paypal.com/webapps/mpp/ua/privacy-full)
+---
 
-### Merger, acquisition or asset sale
+## 5. Prohibited Uses
 
-If we or our subsidiaries are involved in a merger, acquisition, or asset sale, your Personal Information may be transferred.
+You agree not to use the Service to:
 
-### Updates
+- Impersonate another person  
+- Submit content you do not have rights to use  
+- Create unlawful, harmful, or deceptive content  
+- Violate any applicable laws or regulations  
+- Attempt to interfere with or disrupt the Service  
 
-We are constantly reviewing our privacy policy and procedures to ensure that they meet best practices. This policy was last updated on August 21, 2021.
+We reserve the right to remove content or restrict access for violations.
 
-### Contact us
+---
 
-If you have any questions or suggestions about our privacy policy or want to know more information about Personal Information we hold, please contact us at support@unwrapped.design or write to us at Mariehamn, Åland Islands..
+## 6. Intellectual Property
 
-### Complaints
+All content, software, designs, trademarks, and branding on Vows.you (excluding User Content) are owned by Vows.you or its licensors.
 
-If you believe that we have breached our obligations to you under this privacy policy or relevant privacy laws, please contact us at email@example If you are not satisfied with our response, you have the right to lodge a complaint at any time to your relevant authority.
+You may not copy, modify, distribute, or exploit any part of the Service without our prior written permission.
+
+---
+
+## 7. AI-Generated Content Disclaimer
+
+AI-generated content is provided **as-is** and may contain inaccuracies or subjective interpretations.
+
+You are responsible for reviewing, editing, and deciding whether to use any content generated by the Service.
+
+Vows.you does not guarantee that generated content will meet legal, personal, cultural, or emotional expectations.
+
+---
+
+## 8. Payments and Subscriptions (If Applicable)
+
+If paid features are offered:
+
+- Prices and billing terms will be disclosed before purchase  
+- Payments are non-refundable unless otherwise stated  
+- We may change pricing with reasonable notice  
+
+Failure to pay may result in suspension or termination of access.
+
+---
+
+## 9. Termination
+
+We may suspend or terminate your access to the Service at any time if you violate these Terms or misuse the Service.
+
+You may stop using the Service at any time.
+
+Sections that by nature should survive termination (including intellectual property, disclaimers, and limitation of liability) will survive.
+
+---
+
+## 10. Disclaimer of Warranties
+
+The Service is provided **“as is” and “as available.”**
+
+We make no warranties, express or implied, including but not limited to:
+- Merchantability  
+- Fitness for a particular purpose  
+- Accuracy or reliability of generated content  
+
+Use of the Service is at your own risk.
+
+---
+
+## 11. Limitation of Liability
+
+To the maximum extent permitted by law, Vows.you shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service.
+
+Our total liability for any claim related to the Service will not exceed the amount you paid to us in the last 12 months, or $100 if no payment was made.
+
+---
+
+## 12. Indemnification
+
+You agree to indemnify and hold harmless Vows.you from any claims, damages, or expenses arising out of:
+- Your use of the Service  
+- Your User Content  
+- Your violation of these Terms  
+
+---
+
+## 13. Governing Law
+
+These Terms are governed by and construed in accordance with the laws of the United States, without regard to conflict-of-law principles.
+
+---
+
+## 14. Changes to These Terms
+
+We may update these Terms from time to time.
+
+When changes are made, we will update the “Last updated” date above. Continued use of the Service means you accept the updated Terms.
+
+---
+
+## 15. Contact Information
+
+If you have questions about these Terms, contact us:
+
+**Vows.you**  
+Website: https://www.vows.you/  
+Email: support@vows.you
