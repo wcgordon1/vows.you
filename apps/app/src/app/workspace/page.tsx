@@ -2,7 +2,7 @@ import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
 import { UserButton } from "@clerk/nextjs";
 
-export default async function Dashboard() {
+export default async function Workspace() {
   const user = await currentUser();
 
   // Preview env or missing Clerk keys — show friendly fallback
@@ -12,7 +12,7 @@ export default async function Dashboard() {
         <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
           <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
             <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-              Dashboard
+              Workspace
             </h1>
           </div>
         </header>
@@ -43,7 +43,7 @@ export default async function Dashboard() {
       <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-            Dashboard
+            Workspace
           </h1>
           <UserButton />
         </div>
