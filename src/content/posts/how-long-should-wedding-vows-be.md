@@ -11,7 +11,6 @@ tags:
  - length
 ---
 
-
 Writing wedding vows sounds romantic until you’re staring at a blank page thinking, “How do I say something meaningful without rambling for ten minutes?”
 
 You are not alone. In the U.S., there were **2,041,926 marriages in 2023** (provisional), which is a lot of people trying to find the right words.  

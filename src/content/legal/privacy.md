@@ -1,6 +1,6 @@
 ---
 page: Privacy Policy
-pubDate: 2025-01-26
+pubDate: 2026-01-26
 ---
 
 This Privacy Policy explains how Vows.you (“we,” “us,” or “our”) collects, uses, stores, and protects your information when you use our website and services (the “Service”).
