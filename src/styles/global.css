@@ -79,6 +79,12 @@
   --astro-code-token-italic: italic;
   --astro-code-token-underline: underline;
 }
+/* ── Global: all buttons get pointer cursor ── */
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
 code {
   counter-reset: step;
   counter-increment: step 0;
