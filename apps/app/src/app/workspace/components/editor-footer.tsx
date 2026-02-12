@@ -1,31 +1,78 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import type { Editor } from "@tiptap/react";
 import { Eye, Play } from "lucide-react";
 import { PracticeMode } from "./practice-mode";
+import {
+  extractPlainText,
+  countWords,
+  estimateSpeakingTime,
+  type TiptapJSON,
+} from "../lib/vow-utils";
 
 interface EditorFooterProps {
   editor: Editor | null;
 }
 
-function getWordCount(editor: Editor | null): number {
-  if (!editor) return 0;
-  const text = editor.state.doc.textContent;
-  return text.trim().split(/\s+/).filter(Boolean).length;
-}
+/**
+ * Debounce a value by `delay` ms. Returns the latest value after the delay
+ * has elapsed without a new update.
+ */
+function useDebouncedValue<T>(value: T, delay: number): T {
+  const [debounced, setDebounced] = useState(value);
 
-function getReadingTime(wordCount: number): string {
-  const minutes = Math.ceil(wordCount / 150);
-  if (minutes < 1) return "< 1 min";
-  return `~ ${minutes} min`;
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+
+  return debounced;
 }
 
 export function EditorFooter({ editor }: EditorFooterProps) {
   const [showPractice, setShowPractice] = useState(false);
-  const wordCount = getWordCount(editor);
-  const readingTime = getReadingTime(wordCount);
-  const vowText = editor?.state.doc.textContent ?? "";
+
+  // Track editor updates via a revision counter that bumps on every transaction
+  const [revision, setRevision] = useState(0);
+  const revisionRef = useRef(revision);
+
+  useEffect(() => {
+    if (!editor) return;
+
+    const handler = () => {
+      revisionRef.current += 1;
+      setRevision(revisionRef.current);
+    };
+
+    editor.on("update", handler);
+    return () => {
+      editor.off("update", handler);
+    };
+  }, [editor]);
+
+  const debouncedRevision = useDebouncedValue(revision, 150);
+
+  // Derive stats from the debounced revision
+  const { wordCount, readingTime, tiptapJSON } = useMemo(() => {
+    if (!editor) {
+      return {
+        wordCount: 0,
+        readingTime: "< 1 min",
+        tiptapJSON: null as TiptapJSON | null,
+      };
+    }
+
+    // Access debouncedRevision to create dependency
+    void debouncedRevision;
+
+    const json = editor.getJSON() as TiptapJSON;
+    const text = extractPlainText(json);
+    const wc = countWords(text);
+    const time = estimateSpeakingTime(text);
+
+    return { wordCount: wc, readingTime: time.display, tiptapJSON: json };
+  }, [editor, debouncedRevision]);
 
   return (
     <>
@@ -51,10 +98,9 @@ export function EditorFooter({ editor }: EditorFooterProps) {
         </div>
       </div>
 
-      {showPractice && (
+      {showPractice && tiptapJSON && (
         <PracticeMode
-          vowText={vowText}
-          readingTime={readingTime}
+          tiptapJSON={tiptapJSON}
           onClose={() => setShowPractice(false)}
         />
       )}
