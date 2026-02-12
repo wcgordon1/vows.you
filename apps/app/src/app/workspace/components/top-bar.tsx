@@ -67,7 +67,7 @@ export function TopBar() {
           : null;
 
   return (
-    <header className="grid h-12 grid-cols-[1fr_auto_1fr] items-center border-b border-base-200 bg-sand-50/80 backdrop-blur-sm px-5 shrink-0">
+    <header className="relative z-40 grid h-12 grid-cols-[1fr_auto_1fr] items-center border-b border-base-200 bg-sand-50/80 backdrop-blur-sm px-5 shrink-0">
       {/* Left — Logo */}
       <div className="flex items-center gap-2">
         <Logo className="h-5 w-5 text-accent-600" />
@@ -105,7 +105,7 @@ export function TopBar() {
 
         {/* Dropdown */}
         {showDropdown && (
-          <div className="absolute left-1/2 top-full z-30 mt-2 w-52 -translate-x-1/2 rounded-lg border border-base-200 bg-white py-1 shadow-lg">
+          <div className="absolute left-1/2 top-full z-50 mt-2 w-52 -translate-x-1/2 rounded-lg border border-base-200 bg-white py-1 shadow-lg">
             {isRenaming ? (
               <div className="px-3 py-2">
                 <label className="block text-[11px] font-medium uppercase tracking-wider text-base-400 mb-1.5">

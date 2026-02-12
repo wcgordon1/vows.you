@@ -1,13 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PanelRightClose, PanelRightOpen, Lock } from "lucide-react";
 import { ToneCard } from "./tone-card";
 import { LengthCard } from "./length-card";
 import { StoryBeatCard } from "./story-beat-card";
 
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    setMatches(mql.matches);
+    function handler(e: MediaQueryListEvent) {
+      setMatches(e.matches);
+    }
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, [query]);
+
+  return matches;
+}
+
 export function GuidePanel() {
-  const [collapsed, setCollapsed] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 767px)");
+  const [manualCollapsed, setManualCollapsed] = useState<boolean | null>(null);
+
+  // Auto-collapse on mobile, but let user override
+  const collapsed = manualCollapsed ?? isMobile;
+
+  function toggle() {
+    setManualCollapsed(!collapsed);
+  }
+
+  // Reset manual override when crossing breakpoint
+  useEffect(() => {
+    setManualCollapsed(null);
+  }, [isMobile]);
 
   return (
     <div
@@ -18,7 +47,7 @@ export function GuidePanel() {
       {collapsed ? (
         <div className="flex flex-col items-center py-3">
           <button
-            onClick={() => setCollapsed(false)}
+            onClick={toggle}
             title="Show Guide"
             className="flex items-center justify-center h-7 w-7 rounded-md text-base-400 transition-colors hover:bg-sand-100 hover:text-base-600"
           >
@@ -36,7 +65,7 @@ export function GuidePanel() {
               </p>
             </div>
             <button
-              onClick={() => setCollapsed(true)}
+              onClick={toggle}
               title="Hide Guide"
               className="flex items-center justify-center h-7 w-7 rounded-md text-base-400 transition-colors hover:bg-sand-100 hover:text-base-600"
             >
@@ -45,7 +74,7 @@ export function GuidePanel() {
           </div>
 
           {/* Cards */}
-          <div className="flex-1 overflow-y-auto p-3 space-y-2.5">
+          <div className="flex-1 overflow-y-auto p-3 space-y-2.5 guide-scroll">
             <ToneCard />
             <LengthCard />
             <StoryBeatCard />
