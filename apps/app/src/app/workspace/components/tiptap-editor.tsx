@@ -68,7 +68,7 @@ export function TiptapEditor() {
       }),
       Underline,
       Placeholder.configure({
-        placeholder: "Start writing your vows…\n\nThink of one moment that still feels vivid — where you knew this was different. Begin there.",
+        placeholder: "Start writing your vows…\n\nThink of one moment that still feels vivid.\n\nWhere you knew this was different.\n\nBegin there.",
       }),
     ],
     content: "",
