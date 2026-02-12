@@ -111,32 +111,49 @@ export function EditorFooter({ editor, analysis }: EditorFooterProps) {
 
   return (
     <>
-      <div className="flex items-center justify-between px-8 py-3 border-t border-base-100">
+      <div className={`flex items-center justify-between border-t border-base-100 ${isMobile ? "px-4 py-2" : "px-8 py-3"}`}>
         {/* Left — Stats */}
-        <div className="text-xs font-medium text-base-500 tracking-wide">
+        <div className={`font-medium text-base-500 tracking-wide ${isMobile ? "text-[11px]" : "text-xs"}`}>
           {wordCount} words &middot; {readingTime}
         </div>
 
         {/* Right — Actions */}
-        <div className="flex items-center gap-2">
+        <div className={`flex items-center ${isMobile ? "gap-1.5" : "gap-2"}`}>
           {showImprovements && (
-            <button
-              onClick={handleImprovementsClick}
-              className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700"
-            >
-              <Sparkles className="h-3.5 w-3.5" />
-              See improvements
-              <span className="flex items-center justify-center h-4 min-w-4 px-1 rounded-full bg-accent-100 text-[10px] font-semibold text-accent-700">
-                {analysis.weakHits}
-              </span>
-            </button>
+            isMobile ? (
+              <button
+                onClick={handleImprovementsClick}
+                title="See improvements"
+                className="relative flex items-center justify-center h-8 w-8 rounded-full text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700"
+              >
+                <Sparkles className="h-4 w-4" />
+                <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center h-3.5 min-w-3.5 px-0.5 rounded-full bg-accent-500 text-[9px] font-bold text-white">
+                  {analysis.weakHits}
+                </span>
+              </button>
+            ) : (
+              <button
+                onClick={handleImprovementsClick}
+                className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700"
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                See improvements
+                <span className="flex items-center justify-center h-4 min-w-4 px-1 rounded-full bg-accent-100 text-[10px] font-semibold text-accent-700">
+                  {analysis.weakHits}
+                </span>
+              </button>
+            )
           )}
           <button
             onClick={handleExportClick}
             title="Export"
-            className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700"
+            className={
+              isMobile
+                ? "flex items-center justify-center h-8 w-8 rounded-full text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700"
+                : "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700"
+            }
           >
-            <FileDown className="h-3.5 w-3.5" />
+            <FileDown className={isMobile ? "h-4 w-4" : "h-3.5 w-3.5"} />
             {!isMobile && "Export"}
           </button>
           <button
@@ -149,7 +166,7 @@ export function EditorFooter({ editor, analysis }: EditorFooterProps) {
               isMobile ? "h-8 w-8 p-0" : "px-4 py-1.5"
             }`}
           >
-            <Play className="h-3.5 w-3.5 fill-current" />
+            <Play className={`fill-current ${isMobile ? "h-4 w-4" : "h-3.5 w-3.5"}`} />
             {!isMobile && "Practice"}
           </button>
         </div>

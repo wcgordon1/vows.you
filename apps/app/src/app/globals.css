@@ -93,6 +93,12 @@ code .line::before {
   color: #999999;
 }
 
+/* ── Global: all buttons get pointer cursor ── */
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
 /* ── Workspace background ── */
 .workspace-bg {
   background:

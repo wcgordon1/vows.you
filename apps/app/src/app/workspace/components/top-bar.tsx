@@ -9,11 +9,14 @@ import {
   Pencil,
   Trash2,
   FileText,
+  FileDown,
   Sparkles,
 } from "lucide-react";
 import { Logo } from "./logo";
 import { useWorkspace } from "../hooks/use-workspace";
+import { useMediaQuery } from "../hooks/use-media-query";
 import { getDraftLimit } from "../lib/entitlements";
+import { track } from "../lib/analytics";
 
 export function TopBar() {
   const {
@@ -24,16 +27,20 @@ export function TopBar() {
     switchDraft,
     renameDraft,
     deleteDraft,
+    requestAction,
     setShowUpgradeCard,
   } = useWorkspace();
 
   const { drafts, saveStatus, hasPaidEntitlement, showUpgradeCard } = state;
 
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showMoreMenu, setShowMoreMenu] = useState(false);
   const [isRenaming, setIsRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState("");
   const renameRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const moreRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const title = activeDraft?.title ?? "Untitled";
   const draftLimit = getDraftLimit(isSignedIn, hasPaidEntitlement);
@@ -63,6 +70,18 @@ export function TopBar() {
     if (showDropdown) document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, [showDropdown, setShowUpgradeCard]);
+
+  // ── Close more-menu on outside click ────────────────────────────────────
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setShowMoreMenu(false);
+      }
+    }
+    if (showMoreMenu) document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [showMoreMenu]);
 
   // ── Handlers ────────────────────────────────────────────────────────────
 
@@ -98,6 +117,23 @@ export function TopBar() {
   function handleNewDraft() {
     setShowDropdown(false);
     createDraft();
+  }
+
+  function handleMoreRename() {
+    setShowMoreMenu(false);
+    setShowDropdown(true);
+    startRename();
+  }
+
+  function handleMoreDelete() {
+    setShowMoreMenu(false);
+    if (activeDraft) handleDelete(activeDraft.id);
+  }
+
+  function handleMoreExport() {
+    setShowMoreMenu(false);
+    track({ event: "export_clicked" });
+    requestAction("EXPORT_PDF");
   }
 
   // ── Status text ─────────────────────────────────────────────────────────
@@ -241,7 +277,7 @@ export function TopBar() {
                     <p className="text-[11px] text-base-500 leading-relaxed mb-2">
                       Unlock unlimited drafts, PDF export, and more.
                     </p>
-                    <button className="w-full rounded-md bg-accent-500 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-accent-600">
+                    <button className="w-full rounded-full bg-accent-500 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-accent-600">
                       Upgrade — $129
                     </button>
                   </div>
@@ -270,14 +306,47 @@ export function TopBar() {
           className="flex items-center gap-1.5 rounded-full border border-base-200 bg-white px-3.5 py-1.5 text-xs font-medium text-base-700 shadow-sm transition-colors hover:bg-sand-50 hover:border-base-300"
         >
           <Plus className="h-3 w-3" />
-          New Draft
+          {isMobile ? "New" : "New Draft"}
         </button>
-        <button
-          title="More"
-          className="flex items-center justify-center h-8 w-8 rounded-full text-base-400 transition-colors hover:bg-sand-100 hover:text-base-600"
-        >
-          <MoreHorizontal className="h-4 w-4" />
-        </button>
+
+        {/* Three-dot more menu */}
+        <div className="relative" ref={moreRef}>
+          <button
+            onClick={() => setShowMoreMenu(!showMoreMenu)}
+            title="More"
+            className="flex items-center justify-center h-8 w-8 rounded-full text-base-400 transition-colors hover:bg-sand-100 hover:text-base-600"
+          >
+            <MoreHorizontal className="h-4 w-4" />
+          </button>
+
+          {showMoreMenu && (
+            <div className="absolute right-0 top-full z-50 mt-1.5 w-44 rounded-lg border border-base-200 bg-white py-1 shadow-lg">
+              <button
+                onClick={handleMoreRename}
+                className="flex items-center gap-2 w-full px-3 py-2 text-[13px] text-base-600 hover:bg-sand-50 transition-colors"
+              >
+                <Pencil className="h-3.5 w-3.5 text-base-400" />
+                Rename draft
+              </button>
+              <button
+                onClick={handleMoreExport}
+                className="flex items-center gap-2 w-full px-3 py-2 text-[13px] text-base-600 hover:bg-sand-50 transition-colors"
+              >
+                <FileDown className="h-3.5 w-3.5 text-base-400" />
+                Export
+              </button>
+              {drafts.length > 1 && (
+                <button
+                  onClick={handleMoreDelete}
+                  className="flex items-center gap-2 w-full px-3 py-2 text-[13px] text-red-500 hover:bg-red-50 transition-colors"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                  Delete draft
+                </button>
+              )}
+            </div>
+          )}
+        </div>
 
         {/* Auth: show UserButton when signed in, Sign In button when not */}
         {isSignedIn ? (
