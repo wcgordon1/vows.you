@@ -69,6 +69,7 @@ export function AuthGateModal() {
               },
             }}
             routing="hash"
+            signInUrl="#/sign-in"
             fallbackRedirectUrl="/workspace"
           />
         </div>
