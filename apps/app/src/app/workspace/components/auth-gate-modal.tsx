@@ -1,6 +1,6 @@
 "use client";
 
-import { SignIn } from "@clerk/nextjs";
+import { SignUp } from "@clerk/nextjs";
 import { X } from "lucide-react";
 import { useWorkspace } from "../hooks/use-workspace";
 import { clearPendingAction } from "../lib/pending-action";
@@ -51,9 +51,9 @@ export function AuthGateModal() {
           </p>
         </div>
 
-        {/* Clerk SignIn form */}
+        {/* Clerk SignUp form (with "Already have an account? Sign in" link) */}
         <div className="rounded-b-xl bg-white px-6 pb-6 flex justify-center">
-          <SignIn
+          <SignUp
             appearance={{
               elements: {
                 rootBox: "w-full",
