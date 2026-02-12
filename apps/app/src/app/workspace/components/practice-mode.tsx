@@ -31,8 +31,11 @@ interface PracticeModeProps {
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export function PracticeMode({ tiptapJSON, onClose }: PracticeModeProps) {
-  // Derive text + segments from JSON
-  const plainText = useMemo(() => extractPlainText(tiptapJSON), [tiptapJSON]);
+  // Derive text + segments from JSON (skip headings — they're not spoken aloud)
+  const plainText = useMemo(
+    () => extractPlainText(tiptapJSON, { skipHeadings: true }),
+    [tiptapJSON],
+  );
 
   const segments = useMemo(() => splitIntoSegments(plainText), [plainText]);
 
@@ -149,20 +152,19 @@ export function PracticeMode({ tiptapJSON, onClose }: PracticeModeProps) {
         ref={scrollContainerRef}
         className="flex-1 overflow-y-auto relative"
       >
-        {/* Focus line overlay */}
+        {/* Focus line — subtle fixed guide */}
         <div
           className="sticky z-20 pointer-events-none"
           style={{ top: `${focusLineFraction * 100}%` }}
         >
-          <div className="h-px w-full bg-accent-300/40" />
-          <div className="h-8 w-full bg-linear-to-b from-accent-300/10 to-transparent" />
+          <div className="h-px w-full bg-accent-400/25" />
         </div>
 
-        {/* Top fade */}
-        <div className="sticky top-0 h-12 bg-linear-to-b from-sand-50 to-transparent pointer-events-none z-10" />
+        {/* Top fade — small so it doesn't collide with focus line */}
+        <div className="sticky top-0 h-4 bg-linear-to-b from-sand-50 to-transparent pointer-events-none z-10" />
 
-        <div className="max-w-2xl mx-auto px-8 py-12">
-          <h3 className="text-center text-sm uppercase tracking-widest text-base-400 mb-12">
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          <h3 className="text-center text-sm uppercase tracking-widest text-base-400 mb-16">
             Your Wedding Vows
           </h3>
 
@@ -171,7 +173,7 @@ export function PracticeMode({ tiptapJSON, onClose }: PracticeModeProps) {
               Start writing your vows to see them here...
             </p>
           ) : (
-            <div className="space-y-8">
+            <div className="space-y-14">
               {paragraphGroups.map((group, gIdx) => (
                 <p
                   key={gIdx}
@@ -186,13 +188,14 @@ export function PracticeMode({ tiptapJSON, onClose }: PracticeModeProps) {
                       <span
                         key={globalIndex}
                         data-segment-index={globalIndex}
-                        className={`transition-all duration-300 ${
+                        className={[
+                          "transition-all duration-300 ease-out",
                           isActive
-                            ? "text-base-900 font-semibold"
+                            ? "text-base-900 opacity-100 bg-accent-50/60 rounded-md px-1.5 py-0.5 -mx-1.5"
                             : isPast
-                              ? "text-base-400"
-                              : "text-base-600"
-                        }`}
+                              ? "text-base-800 opacity-25"
+                              : "text-base-800 opacity-45",
+                        ].join(" ")}
                       >
                         {sIdx > 0 ? " " : ""}
                         {seg.text}
@@ -209,7 +212,7 @@ export function PracticeMode({ tiptapJSON, onClose }: PracticeModeProps) {
         <div className="h-[60vh]" />
 
         {/* Bottom fade */}
-        <div className="sticky bottom-0 h-12 bg-linear-to-t from-sand-50 to-transparent pointer-events-none z-10" />
+        <div className="sticky bottom-0 h-4 bg-linear-to-t from-sand-50 to-transparent pointer-events-none z-10" />
       </div>
 
       {/* ── Bottom controls ──────────────────────────────────────────────── */}

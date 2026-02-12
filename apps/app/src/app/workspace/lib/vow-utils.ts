@@ -37,12 +37,19 @@ const SEGMENT_MIN_DURATION_MS = 700;
  * Recursively walk a Tiptap JSON doc and produce plain text that preserves
  * paragraph/heading boundaries as `\n\n` and hard breaks as `\n`.
  */
-export function extractPlainText(doc: TiptapJSON): string {
+export function extractPlainText(
+  doc: TiptapJSON,
+  options?: { skipHeadings?: boolean },
+): string {
   if (!doc || !doc.content) return "";
 
   const blocks: string[] = [];
 
   for (const node of doc.content) {
+    if (node.type === "heading" && options?.skipHeadings) {
+      continue;
+    }
+
     if (
       node.type === "paragraph" ||
       node.type === "heading" ||
