@@ -26,21 +26,21 @@ const BEATS = [
 export function StoryBeatCard() {
   return (
     <div className="rounded-lg border border-base-200 bg-white p-4">
-      <h3 className="text-sm font-semibold text-base-800 mb-3">
+      <h3 className="text-sm font-semibold text-base-800 mb-2">
         Add a Story Beat
       </h3>
-      <div className="space-y-2">
+      <div className="space-y-0.5">
         {BEATS.map((beat) => {
           const Icon = beat.icon;
           return (
             <button
               key={beat.label}
-              className="flex items-center gap-3 w-full rounded-lg px-3 py-2.5 text-left text-sm text-base-600 transition-colors hover:bg-sand-50"
+              className="flex items-center gap-2.5 w-full rounded-lg px-2.5 py-2 text-left text-sm text-base-600 transition-colors hover:bg-sand-50"
             >
               <span
-                className={`flex items-center justify-center h-7 w-7 rounded-md ${beat.iconBg}`}
+                className={`flex items-center justify-center h-6 w-6 rounded-md ${beat.iconBg}`}
               >
-                <Icon className={`h-4 w-4 ${beat.iconColor}`} />
+                <Icon className={`h-3.5 w-3.5 ${beat.iconColor}`} />
               </span>
               <span className="truncate">{beat.label}</span>
             </button>
