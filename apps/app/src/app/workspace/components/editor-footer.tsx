@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import type { Editor } from "@tiptap/react";
 import { FileDown, Play } from "lucide-react";
-import { PracticeMode } from "./practice-mode";
 import { ExportPrintView } from "./export-print-view";
 import {
   extractPlainText,
@@ -33,7 +33,7 @@ function useDebouncedValue<T>(value: T, delay: number): T {
 }
 
 export function EditorFooter({ editor }: EditorFooterProps) {
-  const [showPractice, setShowPractice] = useState(false);
+  const router = useRouter();
   const [showExport, setShowExport] = useState(false);
   const { requestAction, activeDraft } = useWorkspace();
 
@@ -108,7 +108,7 @@ export function EditorFooter({ editor }: EditorFooterProps) {
           <button
             onClick={() => {
               track({ event: "practice_mode_opened" });
-              setShowPractice(true);
+              router.push("/workspace/practice");
             }}
             className="flex items-center gap-1.5 rounded-full bg-accent-500 px-4 py-1.5 text-xs font-medium text-white shadow-sm transition-colors hover:bg-accent-600"
           >
@@ -117,13 +117,6 @@ export function EditorFooter({ editor }: EditorFooterProps) {
           </button>
         </div>
       </div>
-
-      {showPractice && tiptapJSON && (
-        <PracticeMode
-          tiptapJSON={tiptapJSON}
-          onClose={() => setShowPractice(false)}
-        />
-      )}
 
       {showExport && tiptapJSON && (
         <ExportPrintView

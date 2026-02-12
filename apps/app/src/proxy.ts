@@ -1,18 +1,9 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-const isProtectedRoute = createRouteMatcher(["/workspace(.*)"]);
-
-export default clerkMiddleware(async (auth, req) => {
-  // Preview deployments: skip auth entirely
-  if (process.env.VERCEL_ENV === "preview") {
-    return NextResponse.next();
-  }
-
-  if (isProtectedRoute(req)) {
-    await auth.protect();
-  }
-});
+// Workspace is anonymous-first — no route protection.
+// Auth gating is handled in-app via the workspace context
+// (auth-gate-modal.tsx) when users attempt "durability" actions.
+export default clerkMiddleware();
 
 export const config = {
   matcher: [
