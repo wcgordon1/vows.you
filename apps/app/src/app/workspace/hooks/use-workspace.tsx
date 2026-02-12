@@ -151,6 +151,9 @@ interface WorkspaceContextValue {
   // Vow analysis (shared between editor and guide panel)
   vowAnalysis: VowAnalysis | null;
   setVowAnalysis: (analysis: VowAnalysis | null) => void;
+  // Editor bridge — lets guide panel insert content into the editor
+  insertHTML: (html: string, opts?: { replace?: boolean }) => void;
+  setInsertHTML: (fn: (html: string, opts?: { replace?: boolean }) => void) => void;
 }
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
@@ -164,6 +167,19 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
 
   // Vow analysis — shared between TiptapEditor and SuggestionsCard
   const [vowAnalysis, setVowAnalysis] = useState<VowAnalysis | null>(null);
+
+  // Editor bridge — guide panel uses this to insert content
+  const insertHTMLRef = useRef<(html: string, opts?: { replace?: boolean }) => void>(() => {});
+  const setInsertHTML = useCallback(
+    (fn: (html: string, opts?: { replace?: boolean }) => void) => {
+      insertHTMLRef.current = fn;
+    },
+    [],
+  );
+  const insertHTML = useCallback(
+    (html: string, opts?: { replace?: boolean }) => insertHTMLRef.current(html, opts),
+    [],
+  );
 
   // Track previous auth state to detect sign-in completion
   const prevSignedIn = useRef(isSignedIn);
@@ -405,6 +421,8 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     setPaidEntitlement,
     vowAnalysis,
     setVowAnalysis,
+    insertHTML,
+    setInsertHTML,
   };
 
   return (

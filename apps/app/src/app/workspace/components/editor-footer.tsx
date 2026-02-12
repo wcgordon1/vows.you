@@ -12,6 +12,7 @@ import {
   type TiptapJSON,
 } from "../lib/vow-utils";
 import { useWorkspace } from "../hooks/use-workspace";
+import { useMediaQuery } from "../hooks/use-media-query";
 import { track } from "../lib/analytics";
 import type { VowAnalysis } from "@/lib/vow-review";
 
@@ -39,6 +40,7 @@ export function EditorFooter({ editor, analysis }: EditorFooterProps) {
   const [showExport, setShowExport] = useState(false);
   const { requestAction, activeDraft, state } = useWorkspace();
   const isPaid = state.hasPaidEntitlement;
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   // Track editor updates via a revision counter
   const [revision, setRevision] = useState(0);
@@ -131,20 +133,24 @@ export function EditorFooter({ editor, analysis }: EditorFooterProps) {
           )}
           <button
             onClick={handleExportClick}
+            title="Export"
             className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700"
           >
             <FileDown className="h-3.5 w-3.5" />
-            Export
+            {!isMobile && "Export"}
           </button>
           <button
             onClick={() => {
               track({ event: "practice_mode_opened" });
               router.push("/workspace/practice");
             }}
-            className="flex items-center gap-1.5 rounded-full bg-accent-500 px-4 py-1.5 text-xs font-medium text-white shadow-sm transition-colors hover:bg-accent-600"
+            title="Practice"
+            className={`flex items-center justify-center gap-1.5 rounded-full bg-accent-500 text-xs font-medium text-white shadow-sm transition-colors hover:bg-accent-600 ${
+              isMobile ? "h-8 w-8 p-0" : "px-4 py-1.5"
+            }`}
           >
             <Play className="h-3.5 w-3.5 fill-current" />
-            Practice
+            {!isMobile && "Practice"}
           </button>
         </div>
       </div>

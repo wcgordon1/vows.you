@@ -1,28 +1,39 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { PanelRightClose, PanelRightOpen } from "lucide-react";
 import { useMediaQuery } from "../hooks/use-media-query";
+import { NextStepModule } from "./next-step-module";
 import { ToneCard } from "./tone-card";
 import { LengthCard } from "./length-card";
+import { OutlineCard } from "./outline-card";
 import { StoryBeatCard } from "./story-beat-card";
-import { SuggestionsCard } from "./suggestions-card";
+import { CoachNotesCard } from "./coach-notes-card";
 
 export function GuidePanel() {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const [manualCollapsed, setManualCollapsed] = useState<boolean | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Auto-collapse on mobile, but let user override
   const collapsed = manualCollapsed ?? isMobile;
 
   function toggle() {
     setManualCollapsed(!collapsed);
   }
 
-  // Reset manual override when crossing breakpoint
   useEffect(() => {
     setManualCollapsed(null);
   }, [isMobile]);
+
+  const scrollTo = useCallback(
+    (section: "outlines" | "beats" | "notes") => {
+      const el = scrollRef.current?.querySelector(
+        `[data-guide-section="${section}"]`,
+      );
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    },
+    [],
+  );
 
   return (
     <div
@@ -47,7 +58,7 @@ export function GuidePanel() {
             <div>
               <h2 className="text-sm font-semibold text-base-800">Guide</h2>
               <p className="text-[11px] text-base-400 mt-0.5">
-                3 quick steps to shape your vows
+                Your calm vow-writing coach
               </p>
             </div>
             <button
@@ -59,12 +70,28 @@ export function GuidePanel() {
             </button>
           </div>
 
-          {/* Cards */}
-          <div className="flex-1 overflow-y-auto p-3 space-y-2.5 guide-scroll">
+          {/* Sticky Next Step */}
+          <NextStepModule onScrollTo={scrollTo} />
+
+          {/* Scrollable cards */}
+          <div
+            ref={scrollRef}
+            className="flex-1 overflow-y-auto p-3 space-y-2.5 guide-scroll"
+          >
             <ToneCard />
             <LengthCard />
-            <StoryBeatCard />
-            <SuggestionsCard />
+
+            <div data-guide-section="outlines">
+              <OutlineCard />
+            </div>
+
+            <div data-guide-section="beats">
+              <StoryBeatCard />
+            </div>
+
+            <div data-guide-section="notes">
+              <CoachNotesCard />
+            </div>
           </div>
         </>
       )}

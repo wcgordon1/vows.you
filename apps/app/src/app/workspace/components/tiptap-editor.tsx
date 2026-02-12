@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
@@ -14,44 +14,9 @@ import { useAutosave } from "../hooks/use-autosave";
 import { useVowAnalysis } from "../hooks/use-vow-analysis";
 import { WeakPhraseHighlight } from "../extensions/weak-phrase-highlight";
 
-const PROMPT_CHIPS: { label: string; content: string }[] = [
-  {
-    label: "How you met",
-    content: [
-      "<p>The first time I saw you, I remember…</p>",
-      "<p>I knew something was different when…</p>",
-      "<p>Looking back on that moment now, I realize…</p>",
-    ].join(""),
-  },
-  {
-    label: "A favorite memory",
-    content: [
-      "<p>One of my favorite memories with you is…</p>",
-      "<p>What made that moment special was…</p>",
-      "<p>Every time I think about it, I feel…</p>",
-    ].join(""),
-  },
-  {
-    label: "What you admire",
-    content: [
-      "<p>One of the things I love most about you is…</p>",
-      "<p>You have this way of making everyone around you feel…</p>",
-      "<p>Your strength and kindness inspire me to…</p>",
-    ].join(""),
-  },
-  {
-    label: "A promise",
-    content: [
-      "<p>I promise to always…</p>",
-      "<p>Even when things get hard, I will…</p>",
-      "<p>Together, I know we can…</p>",
-    ].join(""),
-  },
-];
-
 export function TiptapEditor() {
   const [isFocused, setIsFocused] = useState(false);
-  const { activeDraft, state, setVowAnalysis } = useWorkspace();
+  const { activeDraft, state, setVowAnalysis, setInsertHTML } = useWorkspace();
   const isPaid = state.hasPaidEntitlement;
   const loadedDraftIdRef = useRef<string | null>(null);
 
@@ -71,7 +36,8 @@ export function TiptapEditor() {
       }),
       Underline,
       Placeholder.configure({
-        placeholder: "Start writing your vows…\n\nThink of one moment that still feels vivid.\n\nWhere you knew this was different.\n\nBegin there.",
+        placeholder:
+          "Start writing your vows…\n\nThink of one moment that still feels vivid.\n\nWhere you knew this was different.\n\nBegin there.",
       }),
       WeakPhraseHighlight,
     ],
@@ -86,11 +52,26 @@ export function TiptapEditor() {
     onBlur: () => setIsFocused(false),
   });
 
+  // ── Bridge: expose insertHTML to workspace context ──────────────────────
+
+  useEffect(() => {
+    if (!editor) return;
+
+    setInsertHTML((html: string, opts?: { replace?: boolean }) => {
+      if (opts?.replace) {
+        editor.chain().focus().setContent(html).run();
+      } else {
+        // Append at end
+        editor.chain().focus("end").insertContent(html).run();
+      }
+    });
+  }, [editor, setInsertHTML]);
+
   // ── Vow analysis (auto-runs on content changes) ────────────────────────
 
   const analysis = useVowAnalysis(editor);
 
-  // Push analysis results to workspace context (for SuggestionsCard)
+  // Push analysis results to workspace context (for CoachNotesCard)
   useEffect(() => {
     setVowAnalysis(analysis);
   }, [analysis, setVowAnalysis]);
@@ -111,7 +92,6 @@ export function TiptapEditor() {
   useEffect(() => {
     if (!editor || !activeDraft) return;
 
-    // Only reload if we're switching to a different draft
     if (loadedDraftIdRef.current === activeDraft.id) return;
     loadedDraftIdRef.current = activeDraft.id;
 
@@ -130,14 +110,6 @@ export function TiptapEditor() {
 
   const isEmpty = !editor || editor.state.doc.textContent.trim().length === 0;
 
-  const insertPrompt = useCallback(
-    (html: string) => {
-      if (!editor) return;
-      editor.chain().focus().setContent(html).run();
-    },
-    [editor],
-  );
-
   // Show loading state while drafts load
   if (!state.isLoaded) {
     return (
@@ -153,24 +125,6 @@ export function TiptapEditor() {
 
       <div className="flex-1 overflow-y-auto relative">
         <EditorContent editor={editor} />
-
-        {/* Empty state prompt chips */}
-        {isEmpty && !isFocused && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-10 pointer-events-none">
-            <p className="text-sm text-base-400 mb-3">Start with…</p>
-            <div className="flex flex-wrap gap-2 justify-center pointer-events-auto">
-              {PROMPT_CHIPS.map((chip) => (
-                <button
-                  key={chip.label}
-                  onClick={() => insertPrompt(chip.content)}
-                  className="rounded-full border border-base-200 bg-white px-3.5 py-1.5 text-xs font-medium text-base-500 shadow-sm transition-colors hover:bg-sand-50 hover:text-base-700 hover:border-base-300"
-                >
-                  {chip.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
       <EditorFooter editor={editor} analysis={analysis} />

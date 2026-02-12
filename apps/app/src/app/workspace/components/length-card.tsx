@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
 
 const LENGTHS = ["Short", "Medium", "Long"] as const;
 
@@ -13,17 +13,57 @@ const DESCRIPTIONS: Record<string, string> = {
 
 export function LengthCard() {
   const [selected, setSelected] = useState<string>("Medium");
+  const [collapsed, setCollapsed] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  function handleSelect(length: string) {
+    setSelected(length);
+    if (!hasInteracted) {
+      setHasInteracted(true);
+      setTimeout(() => setCollapsed(true), 400);
+    }
+  }
+
+  if (collapsed) {
+    return (
+      <button
+        onClick={() => setCollapsed(false)}
+        className="flex items-center justify-between w-full rounded-lg border border-base-200 bg-white px-3.5 py-2.5 text-left transition-colors hover:bg-sand-50/60 group"
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold text-base-700 uppercase tracking-wide">
+            Length
+          </span>
+          <span className="text-xs text-base-500">&middot;</span>
+          <span className="text-xs font-medium text-base-600">
+            {selected} — {DESCRIPTIONS[selected]?.split("—")[1]?.trim()}
+          </span>
+        </div>
+        <ChevronDown className="h-3 w-3 text-base-300 group-hover:text-base-500 transition-colors" />
+      </button>
+    );
+  }
 
   return (
     <div className="rounded-lg border border-base-200 bg-white p-3.5">
-      <h3 className="text-xs font-semibold text-base-700 uppercase tracking-wide mb-2">
-        Target Length
-      </h3>
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-xs font-semibold text-base-700 uppercase tracking-wide">
+          Target Length
+        </h3>
+        {hasInteracted && (
+          <button
+            onClick={() => setCollapsed(true)}
+            className="text-[10px] text-base-400 hover:text-base-600 transition-colors"
+          >
+            Done
+          </button>
+        )}
+      </div>
       <div className="flex flex-wrap gap-1.5 mb-2">
         {LENGTHS.map((length) => (
           <button
             key={length}
-            onClick={() => setSelected(length)}
+            onClick={() => handleSelect(length)}
             className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all ${
               selected === length
                 ? "bg-base-900 text-white ring-1 ring-base-900"
