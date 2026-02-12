@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Check } from "lucide-react";
 
 const PRIMARY_TONES = ["Heartfelt", "Light & Funny"] as const;
 const MORE_TONES = ["Poetic", "Playful", "Traditional", "Modern"] as const;
@@ -12,25 +12,28 @@ export function ToneCard() {
   const [expanded, setExpanded] = useState(false);
 
   const visibleTones = expanded ? ALL_TONES : PRIMARY_TONES;
-
-  // If a "more" tone is selected but panel is collapsed, show it in the primary row
-  const isMoreToneSelected = MORE_TONES.includes(selected as (typeof MORE_TONES)[number]);
-  const displayTones = !expanded && isMoreToneSelected
-    ? [selected, ...PRIMARY_TONES.filter((t) => t !== selected)]
-    : visibleTones;
+  const isMoreToneSelected = MORE_TONES.includes(
+    selected as (typeof MORE_TONES)[number],
+  );
+  const displayTones =
+    !expanded && isMoreToneSelected
+      ? [selected, ...PRIMARY_TONES.filter((t) => t !== selected)]
+      : visibleTones;
 
   return (
-    <div className="rounded-lg border border-base-200 bg-white p-4">
+    <div className="rounded-lg border border-base-200 bg-white p-3.5">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-semibold text-base-800">Pick a Tone</h3>
+        <h3 className="text-xs font-semibold text-base-700 uppercase tracking-wide">
+          Pick a Tone
+        </h3>
         <button
           onClick={() => setExpanded(!expanded)}
-          className="flex items-center justify-center h-6 w-6 rounded-md text-base-400 transition-colors hover:bg-sand-100 hover:text-base-600"
+          className="flex items-center justify-center h-5 w-5 rounded text-base-400 transition-colors hover:bg-sand-100 hover:text-base-600"
         >
           {expanded ? (
-            <ChevronUp className="h-3.5 w-3.5" />
+            <ChevronUp className="h-3 w-3" />
           ) : (
-            <ChevronDown className="h-3.5 w-3.5" />
+            <ChevronDown className="h-3 w-3" />
           )}
         </button>
       </div>
@@ -39,12 +42,13 @@ export function ToneCard() {
           <button
             key={tone}
             onClick={() => setSelected(tone)}
-            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+            className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all ${
               selected === tone
-                ? "bg-base-900 text-white"
-                : "bg-sand-100 text-base-600 hover:bg-sand-200"
+                ? "bg-base-900 text-white ring-1 ring-base-900"
+                : "bg-sand-50 text-base-500 hover:bg-sand-100 hover:text-base-700 border border-base-200"
             }`}
           >
+            {selected === tone && <Check className="h-2.5 w-2.5" />}
             {tone}
           </button>
         ))}

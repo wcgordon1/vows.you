@@ -93,6 +93,17 @@ code .line::before {
   color: #999999;
 }
 
+/* ── Workspace background ── */
+.workspace-bg {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      oklch(97.03% 0.007 88.64 / 0.5),
+      transparent
+    ),
+    oklch(97.03% 0.007 88.64); /* sand-100 base with soft warm vignette */
+}
+
 /* ── Tiptap editor styles ── */
 .tiptap p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
@@ -111,14 +122,21 @@ code .line::before {
 .tiptap.prose h2 {
   font-family: var(--font-noto-serif), serif;
   font-weight: 600;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
+  margin-top: 1em;
+  margin-bottom: 0.6em;
+  color: oklch(0.205 0 0); /* base-900 */
 }
 
 .tiptap.prose p {
   font-family: var(--font-noto-serif), serif;
-  line-height: 1.8;
-  margin-bottom: 1em;
+  line-height: 2;
+  margin-bottom: 1.2em;
+  color: oklch(0.269 0 0); /* base-800 */
+}
+
+.tiptap.prose ul,
+.tiptap.prose ol {
+  line-height: 2;
 }
 
 /* Selection styling */
@@ -126,8 +144,26 @@ code .line::before {
   background-color: oklch(92.11% 0.031 32.56); /* accent-100 */
 }
 
-/* Smooth scrollbar for editor */
-.tiptap {
+/* Smooth scrollbar for editor + guide */
+.tiptap,
+.guide-scroll {
   scrollbar-width: thin;
-  scrollbar-color: oklch(0.87 0 0) transparent; /* base-300 */
+  scrollbar-color: oklch(0.922 0 0) transparent; /* base-200 */
+}
+
+/* Hide scrollbar until hover */
+.tiptap::-webkit-scrollbar,
+.guide-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tiptap::-webkit-scrollbar-thumb,
+.guide-scroll::-webkit-scrollbar-thumb {
+  background: oklch(0.922 0 0); /* base-200 */
+  border-radius: 4px;
+}
+
+.tiptap::-webkit-scrollbar-track,
+.guide-scroll::-webkit-scrollbar-track {
+  background: transparent;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { Editor } from "@tiptap/react";
 import {
   Bold,
@@ -17,6 +18,7 @@ import {
 
 interface EditorToolbarProps {
   editor: Editor | null;
+  visible: boolean;
 }
 
 function ToolbarButton({
@@ -35,8 +37,8 @@ function ToolbarButton({
       type="button"
       onClick={onClick}
       title={title}
-      className={`flex items-center justify-center h-8 w-8 rounded-md text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700 ${
-        isActive ? "bg-sand-100 text-base-900" : ""
+      className={`flex items-center justify-center h-7 w-7 rounded text-base-400 transition-colors hover:bg-sand-100 hover:text-base-700 ${
+        isActive ? "bg-sand-100 text-base-800" : ""
       }`}
     >
       {children}
@@ -45,53 +47,47 @@ function ToolbarButton({
 }
 
 function Divider() {
-  return <div className="w-px h-5 bg-base-200 mx-1" />;
+  return <div className="w-px h-4 bg-base-200 mx-0.5" />;
 }
 
-export function EditorToolbar({ editor }: EditorToolbarProps) {
+export function EditorToolbar({ editor, visible }: EditorToolbarProps) {
+  const [showOverflow, setShowOverflow] = useState(false);
+
   if (!editor) return null;
 
   return (
-    <div className="flex items-center gap-0.5 px-6 py-2 border-b border-base-200">
+    <div
+      className={`flex items-center gap-0.5 px-6 py-1.5 border-b border-base-100 transition-all duration-200 ${
+        visible
+          ? "opacity-100 max-h-12"
+          : "opacity-0 max-h-0 overflow-hidden py-0 border-transparent"
+      }`}
+    >
       {/* Heading */}
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         isActive={editor.isActive("heading", { level: 2 })}
-        title="Heading 2"
+        title="Heading"
       >
-        <Heading2 className="h-4 w-4" />
+        <Heading2 className="h-3.5 w-3.5" />
       </ToolbarButton>
 
       <Divider />
 
-      {/* Inline formatting */}
+      {/* Core formatting */}
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleBold().run()}
         isActive={editor.isActive("bold")}
         title="Bold"
       >
-        <Bold className="h-4 w-4" />
+        <Bold className="h-3.5 w-3.5" />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleItalic().run()}
         isActive={editor.isActive("italic")}
         title="Italic"
       >
-        <Italic className="h-4 w-4" />
-      </ToolbarButton>
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleUnderline().run()}
-        isActive={editor.isActive("underline")}
-        title="Underline"
-      >
-        <UnderlineIcon className="h-4 w-4" />
-      </ToolbarButton>
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-        isActive={editor.isActive("strike")}
-        title="Strikethrough"
-      >
-        <Strikethrough className="h-4 w-4" />
+        <Italic className="h-3.5 w-3.5" />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => {
@@ -112,7 +108,14 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
         isActive={editor.isActive("link")}
         title="Link"
       >
-        <LinkIcon className="h-4 w-4" />
+        <LinkIcon className="h-3.5 w-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleStrike().run()}
+        isActive={editor.isActive("strike")}
+        title="Strikethrough"
+      >
+        <Strikethrough className="h-3.5 w-3.5" />
       </ToolbarButton>
 
       <Divider />
@@ -123,40 +126,53 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
         isActive={editor.isActive({ textAlign: "left" })}
         title="Align Left"
       >
-        <AlignLeft className="h-4 w-4" />
+        <AlignLeft className="h-3.5 w-3.5" />
       </ToolbarButton>
       <ToolbarButton
         onClick={() => editor.chain().focus().setTextAlign("center").run()}
         isActive={editor.isActive({ textAlign: "center" })}
         title="Align Center"
       >
-        <AlignCenter className="h-4 w-4" />
+        <AlignCenter className="h-3.5 w-3.5" />
       </ToolbarButton>
 
       <Divider />
 
-      {/* Lists */}
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleBulletList().run()}
-        isActive={editor.isActive("bulletList")}
-        title="Bullet List"
-      >
-        <List className="h-4 w-4" />
-      </ToolbarButton>
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        isActive={editor.isActive("orderedList")}
-        title="Numbered List"
-      >
-        <ListOrdered className="h-4 w-4" />
-      </ToolbarButton>
+      {/* Overflow toggle */}
+      <div className="relative">
+        <ToolbarButton
+          onClick={() => setShowOverflow(!showOverflow)}
+          title="More formatting"
+        >
+          <MoreHorizontal className="h-3.5 w-3.5" />
+        </ToolbarButton>
 
-      <Divider />
-
-      {/* Overflow */}
-      <ToolbarButton onClick={() => {}} title="More options">
-        <MoreHorizontal className="h-4 w-4" />
-      </ToolbarButton>
+        {showOverflow && (
+          <div className="absolute top-full left-0 mt-1 flex items-center gap-0.5 rounded-lg border border-base-200 bg-white px-1.5 py-1 shadow-md z-20">
+            <ToolbarButton
+              onClick={() => editor.chain().focus().toggleUnderline().run()}
+              isActive={editor.isActive("underline")}
+              title="Underline"
+            >
+              <UnderlineIcon className="h-3.5 w-3.5" />
+            </ToolbarButton>
+            <ToolbarButton
+              onClick={() => editor.chain().focus().toggleBulletList().run()}
+              isActive={editor.isActive("bulletList")}
+              title="Bullet List"
+            >
+              <List className="h-3.5 w-3.5" />
+            </ToolbarButton>
+            <ToolbarButton
+              onClick={() => editor.chain().focus().toggleOrderedList().run()}
+              isActive={editor.isActive("orderedList")}
+              title="Numbered List"
+            >
+              <ListOrdered className="h-3.5 w-3.5" />
+            </ToolbarButton>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
