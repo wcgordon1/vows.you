@@ -92,3 +92,42 @@ code .line::before {
   text-align: right;
   color: #999999;
 }
+
+/* ── Tiptap editor styles ── */
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: oklch(0.708 0 0); /* base-400 */
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
+}
+
+.tiptap:focus {
+  outline: none;
+}
+
+/* Prose overrides for the vow editor */
+.tiptap.prose h2 {
+  font-family: var(--font-noto-serif), serif;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.tiptap.prose p {
+  font-family: var(--font-noto-serif), serif;
+  line-height: 1.8;
+  margin-bottom: 1em;
+}
+
+/* Selection styling */
+.tiptap ::selection {
+  background-color: oklch(92.11% 0.031 32.56); /* accent-100 */
+}
+
+/* Smooth scrollbar for editor */
+.tiptap {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.87 0 0) transparent; /* base-300 */
+}
