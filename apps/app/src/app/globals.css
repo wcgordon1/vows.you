@@ -167,3 +167,54 @@ code .line::before {
 .guide-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* ── Weak phrase highlighting (paid users) ── */
+.weak-phrase {
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.weak-phrase--high {
+  background-color: oklch(93% 0.05 25 / 0.5);
+  border-bottom: 2px solid oklch(63% 0.2 25);
+}
+.weak-phrase--high:hover {
+  background-color: oklch(93% 0.05 25 / 0.75);
+}
+
+.weak-phrase--med {
+  background-color: oklch(95% 0.04 75 / 0.45);
+  border-bottom: 2px solid oklch(72% 0.14 75);
+}
+.weak-phrase--med:hover {
+  background-color: oklch(95% 0.04 75 / 0.7);
+}
+
+.weak-phrase--low {
+  background-color: oklch(95% 0.02 250 / 0.3);
+  border-bottom: 2px solid oklch(70% 0.08 250);
+}
+.weak-phrase--low:hover {
+  background-color: oklch(95% 0.02 250 / 0.5);
+}
+
+/* ── Suggestions card animations ── */
+@keyframes countPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes cardGlow {
+  0% { box-shadow: 0 0 0 0 oklch(64.47% 0.167 35.21 / 0.3); }
+  70% { box-shadow: 0 0 0 6px oklch(64.47% 0.167 35.21 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(64.47% 0.167 35.21 / 0); }
+}
+
+.suggestions-count-pulse {
+  animation: countPulse 0.35s ease-in-out;
+}
+
+.suggestions-card-glow {
+  animation: cardGlow 1s ease-out;
+}

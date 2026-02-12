@@ -1,26 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PanelRightClose, PanelRightOpen, Lock } from "lucide-react";
+import { PanelRightClose, PanelRightOpen } from "lucide-react";
+import { useMediaQuery } from "../hooks/use-media-query";
 import { ToneCard } from "./tone-card";
 import { LengthCard } from "./length-card";
 import { StoryBeatCard } from "./story-beat-card";
-
-function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false);
-
-  useEffect(() => {
-    const mql = window.matchMedia(query);
-    setMatches(mql.matches);
-    function handler(e: MediaQueryListEvent) {
-      setMatches(e.matches);
-    }
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, [query]);
-
-  return matches;
-}
+import { SuggestionsCard } from "./suggestions-card";
 
 export function GuidePanel() {
   const isMobile = useMediaQuery("(max-width: 767px)");
@@ -78,23 +64,7 @@ export function GuidePanel() {
             <ToneCard />
             <LengthCard />
             <StoryBeatCard />
-
-            {/* Tasteful upgrade hint */}
-            <div className="rounded-lg border border-dashed border-base-200 bg-sand-50/60 p-3.5 mt-1">
-              <div className="flex items-center gap-2 mb-1.5">
-                <Lock className="h-3 w-3 text-accent-500" />
-                <span className="text-xs font-semibold text-base-700">
-                  AI Suggestions
-                </span>
-              </div>
-              <p className="text-[11px] text-base-400 leading-relaxed">
-                Get personalized prompts and tone analysis tailored to your
-                story.
-              </p>
-              <button className="mt-2 text-[11px] font-medium text-accent-600 hover:text-accent-700 transition-colors">
-                Upgrade to unlock
-              </button>
-            </div>
+            <SuggestionsCard />
           </div>
         </>
       )}

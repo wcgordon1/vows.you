@@ -15,7 +15,8 @@ export type GatedAction =
   | "CREATE_DRAFT"
   | "EXPORT_PDF"
   | "SYNC"
-  | "SHARE";
+  | "SHARE"
+  | "VIEW_SUGGESTIONS";
 
 export type GateResult =
   | { allowed: true }
@@ -103,6 +104,7 @@ export function checkGate(
       );
     case "EXPORT_PDF":
       return canExportPDF(opts.isSignedIn, opts.hasPaidEntitlement);
+    case "VIEW_SUGGESTIONS":
     case "SYNC":
     case "SHARE":
       if (!opts.isSignedIn) {

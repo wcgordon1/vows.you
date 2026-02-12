@@ -7,6 +7,7 @@ import {
   useEffect,
   useReducer,
   useRef,
+  useState,
   type ReactNode,
 } from "react";
 import { useAuth } from "@clerk/nextjs";
@@ -25,6 +26,7 @@ import {
   consumePendingAction,
 } from "../lib/pending-action";
 import { track } from "../lib/analytics";
+import type { VowAnalysis } from "@/lib/vow-review";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -146,6 +148,9 @@ interface WorkspaceContextValue {
   setShowUpgradeCard: (show: boolean) => void;
   // Entitlement (mock for now)
   setPaidEntitlement: (value: boolean) => void;
+  // Vow analysis (shared between editor and guide panel)
+  vowAnalysis: VowAnalysis | null;
+  setVowAnalysis: (analysis: VowAnalysis | null) => void;
 }
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
@@ -156,6 +161,9 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { isSignedIn: clerkSignedIn } = useAuth();
   const isSignedIn = clerkSignedIn ?? false;
+
+  // Vow analysis — shared between TiptapEditor and SuggestionsCard
+  const [vowAnalysis, setVowAnalysis] = useState<VowAnalysis | null>(null);
 
   // Track previous auth state to detect sign-in completion
   const prevSignedIn = useRef(isSignedIn);
@@ -395,6 +403,8 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     setShowPaywallModal,
     setShowUpgradeCard,
     setPaidEntitlement,
+    vowAnalysis,
+    setVowAnalysis,
   };
 
   return (

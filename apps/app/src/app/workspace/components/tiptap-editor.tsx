@@ -11,6 +11,8 @@ import { EditorToolbar } from "./editor-toolbar";
 import { EditorFooter } from "./editor-footer";
 import { useWorkspace } from "../hooks/use-workspace";
 import { useAutosave } from "../hooks/use-autosave";
+import { useVowAnalysis } from "../hooks/use-vow-analysis";
+import { WeakPhraseHighlight } from "../extensions/weak-phrase-highlight";
 
 const PROMPT_CHIPS: { label: string; content: string }[] = [
   {
@@ -49,7 +51,8 @@ const PROMPT_CHIPS: { label: string; content: string }[] = [
 
 export function TiptapEditor() {
   const [isFocused, setIsFocused] = useState(false);
-  const { activeDraft, state } = useWorkspace();
+  const { activeDraft, state, setVowAnalysis } = useWorkspace();
+  const isPaid = state.hasPaidEntitlement;
   const loadedDraftIdRef = useRef<string | null>(null);
 
   const editor = useEditor({
@@ -70,6 +73,7 @@ export function TiptapEditor() {
       Placeholder.configure({
         placeholder: "Start writing your vows…\n\nThink of one moment that still feels vivid.\n\nWhere you knew this was different.\n\nBegin there.",
       }),
+      WeakPhraseHighlight,
     ],
     content: "",
     editorProps: {
@@ -81,6 +85,26 @@ export function TiptapEditor() {
     onFocus: () => setIsFocused(true),
     onBlur: () => setIsFocused(false),
   });
+
+  // ── Vow analysis (auto-runs on content changes) ────────────────────────
+
+  const analysis = useVowAnalysis(editor);
+
+  // Push analysis results to workspace context (for SuggestionsCard)
+  useEffect(() => {
+    setVowAnalysis(analysis);
+  }, [analysis, setVowAnalysis]);
+
+  // Apply inline highlights for paid users only
+  useEffect(() => {
+    if (!editor) return;
+
+    if (isPaid && analysis.spans.length > 0) {
+      editor.commands.setWeakPhraseSpans(analysis.spans);
+    } else {
+      editor.commands.clearWeakPhraseSpans();
+    }
+  }, [editor, isPaid, analysis.spans]);
 
   // ── Load draft content when active draft changes ──────────────────────
 
@@ -149,7 +173,7 @@ export function TiptapEditor() {
         )}
       </div>
 
-      <EditorFooter editor={editor} />
+      <EditorFooter editor={editor} analysis={analysis} />
     </div>
   );
 }

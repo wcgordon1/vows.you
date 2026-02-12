@@ -16,7 +16,8 @@ type AnalyticsEvent =
   | { event: "paywall_viewed"; trigger: string }
   | { event: "purchase_completed" }
   | { event: "practice_mode_opened" }
-  | { event: "practice_mode_completed" };
+  | { event: "practice_mode_completed" }
+  | { event: "see_improvements_clicked" };
 
 export function track(payload: AnalyticsEvent): void {
   if (process.env.NODE_ENV === "development") {
