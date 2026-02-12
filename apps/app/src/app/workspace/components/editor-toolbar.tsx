@@ -13,7 +13,6 @@ import {
   List,
   ListOrdered,
   MoreHorizontal,
-  Heading2,
 } from "lucide-react";
 
 interface EditorToolbarProps {
@@ -57,20 +56,27 @@ export function EditorToolbar({ editor, visible }: EditorToolbarProps) {
 
   return (
     <div
-      className={`flex items-center gap-0.5 px-6 py-1.5 border-b border-base-100 transition-all duration-200 ${
+      className={`flex items-center gap-0.5 px-10 py-1.5 border-b border-base-100 transition-all duration-200 ${
         visible
           ? "opacity-100 max-h-12"
           : "opacity-0 max-h-0 overflow-hidden py-0 border-transparent"
       }`}
     >
-      {/* Heading */}
-      <ToolbarButton
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        isActive={editor.isActive("heading", { level: 2 })}
+      {/* Heading — text label instead of icon for cleaner look */}
+      <button
+        type="button"
+        onClick={() =>
+          editor.chain().focus().toggleHeading({ level: 2 }).run()
+        }
         title="Heading"
+        className={`flex items-center justify-center h-7 rounded px-2 text-xs font-semibold transition-colors hover:bg-sand-100 hover:text-base-700 ${
+          editor.isActive("heading", { level: 2 })
+            ? "bg-sand-100 text-base-800"
+            : "text-base-400"
+        }`}
       >
-        <Heading2 className="h-3.5 w-3.5" />
-      </ToolbarButton>
+        H2
+      </button>
 
       <Divider />
 
