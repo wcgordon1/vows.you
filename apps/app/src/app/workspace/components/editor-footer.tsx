@@ -2,22 +2,24 @@
 
 import { useState, useEffect, useRef, useMemo } from "react";
 import type { Editor } from "@tiptap/react";
-import { Eye, Play } from "lucide-react";
+import { FileDown, Play } from "lucide-react";
 import { PracticeMode } from "./practice-mode";
+import { ExportPrintView } from "./export-print-view";
 import {
   extractPlainText,
   countWords,
   estimateSpeakingTime,
   type TiptapJSON,
 } from "../lib/vow-utils";
+import { useWorkspace } from "../hooks/use-workspace";
+import { track } from "../lib/analytics";
 
 interface EditorFooterProps {
   editor: Editor | null;
 }
 
 /**
- * Debounce a value by `delay` ms. Returns the latest value after the delay
- * has elapsed without a new update.
+ * Debounce a value by `delay` ms.
  */
 function useDebouncedValue<T>(value: T, delay: number): T {
   const [debounced, setDebounced] = useState(value);
@@ -32,8 +34,10 @@ function useDebouncedValue<T>(value: T, delay: number): T {
 
 export function EditorFooter({ editor }: EditorFooterProps) {
   const [showPractice, setShowPractice] = useState(false);
+  const [showExport, setShowExport] = useState(false);
+  const { requestAction, activeDraft } = useWorkspace();
 
-  // Track editor updates via a revision counter that bumps on every transaction
+  // Track editor updates via a revision counter
   const [revision, setRevision] = useState(0);
   const revisionRef = useRef(revision);
 
@@ -63,7 +67,6 @@ export function EditorFooter({ editor }: EditorFooterProps) {
       };
     }
 
-    // Access debouncedRevision to create dependency
     void debouncedRevision;
 
     const json = editor.getJSON() as TiptapJSON;
@@ -73,6 +76,17 @@ export function EditorFooter({ editor }: EditorFooterProps) {
 
     return { wordCount: wc, readingTime: time.display, tiptapJSON: json };
   }, [editor, debouncedRevision]);
+
+  // ── Export handler (gated) ──────────────────────────────────────────────
+
+  function handleExportClick() {
+    track({ event: "export_clicked" });
+    const result = requestAction("EXPORT_PDF");
+    if (result.allowed) {
+      setShowExport(true);
+    }
+    // If not allowed, requestAction already opened the appropriate modal
+  }
 
   return (
     <>
@@ -84,12 +98,18 @@ export function EditorFooter({ editor }: EditorFooterProps) {
 
         {/* Right — Actions */}
         <div className="flex items-center gap-2">
-          <button className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700">
-            <Eye className="h-3.5 w-3.5" />
-            Preview
+          <button
+            onClick={handleExportClick}
+            className="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-base-500 transition-colors hover:bg-sand-100 hover:text-base-700"
+          >
+            <FileDown className="h-3.5 w-3.5" />
+            Export
           </button>
           <button
-            onClick={() => setShowPractice(true)}
+            onClick={() => {
+              track({ event: "practice_mode_opened" });
+              setShowPractice(true);
+            }}
             className="flex items-center gap-1.5 rounded-full bg-accent-500 px-4 py-1.5 text-xs font-medium text-white shadow-sm transition-colors hover:bg-accent-600"
           >
             <Play className="h-3.5 w-3.5 fill-current" />
@@ -102,6 +122,14 @@ export function EditorFooter({ editor }: EditorFooterProps) {
         <PracticeMode
           tiptapJSON={tiptapJSON}
           onClose={() => setShowPractice(false)}
+        />
+      )}
+
+      {showExport && tiptapJSON && (
+        <ExportPrintView
+          tiptapJSON={tiptapJSON}
+          title={activeDraft?.title ?? "My Vows"}
+          onClose={() => setShowExport(false)}
         />
       )}
     </>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
@@ -9,8 +9,8 @@ import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorToolbar } from "./editor-toolbar";
 import { EditorFooter } from "./editor-footer";
-
-const DEMO_CONTENT = `<h2>Your Wedding Vows</h2><p>When I think about the first time we met,<br>I still remember how nervous I felt…</p><p>You turned that nervousness into laughter.<br>And laughter into something steady.</p><p>Today, I promise…</p>`;
+import { useWorkspace } from "../hooks/use-workspace";
+import { useAutosave } from "../hooks/use-autosave";
 
 const PROMPT_CHIPS = [
   "How you met",
@@ -21,6 +21,8 @@ const PROMPT_CHIPS = [
 
 export function TiptapEditor() {
   const [isFocused, setIsFocused] = useState(false);
+  const { activeDraft, state } = useWorkspace();
+  const loadedDraftIdRef = useRef<string | null>(null);
 
   const editor = useEditor({
     extensions: [
@@ -41,7 +43,7 @@ export function TiptapEditor() {
         placeholder: "Start writing your vows…",
       }),
     ],
-    content: DEMO_CONTENT,
+    content: "",
     editorProps: {
       attributes: {
         class:
@@ -52,15 +54,50 @@ export function TiptapEditor() {
     onBlur: () => setIsFocused(false),
   });
 
+  // ── Load draft content when active draft changes ──────────────────────
+
+  useEffect(() => {
+    if (!editor || !activeDraft) return;
+
+    // Only reload if we're switching to a different draft
+    if (loadedDraftIdRef.current === activeDraft.id) return;
+    loadedDraftIdRef.current = activeDraft.id;
+
+    if (activeDraft.tiptapJSON) {
+      editor.commands.setContent(activeDraft.tiptapJSON);
+    } else {
+      editor.commands.clearContent();
+    }
+  }, [editor, activeDraft]);
+
+  // ── Autosave ──────────────────────────────────────────────────────────
+
+  useAutosave(editor);
+
+  // ── UI ────────────────────────────────────────────────────────────────
+
   const isEmpty = !editor || editor.state.doc.textContent.trim().length === 0;
 
   const insertPrompt = useCallback(
     (text: string) => {
       if (!editor) return;
-      editor.chain().focus().setContent(`<h2>Your Wedding Vows</h2><p>${text}…</p>`).run();
+      editor
+        .chain()
+        .focus()
+        .setContent(`<p>${text}…</p>`)
+        .run();
     },
     [editor],
   );
+
+  // Show loading state while drafts load
+  if (!state.isLoaded) {
+    return (
+      <div className="flex flex-col flex-1 min-h-0 items-center justify-center">
+        <p className="text-sm text-base-400">Loading your drafts…</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col flex-1 min-h-0">
