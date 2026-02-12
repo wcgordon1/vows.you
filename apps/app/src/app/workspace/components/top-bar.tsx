@@ -16,7 +16,6 @@ export function TopBar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const savedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Focus rename input when it appears
   useEffect(() => {
     if (isRenaming && renameRef.current) {
       renameRef.current.focus();
@@ -24,7 +23,6 @@ export function TopBar() {
     }
   }, [isRenaming]);
 
-  // Close dropdown on outside click
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (
@@ -43,8 +41,6 @@ export function TopBar() {
     setIsRenaming(false);
     setShowDropdown(false);
     if (!title.trim()) setTitle("Untitled");
-
-    // Simulate save cycle
     setSaveStatus("saving");
     if (savedTimerRef.current) clearTimeout(savedTimerRef.current);
     savedTimerRef.current = setTimeout(() => {
@@ -61,81 +57,87 @@ export function TopBar() {
     }
   }
 
+  const statusText =
+    saveStatus === "saving"
+      ? "Saving\u2026"
+      : saveStatus === "saved"
+        ? "Saved"
+        : saveStatus === "offline"
+          ? "Offline"
+          : null;
+
   return (
-    <header className="grid grid-cols-[1fr_auto_1fr] items-center border-b border-base-200 bg-sand-50/80 backdrop-blur-sm px-5 py-2.5 shrink-0">
+    <header className="grid h-12 grid-cols-[1fr_auto_1fr] items-center border-b border-base-200 bg-sand-50/80 backdrop-blur-sm px-5 shrink-0">
       {/* Left — Logo */}
       <div className="flex items-center gap-2">
         <Logo className="h-5 w-5 text-accent-600" />
-        <span className="text-base font-serif font-semibold text-base-900 tracking-tight leading-none translate-y-[0.5px]">
+        <span className="text-base font-serif font-semibold text-base-900 tracking-tight">
           Vows
         </span>
       </div>
 
-      {/* Center — Title (always display, never a form) */}
-      <div className="flex flex-col items-center gap-0.5 relative" ref={dropdownRef}>
+      {/* Center — Title pill, vertically centered, dropdown anchored below */}
+      <div className="relative flex items-center justify-center" ref={dropdownRef}>
         <button
-          onClick={() => setShowDropdown(!showDropdown)}
-          className="group flex items-center gap-1.5 rounded-lg px-3 py-1 transition-colors hover:bg-sand-100"
+          onClick={() => {
+            setShowDropdown(!showDropdown);
+            setIsRenaming(false);
+          }}
+          className="group flex items-center gap-1.5 rounded-full px-3.5 py-1 transition-colors hover:bg-sand-100"
         >
-          <span className="text-sm font-medium text-base-800">{title}</span>
+          <span className="text-sm font-medium text-base-800 leading-none">
+            {title}
+          </span>
+          {statusText && (
+            <>
+              <span className="text-base-300">·</span>
+              <span
+                className={`text-[11px] leading-none ${
+                  saveStatus === "offline" ? "text-red-400" : "text-base-400"
+                }`}
+              >
+                {statusText}
+              </span>
+            </>
+          )}
           <ChevronDown className="h-3 w-3 text-base-300 group-hover:text-base-500 transition-colors" />
         </button>
 
-        {/* Save status — calm, muted */}
-        <span
-          className={`text-[11px] h-3.5 leading-none transition-opacity duration-300 ${
-            saveStatus === "saving"
-              ? "text-base-400 opacity-100"
-              : saveStatus === "saved"
-                ? "text-base-400 opacity-100"
-                : saveStatus === "offline"
-                  ? "text-red-400 opacity-100"
-                  : "opacity-0"
-          }`}
-        >
-          {saveStatus === "saving"
-            ? "Saving\u2026"
-            : saveStatus === "saved"
-              ? "Saved"
-              : saveStatus === "offline"
-                ? "Offline"
-                : "\u00A0"}
-        </span>
-
         {/* Dropdown */}
         {showDropdown && (
-          <div className="absolute top-full mt-1 w-56 rounded-xl border border-base-200 bg-white shadow-lg z-30 py-1 overflow-hidden">
-            {/* Dropdown header */}
-            <div className="px-3 py-2 border-b border-base-100">
-              <p className="text-[11px] uppercase tracking-wider text-base-400 font-medium">
-                Draft
-              </p>
-              {isRenaming ? (
+          <div className="absolute left-1/2 top-full z-30 mt-2 w-52 -translate-x-1/2 rounded-lg border border-base-200 bg-white py-1 shadow-lg">
+            {isRenaming ? (
+              <div className="px-3 py-2">
+                <label className="block text-[11px] font-medium uppercase tracking-wider text-base-400 mb-1.5">
+                  Rename draft
+                </label>
                 <input
                   ref={renameRef}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   onBlur={commitRename}
                   onKeyDown={handleRenameKeyDown}
-                  className="mt-1 w-full rounded-md border border-base-200 bg-sand-50 px-2 py-1 text-sm text-base-800 outline-none focus:border-base-300"
+                  className="w-full rounded-md border border-base-200 bg-white px-2.5 py-1.5 text-sm text-base-800 outline-none focus:border-base-300 focus:ring-1 focus:ring-base-200"
                 />
-              ) : (
-                <p className="text-sm font-medium text-base-800 mt-0.5 truncate">
-                  {title}
-                </p>
-              )}
-            </div>
-            {/* Actions */}
-            {!isRenaming && (
-              <div className="py-1">
+              </div>
+            ) : (
+              <>
+                <div className="px-3 py-2 border-b border-base-100">
+                  <p className="text-[11px] uppercase tracking-wider text-base-400 font-medium">
+                    Draft
+                  </p>
+                  <p className="text-sm font-medium text-base-800 mt-0.5 truncate">
+                    {title}
+                  </p>
+                </div>
                 <button
                   onClick={() => setIsRenaming(true)}
-                  className="flex items-center gap-2 w-full px-3 py-1.5 text-sm text-base-600 hover:bg-sand-50 transition-colors"
+                  className="flex items-center gap-2 w-full px-3 py-2 text-[13px] text-base-600 hover:bg-sand-50 transition-colors"
                 >
                   <Pencil className="h-3.5 w-3.5" />
                   Rename
                 </button>
-              </div>
+              </>
             )}
           </div>
         )}
