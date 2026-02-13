@@ -24,7 +24,7 @@ const PHASE_CONFIG: Record<
   }
 > = {
   start: {
-    message: "Begin with one vivid memory — the rest will follow.",
+    message: "Begin with one vivid memory - the rest will follow.",
     cta: "Insert a starter line",
     icon: Pen,
     accent: "text-accent-600",

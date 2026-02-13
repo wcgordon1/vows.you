@@ -133,8 +133,8 @@ export function CoachNotesCard() {
             Coach Notes
           </h3>
         </div>
-        <p className="text-[11px] text-base-400 leading-relaxed font-serif italic">
-          Start writing and your coach notes will appear here — gentle
+        <p className="text-[13px] text-base-400 leading-relaxed font-serif italic">
+          Start writing and your coach notes will appear here. Gentle
           suggestions to make your vows more personal.
         </p>
       </div>

@@ -10,6 +10,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { EditorToolbar } from "./editor-toolbar";
 import { EditorFooter } from "./editor-footer";
 import { useWorkspace } from "../hooks/use-workspace";
+import { useMediaQuery } from "../hooks/use-media-query";
 import { useAutosave } from "../hooks/use-autosave";
 import { useVowAnalysis } from "../hooks/use-vow-analysis";
 import { WeakPhraseHighlight } from "../extensions/weak-phrase-highlight";
@@ -49,10 +50,15 @@ const PROMPT_CHIPS: { label: string; content: string }[] = [
   },
 ];
 
+const PLACEHOLDER_FULL =
+  "Start writing your vows…\n\nThink of one moment that still feels vivid.\n\nWhere you knew this was different.\n\nBegin there.";
+const PLACEHOLDER_SHORT = "Start writing your vows…";
+
 export function TiptapEditor() {
   const [isFocused, setIsFocused] = useState(false);
   const { activeDraft, state, setVowAnalysis, setInsertHTML } = useWorkspace();
   const isPaid = state.hasPaidEntitlement;
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const loadedDraftIdRef = useRef<string | null>(null);
 
   const editor = useEditor({
@@ -71,8 +77,7 @@ export function TiptapEditor() {
       }),
       Underline,
       Placeholder.configure({
-        placeholder:
-          "Start writing your vows…\n\nThink of one moment that still feels vivid.\n\nWhere you knew this was different.\n\nBegin there.",
+        placeholder: isMobile ? PLACEHOLDER_SHORT : PLACEHOLDER_FULL,
       }),
       WeakPhraseHighlight,
     ],

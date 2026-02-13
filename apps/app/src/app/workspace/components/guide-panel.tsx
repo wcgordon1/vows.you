@@ -58,7 +58,7 @@ export function GuidePanel() {
             <div>
               <h2 className="text-sm font-semibold text-base-800">Guide</h2>
               <p className="text-[11px] text-base-400 mt-0.5">
-                Your calm vow-writing coach
+                Your vow-writing coach
               </p>
             </div>
             <button
@@ -70,14 +70,17 @@ export function GuidePanel() {
             </button>
           </div>
 
-          {/* Sticky Next Step */}
-          <NextStepModule onScrollTo={scrollTo} />
+          {/* Sticky Coach Notes */}
+          <div className="px-3 pt-3 pb-1" data-guide-section="notes">
+            <CoachNotesCard />
+          </div>
 
           {/* Scrollable cards */}
           <div
             ref={scrollRef}
             className="flex-1 overflow-y-auto p-3 space-y-2.5 guide-scroll"
           >
+            <NextStepModule onScrollTo={scrollTo} />
             <ToneCard />
             <LengthCard />
 
@@ -87,10 +90,6 @@ export function GuidePanel() {
 
             <div data-guide-section="beats">
               <StoryBeatCard />
-            </div>
-
-            <div data-guide-section="notes">
-              <CoachNotesCard />
             </div>
           </div>
         </>
