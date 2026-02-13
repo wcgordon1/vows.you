@@ -45,7 +45,7 @@ export function ExportPrintView({
             className="flex items-center gap-2 rounded-full bg-accent-500 px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-accent-600"
           >
             <Printer className="h-4 w-4" />
-            Print / Save PDF
+            Save PDF
           </button>
           <button
             onClick={onClose}
