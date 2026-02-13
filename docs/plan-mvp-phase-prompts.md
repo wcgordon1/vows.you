@@ -5,6 +5,8 @@ Each phase has a copy/paste prompt intended for a coding agent.
 
 Reference master plan: `docs/plan-mvp.md`.
 
+We will build all features and gate free / paid tiers at the end. Already have checkGate, requestAction, and hasPaidEntitlement wired up. It's literally just wrapping existing buttons with if (!isPaid) { requestAction("X"); return; } -- a few lines per feature.
+
 ---
 
 ## Global constraints (apply to every phase)
@@ -322,4 +324,4 @@ Output:
 - Collaboration
 - Wedding website builder
 - Subscriptions instead of one-time
-- Custom domains
+- Custom domains 
