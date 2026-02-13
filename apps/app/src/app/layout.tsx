@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Serif } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ConvexClerkProvider } from "./convex-client-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -64,10 +64,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // If Clerk keys are missing (e.g. preview deployments), render without auth
-  const hasClerkKeys = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  // If Clerk/Convex keys are missing (e.g. preview deployments), render without auth
+  const hasKeys =
+    !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+    !!process.env.NEXT_PUBLIC_CONVEX_URL;
 
-  if (!hasClerkKeys) {
+  if (!hasKeys) {
     return (
       <html lang="en">
         <body
@@ -80,7 +82,7 @@ export default function RootLayout({
   }
 
   return (
-    <ClerkProvider>
+    <ConvexClerkProvider>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} antialiased`}
@@ -88,6 +90,6 @@ export default function RootLayout({
           {children}
         </body>
       </html>
-    </ClerkProvider>
+    </ConvexClerkProvider>
   );
 }

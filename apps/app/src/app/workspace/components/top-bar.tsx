@@ -11,6 +11,7 @@ import {
   FileText,
   FileDown,
   Sparkles,
+  LogIn,
 } from "lucide-react";
 import { Logo } from "./logo";
 import { useWorkspace } from "../hooks/use-workspace";
@@ -218,13 +219,22 @@ export function TopBar() {
                   {drafts.map((draft) => {
                     const isActive = draft.id === activeDraft?.id;
                     return (
-                      <button
+                      <div
                         key={draft.id}
+                        role="button"
+                        tabIndex={0}
                         onClick={() => {
                           switchDraft(draft.id);
                           setShowDropdown(false);
                         }}
-                        className={`flex items-center gap-2 w-full px-3 py-2 text-[13px] transition-colors ${
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            switchDraft(draft.id);
+                            setShowDropdown(false);
+                          }
+                        }}
+                        className={`flex items-center gap-2 w-full px-3 py-2 text-[13px] transition-colors cursor-pointer ${
                           isActive
                             ? "bg-sand-50 text-base-900 font-medium"
                             : "text-base-600 hover:bg-sand-50"
@@ -260,7 +270,7 @@ export function TopBar() {
                             )}
                           </div>
                         )}
-                      </button>
+                      </div>
                     );
                   })}
                 </div>
@@ -303,10 +313,10 @@ export function TopBar() {
       <div className="flex items-center gap-1.5 justify-end">
         <button
           onClick={handleNewDraft}
-          className="flex items-center gap-1.5 rounded-full border border-base-200 bg-white px-3.5 py-1.5 text-xs font-medium text-base-700 shadow-sm transition-colors hover:bg-sand-50 hover:border-base-300"
+          className="flex items-center gap-1.5 rounded-full border border-base-200 bg-white px-2.5 py-1.5 text-xs font-medium text-base-700 shadow-sm transition-colors hover:bg-sand-50 hover:border-base-300"
         >
           <Plus className="h-3 w-3" />
-          {isMobile ? "New" : "New Draft"}
+          {isMobile ? "" : "New Draft"}
         </button>
 
         {/* Three-dot more menu */}
@@ -359,9 +369,18 @@ export function TopBar() {
           />
         ) : (
           <SignInButton mode="modal">
-            <button className="rounded-full bg-base-900 px-3.5 py-1.5 text-xs font-medium text-white transition-colors hover:bg-base-800">
-              Sign in
-            </button>
+            {isMobile ? (
+              <button
+                className="flex items-center justify-center h-8 w-8 rounded-full bg-base-900 text-white transition-colors hover:bg-base-800"
+                title="Sign in"
+              >
+                <LogIn className="h-3.5 w-3.5" />
+              </button>
+            ) : (
+              <button className="rounded-full bg-base-900 px-3.5 py-1.5 text-xs font-medium text-white transition-colors hover:bg-base-800">
+                Sign in
+              </button>
+            )}
           </SignInButton>
         )}
       </div>

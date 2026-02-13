@@ -5,12 +5,16 @@ import {
   useContext,
   useCallback,
   useEffect,
+  useMemo,
   useReducer,
   useRef,
   useState,
   type ReactNode,
 } from "react";
 import { useAuth } from "@clerk/nextjs";
+import { useQuery, useMutation } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
+import type { Id } from "../../../../convex/_generated/dataModel";
 import {
   draftStore,
   createEmptyDraft,
@@ -127,6 +131,26 @@ const initialState: WorkspaceState = {
   showUpgradeCard: false,
 };
 
+// ─── Convex → Draft normalization ─────────────────────────────────────────────
+// Maps Convex document shape to the local Draft interface so downstream
+// components don't need to know about the data source.
+
+function convexToDraft(doc: {
+  _id: Id<"drafts">;
+  title: string;
+  body?: unknown;
+  createdAt: number;
+  updatedAt: number;
+}): Draft {
+  return {
+    id: doc._id as string,
+    title: doc.title,
+    tiptapJSON: (doc.body as Record<string, unknown>) ?? null,
+    createdAt: doc.createdAt,
+    updatedAt: doc.updatedAt,
+  };
+}
+
 // ─── Context ─────────────────────────────────────────────────────────────────
 
 interface WorkspaceContextValue {
@@ -146,7 +170,7 @@ interface WorkspaceContextValue {
   setShowAuthModal: (show: boolean) => void;
   setShowPaywallModal: (show: boolean, trigger?: string) => void;
   setShowUpgradeCard: (show: boolean) => void;
-  // Entitlement (mock for now)
+  // Entitlement (mock for now — Phase 4 wires to Convex)
   setPaidEntitlement: (value: boolean) => void;
   // Vow analysis (shared between editor and guide panel)
   vowAnalysis: VowAnalysis | null;
@@ -162,7 +186,7 @@ const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
 
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { isSignedIn: clerkSignedIn } = useAuth();
+  const { isSignedIn: clerkSignedIn, isLoaded: clerkLoaded } = useAuth();
   const isSignedIn = clerkSignedIn ?? false;
 
   // Vow analysis — shared between TiptapEditor and SuggestionsCard
@@ -181,82 +205,196 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     [],
   );
 
-  // Track previous auth state to detect sign-in completion
-  const prevSignedIn = useRef(isSignedIn);
+  // ── Convex hooks (always called — skipped when signed out) ────────────
+  const convexDraftsRaw = useQuery(api.drafts.list, isSignedIn ? {} : "skip");
+  const convexCreate = useMutation(api.drafts.create);
+  const convexUpdate = useMutation(api.drafts.update);
+  const convexRename = useMutation(api.drafts.rename);
+  const convexRemove = useMutation(api.drafts.remove);
+  const convexMigrate = useMutation(api.drafts.migrateFromLocal);
 
-  const activeDraft =
-    state.drafts.find((d) => d.id === state.activeDraftId) ?? null;
+  // Entitlement query (Phase 4 stub — returns false until Polar webhook writes entitlements)
+  const convexHasPaid = useQuery(api.entitlements.hasPaid, isSignedIn ? {} : "skip");
+  const hasPaidEntitlement = convexHasPaid ?? state.hasPaidEntitlement;
 
-  // ── Load drafts from store on mount ─────────────────────────────────────
+  // Normalize Convex docs to Draft shape (memoized)
+  const convexDrafts = useMemo(
+    () => convexDraftsRaw?.map(convexToDraft) ?? null,
+    [convexDraftsRaw],
+  );
+
+  // ── Derived state: drafts source depends on auth ──────────────────────
+  // Signed in  → Convex is source of truth
+  // Signed out → local reducer state is source of truth
+  const drafts = isSignedIn ? (convexDrafts ?? []) : state.drafts;
+  const isLoaded = isSignedIn ? convexDrafts !== null : state.isLoaded;
+
+  // Override state exposed to consumers so they always see the right data
+  const contextState: WorkspaceState = useMemo(
+    () => ({ ...state, drafts, isLoaded, hasPaidEntitlement }),
+    [state, drafts, isLoaded, hasPaidEntitlement],
+  );
+
+  const activeDraft = useMemo(
+    () => drafts.find((d) => d.id === state.activeDraftId) ?? null,
+    [drafts, state.activeDraftId],
+  );
+
+  // Refs for one-time effects
+  const migrationDone = useRef(false);
+  const autoCreateDone = useRef(false);
+
+  // ── Load local drafts on mount (anonymous users only) ─────────────────
+  // IMPORTANT: Wait for Clerk to finish loading before running this.
+  // Otherwise isSignedIn starts as false during Clerk init, we create a
+  // phantom local draft, and migration immediately ships it to Convex.
 
   useEffect(() => {
+    if (!clerkLoaded) return;  // Wait for Clerk to determine auth state
+    if (isSignedIn) return;    // Signed in → Convex handles drafts
+
     async function loadDrafts() {
-      let drafts = await draftStore.getAll();
+      let localDrafts = await draftStore.getAll();
       let activeId = draftStore.getActiveDraftId();
 
-      // If no drafts exist, create the first one
-      if (drafts.length === 0) {
+      if (localDrafts.length === 0) {
         const first = createEmptyDraft();
         await draftStore.save(first);
-        drafts = [first];
+        localDrafts = [first];
         activeId = first.id;
         draftStore.setActiveDraftId(first.id);
       }
 
-      // Ensure activeId points to a valid draft
-      if (!activeId || !drafts.find((d) => d.id === activeId)) {
-        activeId = drafts[0].id;
+      if (!activeId || !localDrafts.find((d) => d.id === activeId)) {
+        activeId = localDrafts[0].id;
         draftStore.setActiveDraftId(activeId);
       }
 
       dispatch({
         type: "DRAFTS_LOADED",
-        drafts,
+        drafts: localDrafts,
         activeDraftId: activeId,
       });
     }
 
     loadDrafts();
-  }, []);
+  }, [clerkLoaded, isSignedIn]);
 
-  // ── Detect sign-in completion and consume pending action ────────────────
+  // ── Migrate local drafts to Convex on sign-in ─────────────────────────
+  // Handles both: fresh sign-in during session AND page reload while signed in
+  // (orphaned local drafts from a previous anonymous session).
 
   useEffect(() => {
-    if (!prevSignedIn.current && isSignedIn) {
-      // User just signed in — consume pending action
+    if (!clerkLoaded || !isSignedIn) return;
+    if (migrationDone.current) return;
+    migrationDone.current = true;
+
+    (async () => {
+      const localDrafts = await draftStore.getAll();
+      if (localDrafts.length > 0) {
+        try {
+          await convexMigrate({
+            drafts: localDrafts.map((d) => ({
+              localId: d.id,
+              title: d.title,
+              body: d.tiptapJSON ?? undefined,
+              createdAt: d.createdAt,
+              updatedAt: d.updatedAt,
+            })),
+          });
+        } catch (err) {
+          // Migration failed — drafts stay local. Non-fatal.
+          console.error("Draft migration failed:", err);
+        }
+
+        // Clear local store (server is now source of truth)
+        for (const d of localDrafts) {
+          await draftStore.delete(d.id);
+        }
+      }
+
+      // Handle pending action from auth gate flow
       const pending = consumePendingAction();
       if (pending) {
         track({ event: "signup_completed_from_gate", gate: pending.type });
-        // Re-execute the gated action now that user is signed in
-        // Use a microtask so state has settled
-        queueMicrotask(() => {
-          if (pending.type === "CREATE_DRAFT") {
-            createDraftInternal();
+        if (pending.type === "CREATE_DRAFT") {
+          try {
+            const newId = await convexCreate({ title: "Untitled" });
+            draftStore.setActiveDraftId(newId as string);
+            dispatch({ type: "DRAFT_SWITCHED", id: newId as string });
+            track({ event: "draft_created" });
+          } catch {
+            // Non-fatal
           }
-          // Other actions (EXPORT_PDF, etc.) will be re-triggered by UI
-        });
+        }
       }
-    }
-    prevSignedIn.current = isSignedIn;
-  }, [isSignedIn]); // eslint-disable-line react-hooks/exhaustive-deps
+    })();
+  }, [clerkLoaded, isSignedIn, convexMigrate, convexCreate]);
 
-  // ── Draft Actions ───────────────────────────────────────────────────────
+  // ── Keep activeDraftId in sync with available drafts ──────────────────
+  // On mount / refresh, try restoring from sessionStorage first so the
+  // user lands on the same draft they were editing.
+
+  useEffect(() => {
+    if (!isLoaded || drafts.length === 0) return;
+
+    // Already have a valid active draft — nothing to do
+    if (state.activeDraftId && drafts.find((d) => d.id === state.activeDraftId)) return;
+
+    // Try restoring from sessionStorage (survives page refresh)
+    const savedId = draftStore.getActiveDraftId();
+    if (savedId && drafts.find((d) => d.id === savedId)) {
+      dispatch({ type: "DRAFT_SWITCHED", id: savedId });
+      return;
+    }
+
+    // Fallback: pick the first draft
+    const id = drafts[0].id;
+    draftStore.setActiveDraftId(id);
+    dispatch({ type: "DRAFT_SWITCHED", id });
+  }, [drafts, isLoaded, state.activeDraftId]);
+
+  // ── Auto-create first draft for signed-in user with no drafts ─────────
+
+  useEffect(() => {
+    if (!isSignedIn || convexDrafts === null || autoCreateDone.current) return;
+    if (convexDrafts.length > 0) return;
+
+    autoCreateDone.current = true;
+    (async () => {
+      try {
+        const id = await convexCreate({ title: "Untitled" });
+        draftStore.setActiveDraftId(id as string);
+        dispatch({ type: "DRAFT_SWITCHED", id: id as string });
+      } catch {
+        // Non-fatal — query will pick up any server-side changes
+      }
+    })();
+  }, [isSignedIn, convexDrafts, convexCreate]);
+
+  // ── Draft Actions (dual-store: Convex when signed in, local otherwise) ─
 
   const createDraftInternal = useCallback(async () => {
-    const draft = createEmptyDraft();
-    await draftStore.save(draft);
-    draftStore.setActiveDraftId(draft.id);
-    dispatch({ type: "DRAFT_CREATED", draft });
+    if (isSignedIn) {
+      const id = await convexCreate({ title: "Untitled" });
+      draftStore.setActiveDraftId(id as string);
+      dispatch({ type: "DRAFT_SWITCHED", id: id as string });
+    } else {
+      const draft = createEmptyDraft();
+      await draftStore.save(draft);
+      draftStore.setActiveDraftId(draft.id);
+      dispatch({ type: "DRAFT_CREATED", draft });
+    }
     track({ event: "draft_created" });
-  }, []);
+  }, [isSignedIn, convexCreate]);
 
   const createDraft = useCallback(() => {
     track({ event: "new_draft_clicked" });
 
     const result = checkGate("CREATE_DRAFT", {
       isSignedIn,
-      hasPaidEntitlement: state.hasPaidEntitlement,
-      currentDraftCount: state.drafts.length,
+      hasPaidEntitlement,
+      currentDraftCount: drafts.length,
     });
 
     if (!result.allowed) {
@@ -275,7 +413,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     }
 
     createDraftInternal();
-  }, [isSignedIn, state.hasPaidEntitlement, state.drafts.length, createDraftInternal]);
+  }, [isSignedIn, hasPaidEntitlement, drafts.length, createDraftInternal]);
 
   const switchDraft = useCallback(
     (id: string) => {
@@ -291,64 +429,102 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     (tiptapJSON: Record<string, unknown>) => {
       if (!state.activeDraftId) return;
 
-      const existing = state.drafts.find((d) => d.id === state.activeDraftId);
-      if (!existing) return;
-
-      const updated: Draft = {
-        ...existing,
-        tiptapJSON,
-        updatedAt: Date.now(),
-      };
-
-      dispatch({ type: "DRAFT_UPDATED", draft: updated });
-
-      // Persist to store (fire and forget — autosave handles debounce)
       dispatch({ type: "SET_SAVE_STATUS", status: "saving" });
-      draftStore.save(updated).then(() => {
-        dispatch({ type: "SET_SAVE_STATUS", status: "saved" });
-        setTimeout(() => {
-          dispatch({ type: "SET_SAVE_STATUS", status: "idle" });
-        }, 2000);
-      });
+
+      if (isSignedIn) {
+        // Convex path: mutation → reactive query updates automatically
+        convexUpdate({
+          id: state.activeDraftId as unknown as Id<"drafts">,
+          body: tiptapJSON,
+        })
+          .then(() => {
+            dispatch({ type: "SET_SAVE_STATUS", status: "saved" });
+            setTimeout(() => dispatch({ type: "SET_SAVE_STATUS", status: "idle" }), 2000);
+          })
+          .catch(() => {
+            dispatch({ type: "SET_SAVE_STATUS", status: "idle" });
+          });
+      } else {
+        // Local path: update reducer + persist to IndexedDB
+        const existing = state.drafts.find((d) => d.id === state.activeDraftId);
+        if (!existing) return;
+
+        const updated: Draft = {
+          ...existing,
+          tiptapJSON,
+          updatedAt: Date.now(),
+        };
+
+        dispatch({ type: "DRAFT_UPDATED", draft: updated });
+        draftStore.save(updated).then(() => {
+          dispatch({ type: "SET_SAVE_STATUS", status: "saved" });
+          setTimeout(() => dispatch({ type: "SET_SAVE_STATUS", status: "idle" }), 2000);
+        });
+      }
     },
-    [state.activeDraftId, state.drafts],
+    [state.activeDraftId, state.drafts, isSignedIn, convexUpdate],
   );
 
   const renameDraft = useCallback(
     async (id: string, title: string) => {
-      const draft = state.drafts.find((d) => d.id === id);
-      if (!draft) return;
+      if (isSignedIn) {
+        await convexRename({ id: id as unknown as Id<"drafts">, title });
+      } else {
+        const draft = state.drafts.find((d) => d.id === id);
+        if (!draft) return;
 
-      const updated = { ...draft, title, updatedAt: Date.now() };
-      dispatch({ type: "DRAFT_RENAMED", id, title });
-      await draftStore.save(updated);
+        const updated = { ...draft, title, updatedAt: Date.now() };
+        dispatch({ type: "DRAFT_RENAMED", id, title });
+        await draftStore.save(updated);
+      }
     },
-    [state.drafts],
+    [state.drafts, isSignedIn, convexRename],
   );
 
   const deleteDraft = useCallback(
     async (id: string) => {
-      await draftStore.delete(id);
-      const remaining = state.drafts.filter((d) => d.id !== id);
+      if (isSignedIn) {
+        await convexRemove({ id: id as unknown as Id<"drafts"> });
 
-      let newActiveId: string | null = null;
-      if (remaining.length > 0) {
-        // Switch to another draft
-        newActiveId =
-          state.activeDraftId === id ? remaining[0].id : state.activeDraftId;
+        // Pick new active draft from current list
+        const remaining = drafts.filter((d) => d.id !== id);
+        let newActiveId: string | null = null;
+
+        if (remaining.length > 0) {
+          newActiveId =
+            state.activeDraftId === id ? remaining[0].id : state.activeDraftId;
+        } else {
+          // Deleted the last draft — create a fresh one
+          const freshId = await convexCreate({ title: "Untitled" });
+          newActiveId = freshId as string;
+        }
+
+        if (newActiveId) {
+          draftStore.setActiveDraftId(newActiveId);
+          dispatch({ type: "DRAFT_SWITCHED", id: newActiveId });
+        }
       } else {
-        // Deleted the last draft — create a fresh one
-        const fresh = createEmptyDraft();
-        await draftStore.save(fresh);
-        remaining.push(fresh);
-        newActiveId = fresh.id;
+        await draftStore.delete(id);
+        const remaining = state.drafts.filter((d) => d.id !== id);
+
+        let newActiveId: string | null = null;
+        if (remaining.length > 0) {
+          newActiveId =
+            state.activeDraftId === id ? remaining[0].id : state.activeDraftId;
+        } else {
+          const fresh = createEmptyDraft();
+          await draftStore.save(fresh);
+          remaining.push(fresh);
+          newActiveId = fresh.id;
+        }
+
+        if (newActiveId) draftStore.setActiveDraftId(newActiveId);
+        dispatch({ type: "DRAFT_DELETED", id, newActiveId });
       }
 
-      if (newActiveId) draftStore.setActiveDraftId(newActiveId);
-      dispatch({ type: "DRAFT_DELETED", id, newActiveId });
       track({ event: "draft_deleted" });
     },
-    [state.drafts, state.activeDraftId],
+    [state.drafts, state.activeDraftId, drafts, isSignedIn, convexRemove, convexCreate],
   );
 
   // ── Gated Action Check ─────────────────────────────────────────────────
@@ -357,8 +533,8 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     (action: GatedAction): GateResult => {
       const result = checkGate(action, {
         isSignedIn,
-        hasPaidEntitlement: state.hasPaidEntitlement,
-        currentDraftCount: state.drafts.length,
+        hasPaidEntitlement,
+        currentDraftCount: drafts.length,
       });
 
       if (!result.allowed) {
@@ -377,7 +553,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
 
       return result;
     },
-    [isSignedIn, state.hasPaidEntitlement, state.drafts.length],
+    [isSignedIn, hasPaidEntitlement, drafts.length],
   );
 
   // ── Modal Controls ──────────────────────────────────────────────────────
@@ -406,7 +582,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   // ── Context Value ──────────────────────────────────────────────────────
 
   const value: WorkspaceContextValue = {
-    state,
+    state: contextState,
     activeDraft,
     isSignedIn,
     createDraft,
