@@ -8,7 +8,6 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 
 // Icons (import all used ones)
 import Check from "@/components/fundations/icons/Check.astro";
-import X from "@/components/fundations/icons/X.astro";
 import Minus from "@/components/fundations/icons/Minus.astro";
 
 const pricingOptions = [
@@ -60,6 +59,7 @@ const pricingOptions = [
       { text: "Tone suggestions" },
       { text: "Print-ready export" },
       { text: "Email support" },
+      { text: "Personal writing coach" },
       { text: "Priority support" },
       { text: "Ceremony day checklist" },
     ],
@@ -74,8 +74,9 @@ export const pricingFeatures = [
       { label: "Guided prompts", values: ["Basic", "All prompts"] },
       { label: "Structure guide", values: ["yes", "yes"] },
       { label: "Tone suggestions", values: ["no", "yes"] },
-      { label: "Practice mode", values: ["no", "yes"] },
+      { label: "Practice mode", values: ["yes", "yes"] },
       { label: "Read time tracking", values: ["yes", "yes"] },
+      { label: "Personal writing coach", values: ["no", "yes"] },
     ],
   },
   {
@@ -117,8 +118,9 @@ export const pricingFeatures = [
         variant="textBase"
         class="max-w-xl mx-auto mt-4 text-base-500"
       >
-        Start free. Upgrade when you're ready to practice and polish.
+        Start free. Upgrade when you're ready to polish and finalize.
       </Text>
+      <p class="mt-3 font-serif italic text-sm text-accent-500">30-day money-back guarantee. No questions asked.</p>
     </div>
 
     <!-- Pricing Cards -->
@@ -229,7 +231,7 @@ export const pricingFeatures = [
                       {values.map((value) => (
                         <td class="px-4 py-4 text-center text-base-500">
                           {value === "yes" ? (
-                            <X size="sm" class="mx-auto" />
+                            <Check size="sm" class="mx-auto" />
                           ) : value === "no" ? (
                             <Minus size="sm" class="mx-auto" />
                           ) : (
