@@ -64,13 +64,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Read env vars server-side (always available at runtime on Vercel)
-  // and pass as props — bypasses flaky NEXT_PUBLIC_* build-time inlining
-  const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
-  const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  // If Clerk/Convex keys are missing (e.g. preview deployments), render without auth
+  const hasKeys =
+    !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+    !!process.env.NEXT_PUBLIC_CONVEX_URL;
+
+  if (!hasKeys) {
+    return (
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </html>
+    );
+  }
 
   return (
-    <ConvexClerkProvider convexUrl={convexUrl} clerkKey={clerkKey}>
+    <ConvexClerkProvider>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} antialiased`}
