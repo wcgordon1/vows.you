@@ -96,7 +96,7 @@ export function PaywallModal() {
             onClick={handlePurchase}
             className="w-full rounded-full bg-accent-500 py-3 text-base font-medium text-white shadow-sm transition-colors hover:bg-accent-600 active:bg-accent-700"
           >
-            Get Complete Access
+            Get Complete Access 
           </button>
           <p className="text-[11px] text-base-400 text-center mt-3.5 leading-relaxed">
             30-day money-back guarantee. No questions asked.
