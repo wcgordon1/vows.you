@@ -1,8 +1,8 @@
 {
-  "name": "Vows.you - Write wedding vows that sound like you",
+  "name": "Vows — Write wedding vows that sound like you",
   "short_name": "Vows",
   "description": "Guided prompts to help you write personal, heartfelt wedding vows. Free to start, no email required.",
-  "start_url": "/",
+  "start_url": "/workspace",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#c8713b",

@@ -172,7 +172,7 @@ export function CoachNotesCard() {
 
         {topNotes.length === 0 ? (
           <p className="text-[11px] text-base-400 leading-relaxed font-serif italic">
-            Looking good — no common cliches detected. Your vows sound personal.
+            Looking good - no common cliches detected. Your vows sound personal.
           </p>
         ) : (
           <div className="space-y-1.5">
