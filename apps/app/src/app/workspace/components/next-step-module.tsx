@@ -84,19 +84,17 @@ export function NextStepModule({ onScrollTo }: NextStepModuleProps) {
   }
 
   return (
-    <div className="px-3 pt-3 pb-1">
-      <div className="rounded-xl border border-base-200/80 bg-white p-3.5">
-        <p className="text-[12px] leading-relaxed text-base-600 font-serif italic mb-2.5">
-          {config.message}
-        </p>
-        <button
-          onClick={handleClick}
-          className="flex items-center gap-2 w-full rounded-lg bg-sand-50 border border-base-200/60 px-3 py-2 text-[12px] font-medium text-base-700 transition-colors hover:bg-sand-100 hover:border-base-300 active:bg-sand-200"
-        >
-          <Icon className={`h-3.5 w-3.5 ${config.accent} shrink-0`} />
-          {config.cta}
-        </button>
-      </div>
+    <div className="rounded-lg border border-base-200 bg-white p-3.5">
+      <p className="text-[12px] leading-relaxed text-base-600 font-serif italic mb-2.5">
+        {config.message}
+      </p>
+      <button
+        onClick={handleClick}
+        className="flex items-center gap-2 w-full rounded-lg bg-sand-50 border border-base-200/60 px-3 py-2 text-[12px] font-medium text-base-700 transition-colors hover:bg-sand-100 hover:border-base-300 active:bg-sand-200"
+      >
+        <Icon className={`h-3.5 w-3.5 ${config.accent} shrink-0`} />
+        {config.cta}
+      </button>
     </div>
   );
 }

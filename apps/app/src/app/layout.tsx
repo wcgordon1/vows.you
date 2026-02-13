@@ -19,8 +19,33 @@ const notoSerif = Noto_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Vows",
-  description: "Write and share your vows",
+  title: "Vows — Write wedding vows that sound like you",
+  description:
+    "Get guided prompts and structure to write personal, meaningful wedding vows. No blank page panic. Your voice, just clearer.",
+  openGraph: {
+    title: "Vows — Write wedding vows that sound like you",
+    description:
+      "Get guided prompts and structure to write personal, meaningful wedding vows. No blank page panic. Your voice, just clearer.",
+    images: [
+      {
+        url: "/vows-ogg.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Vows — Write Better Wedding Vows",
+        type: "image/jpeg",
+      },
+    ],
+    siteName: "vows.you",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vows — Write wedding vows that sound like you",
+    description:
+      "Get guided prompts and structure to write personal, meaningful wedding vows.",
+    images: ["/vows-ogg.jpeg"],
+  },
 };
 
 export default function RootLayout({
