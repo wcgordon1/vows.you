@@ -64,8 +64,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Read env vars server-side (always available at runtime on Vercel)
+  // and pass as props — bypasses flaky NEXT_PUBLIC_* build-time inlining
+  const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
+  const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
   return (
-    <ConvexClerkProvider>
+    <ConvexClerkProvider convexUrl={convexUrl} clerkKey={clerkKey}>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} antialiased`}
