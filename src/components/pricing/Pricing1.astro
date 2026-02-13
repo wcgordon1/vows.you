@@ -1,5 +1,5 @@
 ---
-export const description = "Pricing section with three tiers";
+export const description = "Pricing section with two tiers";
 
 // Components
 import Text from "@/components/fundations/elements/Text.astro";
@@ -10,22 +10,25 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import Check from "@/components/fundations/icons/Check.astro";
 import X from "@/components/fundations/icons/X.astro";
 import Minus from "@/components/fundations/icons/Minus.astro";
+
 const pricingOptions = [
   {
     id: "Free",
-    cardClass: "bg-sand-50 ",
+    cardClass: "bg-sand-50",
     primaryTextColor: "text-base-900",
     secondaryTextColor: "text-base-500",
     featuresBorderColor: "border-base-200",
-    title: "Free",
-    monthly: "$0",
-    annual: "$0",
+    title: "Free Forever",
+    price: "$0",
+    priceLabel: "forever",
     description:
       "Try vows.you and see if it feels right. No commitment.",
     button: {
       text: "Start writing",
       variant: "accent",
+      href: "https://app.vows.you/workspace",
     },
+    featuresHeading: "Free plan includes:",
     features: [
       { text: "Guided prompts" },
       { text: "Basic structure guide" },
@@ -35,19 +38,21 @@ const pricingOptions = [
     ],
   },
   {
-    id: "Complete",
+    id: "FullAccess",
     cardClass: "bg-sand-100",
     primaryTextColor: "text-base-900",
     secondaryTextColor: "text-base-500",
     featuresBorderColor: "border-base-200",
-    title: "Complete",
-    monthly: "$29.00",
-    annual: "$19.00",
+    title: "Full Access",
+    price: "$129",
+    priceLabel: "one-time",
     description: "Everything you need to write vows you'll be proud of.",
     button: {
-      text: "Start writing",
+      text: "Get full access",
       variant: "accent",
+      href: "https://app.vows.you/workspace",
     },
+    featuresHeading: "Everything in Free, plus:",
     features: [
       { text: "All prompts and guides" },
       { text: "Unlimited drafts" },
@@ -55,27 +60,6 @@ const pricingOptions = [
       { text: "Tone suggestions" },
       { text: "Print-ready export" },
       { text: "Email support" },
-    ],
-  },
-  {
-    id: "Couple",
-    cardClass: "bg-sand-50 ",
-    primaryTextColor: "text-base-900",
-    secondaryTextColor: "text-base-500",
-    featuresBorderColor: "border-base-200",
-    title: "Couple",
-    monthly: "$49.00",
-    annual: "$39.00",
-    description:
-      "For both of you. Write separately, share when you're ready.",
-    button: {
-      text: "Start together",
-      variant: "default",
-    },
-    features: [
-      { text: "Everything in Complete" },
-      { text: "2 separate accounts" },
-      { text: "Shared length tracking" },
       { text: "Priority support" },
       { text: "Ceremony day checklist" },
     ],
@@ -87,39 +71,29 @@ export const pricingFeatures = [
   {
     category: "Writing Tools",
     features: [
-      {
-        label: "Guided prompts",
-        values: ["Basic", "All prompts", "All prompts"],
-      },
-      { label: "Structure guide", values: ["yes"] },
-      { label: "Tone suggestions", values: ["no", "yes", "yes"] },
-      { label: "Practice mode", values: ["no", "yes", "yes"] },
-      { label: "Read time tracking", values: ["yes"] },
+      { label: "Guided prompts", values: ["Basic", "All prompts"] },
+      { label: "Structure guide", values: ["yes", "yes"] },
+      { label: "Tone suggestions", values: ["no", "yes"] },
+      { label: "Practice mode", values: ["no", "yes"] },
+      { label: "Read time tracking", values: ["yes", "yes"] },
     ],
   },
   {
     category: "Drafts & Export",
     features: [
-      { label: "Saved drafts", values: ["1", "Unlimited", "Unlimited"] },
-      { label: "Export to text", values: ["yes"] },
-      { label: "Print-ready export", values: ["no", "yes", "yes"] },
-      { label: "Mobile access", values: ["yes"] },
+      { label: "Saved drafts", values: ["1", "Unlimited"] },
+      { label: "Export to text", values: ["yes", "yes"] },
+      { label: "Print-ready export", values: ["no", "yes"] },
+      { label: "Mobile access", values: ["yes", "yes"] },
     ],
   },
   {
     category: "Support",
     features: [
-      { label: "Email support", values: ["no", "yes", "yes"] },
-      { label: "Priority support", values: ["no", "no", "yes"] },
-      { label: "Help guides", values: ["yes"] },
-    ],
-  },
-  {
-    category: "Couple Features",
-    features: [
-      { label: "Separate accounts", values: ["no", "no", "2 accounts"] },
-      { label: "Shared length tracking", values: ["no", "no", "yes"] },
-      { label: "Ceremony checklist", values: ["no", "no", "yes"] },
+      { label: "Email support", values: ["no", "yes"] },
+      { label: "Priority support", values: ["no", "yes"] },
+      { label: "Help guides", values: ["yes", "yes"] },
+      { label: "Ceremony day checklist", values: ["no", "yes"] },
     ],
   },
 ];
@@ -143,46 +117,12 @@ export const pricingFeatures = [
         variant="textBase"
         class="max-w-xl mx-auto mt-4 text-base-500"
       >
-        Start free. Upgrade when you want the full experience.
+        Start free. Upgrade when you're ready to practice and polish.
       </Text>
-
-      <!-- Pricing Toggle -->
-      <div
-        aria-labelledby="pricing-toggle"
-        class="relative z-0 inline-flex justify-center p-1 mx-auto mt-8 overflow-hidden bg-white shadow ring-1 ring-base-200 ring-offset-2 gap-4 lg:mx-0 rounded-md w-fit"
-      >
-        <div
-          id="toggle-slider"
-          class="absolute inset-0 w-1/2 bg-base-50 rounded-md transition-transform duration-200 ease-in-out"
-        >
-        </div>
-
-        <button
-          id="monthly-btn"
-          class="relative z-10 flex items-center justify-center w-full h-6 px-2 text-xs font-medium focus:outline-none transition-colors duration-300 text-base-600"
-          type="button"
-          aria-pressed="true"
-          data-ph-event="pricing_toggle_clicked"
-          data-ph-prop-duration="monthly"
-        >
-          Monthly
-        </button>
-
-        <button
-          id="annual-btn"
-          class="relative z-10 flex items-center justify-center w-full h-6 px-2 text-xs font-medium focus:outline-none transition-colors duration-300 focus:text-base-900 hover:text-base-900"
-          type="button"
-          aria-pressed="false"
-          data-ph-event="pricing_toggle_clicked"
-          data-ph-prop-duration="annual"
-        >
-          Annual
-        </button>
-      </div>
     </div>
 
     <!-- Pricing Cards -->
-    <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 max-w-3xl mx-auto">
       {
         pricingOptions.map((tier) => (
           <div
@@ -192,7 +132,7 @@ export const pricingFeatures = [
               <Text
                 tag="h3"
                 variant="textBase"
-                class={` font-medium text-base-900 ${tier.primaryTextColor}`}
+                class={`font-medium text-base-900 ${tier.primaryTextColor}`}
               >
                 {tier.title}
               </Text>
@@ -200,20 +140,11 @@ export const pricingFeatures = [
                 variant="displaySM"
                 class={`font-medium flex items-baseline tracking-tighter mt-2 font-serif ${tier.primaryTextColor}`}
               >
+                <span>{tier.price}</span>
                 <span
-                  class="pricing-amount"
-                  data-monthly={tier.monthly}
-                  data-annual={tier.annual}
+                  class={`text-sm font-normal tracking-normal ml-1 ${tier.secondaryTextColor}`}
                 >
-                  {tier.monthly}
-                </span>
-                <span
-                  class={`text-sm font-normal tracking-normal ${tier.secondaryTextColor}`}
-                >
-                  <span class="monthly-text">/month</span>
-                  <span class="annual-text" style="display: none;">
-                    /annually
-                  </span>
+                  {tier.priceLabel}
                 </span>
               </Text>
               <Text
@@ -224,21 +155,19 @@ export const pricingFeatures = [
                 {tier.description}
               </Text>
 
-              <div class={`mt-4 pt-4 border-t ${tier.featuresBorderColor}  `}>
+              <div class={`mt-4 pt-4 border-t ${tier.featuresBorderColor}`}>
                 <Text
                   tag="p"
                   variant="textXS"
                   class={`font-medium uppercase ${tier.secondaryTextColor}`}
                 >
-                  {tier.title === "Momentum"
-                    ? "Everything in Core plus:"
-                    : "Core plan includes:"}
+                  {tier.featuresHeading}
                 </Text>
                 <ul
-                  class={`flex flex-col mt-4 text-sm  gap-y-3 ${tier.primaryTextColor}`}
+                  class={`flex flex-col mt-4 text-sm gap-y-3 ${tier.primaryTextColor}`}
                   role="list"
                 >
-                  {tier.features.map((feature, index) => (
+                  {tier.features.map((feature) => (
                     <li class="flex items-start gap-2">
                       <Check
                         size="sm"
@@ -251,7 +180,16 @@ export const pricingFeatures = [
               </div>
             </div>
             <div class="w-full mt-8">
-              <Button class="w-full" variant={tier.button.variant} size="sm" data-ph-event="pricing_cta_clicked" data-ph-prop-plan={tier.id} data-ph-prop-context="card">
+              <Button
+                isLink
+                class="w-full"
+                variant={tier.button.variant}
+                size="sm"
+                href={tier.button.href}
+                data-ph-event="pricing_cta_clicked"
+                data-ph-prop-plan={tier.id}
+                data-ph-prop-context="card"
+              >
                 {tier.button.text}
               </Button>
             </div>
@@ -261,7 +199,7 @@ export const pricingFeatures = [
     </div>
     <div class="w-full mt-12 overflow-x-auto">
       <div
-        class="min-w-[768px] border border-base-200 rounded-xl overflow-hidden"
+        class="min-w-[640px] border border-base-200 rounded-xl overflow-hidden max-w-3xl mx-auto"
       >
         <table class="w-full text-sm">
           <thead class="text-center border-b border-base-200">
@@ -269,10 +207,8 @@ export const pricingFeatures = [
               <th class="px-4 pt-8 pb-2 font-medium text-left text-base-900"
                 >Features</th
               >
-
               <th class="px-4 py-2 font-medium text-base-900">Free</th>
-              <th class="px-4 py-2 font-medium text-base-900">Complete</th>
-              <th class="px-4 py-2 font-medium text-base-900">Couple</th>
+              <th class="px-4 py-2 font-medium text-base-900">Full Access</th>
             </tr>
           </thead>
           <tbody>
@@ -281,7 +217,7 @@ export const pricingFeatures = [
                 <>
                   <tr class="font-semibold bg-sand-100">
                     <td
-                      colspan="5"
+                      colspan="3"
                       class="px-4 py-8 text-base font-medium border-b text-base-900 border-base-200"
                     >
                       {category}
@@ -290,10 +226,10 @@ export const pricingFeatures = [
                   {features.map(({ label, values }) => (
                     <tr class="border-b border-base-200">
                       <td class="px-4 py-2 text-base-500">{label}</td>
-                      {values.map((value, i) => (
+                      {values.map((value) => (
                         <td class="px-4 py-4 text-center text-base-500">
                           {value === "yes" ? (
-                            <X size="sm" class="mx-auto " />
+                            <X size="sm" class="mx-auto" />
                           ) : value === "no" ? (
                             <Minus size="sm" class="mx-auto" />
                           ) : (
@@ -309,18 +245,31 @@ export const pricingFeatures = [
             <tr>
               <td></td>
               <td class="px-4 py-2 text-center text-base-500">
-                <Button class="w-full" variant="accent" size="sm" data-ph-event="pricing_cta_clicked" data-ph-prop-plan="Free" data-ph-prop-context="table">
+                <Button
+                  isLink
+                  class="w-full"
+                  variant="accent"
+                  size="sm"
+                  href="https://app.vows.you/workspace"
+                  data-ph-event="pricing_cta_clicked"
+                  data-ph-prop-plan="Free"
+                  data-ph-prop-context="table"
+                >
                   Start writing
                 </Button>
               </td>
               <td class="px-4 py-2 text-center text-base-500">
-                <Button class="w-full" variant="accent" size="sm" data-ph-event="pricing_cta_clicked" data-ph-prop-plan="Complete" data-ph-prop-context="table">
-                  Start writing
-                </Button>
-              </td>
-              <td class="px-4 py-2 text-center text-base-500">
-                <Button class="w-full" variant="default" size="sm" data-ph-event="pricing_cta_clicked" data-ph-prop-plan="Couple" data-ph-prop-context="table">
-                  Start together
+                <Button
+                  isLink
+                  class="w-full"
+                  variant="accent"
+                  size="sm"
+                  href="https://app.vows.you/workspace"
+                  data-ph-event="pricing_cta_clicked"
+                  data-ph-prop-plan="FullAccess"
+                  data-ph-prop-context="table"
+                >
+                  Get full access
                 </Button>
               </td>
             </tr>
@@ -329,79 +278,4 @@ export const pricingFeatures = [
       </div>
     </div>
   </Wrapper>
-
-  <script type="module">
-    // Initialize vanilla JS pricing toggle functionality
-    document.addEventListener("DOMContentLoaded", function () {
-      const monthlyBtn = document.getElementById("monthly-btn");
-      const annualBtn = document.getElementById("annual-btn");
-      const toggleSlider = document.getElementById("toggle-slider");
-      const pricingAmounts = document.querySelectorAll(".pricing-amount");
-      const monthlyTexts = document.querySelectorAll(".monthly-text");
-      const annualTexts = document.querySelectorAll(".annual-text");
-
-      // accent state is monthly
-      let currentDuration = "monthly";
-
-      // Function to update UI based on selected duration
-      function updatePricingUI(duration) {
-        // Update toggle slider position
-        if (duration === "monthly") {
-          toggleSlider.style.transform = "translateX(0)";
-          monthlyBtn.classList.add("text-base-600");
-          monthlyBtn.classList.remove(
-            "focus:text-base-900",
-            "hover:text-base-900"
-          );
-          annualBtn.classList.remove("text-base-600");
-          annualBtn.classList.add("focus:text-base-900", "hover:text-base-900");
-          monthlyBtn.setAttribute("aria-pressed", "true");
-          annualBtn.setAttribute("aria-pressed", "false");
-        } else {
-          toggleSlider.style.transform = "translateX(100%)";
-          annualBtn.classList.add("text-base-600");
-          annualBtn.classList.remove(
-            "focus:text-base-900",
-            "hover:text-base-900"
-          );
-          monthlyBtn.classList.remove("text-base-600");
-          monthlyBtn.classList.add(
-            "focus:text-base-900",
-            "hover:text-base-900"
-          );
-          monthlyBtn.setAttribute("aria-pressed", "false");
-          annualBtn.setAttribute("aria-pressed", "true");
-        }
-
-        // Update pricing text
-        pricingAmounts.forEach((amount) => {
-          amount.textContent = amount.dataset[duration];
-        });
-
-        // Show/hide appropriate text
-        if (duration === "monthly") {
-          monthlyTexts.forEach((text) => (text.style.display = "inline"));
-          annualTexts.forEach((text) => (text.style.display = "none"));
-        } else {
-          monthlyTexts.forEach((text) => (text.style.display = "none"));
-          annualTexts.forEach((text) => (text.style.display = "inline"));
-        }
-
-        // Update current duration
-        currentDuration = duration;
-      }
-
-      // Add event listeners to buttons
-      monthlyBtn.addEventListener("click", function () {
-        updatePricingUI("monthly");
-      });
-
-      annualBtn.addEventListener("click", function () {
-        updatePricingUI("annual");
-      });
-
-      // Initialize UI
-      updatePricingUI(currentDuration);
-    });
-  </script>
 </section>
