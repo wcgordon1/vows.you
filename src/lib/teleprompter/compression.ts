@@ -23,7 +23,9 @@ export function encodeText(text: string): string {
   return `/teleprompter/practice?ref=${id}`;
 }
 
-export function decodeText(url: URL): string | null {
+const TEXT_PARAM_MAX = 16000;
+
+export function decodeText(url: URL): string | { error: string } | null {
   const t = url.searchParams.get("t");
   if (t) {
     const decoded = decompressFromEncodedURIComponent(t);
@@ -40,7 +42,16 @@ export function decodeText(url: URL): string | null {
   }
 
   const raw = url.searchParams.get("text");
-  if (raw) return raw;
+  if (raw) {
+    if (raw.length > TEXT_PARAM_MAX) {
+      return {
+        error:
+          "Text is too long to load via URL. Use the teleprompter input page or send text via postMessage.",
+      };
+    }
+    // Bubble encodes spaces as %2B which decodes to literal +
+    return raw.replace(/\+/g, " ");
+  }
 
   return null;
 }

@@ -138,6 +138,29 @@ function sanitizeNode(node: Node): void {
   }
 }
 
+// ── Wrap bare text between block elements in <p> tags ───────────────────────
+
+function wrapBareText(html: string): string {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const body = doc.body;
+
+  const nodesToWrap: Text[] = [];
+  for (const child of Array.from(body.childNodes)) {
+    if (child.nodeType === Node.TEXT_NODE && child.textContent?.trim()) {
+      nodesToWrap.push(child as Text);
+    }
+  }
+
+  for (const textNode of nodesToWrap) {
+    const p = doc.createElement("p");
+    textNode.parentNode?.replaceChild(p, textNode);
+    p.appendChild(textNode);
+  }
+
+  return body.innerHTML;
+}
+
 // ── Full pipeline ───────────────────────────────────────────────────────────
 
 function hasBBCode(text: string): boolean {
@@ -150,9 +173,9 @@ export function parseContent(raw: string): string {
   let html: string;
 
   if (hasBBCode(raw)) {
+    // BBCode path: convert tags to HTML, wrap bare text, sanitize. No Markdown.
     html = bbcodeToHtml(raw);
-    // Run marked on the result to handle any remaining Markdown inside BBCode
-    html = markdownToHtml(html);
+    html = wrapBareText(html);
   } else {
     html = markdownToHtml(raw);
   }

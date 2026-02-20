@@ -48,7 +48,11 @@ export default function TeleprompterPlayer() {
     const url = new URL(window.location.href);
     const decoded = decodeText(url);
     if (decoded) {
-      setRawText(decoded);
+      if (typeof decoded === "object" && "error" in decoded) {
+        setError(decoded.error);
+      } else {
+        setRawText(decoded);
+      }
       return;
     }
 
