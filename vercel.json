@@ -4,7 +4,7 @@
   "outputDirectory": "dist",
   "headers": [
     {
-      "source": "/teleprompter/practice",
+      "source": "/practice-wedding-vows/practice",
       "headers": [
         {
           "key": "Content-Security-Policy",
@@ -39,5 +39,17 @@
       ]
     }
   ],
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/teleprompter",
+      "destination": "/practice-wedding-vows",
+      "permanent": true
+    },
+    {
+      "source": "/teleprompter/practice",
+      "destination": "/practice-wedding-vows/practice",
+      "permanent": true
+    }
+  ]
 }

@@ -1,0 +1,311 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import Wrapper from "@/components/fundations/containers/Wrapper.astro"
+import Text from "@/components/fundations/elements/Text.astro"
+import TeleprompterInput from "@/components/teleprompter/TeleprompterInput"
+import JsonLd from "@/components/fundations/head/JsonLd.astro"
+import { Image } from "astro:assets"
+import pacingImg from "@/images/blog/practice-wedding-vows-pacing.jpg"
+import outLoudImg from "@/images/blog/practice-wedding-vows-out-loud.jpg"
+
+const SITE_URL = "https://vows.you";
+
+const webAppSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebApplication",
+	"name": "Practice Wedding Vows — Free Teleprompter",
+	"url": `${SITE_URL}/practice-wedding-vows`,
+	"applicationCategory": "LifestyleApplication",
+	"operatingSystem": "Web",
+	"offers": {
+		"@type": "Offer",
+		"price": "0",
+		"priceCurrency": "USD"
+	},
+	"description": "Practice your wedding vows with a free teleprompter. Smooth auto-scroll, word-by-word highlighting, adjustable speed, fullscreen, and mirror mode. No sign-up required.",
+	"featureList": [
+		"Smooth auto-scrolling teleprompter",
+		"Word-by-word highlighting",
+		"Adjustable reading speed",
+		"Fullscreen practice mode",
+		"Mirror mode for rehearsing",
+		"Privacy-first (browser-only)"
+	]
+};
+
+const breadcrumbSchema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{
+			"@type": "ListItem",
+			"position": 1,
+			"name": "Home",
+			"item": SITE_URL
+		},
+		{
+			"@type": "ListItem",
+			"position": 2,
+			"name": "Practice Wedding Vows",
+			"item": `${SITE_URL}/practice-wedding-vows`
+		}
+	]
+};
+
+const faqs = [
+	{
+		question: "How do I practice reading my wedding vows?",
+		answer: "Paste your vows into the teleprompter above and click 'Practice Reading.' The tool scrolls your text at a natural speaking pace with word-by-word highlighting so you can rehearse timing, eye contact, and delivery. Practice out loud at least 5–7 times before your ceremony."
+	},
+	{
+		question: "What speed should I read my wedding vows at?",
+		answer: "Most people speak comfortably at 120–140 words per minute, but wedding vows benefit from a slower pace — around 100–130 WPM. The teleprompter offers Slow (100 WPM), Medium (130 WPM), and Fast (160 WPM) presets. Start on Slow and increase only when you feel confident."
+	},
+	{
+		question: "How long should wedding vows be?",
+		answer: "Wedding vows typically run 1–2 minutes when spoken aloud, which is roughly 150–300 words. Anything under a minute can feel rushed; anything over three minutes risks losing the room. The teleprompter shows your estimated reading time so you can trim or expand before the ceremony."
+	},
+	{
+		question: "Can I practice wedding vows on my phone?",
+		answer: "Yes. The teleprompter is fully responsive and works on phones, tablets, and desktops. Use fullscreen mode for a distraction-free rehearsal on mobile — just tap the fullscreen button or press F."
+	},
+	{
+		question: "What is mirror mode on a teleprompter?",
+		answer: "Mirror mode flips the text horizontally, simulating a professional teleprompter setup where you read reflected text on a glass pane. It's also useful for practicing while facing someone, since the text appears reversed to anyone watching you."
+	},
+	{
+		question: "Is this wedding vow teleprompter free?",
+		answer: "Completely free with no sign-up required. Your vows stay in your browser — nothing is sent to a server. You can practice as many times as you want."
+	},
+	{
+		question: "How many times should I practice my wedding vows before the ceremony?",
+		answer: "Aim for at least 5–7 full read-throughs out loud over the week before your wedding. Space your practice sessions across different days so the words feel natural, not memorized. Recording yourself on the last few runs helps catch pacing issues."
+	}
+];
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"mainEntity": faqs.map(faq => ({
+		"@type": "Question",
+		"name": faq.question,
+		"acceptedAnswer": {
+			"@type": "Answer",
+			"text": faq.answer
+		}
+	}))
+};
+---
+
+<BaseLayout
+	title="Practice Wedding Vows — Free Teleprompter to Rehearse Your Vows | vows.you"
+	description="Practice your wedding vows with a free, smooth-scrolling teleprompter. Word-by-word highlighting, adjustable speed, fullscreen and mirror mode. No sign-up required."
+>
+	<JsonLd slot="head" data={webAppSchema} />
+	<JsonLd slot="head" data={breadcrumbSchema} />
+	<JsonLd slot="head" data={faqSchema} />
+
+	<!-- Hero + Teleprompter Input -->
+	<section>
+		<Wrapper variant="standard" class="pt-32 pb-16">
+			<header class="max-w-2xl mb-10">
+				<p class="text-sm font-medium uppercase tracking-wide text-accent-500 mb-4">
+					Free Tool
+				</p>
+				<Text tag="h1" variant="displayMD" class="font-serif font-medium tracking-tight text-base-900 mb-5">
+					Practice Your Wedding Vows
+				</Text>
+				<Text tag="p" variant="textLG" class="text-base-600 leading-relaxed">
+					Paste your vows below and rehearse reading them out loud with a smooth-scrolling teleprompter. Word-by-word highlighting keeps you on pace so you sound natural, not rushed.
+				</Text>
+				<p class="text-sm text-base-500 mt-4 flex items-center gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+					</svg>
+					Your text stays in your browser. Nothing is sent to a server.
+				</p>
+			</header>
+
+			<TeleprompterInput client:load />
+		</Wrapper>
+	</section>
+
+	<!-- How to Practice Wedding Vows -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-16">
+			<div class="max-w-2xl mb-10">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-4">
+					How to Practice Wedding Vows Before the Ceremony
+				</Text>
+				<Text tag="p" variant="textBase" class="text-base-600 leading-relaxed">
+					Reading vows off a crumpled piece of paper is the number one reason people rush through the most important words they'll ever say. A teleprompter lets you keep your head up, your pacing steady, and your emotions in check.
+				</Text>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+				<div>
+					<div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-50 text-accent-500 mb-3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<polygon points="6 3 20 12 6 21 6 3"/>
+						</svg>
+					</div>
+					<h3 class="font-medium text-base-800 mb-1">Smooth Auto-Scroll</h3>
+					<p class="text-sm text-base-500">Text scrolls at a natural reading pace with three speed presets tuned for spoken vows.</p>
+				</div>
+				<div>
+					<div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-50 text-accent-500 mb-3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12 20h9"/>
+							<path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/>
+						</svg>
+					</div>
+					<h3 class="font-medium text-base-800 mb-1">Word-by-Word Highlighting</h3>
+					<p class="text-sm text-base-500">Each word lights up as you go so you keep your place and nail your pacing every time.</p>
+				</div>
+				<div>
+					<div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-50 text-accent-500 mb-3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M8 3H5a2 2 0 0 0-2 2v3"/>
+							<path d="M21 8V5a2 2 0 0 0-2-2h-3"/>
+							<path d="M3 16v3a2 2 0 0 0 2 2h3"/>
+							<path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+						</svg>
+					</div>
+					<h3 class="font-medium text-base-800 mb-1">Fullscreen Practice Mode</h3>
+					<p class="text-sm text-base-500">Go fullscreen for a distraction-free rehearsal. Works beautifully on phones and tablets.</p>
+				</div>
+				<div>
+					<div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-50 text-accent-500 mb-3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M8 3v3a2 2 0 0 1-2 2H3"/>
+							<path d="M21 8h-3a2 2 0 0 1-2-2V3"/>
+							<path d="M3 16h3a2 2 0 0 1 2 2v3"/>
+							<path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
+						</svg>
+					</div>
+					<h3 class="font-medium text-base-800 mb-1">Mirror Mode</h3>
+					<p class="text-sm text-base-500">Flip the text to practice facing someone — just like a real teleprompter glass.</p>
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- Wedding Vow Practice Tips -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-16">
+			<div class="max-w-2xl">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-4">
+					Tips for Practicing Wedding Vows Out Loud
+				</Text>
+				<div class="space-y-6 text-base-600 leading-relaxed">
+					<div>
+						<Text tag="h3" variant="textLG" class="font-semibold text-base-800 mb-2">
+							Start slow, then find your natural pace
+						</Text>
+						<p>Begin on the Slow setting (100 WPM) even if it feels awkward. Most people speak faster when they're nervous, so training yourself at a slower pace gives you a buffer on the big day.</p>
+					</div>
+					<div>
+						<Text tag="h3" variant="textLG" class="font-semibold text-base-800 mb-2">
+							Practice at least five times before the ceremony
+						</Text>
+						<p>Spacing your rehearsals over several days helps the words feel natural rather than memorized. Record yourself on the last two runs to catch pacing problems you won't notice in the moment.</p>
+					</div>
+					<div>
+						<Text tag="h3" variant="textLG" class="font-semibold text-base-800 mb-2">
+							Pause on the emotional lines — don't rush past them
+						</Text>
+						<p>The sentences that make you feel something are the ones your partner will remember. Let them land. The teleprompter's punctuation-aware pausing helps, but you should also practice looking up from the text on the lines that matter most.</p>
+					</div>
+					<div>
+						<Text tag="h3" variant="textLG" class="font-semibold text-base-800 mb-2">
+							Use fullscreen mode for a realistic rehearsal
+						</Text>
+						<p>Distractions train you to break eye contact. Fullscreen removes everything except your words. Pair it with mirror mode if you plan to face your partner while reading.</p>
+					</div>
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- FAQ Section -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-16">
+			<div class="max-w-2xl">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-8">
+					Frequently Asked Questions About Practicing Wedding Vows
+				</Text>
+				<div class="divide-y divide-base-200">
+					{faqs.map((faq) => (
+						<details class="group py-5">
+							<summary class="flex items-center justify-between cursor-pointer list-none text-base font-medium text-base-800 hover:text-base-900">
+								{faq.question}
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 ml-4 text-base-400 transition-transform group-open:rotate-180">
+									<path d="m6 9 6 6 6-6"/>
+								</svg>
+							</summary>
+							<p class="mt-3 text-sm text-base-600 leading-relaxed">
+								{faq.answer}
+							</p>
+						</details>
+					))}
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- Related Guides -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-16">
+			<div class="max-w-2xl mb-8">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900">
+					Guides to Help You Practice and Deliver Your Vows
+				</Text>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+				<a href="/guides/how-to-read-wedding-vows-without-rushing/" class="group block rounded-2xl border border-base-200 overflow-hidden hover:border-base-300 transition-colors">
+					<div class="aspect-[16/9] overflow-hidden bg-sand-100">
+						<Image src={pacingImg} alt="Couple reading wedding vows at ceremony" width={600} height={338} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+					</div>
+					<div class="p-5">
+						<p class="text-xs text-accent-500 font-medium uppercase tracking-wide mb-2">Pacing Guide</p>
+						<h3 class="font-serif font-medium text-base-900 mb-1 group-hover:text-accent-600 transition-colors">How to Read Wedding Vows Without Rushing</h3>
+						<p class="text-sm text-base-500">Pacing tips, breathing techniques, and a simple rehearsal framework so your vows land the way you want them to.</p>
+					</div>
+				</a>
+				<a href="/guides/how-to-practice-wedding-vows-out-loud/" class="group block rounded-2xl border border-base-200 overflow-hidden hover:border-base-300 transition-colors">
+					<div class="aspect-[16/9] overflow-hidden bg-sand-100">
+						<Image src={outLoudImg} alt="Person rehearsing wedding vows out loud" width={600} height={338} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+					</div>
+					<div class="p-5">
+						<p class="text-xs text-accent-500 font-medium uppercase tracking-wide mb-2">7-Day Plan</p>
+						<h3 class="font-serif font-medium text-base-900 mb-1 group-hover:text-accent-600 transition-colors">How to Practice Your Wedding Vows Out Loud</h3>
+						<p class="text-sm text-base-500">A day-by-day rehearsal plan that takes you from first read-through to ceremony-ready confidence.</p>
+					</div>
+				</a>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- CTA to app -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-12">
+			<div class="max-w-xl mx-auto text-center">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900">
+					Need help writing your vows?
+				</Text>
+				<Text tag="p" variant="textBase" class="mt-4 text-base-500">
+					Our free wedding vows template walks you through prompts to generate ceremony-ready vows in minutes.
+				</Text>
+				<a
+					href="/wedding-vows-template"
+					class="inline-flex items-center gap-2 mt-6 px-6 py-3 text-sm font-semibold text-white bg-accent-500 rounded-full hover:bg-accent-600 transition-colors"
+				>
+					Try Free Vows Template
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 12h14"/>
+						<path d="m12 5 7 7-7 7"/>
+					</svg>
+				</a>
+			</div>
+		</Wrapper>
+	</section>
+</BaseLayout>

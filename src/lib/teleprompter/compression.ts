@@ -10,7 +10,7 @@ export function encodeText(text: string): string {
   const compressed = compressToEncodedURIComponent(text);
 
   if (compressed.length <= URL_PARAM_MAX) {
-    return `/teleprompter/practice?t=${compressed}`;
+    return `/practice-wedding-vows/practice?t=${compressed}`;
   }
 
   const id = crypto.randomUUID();
@@ -18,9 +18,9 @@ export function encodeText(text: string): string {
     localStorage.setItem(LS_PREFIX + id, text);
   } catch {
     // localStorage full — fall back to URL anyway (may truncate on very old browsers)
-    return `/teleprompter/practice?t=${compressed}`;
+    return `/practice-wedding-vows/practice?t=${compressed}`;
   }
-  return `/teleprompter/practice?ref=${id}`;
+  return `/practice-wedding-vows/practice?ref=${id}`;
 }
 
 const TEXT_PARAM_MAX = 16000;
