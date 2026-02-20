@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
+    "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "@astrolib/seo": "^1.0.0-beta.8",
@@ -19,7 +20,11 @@
     "astro": "^5.16.6",
     "docx": "^9.5.1",
     "jspdf": "^4.0.0",
+    "lucide-react": "^0.575.0",
     "lz-string": "^1.5.0",
+    "marked": "^17.0.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "reading-time": "^1.5.0",
     "tailwind-scrollbar-hide": "^4.0.0",
     "tailwindcss": "^4.1.18"

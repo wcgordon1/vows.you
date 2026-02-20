@@ -1,0 +1,146 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import TeleprompterPlayer from "@/components/teleprompter/TeleprompterPlayer"
+---
+
+<BaseLayout
+	hideNav={true}
+	hideFooter={true}
+	title="Practice Your Vows | Teleprompter | vows.you"
+	description="Practice reading your wedding vows with a smooth-scrolling teleprompter."
+	noindex={true}
+>
+	<TeleprompterPlayer client:only="react" />
+</BaseLayout>
+
+<style is:global>
+	/* ── Teleprompter word highlight styles ─────────────────────────────── */
+	.tp-word {
+		transition: color 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+		border-radius: 3px;
+		padding: 1px 2px;
+		margin: -1px -2px;
+	}
+
+	.tp-active {
+		color: var(--color-base-900);
+		opacity: 1;
+		background-color: oklch(96.37% 0.014 34.3 / 0.6);
+	}
+
+	.tp-past {
+		color: var(--color-base-800);
+		opacity: 0.25;
+	}
+
+	.tp-future {
+		color: var(--color-base-800);
+		opacity: 0.45;
+	}
+
+	/* ── Teleprompter content formatting ───────────────────────────────── */
+	.tp-content h1 {
+		font-size: 2rem;
+		font-weight: 600;
+		margin-bottom: 1rem;
+		margin-top: 2rem;
+	}
+
+	.tp-content h2 {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin-bottom: 0.75rem;
+		margin-top: 1.5rem;
+	}
+
+	.tp-content h3 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		margin-top: 1.25rem;
+	}
+
+	.tp-content p {
+		margin-bottom: 1.25rem;
+	}
+
+	.tp-content ul,
+	.tp-content ol {
+		margin-bottom: 1.25rem;
+		padding-left: 1.5rem;
+		text-align: left;
+	}
+
+	.tp-content ul {
+		list-style-type: disc;
+	}
+
+	.tp-content ol {
+		list-style-type: decimal;
+	}
+
+	.tp-content li {
+		margin-bottom: 0.5rem;
+	}
+
+	.tp-content strong {
+		font-weight: 700;
+	}
+
+	.tp-content em {
+		font-style: italic;
+	}
+
+	.tp-content a {
+		color: var(--color-accent-500);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.tp-content .tp-center {
+		text-align: center;
+	}
+
+	.tp-content .tp-right {
+		text-align: right;
+	}
+
+	.tp-content .tp-justify {
+		text-align: justify;
+	}
+
+	.tp-content > :first-child {
+		margin-top: 0;
+	}
+
+	/* ── Fullscreen background fix ─────────────────────────────────────── */
+	:fullscreen {
+		background-color: var(--color-sand-50);
+	}
+
+	/* ── Full-height layout for both standalone + iframe ────────────────── */
+	html, body {
+		height: 100%;
+		overflow: hidden;
+	}
+
+	body {
+		display: flex;
+		flex-direction: column;
+	}
+
+	body > main {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		min-height: 0;
+		height: 100%;
+	}
+
+	/* ── Safe area padding for notched devices ──────────────────────────── */
+	@supports (padding-bottom: env(safe-area-inset-bottom)) {
+		footer {
+			padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+		}
+	}
+</style>
