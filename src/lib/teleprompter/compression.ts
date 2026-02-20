@@ -50,7 +50,14 @@ export function decodeText(url: URL): string | { error: string } | null {
       };
     }
     // Bubble encodes spaces as %2B which decodes to literal +
-    return raw.replace(/\+/g, " ");
+    // Also convert literal \n (two chars) to real newlines
+    // Handle double-encoded %5B %5D from Bubble in case of double URL encoding
+    return raw
+      .replace(/\+/g, " ")
+      .replace(/%5B/gi, "[")
+      .replace(/%5D/gi, "]")
+      .replace(/%2F/gi, "/")
+      .replace(/\\n/g, "\n");
   }
 
   return null;

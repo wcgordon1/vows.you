@@ -2,7 +2,7 @@ import { marked } from "marked";
 
 // ── BBCode → HTML conversion ────────────────────────────────────────────────
 
-const BBCODE_RULES: [RegExp, string][] = [
+const BBCODE_PAIRED: [RegExp, string][] = [
   [/\[h1\]([\s\S]*?)\[\/h1\]/gi, "<h1>$1</h1>"],
   [/\[h2\]([\s\S]*?)\[\/h2\]/gi, "<h2>$1</h2>"],
   [/\[h3\]([\s\S]*?)\[\/h3\]/gi, "<h3>$1</h3>"],
@@ -15,15 +15,26 @@ const BBCODE_RULES: [RegExp, string][] = [
   [/\[ul\]([\s\S]*?)\[\/ul\]/gi, "<ul>$1</ul>"],
   [/\[ol\]([\s\S]*?)\[\/ol\]/gi, "<ol>$1</ol>"],
   [/\[ml\]([\s\S]*?)\[\/ml\]/gi, "$1"],
-  // [li] with optional attrs — strip attrs, keep content
   [/\[li(?:\s[^\]]*?)?\]([\s\S]*?)\[\/li\]/gi, "<li>$1</li>"],
 ];
 
 function bbcodeToHtml(text: string): string {
   let html = text;
-  for (const [pattern, replacement] of BBCODE_RULES) {
+
+  // 1) Process paired tags first ([b]...[/b], [h2]...[/h2], etc.)
+  for (const [pattern, replacement] of BBCODE_PAIRED) {
     html = html.replace(pattern, replacement);
   }
+
+  // 2) Convert [br] to <br>
+  html = html.replace(/\[br\]/gi, "<br>");
+
+  // 3) Any leftover standalone [b] (no closing [/b]) → treat as line break
+  html = html.replace(/\[b\]/gi, "<br>");
+
+  // 4) Strip any remaining unmatched BBCode tags so they don't render as text
+  html = html.replace(/\[\/?(?:h[1-3]|b|i|url|center|right|justify|ul|ol|li|ml|br)(?:=[^\]]*)?\]/gi, "");
+
   return html;
 }
 
@@ -164,7 +175,7 @@ function wrapBareText(html: string): string {
 // ── Full pipeline ───────────────────────────────────────────────────────────
 
 function hasBBCode(text: string): boolean {
-  return /\[(?:h[1-3]|b|i|url|center|right|justify|ul|ol|li|ml)[=\s\]]/i.test(text);
+  return /\[(?:h[1-3]|b|i|url|center|right|justify|ul|ol|li|ml|br)[=\s\]]/i.test(text);
 }
 
 export function parseContent(raw: string): string {
@@ -173,9 +184,10 @@ export function parseContent(raw: string): string {
   let html: string;
 
   if (hasBBCode(raw)) {
-    // BBCode path: convert tags to HTML, wrap bare text, sanitize. No Markdown.
-    html = bbcodeToHtml(raw);
-    html = wrapBareText(html);
+    html = raw.replace(/\n/g, "<br>");
+    html = bbcodeToHtml(html);
+    // Collapse consecutive <br> tags into a single one
+    html = html.replace(/(<br\s*\/?\s*>[\s]*){2,}/gi, "<br>");
   } else {
     html = markdownToHtml(raw);
   }
