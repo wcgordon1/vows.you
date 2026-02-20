@@ -64,7 +64,7 @@ export default function TeleprompterPlayer() {
     window.addEventListener("message", handler);
 
     const timeout = setTimeout(() => {
-      setError("No text found. Go back and paste your vows first.");
+      setError("No text found. Go back and write your vows first.");
     }, 1500);
 
     return () => {
