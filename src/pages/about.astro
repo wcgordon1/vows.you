@@ -8,11 +8,44 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import JsonLd from "@/components/fundations/head/JsonLd.astro";
 // Components
 import BlogCard from "@/components/blog/BlogCard.astro";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("posts");
+
+const SITE_URL = "https://vows.you";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": SITE_URL,
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About",
+      "item": `${SITE_URL}/about`,
+    },
+  ],
+};
+
+const aboutPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About vows.you",
+  "description": "We built vows.you to help couples write wedding vows that sound like them. Learn about our mission, values, and how we can help you find the right words.",
+  "url": `${SITE_URL}/about`,
+  "mainEntity": {
+    "@id": `${SITE_URL}/#organization`,
+  },
+};
 const values = [
   {
     title: "Clarity over cleverness",
@@ -51,6 +84,8 @@ const howItWorks = [
   title="About Us | vows.you"
   description="We built vows.you to help couples write wedding vows that sound like them. Learn about our mission, values, and how we can help you find the right words."
 >
+  <JsonLd slot="head" data={breadcrumbSchema} />
+  <JsonLd slot="head" data={aboutPageSchema} />
   <section>
     <Wrapper variant="standard" class="pt-32 pb-12">
       <div class="max-w-xl mx-auto text-balance">

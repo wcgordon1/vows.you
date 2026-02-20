@@ -1,6 +1,7 @@
 ---
 // Fundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/fundations/head/JsonLd.astro";
 // Sections
 import Hero1 from "@/components/heros/Hero1.astro";
 import QuoteMarquee from "@/components/testimonials/QuoteMarquee.astro";
@@ -11,9 +12,43 @@ import Feature4 from "@/components/features/Feature4.astro";
 import Cta1 from "@/components/ctas/Cta1.astro";
 import Pricing1 from "@/components/pricing/Pricing1.astro";
 import Testimonial1 from "@/components/testimonials/Testimonial1.astro";
+
+const SITE_URL = "https://vows.you";
+
+const softwareAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "vows.you",
+  "url": SITE_URL,
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Web",
+  "description": "Get guided prompts and structure to write personal, meaningful wedding vows. No blank page panic. Your voice, just clearer.",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "0",
+    "highPrice": "29",
+    "offerCount": "3",
+  },
+  "featureList": [
+    "Guided vow-writing prompts",
+    "Free wedding vow template generator",
+    "Free vow cliché and length checker",
+    "Free vow teleprompter with word highlighting",
+    "PDF and DOCX download",
+    "Privacy-first (browser-only tools)",
+  ],
+  "publisher": {
+    "@id": `${SITE_URL}/#organization`,
+  },
+};
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="vows.you — Write Wedding Vows That Sound Like You"
+  description="Get guided prompts and structure to write personal, meaningful wedding vows. Free tools to generate, review, and practice your vows. Your voice, just clearer."
+>
+  <JsonLd slot="head" data={softwareAppSchema} />
   <Hero1 />
   <QuoteMarquee />
   <Feature1 />

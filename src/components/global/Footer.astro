@@ -5,63 +5,36 @@ import Logo from "@/components/assets/Logo.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 const footerLinks = [
   {
-    heading: "Product",
+    heading: "Free Tools",
     links: [
-      { label: "Start writing", href: "https://app.vows.you/workspace" },
-      { label: "See examples", href: "/guides" },
-      { label: "Pricing", href: "/#pricing-section" },
-      { label: "Changelog", href: "/changelog" },
+      { label: "Wedding Vows Template", href: "/wedding-vows-template" },
+      { label: "Wedding Vow Review", href: "/free-wedding-vow-review" },
+      { label: "Vow Teleprompter", href: "/teleprompter" },
     ],
   },
   {
     heading: "Resources",
     links: [
-      {
-        label: "Guides",
-        href: "/guides",
-      },
-      {
-        label: "Support",
-        href: "/support",
-      },
-      {
-        label: "Couples",
-        href: "/couples",
-      },
+      { label: "Guides", href: "/guides" },
+      { label: "Support", href: "/support" },
+      { label: "Couples", href: "/couples" },
     ],
   },
   {
-    heading: "Company",
+    heading: "Product",
     links: [
-      {
-        label: "About",
-        href: "/about",
-      },
-      {
-        label: "Contact",
-        href: "/contact",
-      },
-      {
-        label: "Free Vow Review",
-        href: "/free-wedding-vow-review",
-      },
-      {
-        label: "Free Templates",
-        href: "/wedding-vows-template",
-      },
+      { label: "Start Writing", href: "https://app.vows.you/workspace" },
+      { label: "Pricing", href: "/#pricing-section" },
+      { label: "Changelog", href: "/changelog" },
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
     heading: "Legal",
     links: [
-      {
-        label: "Privacy",
-        href: "/legal/privacy",
-      },
-      {
-        label: "Terms",
-        href: "/legal/terms",
-      },
+      { label: "Privacy Policy", href: "/legal/privacy" },
+      { label: "Terms of Service", href: "/legal/terms" },
     ],
   },
 ];
@@ -99,8 +72,6 @@ const footerLinks = [
                 {section.links.map((link) => (
                   <li>
                     <a
-                      title="Button to your page"
-                      aria-label="your label"
                       href={link.href}
                       class="hover:text-black"
                     >

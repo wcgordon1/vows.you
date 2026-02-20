@@ -4,6 +4,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import JsonLd from "@/components/fundations/head/JsonLd.astro";
 // Component
 import BlogCard from "@/components/blog/BlogCard.astro";
 import BlogSearch from "@/components/blog/BlogSearch.astro";
@@ -18,12 +19,52 @@ const allPosts = allPostsUnsorted.sort(
 );
 // Tags
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+
+const SITE_URL = "https://vows.you";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": SITE_URL,
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": `${SITE_URL}/guides`,
+    },
+  ],
+};
+
+const collectionPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Wedding Vow Writing Guides",
+  "description": "Tips, examples, and advice for writing wedding vows that sound like you. Learn how to structure, personalize, and deliver vows you'll be proud of.",
+  "url": `${SITE_URL}/guides`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": allPosts.map((post, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": post.data.title,
+      "url": `${SITE_URL}/guides/${post.slug}`,
+    })),
+  },
+};
 ---
 
 <BaseLayout
   title="Wedding Vow Writing Guides | vows.you"
   description="Tips, examples, and advice for writing wedding vows that sound like you. Learn how to structure, personalize, and deliver vows you'll be proud of."
 >
+  <JsonLd slot="head" data={breadcrumbSchema} />
+  <JsonLd slot="head" data={collectionPageSchema} />
   <section>
     <Wrapper variant="standard" class="pt-32 pb-4">
       <div class="max-w-xl text-balance">
