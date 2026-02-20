@@ -133,7 +133,7 @@ export default function TeleprompterPlayer() {
           break;
         case "f":
         case "F":
-          if (!embed) toggleFullscreen();
+          toggleFullscreen();
           break;
         case "m":
         case "M":
@@ -187,7 +187,7 @@ export default function TeleprompterPlayer() {
   const shortcuts = [
     { key: "Space", label: "play / pause" },
     { key: "R", label: "restart" },
-    ...(!embed ? [{ key: "F", label: "fullscreen" }] : []),
+    { key: "F", label: "fullscreen" },
     { key: "M", label: "mirror" },
   ];
 
@@ -261,19 +261,17 @@ export default function TeleprompterPlayer() {
           >
             <FlipHorizontal2 className="h-4 w-4" />
           </button>
-          {!embed && (
-            <button
-              onClick={toggleFullscreen}
-              className="flex items-center justify-center h-8 w-8 rounded-full text-base-400 transition-colors hover:bg-sand-100 hover:text-base-600"
-              title="Fullscreen (F)"
-            >
-              {isFullscreen ? (
-                <Minimize className="h-4 w-4" />
-              ) : (
-                <Maximize className="h-4 w-4" />
-              )}
-            </button>
-          )}
+          <button
+            onClick={toggleFullscreen}
+            className="flex items-center justify-center h-8 w-8 rounded-full text-base-400 transition-colors hover:bg-sand-100 hover:text-base-600"
+            title="Fullscreen (F)"
+          >
+            {isFullscreen ? (
+              <Minimize className="h-4 w-4" />
+            ) : (
+              <Maximize className="h-4 w-4" />
+            )}
+          </button>
         </div>
       </header>
 
