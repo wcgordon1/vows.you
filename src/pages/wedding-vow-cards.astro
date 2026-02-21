@@ -1,0 +1,233 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import Wrapper from "@/components/fundations/containers/Wrapper.astro"
+import Text from "@/components/fundations/elements/Text.astro"
+import JsonLd from "@/components/fundations/head/JsonLd.astro"
+import VowCardTool from "@/components/vow-cards/VowCardTool"
+
+const embedParam = Astro.url.searchParams.get("embed") === "1";
+
+const SITE_URL = "https://vows.you";
+
+const webAppSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebApplication",
+	"name": "Wedding Vow Cards — Free PDF Export",
+	"url": `${SITE_URL}/wedding-vow-cards`,
+	"applicationCategory": "LifestyleApplication",
+	"operatingSystem": "Web",
+	"offers": {
+		"@type": "Offer",
+		"price": "0",
+		"priceCurrency": "USD"
+	},
+	"description": "Turn your wedding vows into a beautiful, print-ready card. Choose backgrounds, fonts, and overlays. Download as a multi-page PDF. Free, no sign-up, fully private.",
+	"featureList": [
+		"Beautiful card backgrounds",
+		"Customizable fonts and overlays",
+		"Multi-page PDF export",
+		"BBCode formatting support",
+		"Print-ready 4×6 and 5.5×8.5 formats",
+		"Privacy-first (browser-only)"
+	]
+};
+
+const breadcrumbSchema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{
+			"@type": "ListItem",
+			"position": 1,
+			"name": "Home",
+			"item": SITE_URL
+		},
+		{
+			"@type": "ListItem",
+			"position": 2,
+			"name": "Wedding Vow Cards",
+			"item": `${SITE_URL}/wedding-vow-cards`
+		}
+	]
+};
+
+const faqs = [
+	{
+		question: "How do I export my wedding vows as a PDF?",
+		answer: "Paste your vows into the text box, choose a background and style, then click 'Download PDF.' Your vow card is generated instantly in your browser — nothing is uploaded to a server."
+	},
+	{
+		question: "Can I print the vow card for my ceremony?",
+		answer: "Yes! The PDF is sized for standard 4×6 photo prints or 5.5×8.5 booklets. Print at home or send to a professional printer. For best results, use cardstock paper."
+	},
+	{
+		question: "What if my vows are longer than one page?",
+		answer: "The tool automatically creates additional pages. Each page keeps the same background, overlay, and font styling. No text is lost — everything is included in the PDF."
+	},
+	{
+		question: "What formatting is supported?",
+		answer: "You can use BBCode tags like [b]bold[/b], [i]italic[/i], [h1]headings[/h1], [ul][li]lists[/li][/ul], and [center]centered text[/center]. The preview shows how your formatting will look."
+	},
+	{
+		question: "Is this wedding vow card tool free?",
+		answer: "Completely free with no sign-up. Your vows stay in your browser — nothing is sent to a server. Download as many times as you like."
+	},
+	{
+		question: "Can I customize the card design?",
+		answer: "Choose from 10 background images, adjust the overlay color and opacity, pick from three font styles (classic, modern, handwritten), and set your text color. The defaults are designed to look beautiful with no tweaks needed."
+	},
+	{
+		question: "What card sizes are available?",
+		answer: "Two formats: Card (4×6 inches, like a photo print) and Booklet (5.5×8.5 inches, half-letter). Both are portrait orientation and print-ready."
+	}
+];
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"mainEntity": faqs.map(faq => ({
+		"@type": "Question",
+		"name": faq.question,
+		"acceptedAnswer": {
+			"@type": "Answer",
+			"text": faq.answer
+		}
+	}))
+};
+---
+
+<BaseLayout
+	hideNav={embedParam}
+	hideFooter={embedParam}
+	title={embedParam
+		? "Vow Cards | vows.you"
+		: "Wedding Vow Cards (Free) — Print-Ready PDF Export | vows.you"
+	}
+	description="Turn your wedding vows into a beautiful, print-ready card. Choose backgrounds, fonts, and overlay styling. Download as PDF. Free, private, no sign-up."
+	noindex={embedParam}
+>
+	{!embedParam && (
+		<Fragment>
+			<JsonLd slot="head" data={webAppSchema} />
+			<JsonLd slot="head" data={breadcrumbSchema} />
+			<JsonLd slot="head" data={faqSchema} />
+		</Fragment>
+	)}
+
+	{/* Marketing header — only in non-embed mode */}
+	{!embedParam && (
+		<section>
+			<Wrapper variant="standard" class="pt-32 pb-8">
+				<header class="max-w-3xl mb-8">
+					<p class="text-sm font-medium uppercase tracking-wide text-accent-500 mb-4">
+						Free tool
+					</p>
+					<Text tag="h1" variant="displayMD" class="font-serif font-medium tracking-tight text-base-900 mb-6">
+						Wedding Vow Cards
+					</Text>
+					<Text tag="p" variant="textLG" class="text-base-600 leading-relaxed">
+						Turn your vows into a beautiful, print-ready card. Pick a background, tweak the overlay and font, then download a PDF sized for a 4×6 print or a half-letter booklet.
+					</Text>
+					<p class="text-sm text-base-500 mt-4 flex items-center gap-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+							<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+						</svg>
+						Your vows stay in your browser. Nothing is sent to a server.
+					</p>
+				</header>
+			</Wrapper>
+		</section>
+	)}
+
+	{/* Tool area */}
+	<section>
+		<Wrapper variant="standard" class={embedParam ? "py-0" : "pb-16"}>
+			<VowCardTool client:only="react" embedParam={embedParam} />
+		</Wrapper>
+	</section>
+
+	{/* FAQ section — marketing mode only */}
+	{!embedParam && (
+		<section class="border-t border-base-200 border-dashed">
+			<Wrapper variant="standard" class="py-16">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-10">
+					Frequently asked questions
+				</Text>
+				<dl class="space-y-8 max-w-3xl">
+					{faqs.map((faq) => (
+						<div>
+							<dt class="text-base font-semibold text-base-800 mb-2">
+								{faq.question}
+							</dt>
+							<dd class="text-sm text-base-600 leading-relaxed">
+								{faq.answer}
+							</dd>
+						</div>
+					))}
+				</dl>
+			</Wrapper>
+		</section>
+	)}
+</BaseLayout>
+
+<style is:global>
+	/* ── Vow card preview content formatting ──────────────────────────── */
+	.vc-preview-content h1 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin-bottom: 0.4rem;
+		margin-top: 0.5rem;
+	}
+	.vc-preview-content h2 {
+		font-size: 1.1rem;
+		font-weight: 600;
+		margin-bottom: 0.3rem;
+		margin-top: 0.4rem;
+	}
+	.vc-preview-content h3 {
+		font-size: 1rem;
+		font-weight: 600;
+		margin-bottom: 0.25rem;
+	}
+	.vc-preview-content p {
+		margin-bottom: 0.5em;
+	}
+	.vc-preview-content br {
+		display: block;
+		content: "";
+		margin-top: 0.25rem;
+	}
+	.vc-preview-content ul,
+	.vc-preview-content ol {
+		padding-left: 1.25rem;
+		margin-bottom: 0.5em;
+	}
+	.vc-preview-content ul {
+		list-style-type: disc;
+	}
+	.vc-preview-content ol {
+		list-style-type: decimal;
+	}
+	.vc-preview-content li {
+		margin-bottom: 0.25em;
+	}
+	.vc-preview-content strong {
+		font-weight: 700;
+	}
+	.vc-preview-content em {
+		font-style: italic;
+	}
+	.vc-preview-content a {
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+	.vc-preview-content .tp-center {
+		text-align: center;
+	}
+	.vc-preview-content .tp-right {
+		text-align: right;
+	}
+	.vc-preview-content .tp-justify {
+		text-align: justify;
+	}
+</style>
