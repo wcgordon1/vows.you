@@ -49,12 +49,15 @@ function readConfigFromUrl(url: URL): Partial<DesignConfig> {
   return partial;
 }
 
-// ── Trusted origin check ────────────────────────────────────────────────────
-
-const TRUSTED_ORIGINS = ["https://app.vows.you"];
-
-function isTrustedOrigin(origin: string): boolean {
-  return TRUSTED_ORIGINS.includes(origin);
+function detectEmbed(): boolean {
+  if (typeof window === "undefined") return false;
+  const urlEmbed = new URLSearchParams(window.location.search).get("embed") === "1";
+  if (urlEmbed) return true;
+  try {
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
 }
 
 // ── Logo (inline SVG, matches Logo.astro) ───────────────────────────────────
@@ -72,13 +75,10 @@ function VowsLogo({ className = "" }: { className?: string }) {
 
 // ── Component ───────────────────────────────────────────────────────────────
 
-interface Props {
-  embedParam?: boolean;
-}
+export default function VowCardTool() {
+  const [embedMode, setEmbedMode] = useState(false);
+  const brandMode = !embedMode;
 
-export default function VowCardTool({ embedParam = false }: Props) {
-  const [embedMode, setEmbedMode] = useState(embedParam);
-  const [brandMode, setBrandMode] = useState(!embedParam);
   const [config, setConfig] = useState<DesignConfig>(DEFAULT_CONFIG);
   const [vowText, setVowText] = useState("");
   const [filename, setFilename] = useState("wedding-vow-card.pdf");
@@ -89,51 +89,32 @@ export default function VowCardTool({ embedParam = false }: Props) {
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [previewHtml, setPreviewHtml] = useState("");
 
-  // Read URL params on mount
+  // Detect embed mode + read URL params on mount
   useEffect(() => {
     const url = new URL(window.location.href);
+    const isEmbed = detectEmbed();
+    setEmbedMode(isEmbed);
+    console.log("[vow-cards] React mounted, embed:", isEmbed, "url:", url.toString());
+
     const text = decodeVowText(url);
-    if (text) setVowText(text);
+    if (text) {
+      console.log("[vow-cards] Decoded vow text, length:", text.length);
+      setVowText(text);
+    } else {
+      console.log("[vow-cards] No vow text found in URL params");
+    }
 
     const urlConfig = readConfigFromUrl(url);
     if (Object.keys(urlConfig).length > 0) {
-      setConfig((prev) => ({ ...prev, ...urlConfig }));
+      console.log("[vow-cards] URL config overrides:", urlConfig);
+      setConfig((prev) => ({ ...prev, ...urlConfig, brandMode: !isEmbed }));
+    } else {
+      setConfig((prev) => ({ ...prev, brandMode: !isEmbed }));
     }
 
     const fn = url.searchParams.get("filename");
     if (fn) setFilename(fn);
-
-    // If embed=1 in URL, set embed mode (but keep branding on until handshake)
-    if (url.searchParams.get("embed") === "1") {
-      setEmbedMode(true);
-    }
   }, []);
-
-  // postMessage handshake listener
-  useEffect(() => {
-    function handler(e: MessageEvent) {
-      if (!isTrustedOrigin(e.origin)) return;
-      if (e.data?.type === "VOWS_EMBED" && e.data.embed === true) {
-        setEmbedMode(true);
-        setBrandMode(false);
-        try {
-          (e.source as Window)?.postMessage(
-            { type: "VOWS_EMBED_ACK" },
-            { targetOrigin: e.origin },
-          );
-        } catch {
-          // cross-origin reply failed — safe to ignore
-        }
-      }
-    }
-    window.addEventListener("message", handler);
-    return () => window.removeEventListener("message", handler);
-  }, []);
-
-  // Sync brandMode into config
-  useEffect(() => {
-    setConfig((prev) => (prev.brandMode !== brandMode ? { ...prev, brandMode } : prev));
-  }, [brandMode]);
 
   // Debounced preview update
   useEffect(() => {
@@ -160,21 +141,23 @@ export default function VowCardTool({ embedParam = false }: Props) {
     [config.fontKey],
   );
 
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const canDownload = vowText.trim().length > 0;
 
   const handleDownload = useCallback(async () => {
     if (!canDownload || generating) return;
     setGenerating(true);
     setDownloadNote(null);
+    console.log("[vow-cards] Generating PDF, config:", config);
 
     const html = previewHtml || `<p>${vowText.replace(/</g, "&lt;")}</p>`;
     const result = await generatePdf(html, config, filename);
 
     setGenerating(false);
     if (!result.success) {
+      console.error("[vow-cards] PDF generation failed:", result.error);
       setDownloadNote(result.error);
     } else {
+      console.log("[vow-cards] PDF generated successfully");
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         setDownloadNote(
           "If your phone opens the PDF instead of downloading, tap Share → Save to Files.",
@@ -187,7 +170,7 @@ export default function VowCardTool({ embedParam = false }: Props) {
     setConfig((prev) => ({ ...prev, ...patch }));
   }, []);
 
-  // ── Render ──────────────────────────────────────────────────────────────
+  // ── Shared styles ───────────────────────────────────────────────────────
 
   const previewCardStyle: React.CSSProperties = {
     backgroundImage: bgLoadErrors.has(bg.id) ? bg.gradient : `url(${bg.src})`,
@@ -208,268 +191,301 @@ export default function VowCardTool({ embedParam = false }: Props) {
     fontSize: "0.875rem",
   };
 
-  return (
-    <div className={embedMode ? "px-3 py-4" : ""}>
-      <div className={`grid gap-8 ${embedMode ? "" : "md:grid-cols-[1fr_0.85fr]"} ${!embedMode ? "md:grid-cols-[1fr_0.85fr]" : ""}`}>
-        {/* Left column: controls */}
-        <div className="space-y-6 min-w-0">
-          {/* Logo — marketing mode only */}
-          {!embedMode && (
-            <a href="/" className="inline-flex items-center gap-2 text-accent-900 hover:text-accent-700 transition-colors">
-              <VowsLogo className="h-5 w-5" />
-              <span className="font-serif text-lg">vows.you</span>
-            </a>
-          )}
+  // ── Controls (shared between both modes) ────────────────────────────────
 
-          {/* Vow text editor */}
+  const controls = (
+    <div className="space-y-5 min-w-0">
+      {/* Background picker */}
+      <fieldset>
+        <legend className="flex items-center gap-2 text-sm font-medium text-base-700 mb-3">
+          <ImageIcon size={16} className="text-base-400" />
+          Background
+        </legend>
+        <div className="grid grid-cols-5 gap-2">
+          {BACKGROUNDS.map((preset) => (
+            <button
+              key={preset.id}
+              type="button"
+              onClick={() => updateConfig({ bgId: preset.id })}
+              className={`relative aspect-4/3 rounded-lg overflow-hidden border-2 transition-all ${
+                config.bgId === preset.id
+                  ? "border-accent-500 ring-2 ring-accent-200"
+                  : "border-base-200 hover:border-base-300"
+              }`}
+              title={preset.label}
+            >
+              {bgLoadErrors.has(preset.id) ? (
+                <div className="absolute inset-0" style={{ background: preset.gradient }} />
+              ) : (
+                <img
+                  src={preset.src}
+                  alt={preset.label}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                  onError={() => setBgLoadErrors((prev) => new Set(prev).add(preset.id))}
+                />
+              )}
+              <span className="sr-only">{preset.label}</span>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
+      {/* Overlay controls */}
+      <fieldset>
+        <legend className="flex items-center gap-2 text-sm font-medium text-base-700 mb-3">
+          <SlidersHorizontal size={16} className="text-base-400" />
+          Card overlay
+        </legend>
+        <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-base-700 mb-2">Your vows</label>
-            <textarea
-              value={vowText}
-              onChange={(e) => setVowText(e.target.value)}
-              placeholder="Paste or type your wedding vows here... (BBCode formatting supported: [b]bold[/b], [i]italic[/i], [h1]heading[/h1])"
-              rows={embedMode ? 6 : 8}
-              className="w-full rounded-xl border border-base-200 bg-white px-4 py-3 text-sm text-base-800 placeholder:text-base-400 focus:border-accent-400 focus:ring-2 focus:ring-accent-100 focus:outline-none resize-y"
+            <label className="block text-xs text-base-500 mb-1">Color</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="color"
+                value={config.overlayColor}
+                onChange={(e) => updateConfig({ overlayColor: e.target.value })}
+                className="h-8 w-8 rounded border border-base-200 cursor-pointer"
+              />
+              <span className="text-xs text-base-500 font-mono">{config.overlayColor}</span>
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs text-base-500 mb-1">
+              Opacity ({Math.round(config.overlayOpacity * 100)}%)
+            </label>
+            <input
+              type="range"
+              min="0.35"
+              max="0.95"
+              step="0.01"
+              value={config.overlayOpacity}
+              onChange={(e) => updateConfig({ overlayOpacity: parseFloat(e.target.value) })}
+              className="w-full accent-accent-500"
             />
           </div>
+        </div>
+      </fieldset>
 
-          {/* Background picker */}
-          <fieldset>
-            <legend className="flex items-center gap-2 text-sm font-medium text-base-700 mb-3">
-              <ImageIcon size={16} className="text-base-400" />
-              Background
-            </legend>
-            <div className="grid grid-cols-5 gap-2">
-              {BACKGROUNDS.map((preset) => (
-                <button
-                  key={preset.id}
-                  type="button"
-                  onClick={() => updateConfig({ bgId: preset.id })}
-                  className={`relative aspect-4/3 rounded-lg overflow-hidden border-2 transition-all ${
-                    config.bgId === preset.id
-                      ? "border-accent-500 ring-2 ring-accent-200"
-                      : "border-base-200 hover:border-base-300"
-                  }`}
-                  title={preset.label}
-                >
-                  {bgLoadErrors.has(preset.id) ? (
-                    <div
-                      className="absolute inset-0"
-                      style={{ background: preset.gradient }}
-                    />
-                  ) : (
-                    <img
-                      src={preset.src}
-                      alt={preset.label}
-                      className="absolute inset-0 w-full h-full object-cover"
-                      loading="lazy"
-                      onError={() =>
-                        setBgLoadErrors((prev) => new Set(prev).add(preset.id))
-                      }
-                    />
-                  )}
-                  <span className="sr-only">{preset.label}</span>
-                </button>
-              ))}
-            </div>
-          </fieldset>
-
-          {/* Overlay controls */}
-          <fieldset>
-            <legend className="flex items-center gap-2 text-sm font-medium text-base-700 mb-3">
-              <SlidersHorizontal size={16} className="text-base-400" />
-              Card overlay
-            </legend>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs text-base-500 mb-1">Color</label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="color"
-                    value={config.overlayColor}
-                    onChange={(e) => updateConfig({ overlayColor: e.target.value })}
-                    className="h-8 w-8 rounded border border-base-200 cursor-pointer"
-                  />
-                  <span className="text-xs text-base-500 font-mono">{config.overlayColor}</span>
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs text-base-500 mb-1">
-                  Opacity ({Math.round(config.overlayOpacity * 100)}%)
-                </label>
-                <input
-                  type="range"
-                  min="0.35"
-                  max="0.95"
-                  step="0.01"
-                  value={config.overlayOpacity}
-                  onChange={(e) => updateConfig({ overlayOpacity: parseFloat(e.target.value) })}
-                  className="w-full accent-accent-500"
-                />
-              </div>
-            </div>
-          </fieldset>
-
-          {/* Typography */}
-          <fieldset>
-            <legend className="flex items-center gap-2 text-sm font-medium text-base-700 mb-3">
-              <Type size={16} className="text-base-400" />
-              Typography
-            </legend>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs text-base-500 mb-1">Font</label>
-                <div className="flex gap-1.5">
-                  {FONT_OPTIONS.map((fo) => (
-                    <button
-                      key={fo.key}
-                      type="button"
-                      onClick={() => updateConfig({ fontKey: fo.key })}
-                      className={`flex-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                        config.fontKey === fo.key
-                          ? "bg-accent-500 text-white"
-                          : "bg-base-100 text-base-600 hover:bg-base-200"
-                      }`}
-                      style={{ fontFamily: fo.cssFamily }}
-                    >
-                      {fo.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs text-base-500 mb-1">Text color</label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="color"
-                    value={config.fontColor}
-                    onChange={(e) => updateConfig({ fontColor: e.target.value })}
-                    className="h-8 w-8 rounded border border-base-200 cursor-pointer"
-                  />
-                  <span className="text-xs text-base-500 font-mono">{config.fontColor}</span>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-
-          {/* Format selector */}
-          <fieldset>
-            <legend className="flex items-center gap-2 text-sm font-medium text-base-700 mb-3">
-              <Palette size={16} className="text-base-400" />
-              Format
-            </legend>
-            <div className="flex gap-2">
-              {FORMAT_OPTIONS.map((fo) => (
+      {/* Typography */}
+      <fieldset>
+        <legend className="flex items-center gap-2 text-sm font-medium text-base-700 mb-3">
+          <Type size={16} className="text-base-400" />
+          Typography
+        </legend>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-xs text-base-500 mb-1">Font</label>
+            <div className="flex gap-1.5">
+              {FONT_OPTIONS.map((fo) => (
                 <button
                   key={fo.key}
                   type="button"
-                  onClick={() => updateConfig({ format: fo.key })}
-                  className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                    config.format === fo.key
+                  onClick={() => updateConfig({ fontKey: fo.key })}
+                  className={`flex-1 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                    config.fontKey === fo.key
                       ? "bg-accent-500 text-white"
                       : "bg-base-100 text-base-600 hover:bg-base-200"
                   }`}
+                  style={{ fontFamily: fo.cssFamily }}
                 >
                   {fo.label}
                 </button>
               ))}
             </div>
-          </fieldset>
+          </div>
+          <div>
+            <label className="block text-xs text-base-500 mb-1">Text color</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="color"
+                value={config.fontColor}
+                onChange={(e) => updateConfig({ fontColor: e.target.value })}
+                className="h-8 w-8 rounded border border-base-200 cursor-pointer"
+              />
+              <span className="text-xs text-base-500 font-mono">{config.fontColor}</span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
 
-          {/* Download CTA */}
-          <div className="sticky bottom-4 z-10">
+      {/* Format selector */}
+      <fieldset>
+        <legend className="flex items-center gap-2 text-sm font-medium text-base-700 mb-3">
+          <Palette size={16} className="text-base-400" />
+          Format
+        </legend>
+        <div className="flex gap-2">
+          {FORMAT_OPTIONS.map((fo) => (
             <button
+              key={fo.key}
               type="button"
-              onClick={handleDownload}
-              disabled={!canDownload || generating}
-              className={`w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold transition-all shadow-lg ${
-                canDownload && !generating
-                  ? "bg-accent-500 text-white hover:bg-accent-600 active:scale-[0.98]"
-                  : "bg-base-200 text-base-400 cursor-not-allowed"
+              onClick={() => updateConfig({ format: fo.key })}
+              className={`flex-1 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                config.format === fo.key
+                  ? "bg-accent-500 text-white"
+                  : "bg-base-100 text-base-600 hover:bg-base-200"
               }`}
             >
-              {generating ? (
-                <>
-                  <Loader2 size={18} className="animate-spin" />
-                  Generating PDF…
-                </>
-              ) : (
-                <>
-                  <Download size={18} />
-                  Download PDF
-                </>
-              )}
+              {fo.label}
             </button>
-
-            {!canDownload && (
-              <p className="text-xs text-base-400 text-center mt-2">
-                Enter your vows above to enable download
-              </p>
-            )}
-
-            {downloadNote && (
-              <p className="text-xs text-base-500 text-center mt-2 bg-sand-50 rounded-lg px-3 py-2">
-                {downloadNote}
-              </p>
-            )}
-          </div>
-
-          {/* Branding in marketing mode */}
-          {!embedMode && brandMode && (
-            <p className="text-xs text-base-400 text-center pt-2">
-              Made with{" "}
-              <a href="https://vows.you" className="underline hover:text-accent-500">
-                vows.you
-              </a>
-            </p>
-          )}
+          ))}
         </div>
+      </fieldset>
 
-        {/* Right column: preview (desktop only, non-embed) */}
-        <div className={`hidden ${embedMode ? "" : "md:block"}`}>
-          <div className="sticky top-28">
-            <p className="text-xs font-medium text-base-500 mb-3 uppercase tracking-wide">
-              Preview
-            </p>
-            {/* Card preview */}
+      {/* Download CTA */}
+      <div>
+        <button
+          type="button"
+          onClick={handleDownload}
+          disabled={!canDownload || generating}
+          className={`w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold transition-all shadow-lg ${
+            canDownload && !generating
+              ? "bg-accent-500 text-white hover:bg-accent-600 active:scale-[0.98]"
+              : "bg-base-200 text-base-400 cursor-not-allowed"
+          }`}
+        >
+          {generating ? (
+            <>
+              <Loader2 size={18} className="animate-spin" />
+              Generating PDF…
+            </>
+          ) : (
+            <>
+              <Download size={18} />
+              Download PDF
+            </>
+          )}
+        </button>
+
+        {!canDownload && !embedMode && (
+          <p className="text-xs text-base-400 text-center mt-2">
+            Enter your vows above to enable download
+          </p>
+        )}
+
+        {!canDownload && embedMode && (
+          <p className="text-xs text-base-400 text-center mt-2">
+            No vow text received. Make sure your vows are included in the URL.
+          </p>
+        )}
+
+        {downloadNote && (
+          <p className="text-xs text-base-500 text-center mt-2 bg-sand-50 rounded-lg px-3 py-2">
+            {downloadNote}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+
+  // ── Preview card (shared between both modes) ────────────────────────────
+
+  const previewCard = (
+    <div
+      className="relative rounded-2xl overflow-hidden shadow-xl"
+      style={{
+        ...previewCardStyle,
+        aspectRatio: config.format === "card" ? "4/6" : "5.5/8.5",
+      }}
+    >
+      <div className="absolute inset-3" style={overlayStyle} />
+      <div className="absolute inset-3 p-5 overflow-hidden" style={textStyle}>
+        {previewHtml ? (
+          <div className="vc-preview-content" dangerouslySetInnerHTML={{ __html: previewHtml }} />
+        ) : (
+          <p className="text-base-400 italic text-sm">
+            Your vows will appear here…
+          </p>
+        )}
+      </div>
+      {brandMode && (
+        <div className="absolute bottom-4 left-0 right-0 text-center">
+          <span className="text-[9px] tracking-wide" style={{ color: "#aaa" }}>
+            Made with vows.you
+          </span>
+        </div>
+      )}
+    </div>
+  );
+
+  // ── Embed layout ────────────────────────────────────────────────────────
+
+  if (embedMode) {
+    return (
+      <div className="p-4 sm:p-6">
+        <div className="grid gap-6 md:grid-cols-[1fr_0.85fr] md:items-stretch">
+          {/* Controls */}
+          <div>{controls}</div>
+
+          {/* Preview — matches controls height, hidden on mobile */}
+          <div className="hidden md:flex md:flex-col">
             <div
-              className="relative rounded-2xl overflow-hidden shadow-xl"
-              style={{
-                ...previewCardStyle,
-                aspectRatio: config.format === "card" ? "4/6" : "5.5/8.5",
-              }}
+              className="relative rounded-2xl overflow-hidden shadow-xl flex-1 min-h-0"
+              style={previewCardStyle}
             >
-              {/* Overlay */}
               <div className="absolute inset-3" style={overlayStyle} />
-              {/* Text content */}
-              <div
-                className="absolute inset-3 p-5 overflow-hidden"
-                style={textStyle}
-              >
+              <div className="absolute inset-3 p-5 overflow-hidden" style={textStyle}>
                 {previewHtml ? (
-                  <div
-                    className="vc-preview-content"
-                    dangerouslySetInnerHTML={{ __html: previewHtml }}
-                  />
+                  <div className="vc-preview-content" dangerouslySetInnerHTML={{ __html: previewHtml }} />
                 ) : (
                   <p className="text-base-400 italic text-sm">
                     Your vows will appear here…
                   </p>
                 )}
               </div>
-              {/* Brand footer in preview */}
-              {brandMode && (
-                <div className="absolute bottom-4 left-0 right-0 text-center">
-                  <span className="text-[9px] tracking-wide" style={{ color: "#aaa" }}>
-                    Made with vows.you
-                  </span>
-                </div>
-              )}
             </div>
             <p className="text-xs text-base-400 mt-3 text-center">
               Preview shows page 1. Download exports all pages.
             </p>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Marketing layout (Wrapper in Astro page provides the border columns) ──
+
+  return (
+    <div className="grid gap-8 md:grid-cols-[1fr_0.85fr]">
+      {/* Left column: logo + textarea + controls */}
+      <div className="space-y-6 min-w-0">
+        <a href="/" className="inline-flex items-center gap-2 text-accent-900 hover:text-accent-700 transition-colors">
+          <VowsLogo className="h-5 w-5" />
+          <span className="font-serif text-lg">vows.you</span>
+        </a>
+
+        <div>
+          <label className="block text-sm font-medium text-base-700 mb-2">Your vows</label>
+          <textarea
+            value={vowText}
+            onChange={(e) => setVowText(e.target.value)}
+            placeholder="Paste or type your wedding vows here... (BBCode formatting supported: [b]bold[/b], [i]italic[/i], [h1]heading[/h1])"
+            rows={8}
+            className="w-full rounded-xl border border-base-200 bg-white px-4 py-3 text-sm text-base-800 placeholder:text-base-400 focus:border-accent-400 focus:ring-2 focus:ring-accent-100 focus:outline-none resize-y"
+          />
+        </div>
+
+        {controls}
+
+        <p className="text-xs text-base-400 text-center pt-2">
+          Made with{" "}
+          <a href="https://vows.you" className="underline hover:text-accent-500">
+            vows.you
+          </a>
+        </p>
+      </div>
+
+      {/* Right column: preview (desktop only) */}
+      <div className="hidden md:block">
+        <div className="sticky top-28">
+          <p className="text-xs font-medium text-base-500 mb-3 uppercase tracking-wide">
+            Preview
+          </p>
+          {previewCard}
+          <p className="text-xs text-base-400 mt-3 text-center">
+            Preview shows page 1. Download exports all pages.
+          </p>
         </div>
       </div>
     </div>

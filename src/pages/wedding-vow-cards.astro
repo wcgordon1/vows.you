@@ -5,8 +5,6 @@ import Text from "@/components/fundations/elements/Text.astro"
 import JsonLd from "@/components/fundations/head/JsonLd.astro"
 import VowCardTool from "@/components/vow-cards/VowCardTool"
 
-const embedParam = Astro.url.searchParams.get("embed") === "1";
-
 const SITE_URL = "https://vows.you";
 
 const webAppSchema = {
@@ -97,80 +95,98 @@ const faqSchema = {
 ---
 
 <BaseLayout
-	hideNav={embedParam}
-	hideFooter={embedParam}
-	title={embedParam
-		? "Vow Cards | vows.you"
-		: "Wedding Vow Cards (Free) — Print-Ready PDF Export | vows.you"
-	}
+	title="Wedding Vow Cards (Free) — Print-Ready PDF Export | vows.you"
 	description="Turn your wedding vows into a beautiful, print-ready card. Choose backgrounds, fonts, and overlay styling. Download as PDF. Free, private, no sign-up."
-	noindex={embedParam}
 >
-	{!embedParam && (
-		<Fragment>
-			<JsonLd slot="head" data={webAppSchema} />
-			<JsonLd slot="head" data={breadcrumbSchema} />
-			<JsonLd slot="head" data={faqSchema} />
-		</Fragment>
-	)}
+	<JsonLd slot="head" data={webAppSchema} />
+	<JsonLd slot="head" data={breadcrumbSchema} />
+	<JsonLd slot="head" data={faqSchema} />
 
-	{/* Marketing header — only in non-embed mode */}
-	{!embedParam && (
-		<section>
-			<Wrapper variant="standard" class="pt-32 pb-8">
-				<header class="max-w-3xl mb-8">
-					<p class="text-sm font-medium uppercase tracking-wide text-accent-500 mb-4">
-						Free tool
-					</p>
-					<Text tag="h1" variant="displayMD" class="font-serif font-medium tracking-tight text-base-900 mb-6">
-						Wedding Vow Cards
-					</Text>
-					<Text tag="p" variant="textLG" class="text-base-600 leading-relaxed">
-						Turn your vows into a beautiful, print-ready card. Pick a background, tweak the overlay and font, then download a PDF sized for a 4×6 print or a half-letter booklet.
-					</Text>
-					<p class="text-sm text-base-500 mt-4 flex items-center gap-2">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
-							<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-						</svg>
-						Your vows stay in your browser. Nothing is sent to a server.
-					</p>
-				</header>
-			</Wrapper>
-		</section>
-	)}
+	{/* Inline script: runs before paint to hide marketing chrome in embed mode */}
+	<script is:inline slot="head">
+	(function(){
+		var isEmbed = new URLSearchParams(window.location.search).get('embed') === '1';
+		if (!isEmbed) return;
+		console.log('[vow-cards] embed=1 detected, applying embed mode');
+		document.documentElement.classList.add('vc-embed');
+	})();
+	</script>
 
-	{/* Tool area */}
-	<section>
-		<Wrapper variant="standard" class={embedParam ? "py-0" : "pb-16"}>
-			<VowCardTool client:only="react" embedParam={embedParam} />
+	{/* Marketing header */}
+	<section data-vc-marketing>
+		<Wrapper variant="standard" class="pt-32 pb-8">
+			<header class="max-w-3xl mb-8">
+				<p class="text-sm font-medium uppercase tracking-wide text-accent-500 mb-4">
+					Free tool
+				</p>
+				<Text tag="h1" variant="displayMD" class="font-serif font-medium tracking-tight text-base-900 mb-6">
+					Wedding Vow Cards
+				</Text>
+				<Text tag="p" variant="textLG" class="text-base-600 leading-relaxed">
+					Turn your vows into a beautiful, print-ready card. Pick a background, tweak the overlay and font, then download a PDF sized for a 4×6 print or a half-letter booklet.
+				</Text>
+				<p class="text-sm text-base-500 mt-4 flex items-center gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+					</svg>
+					Your vows stay in your browser. Nothing is sent to a server.
+				</p>
+			</header>
 		</Wrapper>
 	</section>
 
-	{/* FAQ section — marketing mode only */}
-	{!embedParam && (
-		<section class="border-t border-base-200 border-dashed">
-			<Wrapper variant="standard" class="py-16">
-				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-10">
-					Frequently asked questions
-				</Text>
-				<dl class="space-y-8 max-w-3xl">
-					{faqs.map((faq) => (
-						<div>
-							<dt class="text-base font-semibold text-base-800 mb-2">
-								{faq.question}
-							</dt>
-							<dd class="text-sm text-base-600 leading-relaxed">
-								{faq.answer}
-							</dd>
-						</div>
-					))}
-				</dl>
-			</Wrapper>
-		</section>
-	)}
+	{/* Tool area */}
+	<section>
+		<Wrapper variant="standard" class="pb-16">
+			<VowCardTool client:only="react" />
+		</Wrapper>
+	</section>
+
+	{/* FAQ section */}
+	<section class="border-t border-base-200 border-dashed" data-vc-marketing>
+		<Wrapper variant="standard" class="py-16">
+			<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-10">
+				Frequently asked questions
+			</Text>
+			<dl class="space-y-8 max-w-3xl">
+				{faqs.map((faq) => (
+					<div>
+						<dt class="text-base font-semibold text-base-800 mb-2">
+							{faq.question}
+						</dt>
+						<dd class="text-sm text-base-600 leading-relaxed">
+							{faq.answer}
+						</dd>
+					</div>
+				))}
+			</dl>
+		</Wrapper>
+	</section>
 </BaseLayout>
 
 <style is:global>
+	/* ── Embed mode: strip everything except the tool ─────────────────── */
+	.vc-embed #nav-wrapper,
+	.vc-embed nav,
+	.vc-embed footer,
+	.vc-embed [data-vc-marketing] {
+		display: none !important;
+	}
+	.vc-embed body {
+		min-height: auto !important;
+		background: transparent !important;
+	}
+	.vc-embed main {
+		padding: 0 !important;
+	}
+	.vc-embed section > div {
+		border-left: none !important;
+		border-right: none !important;
+		max-width: none !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
 	/* ── Vow card preview content formatting ──────────────────────────── */
 	.vc-preview-content h1 {
 		font-size: 1.25rem;
