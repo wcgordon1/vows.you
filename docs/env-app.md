@@ -33,5 +33,5 @@ All variables go in `apps/app/.env.local` (gitignored by `apps/app/.gitignore`).
 - Home URL: `https://app.vows.you`
 - Sign-in URL: `https://app.vows.you/sign-in`
 - Sign-up URL: `https://app.vows.you/sign-up`
-- After sign-in URL: `https://app.vows.you/workspace`
-- After sign-up URL: `https://app.vows.you/workspace`
+- After sign-in URL: `https://app.vows.you/`
+- After sign-up URL: `https://app.vows.you/`
