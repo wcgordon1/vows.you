@@ -273,7 +273,7 @@ export default function VowCardTool() {
           <Type size={16} className="text-base-400" />
           Typography
         </legend>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs text-base-500 mb-1">Font</label>
             <div className="flex gap-1.5">
