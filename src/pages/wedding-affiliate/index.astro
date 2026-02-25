@@ -1,0 +1,387 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import Wrapper from "@/components/fundations/containers/Wrapper.astro"
+import Text from "@/components/fundations/elements/Text.astro"
+import JsonLd from "@/components/fundations/head/JsonLd.astro"
+import { Image } from "astro:assets"
+import heroImg from "@/images/affiliate/affiliate-hero.jpg"
+import tiktokImg from "@/images/affiliate/tiktok-wedding-creator.jpg"
+import bloggerImg from "@/images/affiliate/wedding-blogger.jpg"
+import plannerImg from "@/images/affiliate/wedding-planner.jpg"
+import youtubeImg from "@/images/affiliate/wedding-youtube.jpg"
+import pinterestImg from "@/images/affiliate/pinterest-wedding.jpg"
+
+const SITE_URL = "https://vows.you";
+
+const webPageSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	"name": "Vows.you Affiliate Program — Earn 40% Commission",
+	"url": `${SITE_URL}/wedding-affiliate`,
+	"description": "Join the Vows.you affiliate program and earn $51.60 for every couple you refer. 40% commission on a $129 product with a 90-day cookie window.",
+	"publisher": {
+		"@type": "Organization",
+		"name": "vows.you",
+		"url": SITE_URL
+	}
+};
+
+const breadcrumbSchema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{
+			"@type": "ListItem",
+			"position": 1,
+			"name": "Home",
+			"item": SITE_URL
+		},
+		{
+			"@type": "ListItem",
+			"position": 2,
+			"name": "Affiliate Program",
+			"item": `${SITE_URL}/wedding-affiliate`
+		}
+	]
+};
+
+const faqs = [
+	{
+		question: "How much do I earn per referral?",
+		answer: "You earn 40% of every sale — that's $51.60 on a $129 purchase. There are no tiers, no minimums, and no caps. If you refer ten couples this month, that's $516."
+	},
+	{
+		question: "What is a 90-day cookie window?",
+		answer: "When someone clicks your affiliate link, a small file (a cookie) is saved in their browser. That cookie lasts 90 days. If that person comes back and buys anytime within those 90 days — even if they closed the tab and forgot about it — you still get credited for the sale. Most affiliate programs give you 24 hours or 30 days. Ours gives you three full months because couples don't always buy wedding tools on impulse."
+	},
+	{
+		question: "When and how do I get paid?",
+		answer: "Payouts happen monthly via direct deposit or PayPal. Once your balance hits $50, it's automatically queued for the next payment cycle. You can track every click, conversion, and pending payout in your affiliate dashboard."
+	},
+	{
+		question: "Do I need a website to join?",
+		answer: "No. Plenty of our top affiliates work entirely through TikTok, Instagram, YouTube, or Pinterest. If you have an audience of people planning weddings, you qualify — doesn't matter what platform they're on."
+	},
+	{
+		question: "Who can join the affiliate program?",
+		answer: "Wedding planners, wedding content creators, bridal bloggers, videographers, photographers, officiants — anyone in the wedding space. If couples trust your recommendations, this is a fit. We review every application to keep the program quality-focused."
+	},
+	{
+		question: "What kind of support do affiliates get?",
+		answer: "You get a dedicated affiliate dashboard, pre-made graphics and copy you can customize, and direct access to our team if you need anything. We want you to succeed because when you do, we do."
+	},
+	{
+		question: "Is there a cost to join?",
+		answer: "Zero. No sign-up fee, no monthly fee, no hidden charges. You apply, get approved, grab your link, and start sharing."
+	}
+];
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"mainEntity": faqs.map(faq => ({
+		"@type": "Question",
+		"name": faq.question,
+		"acceptedAnswer": {
+			"@type": "Answer",
+			"text": faq.answer
+		}
+	}))
+};
+
+const articles = [
+	{
+		slug: "tiktok-wedding-creators-affiliate-program",
+		img: tiktokImg,
+		alt: "TikTok creator filming wedding content",
+		label: "TikTok Creators",
+		title: "How TikTok Wedding Creators Earn $51 Per Referral",
+		description: "Your followers already ask what tools you recommend. Here's how to actually get paid when they listen."
+	},
+	{
+		slug: "wedding-bloggers-affiliate-program",
+		img: bloggerImg,
+		alt: "Wedding blogger writing at a laptop",
+		label: "Wedding Bloggers",
+		title: "Monetize Your Wedding Blog with Vows.you",
+		description: "One well-placed link in a vow-writing guide can earn more than a month of display ads."
+	},
+	{
+		slug: "wedding-planners-affiliate-program",
+		img: plannerImg,
+		alt: "Wedding planner organizing an event",
+		label: "Wedding Planners",
+		title: "Wedding Planners: Add a Revenue Stream That Helps Your Clients",
+		description: "You already recommend vow-writing resources. This turns that recommendation into income."
+	},
+	{
+		slug: "wedding-youtube-channels-affiliate-program",
+		img: youtubeImg,
+		alt: "Camera setup for wedding YouTube content",
+		label: "YouTube Channels",
+		title: "How Wedding YouTubers Earn Passive Income with Vows.you",
+		description: "A single link in your video description works for you around the clock — long after upload day."
+	},
+	{
+		slug: "pinterest-wedding-creators-affiliate-program",
+		img: pinterestImg,
+		alt: "Wedding Pinterest mood board",
+		label: "Pinterest Creators",
+		title: "Pinterest Wedding Creators: Turn Pins into Affiliate Income",
+		description: "Wedding pins have long shelf lives. Pair that with a 90-day cookie and the math gets interesting."
+	}
+];
+---
+
+<BaseLayout
+	title="Affiliate Program — Earn 40% Commission Referring Couples | vows.you"
+	description="Join the Vows.you affiliate program. Earn $51.60 per referral with 40% commission on a $129 product and a 90-day cookie window. Perfect for wedding creators, bloggers, and planners."
+>
+	<JsonLd slot="head" data={webPageSchema} />
+	<JsonLd slot="head" data={breadcrumbSchema} />
+	<JsonLd slot="head" data={faqSchema} />
+
+	<!-- Hero -->
+	<section>
+		<Wrapper variant="standard" class="pt-32 pb-16">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+				<header class="max-w-xl">
+					<p class="text-sm font-medium uppercase tracking-wide text-accent-500 mb-4">
+						Affiliate Program
+					</p>
+					<Text tag="h1" variant="displayMD" class="font-serif font-medium tracking-tight text-base-900 mb-5">
+						Earn $51.60 Every Time a Couple Buys Through Your Link
+					</Text>
+					<Text tag="p" variant="textLG" class="text-base-600 leading-relaxed">
+						Vows.you helps couples write wedding vows they're proud to read out loud. It costs $129. You earn 40% of that — $51.60 — for every couple you send our way. And with a 90-day cookie window, they don't have to buy today for you to get paid.
+					</Text>
+					<div class="mt-8 flex flex-col sm:flex-row gap-4">
+						<a
+							href="https://vows.affonso.io/"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-accent-500 rounded-full hover:bg-accent-600 transition-colors"
+						>
+							Apply Now
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M5 12h14"/>
+								<path d="m12 5 7 7-7 7"/>
+							</svg>
+						</a>
+					</div>
+					<p class="text-sm text-base-500 mt-6 flex items-center gap-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+							<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+							<polyline points="22 4 12 14.01 9 11.01"/>
+						</svg>
+						Free to join. No minimums. No caps.
+					</p>
+				</header>
+				<div class="rounded-2xl overflow-hidden">
+					<Image src={heroImg} alt="Couple writing wedding vows together" width={800} height={533} class="w-full h-full object-cover rounded-2xl" />
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- How It Works -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-16">
+			<div class="max-w-2xl mb-10">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-4">
+					Four Steps. That's It.
+				</Text>
+				<Text tag="p" variant="textBase" class="text-base-600 leading-relaxed">
+					No complicated onboarding. No hoops. You apply, get your link, share it with your audience, and earn money when couples buy.
+				</Text>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+				<div>
+					<div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-50 text-accent-500 mb-3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+							<circle cx="9" cy="7" r="4"/>
+							<line x1="19" x2="19" y1="8" y2="14"/>
+							<line x1="22" x2="16" y1="11" y2="11"/>
+						</svg>
+					</div>
+					<h3 class="font-medium text-base-800 mb-1">1. Apply</h3>
+					<p class="text-sm text-base-500">Fill out a quick application. We review it within 48 hours and get you set up.</p>
+				</div>
+				<div>
+					<div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-50 text-accent-500 mb-3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+							<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+						</svg>
+					</div>
+					<h3 class="font-medium text-base-800 mb-1">2. Grab Your Link</h3>
+					<p class="text-sm text-base-500">You get a unique tracking link and access to your affiliate dashboard with real-time stats.</p>
+				</div>
+				<div>
+					<div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-50 text-accent-500 mb-3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+							<polyline points="16 6 12 2 8 6"/>
+							<line x1="12" x2="12" y1="2" y2="15"/>
+						</svg>
+					</div>
+					<h3 class="font-medium text-base-800 mb-1">3. Share With Your Audience</h3>
+					<p class="text-sm text-base-500">Blog post, TikTok, YouTube description, Instagram story, email newsletter — wherever your people are.</p>
+				</div>
+				<div>
+					<div class="flex items-center justify-center w-10 h-10 rounded-xl bg-accent-50 text-accent-500 mb-3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<line x1="12" x2="12" y1="1" y2="23"/>
+							<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+						</svg>
+					</div>
+					<h3 class="font-medium text-base-800 mb-1">4. Get Paid</h3>
+					<p class="text-sm text-base-500">Every time someone buys through your link — even up to 90 days later — you earn $51.60. Monthly payouts.</p>
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- Why This Program -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-16">
+			<div class="max-w-2xl">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-4">
+					Why This Affiliate Program Is Different
+				</Text>
+				<div class="space-y-6 text-base-600 leading-relaxed">
+					<div>
+						<Text tag="h3" variant="textLG" class="font-semibold text-base-800 mb-2">
+							40% commission is unusually high
+						</Text>
+						<p>Most affiliate programs in the wedding space pay 5–15%. We pay 40% because Vows.you is a digital product with low marginal costs, and we'd rather invest in people who genuinely help couples than dump that money into ad platforms. You do the work of recommending something useful, you should get paid well for it.</p>
+					</div>
+					<div>
+						<Text tag="h3" variant="textLG" class="font-semibold text-base-800 mb-2">
+							90 days is a long time (on purpose)
+						</Text>
+						<p>Here's the thing about engaged couples — they don't always buy the moment they hear about something. They bookmark it. They come back two weeks later when they're actually sitting down to write their vows. A 90-day cookie window means you get credit for that sale even if it happens months after the initial click. That's three full months of runway, compared to the 24 hours Amazon gives you.</p>
+					</div>
+					<div>
+						<Text tag="h3" variant="textLG" class="font-semibold text-base-800 mb-2">
+							You're recommending something that actually helps
+						</Text>
+						<p>This isn't dropshipping phone cases. Vows.you helps people write one of the most important things they'll ever say out loud. Couples come to us stressed about a blank page and leave with vows that sound like them. That's an easy recommendation to make — and your audience will thank you for it.</p>
+					</div>
+					<div>
+						<Text tag="h3" variant="textLG" class="font-semibold text-base-800 mb-2">
+							Real numbers, not vague promises
+						</Text>
+						<p>Let's do quick math. If you send 100 people to Vows.you and 5% convert, that's 5 sales. At $51.60 each, that's $258 from a single piece of content. A blog post, a TikTok, a YouTube video — it doesn't have to be complicated. And that content keeps working long after you publish it.</p>
+					</div>
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- Commission Breakdown -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-16">
+			<div class="max-w-2xl mb-10">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-4">
+					The Numbers at a Glance
+				</Text>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl">
+				<div class="p-6 rounded-2xl border border-base-200 text-center">
+					<p class="text-3xl font-serif font-medium text-accent-500">40%</p>
+					<p class="text-sm text-base-500 mt-2">Commission rate</p>
+				</div>
+				<div class="p-6 rounded-2xl border border-base-200 text-center">
+					<p class="text-3xl font-serif font-medium text-accent-500">$51.60</p>
+					<p class="text-sm text-base-500 mt-2">Per sale</p>
+				</div>
+				<div class="p-6 rounded-2xl border border-base-200 text-center">
+					<p class="text-3xl font-serif font-medium text-accent-500">90 days</p>
+					<p class="text-sm text-base-500 mt-2">Cookie window</p>
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- FAQ Section -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-16">
+			<div class="max-w-2xl">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900 mb-8">
+					Common Questions About the Affiliate Program
+				</Text>
+				<div class="divide-y divide-base-200">
+					{faqs.map((faq) => (
+						<details class="group py-5">
+							<summary class="flex items-center justify-between cursor-pointer list-none text-base font-medium text-base-800 hover:text-base-900">
+								{faq.question}
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 ml-4 text-base-400 transition-transform group-open:rotate-180">
+									<path d="m6 9 6 6 6-6"/>
+								</svg>
+							</summary>
+							<p class="mt-3 text-sm text-base-600 leading-relaxed">
+								{faq.answer}
+							</p>
+						</details>
+					))}
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- Affiliate Guides -->
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-16">
+			<div class="max-w-2xl mb-8">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900">
+					Guides for Every Type of Wedding Creator
+				</Text>
+				<Text tag="p" variant="textBase" class="mt-3 text-base-600">
+					We put together a playbook for each platform so you know exactly how to start.
+				</Text>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				{articles.map((article) => (
+					<a href={`/guides/${article.slug}/`} class="group block rounded-2xl border border-base-200 overflow-hidden hover:border-base-300 transition-colors">
+						<div class="aspect-[16/9] overflow-hidden bg-sand-100">
+							<Image src={article.img} alt={article.alt} width={600} height={338} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+						</div>
+						<div class="p-5">
+							<p class="text-xs text-accent-500 font-medium uppercase tracking-wide mb-2">{article.label}</p>
+							<h3 class="font-serif font-medium text-base-900 mb-1 group-hover:text-accent-600 transition-colors">{article.title}</h3>
+							<p class="text-sm text-base-500">{article.description}</p>
+						</div>
+					</a>
+				))}
+			</div>
+		</Wrapper>
+	</section>
+
+	<!-- CTA -->
+	<section id="apply" class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-12">
+			<div class="max-w-xl mx-auto text-center">
+				<Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-900">
+					Ready to start earning?
+				</Text>
+				<Text tag="p" variant="textBase" class="mt-4 text-base-500">
+					Apply in two minutes. No fees, no gotchas. If you're in the wedding space and couples trust you, we want to work with you.
+				</Text>
+				<a
+					href="https://vows.affonso.io/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 mt-6 px-6 py-3 text-sm font-semibold text-white bg-accent-500 rounded-full hover:bg-accent-600 transition-colors"
+				>
+					Apply to the Affiliate Program
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 12h14"/>
+						<path d="m12 5 7 7-7 7"/>
+					</svg>
+				</a>
+			</div>
+		</Wrapper>
+	</section>
+</BaseLayout>

@@ -102,7 +102,7 @@ Depending on your location, you may have the right to:
 - Withdraw consent for voice data processing  
 - Object to certain data uses  
 
-To exercise these rights, please contact us at **support@vows.you**.
+To exercise these rights, please contact us at **hello@vows.you**.
 
 ---
 
@@ -144,4 +144,4 @@ If you have any questions or concerns about this Privacy Policy, please contact 
 
 **Vows.you**  
 Website: https://www.vows.you/  
-Email: support@vows.you
+Email: hello@vows.you

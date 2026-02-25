@@ -163,4 +163,4 @@ If you have questions about these Terms, contact us:
 
 **Vows.you**  
 Website: https://www.vows.you/  
-Email: support@vows.you
+Email: hello@vows.you
