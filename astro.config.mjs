@@ -21,6 +21,7 @@ export default defineConfig({
     drafts: true
   },
   site: 'https://vows.you',
+  trailingSlash: 'never',
   integrations: [
     react(),
     sitemap({
