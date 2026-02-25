@@ -38,7 +38,7 @@ We thought writing vows would be this sweet, romantic thing. Instead, we spirale
 
 What surprised us was how human the questions felt. It wasn’t “describe your partner in three adjectives.” It was the kind of stuff that actually brings your relationship back to life: the first time you felt safe with them, the weird little traditions, the moment you knew this was your person.
 
-Once we had those answers, the vows basically wrote themselves—because the material was real.
+Once we had those answers, the vows basically wrote themselves - because the material was real.
 
 **It helped us sound sincere, not scripted**
 
@@ -48,7 +48,7 @@ We wanted heartfelt, but not overly dramatic. Funny, but not like a stand-up set
 
 My first draft was… long. Like “someone please cut the mic” long.
 
-The read-time estimate and practice mode were the reality check we needed. We trimmed, practiced twice, and landed at a length that felt emotional but respectful of the moment. Walking into the ceremony, we weren’t nervous about rambling—we were excited.
+The read-time estimate and practice mode were the reality check we needed. We trimmed, practiced twice, and landed at a length that felt emotional but respectful of the moment. Walking into the ceremony, we weren’t nervous about rambling - we were excited.
 
 **Details:**
 

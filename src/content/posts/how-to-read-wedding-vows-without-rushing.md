@@ -16,7 +16,7 @@ You spent weeks writing your vows. You agonized over every word. And then on the
 
 It happens to almost everyone. Adrenaline compresses time. Your brain tells you to hurry up because everyone is watching. The result is a blur that neither you nor your partner can remember clearly.
 
-The fix is not "just relax." The fix is deliberate pacing practice — and it takes less effort than you think.
+The fix is not "just relax." The fix is deliberate pacing practice  -  and it takes less effort than you think.
 
 ---
 
@@ -24,9 +24,9 @@ The fix is not "just relax." The fix is deliberate pacing practice — and it ta
 
 Three things conspire against you at the altar:
 
-1. **Adrenaline** — your fight-or-flight system doesn't know the difference between a predator and 150 people staring at you. Your speech rate increases 20–40% under acute stress.
-2. **No external pacing cue** — when you read from a piece of paper, there's no scroll speed, no metronome, nothing telling you to slow down. You set the pace, and your nervous system sets it too fast.
-3. **Emotional flooding** — the sentences that matter most are the ones that make you choke up, and your instinct is to push through them quickly rather than sit in the discomfort.
+1. **Adrenaline**  -  your fight-or-flight system doesn't know the difference between a predator and 150 people staring at you. Your speech rate increases 20–40% under acute stress.
+2. **No external pacing cue**  -  when you read from a piece of paper, there's no scroll speed, no metronome, nothing telling you to slow down. You set the pace, and your nervous system sets it too fast.
+3. **Emotional flooding**  -  the sentences that matter most are the ones that make you choke up, and your instinct is to push through them quickly rather than sit in the discomfort.
 
 Understanding these three forces is the first step. The second step is building a system that counteracts them.
 
@@ -36,9 +36,9 @@ Understanding these three forces is the first step. The second step is building 
 
 This is the single most effective pacing tool for spoken vows. It requires zero practice equipment.
 
-**Before you start:** Take one full breath — in through the nose for 4 seconds, out through the mouth for 6 seconds. This activates your parasympathetic nervous system and physically slows your heart rate.
+**Before you start:** Take one full breath  -  in through the nose for 4 seconds, out through the mouth for 6 seconds. This activates your parasympathetic nervous system and physically slows your heart rate.
 
-**At every period or paragraph break:** Pause. Take one breath. Then continue. Not a gasping breath — a calm, deliberate one.
+**At every period or paragraph break:** Pause. Take one breath. Then continue. Not a gasping breath  -  a calm, deliberate one.
 
 **At the emotional peak** (the sentence that makes you tear up): Stop. Look at your partner. Breathe. Then say it slowly.
 
@@ -58,7 +58,7 @@ Start on the slowest setting even if it feels painfully slow. You're training yo
 
 ### Day 3–4: Move to Medium (130 WPM)
 
-This is close to a natural conversational pace. Most wedding vows land best in this range. Notice which sentences make you want to speed up — those are the ones you need to practice pausing on.
+This is close to a natural conversational pace. Most wedding vows land best in this range. Notice which sentences make you want to speed up  -  those are the ones you need to practice pausing on.
 
 ### Day 5: Record yourself
 
@@ -70,7 +70,7 @@ Use your phone to record a full read-through on Medium. Play it back. You'll hea
 
 ### Day 6–7: Practice with the 3-breath technique
 
-Turn off the teleprompter. Read from your printed vows (or your phone notes — whatever you'll use on the day). Apply the three breaths. Time yourself. You should be within 10% of your Medium-speed teleprompter time.
+Turn off the teleprompter. Read from your printed vows (or your phone notes  -  whatever you'll use on the day). Apply the three breaths. Time yourself. You should be within 10% of your Medium-speed teleprompter time.
 
 ---
 
@@ -96,7 +96,7 @@ Rushing and monotone are cousins. When you speed up, you flatten your intonation
 
 ### Mistake 4: Not practicing out loud
 
-Reading silently is not practice. Your mouth, your breathing, and your voice need repetitions — not just your eyes.
+Reading silently is not practice. Your mouth, your breathing, and your voice need repetitions  -  not just your eyes.
 
 **Fix:** Every practice session should be out loud. Whisper-reading counts if you're in public, but full-voice practice at home is best.
 
@@ -110,7 +110,7 @@ Reading silently is not practice. Your mouth, your breathing, and your voice nee
 | Medium | 130 | Standard length vows (150–250 words). Natural conversational pace. |
 | Fast | 160 | Short, punchy vows (under 150 words). Still slower than most people's nervous pace. |
 
-If your vows are 200 words and you read them at 130 WPM, you'll finish in about 1 minute 32 seconds. That's a comfortable length — long enough to be meaningful, short enough to hold the room.
+If your vows are 200 words and you read them at 130 WPM, you'll finish in about 1 minute 32 seconds. That's a comfortable length  -  long enough to be meaningful, short enough to hold the room.
 
 ---
 
@@ -121,7 +121,7 @@ If your vows are 200 words and you read them at 130 WPM, you'll finish in about 
 - [ ] Take one breath before you begin
 - [ ] Pause at every period
 - [ ] Look up at your partner at least three times
-- [ ] Don't apologize if you cry — pause, breathe, continue
+- [ ] Don't apologize if you cry  -  pause, breathe, continue
 
 ---
 

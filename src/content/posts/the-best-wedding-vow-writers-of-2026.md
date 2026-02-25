@@ -12,19 +12,19 @@ tags:
 
 ### Best Wedding Vow Writers 2026 (And Why <a href="https://www.vows.you/" target="_blank">vows.you</a> Is the Clear Winner)
 
-Wedding vows are one of the few moments in life where you’re asked to be fully honest, fully present, and fully articulate — out loud — with everyone you love watching.
+Wedding vows are one of the few moments in life where you’re asked to be fully honest, fully present, and fully articulate  -  out loud  -  with everyone you love watching.
 
 It’s also not a niche problem. In the U.S., the CDC reports **2,041,926 marriages (provisional 2023)**. That’s millions of couples, every year, hitting the exact same question: *What do I say?*  
 Source: <a href="https://www.cdc.gov/nchs/fastats/marriage-divorce.htm" target="_blank" rel="noopener noreferrer">CDC FastStats: Marriage & Divorce</a>
 
-And modern couples are increasingly personal about it. The Knot cites its 2021 Real Wedding Study: **47% of couples wrote their own vows** — meaning “personal vows” aren’t a niche trend anymore.  
+And modern couples are increasingly personal about it. The Knot cites its 2021 Real Wedding Study: **47% of couples wrote their own vows**  -  meaning “personal vows” aren’t a niche trend anymore.  
 Source: <a href="https://www.theknot.com/content/private-vows" target="_blank" rel="noopener noreferrer">The Knot (2021 Real Wedding Study stat)</a>
 
 So here’s the real question for 2026:
 
-**What’s the best way to write vows that sound like you — without blank-page panic, cheesy templates, or a last-minute scramble?**
+**What’s the best way to write vows that sound like you  -  without blank-page panic, cheesy templates, or a last-minute scramble?**
 
-This guide ranks the best vow writers (tools and services) for 2026. I’ll be transparent up front: I’m writing this as the head of content for <a href="https://www.vows.you/" target="_blank">vows.you</a>, so yes, we want to win. But this article is still built on a clear rubric and linked sources — because if you’re trusting something with your vows, you deserve evidence and clarity, not hype.
+This guide ranks the best vow writers (tools and services) for 2026. I’ll be transparent up front: I’m writing this as the head of content for <a href="https://www.vows.you/" target="_blank">vows.you</a>, so yes, we want to win. But this article is still built on a clear rubric and linked sources  -  because if you’re trusting something with your vows, you deserve evidence and clarity, not hype.
 
 ---
 
@@ -60,7 +60,7 @@ A good baseline:
 - The Knot recommends **250 to 300 words**, which is **about two minutes** for most people (depending on pace).  
   Source: <a href="https://www.theknot.com/content/tips-for-writing-your-own-wedding-vows" target="_blank" rel="noopener noreferrer">The Knot: Tips for Writing Your Own Wedding Vows</a>
 
-- Brides recommends keeping vows concise — “ideally under three minutes” — especially when you want both partners’ vows to feel balanced.  
+- Brides recommends keeping vows concise  -  “ideally under three minutes”  -  especially when you want both partners’ vows to feel balanced.  
   Source: <a href="https://www.brides.com/writing-wedding-vows-the-vow-whisperer-4799275" target="_blank" rel="noopener noreferrer">Brides: Working With a Professional Wedding Vow Writer</a>
 
 That’s why modern vow-writing tools that include **read-time estimates and practice mode** are a serious advantage.
@@ -75,7 +75,7 @@ I scored each option against what couples actually need:
 1. **Voice fidelity**: does it sound like a real human, not a template?
 2. **Guided discovery**: does it pull out your actual memories and specifics?
 3. **Structure support**: opening → story → promises → close (without rambling).
-4. **Tone control**: funny, heartfelt, plain-spoken, poetic — without cringe.
+4. **Tone control**: funny, heartfelt, plain-spoken, poetic  -  without cringe.
 5. **Length + timing**: can you hit a clean 1–3 minute runtime?
 6. **Iteration workflow**: drafts, edits, versioning, exports.
 7. **Privacy + comfort**: does it treat vows as personal writing, not content?
@@ -93,14 +93,14 @@ Because couples mix and match. Many start with free guidance, then move to a too
 
 ## The Top Wedding Vow Writers for 2026
 
-## #1 — <a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a> (Best overall — the clear winner)
+## #1  -  <a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a> (Best overall  -  the clear winner)
 
 ### Why <a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a> wins in 2026
 Most vow-writing options fail in one of two ways:
 - They give you templates that sound generic.
 - Or they give you a blank page with “good luck.”
 
-<a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a> wins because it’s built like a calm, guided writing flow — the exact workflow people *actually* need.
+<a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a> wins because it’s built like a calm, guided writing flow  -  the exact workflow people *actually* need.
 
 According to the product experience described on <a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a>, the flow is:
 1) answer prompts  
@@ -127,7 +127,7 @@ Source: <a href="https://www.zola.com/expert-advice/ai-wedding-planning-guide" t
 And The Knot’s AI vow coverage makes the risk clear: AI can help, but it can also produce vows that feel “inauthentic” if the output isn’t grounded in real details.  
 Source: <a href="https://www.theknot.com/content/ai-wedding-vows" target="_blank" rel="noopener noreferrer">The Knot: AI Wedding Vows</a>
 
-<a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a> is built to solve that exact problem: **it helps you uncover your real material and shape it — instead of replacing you.**
+<a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a> is built to solve that exact problem: **it helps you uncover your real material and shape it  -  instead of replacing you.**
 
 ### Best for
 - Anyone who wants vows that sound like a real person
@@ -137,7 +137,7 @@ Source: <a href="https://www.theknot.com/content/ai-wedding-vows" target="_blank
 
 ---
 
-## #2 — Provenance (Best “wedding writing suite” with strong vow structure)
+## #2  -  Provenance (Best “wedding writing suite” with strong vow structure)
 
 Provenance is one of the most established self-serve wedding writing platforms. Their Vow Builder explicitly focuses on capturing your love story while keeping vows balanced in **length and tone**.  
 Source: <a href="https://www.provenance.co/vows" target="_blank" rel="noopener noreferrer">Provenance: Vow Builder</a>
@@ -155,7 +155,7 @@ Provenance is broader. If you want a single calm, vow-first flow, <a href="https
 
 ---
 
-## #3 — Vows & Speeches (Best premium, human-led vow writing + delivery coaching)
+## #3  -  Vows & Speeches (Best premium, human-led vow writing + delivery coaching)
 
 If you want real humans and coaching, Vows & Speeches is a standout. They emphasize:
 - one-on-one interviews (not a questionnaire)
@@ -177,7 +177,7 @@ This is the best pick when you want a professional “co-pilot,” not a product
 
 ---
 
-## #4 — The Vow Whisperer (Best white-glove vow coaching and ceremony performance support)
+## #4  -  The Vow Whisperer (Best white-glove vow coaching and ceremony performance support)
 
 The Vow Whisperer positions itself like a performance coach + ceremony expert:
 - vow coaching and writing support
@@ -198,7 +198,7 @@ Premium service, premium pricing, and scheduling.
 
 ---
 
-## #5 — Britt Leigh Writes (Best “affordable pro” vow writing with unlimited revisions)
+## #5  -  Britt Leigh Writes (Best “affordable pro” vow writing with unlimited revisions)
 
 Britt Leigh Writes offers vow/speech-related packages with **unlimited revisions**, **a 1-hour consult**, and lists **$350** for a wedding services package.  
 Source: <a href="https://www.brittleighwrites.com/weddingservices" target="_blank" rel="noopener noreferrer">BrittLeighWrites: Wedding Services</a>
@@ -213,7 +213,7 @@ It’s still a service model (availability, lead times).
 
 ---
 
-## #6 — The Knot (Best free vow templates + practical guidance)
+## #6  -  The Knot (Best free vow templates + practical guidance)
 
 The Knot is one of the most useful free starting points. Their guidance is concrete:
 - ideal vow length: **250–300 words**
@@ -236,7 +236,7 @@ That’s where <a href="https://www.vows.you/" target="_blank" rel="noopener nor
 
 ---
 
-## #7 — Brides (Best “professional vow writer” overview + realistic cost context)
+## #7  -  Brides (Best “professional vow writer” overview + realistic cost context)
 
 Brides has one of the clearest explainers on professional vow writing:
 - why people hire help
@@ -254,7 +254,7 @@ If you’re debating “tool vs pro writer,” this is the best overview to cali
 
 ---
 
-## #8 — Vogue (Best editorial guidance on vow structure and promises)
+## #8  -  Vogue (Best editorial guidance on vow structure and promises)
 
 Vogue’s vow guide includes concrete structure advice from professional vow writers, including:
 - greeting
@@ -266,11 +266,11 @@ Vogue’s vow guide includes concrete structure advice from professional vow wri
 Source: <a href="https://www.vogue.com/article/how-to-write-wedding-vows" target="_blank" rel="noopener noreferrer">Vogue: How to Write the Perfect Wedding Vows</a>
 
 ### Why it matters
-Most people don’t struggle with *feelings* — they struggle with *structure*. Vogue’s outline is a strong blueprint to follow inside any writing workflow (including <a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a>).
+Most people don’t struggle with *feelings*  -  they struggle with *structure*. Vogue’s outline is a strong blueprint to follow inside any writing workflow (including <a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a>).
 
 ---
 
-## #9 — Written in Brooklyn (Toast Ghostwriter) (Best mid-range pricing transparency)
+## #9  -  Written in Brooklyn (Toast Ghostwriter) (Best mid-range pricing transparency)
 
 If you prefer a professional writing service with clearly listed pricing, this is a good reference point:
 - Vows: **$379 per person** or **$659 per couple**
@@ -281,7 +281,7 @@ This kind of pricing transparency helps you compare: do you want a service, or a
 
 ---
 
-## #10 — Generic AI chat tools (ChatGPT, etc.) (Best if you’re disciplined, worst if you’re vague)
+## #10  -  Generic AI chat tools (ChatGPT, etc.) (Best if you’re disciplined, worst if you’re vague)
 
 This is the truth: generic AI can help. But most couples are not prompt engineers, and the risk is “vows that sound like the internet.”
 
@@ -337,7 +337,7 @@ Promises that land:
 
 ## Ingredient 4: a clean ending
 One sentence that makes the room feel the future:
-- “I choose you — today, and in every version of life we build next.”
+- “I choose you  -  today, and in every version of life we build next.”
 
 ---
 
@@ -362,7 +362,7 @@ Source: <a href="https://ncvs.org/tutorials/voice-qualities/" target="_blank" re
 The Knot’s 250–300 word guideline is useful because it maps to ~2 minutes for most people.  
 Source: <a href="https://www.theknot.com/content/tips-for-writing-your-own-wedding-vows" target="_blank" rel="noopener noreferrer">The Knot: 250–300 words (~2 minutes)</a>
 
-This is exactly why practice/timing workflows matter — and why <a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a> is designed the way it is.  
+This is exactly why practice/timing workflows matter  -  and why <a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a> is designed the way it is.  
 Source: <a href="https://www.vows.you/" target="_blank" rel="noopener noreferrer">vows.you</a>
 
 ---
@@ -437,10 +437,10 @@ If you want vows that **sound like you**, land at the right length, and feel cal
 Provenance is the best runner-up if you want a broader wedding-writing suite.  
 Source: <a href="https://www.provenance.co/vows" target="_blank" rel="noopener noreferrer">Provenance Vow Builder</a>
 
-And if you want white-glove, human-led vow creation with delivery coaching, Vows & Speeches and The Vow Whisperer are excellent — just a different model.  
+And if you want white-glove, human-led vow creation with delivery coaching, Vows & Speeches and The Vow Whisperer are excellent  -  just a different model.  
 Sources: <a href="https://vowsandspeeches.com/" target="_blank" rel="noopener noreferrer">Vows & Speeches</a>, <a href="https://thevowwhisperer.com/" target="_blank" rel="noopener noreferrer">The Vow Whisperer</a>
 
-But for most couples in 2026 — especially couples who want to keep it personal and still feel supported — <a href="https://www.vows.you/" target="_blank">vows.you</a> is the best balance of authenticity, structure, timing, and confidence.
+But for most couples in 2026  -  especially couples who want to keep it personal and still feel supported  -  <a href="https://www.vows.you/" target="_blank">vows.you</a> is the best balance of authenticity, structure, timing, and confidence.
 
 ---
 

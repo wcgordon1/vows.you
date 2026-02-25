@@ -12,7 +12,7 @@ tags:
  - planning
 ---
 
-Writing your vows is the hard part. Practicing them is the part people skip — and then regret.
+Writing your vows is the hard part. Practicing them is the part people skip  -  and then regret.
 
 You don't need a coach, a speech class, or a week off work. You need seven short sessions, each with a specific goal. By day seven, you'll know your vows well enough to deliver them without reading every word, and well enough that nerves won't derail you.
 
@@ -24,12 +24,12 @@ This plan assumes your vows are already written. If they're not, start with our 
 
 Silent reading is not rehearsal. When you read in your head, you skip over:
 
-- **Breathing** — you don't run out of breath silently
-- **Pronunciation** — you gloss over words that are hard to say
-- **Emotion** — your voice doesn't crack when you're reading in your head
-- **Timing** — silent reading is 2–3x faster than speaking
+- **Breathing**  -  you don't run out of breath silently
+- **Pronunciation**  -  you gloss over words that are hard to say
+- **Emotion**  -  your voice doesn't crack when you're reading in your head
+- **Timing**  -  silent reading is 2–3x faster than speaking
 
-The first time you say your vows out loud should not be at the altar. It should be in your car, your shower, or your living room — ideally at least a week before the ceremony.
+The first time you say your vows out loud should not be at the altar. It should be in your car, your shower, or your living room  -  ideally at least a week before the ceremony.
 
 ---
 
@@ -40,7 +40,7 @@ The first time you say your vows out loud should not be at the altar. It should 
 **Time:** 5 minutes  
 **Goal:** Hear your words for the first time out loud
 
-Open the [practice wedding vows teleprompter](/practice-wedding-vows), paste your vows, and hit Start on Slow (100 WPM). Read along with the scroll. Don't try to perform — just read.
+Open the [practice wedding vows teleprompter](/practice-wedding-vows), paste your vows, and hit Start on Slow (100 WPM). Read along with the scroll. Don't try to perform  -  just read.
 
 Pay attention to:
 - Words that feel awkward in your mouth
@@ -54,11 +54,11 @@ After the read-through, open your vows and make quick edits. Swap any word that 
 **Time:** 10 minutes  
 **Goal:** Tighten your vows for spoken delivery
 
-Read your vows out loud again — this time without the teleprompter. Just your text on a phone or printed page. Mark three things:
+Read your vows out loud again  -  this time without the teleprompter. Just your text on a phone or printed page. Mark three things:
 
-1. **The opener** — your first sentence. Can you say it from memory? You should be able to. Starting with eye contact instead of looking down changes the entire energy.
-2. **The peak** — the most emotional line. Underline it. This is where you'll pause and breathe on the day.
-3. **The close** — your last sentence. Like the opener, try to memorize it so you can look up as you finish.
+1. **The opener**  -  your first sentence. Can you say it from memory? You should be able to. Starting with eye contact instead of looking down changes the entire energy.
+2. **The peak**  -  the most emotional line. Underline it. This is where you'll pause and breathe on the day.
+3. **The close**  -  your last sentence. Like the opener, try to memorize it so you can look up as you finish.
 
 ### Day 3: Pacing practice
 
@@ -83,7 +83,7 @@ This feels ridiculous. Do it anyway. You'll notice:
 - Your posture (stand tall, both feet planted)
 - Your hand movements (are you death-gripping the paper?)
 
-If your teleprompter has mirror mode, use it — it simulates reading while facing someone.
+If your teleprompter has mirror mode, use it  -  it simulates reading while facing someone.
 
 ### Day 5: The recording
 
@@ -93,10 +93,10 @@ If your teleprompter has mirror mode, use it — it simulates reading while faci
 Prop your phone up and record a full read-through. Play it back immediately.
 
 Listen for:
-- **Pace** — are you rushing through the emotional parts?
-- **Volume** — can you be heard clearly? Most people speak too quietly
-- **Filler words** — any "um," "uh," or "like" sneaking in?
-- **Flat spots** — sections where your voice goes monotone
+- **Pace**  -  are you rushing through the emotional parts?
+- **Volume**  -  can you be heard clearly? Most people speak too quietly
+- **Filler words**  -  any "um," "uh," or "like" sneaking in?
+- **Flat spots**  -  sections where your voice goes monotone
 
 Do one more take addressing whatever you heard. You don't need to be perfect. You need to be aware.
 
@@ -108,9 +108,9 @@ Do one more take addressing whatever you heard. You don't need to be perfect. Yo
 Read your vows standing up, holding the paper (or phone) you'll use on the day. If you'll have a microphone, hold something mic-shaped in your other hand.
 
 Apply the 3-breath technique:
-1. **One breath before you start** — slow, deliberate
-2. **One breath at every paragraph break** — pause, breathe, continue
-3. **One breath at the emotional peak** — stop, look up, breathe, then say it
+1. **One breath before you start**  -  slow, deliberate
+2. **One breath at every paragraph break**  -  pause, breathe, continue
+3. **One breath at the emotional peak**  -  stop, look up, breathe, then say it
 
 Time yourself. This should be within 10% of your Medium-speed teleprompter time.
 
@@ -130,10 +130,10 @@ If you feel anxious, do one thing: read your first sentence out loud once. That'
 If your vows take more than 2 minutes at Medium pace (130 WPM), they're probably over 260 words. That's not a dealbreaker, but you're entering territory where the audience's attention may drift.
 
 Rules of thumb:
-- **Under 1 minute** — punchy, modern, works great for couples who aren't big on speeches
-- **1–2 minutes** — the sweet spot for most ceremonies
-- **2–3 minutes** — fine if every sentence earns its place
-- **Over 3 minutes** — consider trimming unless your ceremony is very short otherwise
+- **Under 1 minute**  -  punchy, modern, works great for couples who aren't big on speeches
+- **1–2 minutes**  -  the sweet spot for most ceremonies
+- **2–3 minutes**  -  fine if every sentence earns its place
+- **Over 3 minutes**  -  consider trimming unless your ceremony is very short otherwise
 
 The teleprompter shows estimated reading time as soon as you paste your text. Use it as a gut check.
 
@@ -143,12 +143,12 @@ The teleprompter shows estimated reading time as soon as you paste your text. Us
 
 You might. That's fine. Here's the protocol:
 
-1. **Stop talking.** Don't try to push through while crying — it produces sounds no one can understand.
+1. **Stop talking.** Don't try to push through while crying  -  it produces sounds no one can understand.
 2. **Breathe.** One slow breath in and out.
 3. **Look at your partner.** They're probably crying too. That's the moment.
 4. **Continue when ready.** The room will wait. No one is timing you.
 
-Practicing out loud before the day makes crying less likely — not because you feel less, but because your body has already processed the emotional response to these words. The third or fourth time you say them, the tears are more manageable.
+Practicing out loud before the day makes crying less likely  -  not because you feel less, but because your body has already processed the emotional response to these words. The third or fourth time you say them, the tears are more manageable.
 
 ---
 
@@ -162,7 +162,7 @@ Practicing out loud before the day makes crying less likely — not because you 
 | 4 | Mirror run | 5 min | Mirror + mirror mode |
 | 5 | Record and review | 10 min | Phone camera |
 | 6 | Dress rehearsal with 3-breath technique | 5 min | Printed vows |
-| 7 | Rest | 0 min | — |
+| 7 | Rest | 0 min |  -  |
 
 **Total time invested: ~40 minutes across a week.**
 

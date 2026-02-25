@@ -23,7 +23,7 @@ What if that conversation paid you $51.60?
 
 ## How it works
 
-Vows.you is a guided vow-writing tool. Couples answer prompts about their relationship and get structured, personal vows they can edit and refine. It costs $129. The affiliate program pays you 40% — $51.60 — for every couple that buys through your referral link.
+Vows.you is a guided vow-writing tool. Couples answer prompts about their relationship and get structured, personal vows they can edit and refine. It costs $129. The affiliate program pays you 40%  -  $51.60  -  for every couple that buys through your referral link.
 
 The cookie window is 90 days. So when you mention it to a couple in their planning meeting and they don't get around to buying until a month later, you still get paid.
 
@@ -35,13 +35,13 @@ No inventory. No client service burden. No discount codes to manage. You recomme
 
 You're not starting a side hustle. You're monetizing a recommendation you already make.
 
-**During the planning process:** When you're going over the ceremony timeline and vows come up — and they always come up — mention Vows.you. "Here's what I send all my couples for vow writing." Done.
+**During the planning process:** When you're going over the ceremony timeline and vows come up  -  and they always come up  -  mention Vows.you. "Here's what I send all my couples for vow writing." Done.
 
 **In your welcome packet or planning guide:** If you have a digital guide you send clients, add a section on vow writing with your affiliate link. Every couple who books you sees it automatically.
 
 **On your website's resources page:** Most planner websites have a recommended vendors or resources page. Add Vows.you alongside your photographer recommendations and florist suggestions.
 
-**In follow-up emails:** After your initial consultation or at the ceremony-planning stage, send a quick email: "Start thinking about your vows — here's a tool my couples love."
+**In follow-up emails:** After your initial consultation or at the ceremony-planning stage, send a quick email: "Start thinking about your vows  -  here's a tool my couples love."
 
 You're not creating content. You're not filming videos. You're fitting this into conversations and documents you already have.
 
@@ -51,7 +51,7 @@ You're not creating content. You're not filming videos. You're fitting this into
 
 You've seen the couples who wing their vows. Sometimes it works beautifully. Sometimes one partner reads a poem they found online while the other talks for nine minutes about the time they went to Target together.
 
-Vows.you prevents that. It gives couples structure without making their vows sound canned. The prompts pull out real stories, real feelings, real language — and then organize it into something ceremony-ready.
+Vows.you prevents that. It gives couples structure without making their vows sound canned. The prompts pull out real stories, real feelings, real language  -  and then organize it into something ceremony-ready.
 
 When you recommend it, you're solving a problem your couples genuinely have. Most of them are terrified of writing vows. They don't know how long they should be, how personal to get, or how to start. This tool walks them through all of it.
 
@@ -61,7 +61,7 @@ That's why the conversion rate is solid. You're recommending a solution at the e
 
 ## The math for a planner doing 20 weddings a year
 
-Say you plan 20 weddings this year. Not all of them will have personal vows — some couples go traditional. Let's say 14 out of 20 write their own.
+Say you plan 20 weddings this year. Not all of them will have personal vows  -  some couples go traditional. Let's say 14 out of 20 write their own.
 
 If you recommend Vows.you to all 14 and half of them buy:
 
@@ -73,7 +73,7 @@ Now, if you also have a website or social media presence and your affiliate link
 
 - An extra 5 sales/month from organic traffic = **$3,096/year**
 
-That starts to feel like real money. And it compounds — old blog posts and resource pages keep driving clicks months and years later.
+That starts to feel like real money. And it compounds  -  old blog posts and resource pages keep driving clicks months and years later.
 
 ---
 
@@ -89,7 +89,7 @@ Even better. Your affiliate link works for anyone who clicks it, whether they're
 
 **"Do I have to disclose that it's an affiliate link?"**
 
-Yes, and you should. A simple "affiliate link" note or "I may earn a small commission" disclaimer is standard practice and keeps things transparent. Couples don't care — they care that your recommendation is genuine.
+Yes, and you should. A simple "affiliate link" note or "I may earn a small commission" disclaimer is standard practice and keeps things transparent. Couples don't care  -  they care that your recommendation is genuine.
 
 **"Can I use this alongside my other vendor recommendations?"**
 
@@ -103,4 +103,4 @@ Absolutely. Vows.you isn't competing with your other vendors. It's a complementa
 
 You'll get a unique link and a dashboard to track everything. Place it in your welcome packet tonight and you could have your first commission by next month.
 
-Your couples are going to write their vows anyway. You might as well point them somewhere good — and get paid when you do.
+Your couples are going to write their vows anyway. You might as well point them somewhere good  -  and get paid when you do.

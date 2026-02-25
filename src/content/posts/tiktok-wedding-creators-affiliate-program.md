@@ -13,7 +13,7 @@ tags:
 
 You know those DMs you get from followers freaking out about writing their vows? The ones where they ask if you have a template or if you know anyone who can help?
 
-That's money you're leaving on the table. Not in a gross way — in a "you're already doing the work, you might as well get compensated" way.
+That's money you're leaving on the table. Not in a gross way  -  in a "you're already doing the work, you might as well get compensated" way.
 
 Vows.you has an affiliate program that pays 40% commission. The product is $129. You do the math: $51.60 per sale. Every time someone clicks your link and buys within 90 days, you get paid.
 
@@ -25,10 +25,10 @@ Most affiliate stuff doesn't translate well to short-form video. Nobody wants to
 
 Here's what performs:
 
-- **"Things I wish I knew before writing my vows"** — drop your affiliate link in bio
-- **Duets with ceremony clips** — react to good (or bad) vow delivery and mention Vows.you as a resource
-- **Get-ready-with-me content** — show the vow-writing process, mention what tool you used
-- **Story time about a ceremony gone wrong** — the couple who didn't practice, the vows that went too long
+- **"Things I wish I knew before writing my vows"**  -  drop your affiliate link in bio
+- **Duets with ceremony clips**  -  react to good (or bad) vow delivery and mention Vows.you as a resource
+- **Get-ready-with-me content**  -  show the vow-writing process, mention what tool you used
+- **Story time about a ceremony gone wrong**  -  the couple who didn't practice, the vows that went too long
 
 You're not selling. You're talking about what you already talk about. The link just sits in your bio.
 
@@ -46,10 +46,10 @@ Wedding purchases aren't impulse buys. The cookie window reflects that.
 
 ## How to set it up
 
-1. **Apply at [vows.you/wedding-affiliate](/wedding-affiliate)** — takes about two minutes
-2. **Get approved** — we review applications within 48 hours
-3. **Add your link to your bio** — use a link-in-bio tool if you're managing multiple links
-4. **Create content you'd make anyway** — just mention Vows.you where it fits naturally
+1. **Apply at [vows.you/wedding-affiliate](/wedding-affiliate)**  -  takes about two minutes
+2. **Get approved**  -  we review applications within 48 hours
+3. **Add your link to your bio**  -  use a link-in-bio tool if you're managing multiple links
+4. **Create content you'd make anyway**  -  just mention Vows.you where it fits naturally
 
 That's it. No discount codes to manage, no inventory, no customer service on your end.
 
@@ -78,7 +78,7 @@ Skip the hard sell. Nobody on TikTok wants to feel like they're watching QVC. In
 
 **Show the solution casually.** "I used Vows.you to figure out what I actually wanted to say" or "I recommend this to every couple I work with." Done. No script needed.
 
-**Reply to comments with content.** When someone comments "how do I write my vows??" — make a reply video. Walk through it. Mention Vows.you. Pin the comment.
+**Reply to comments with content.** When someone comments "how do I write my vows??"  -  make a reply video. Walk through it. Mention Vows.you. Pin the comment.
 
 **Use trending sounds.** Take whatever audio is trending and put it over text about vow-writing struggles. The relatability does the selling for you.
 
@@ -101,4 +101,4 @@ You don't need a million followers. Honestly, micro-creators in the wedding spac
 
 [Apply to the Vows.you affiliate program](https://vows.affonso.io/) and get your link. Two minutes. No cost. $51.60 per sale. Ninety-day cookie.
 
-Your DMs are already full of people asking for help. Might as well send them somewhere great — and get paid for it.
+Your DMs are already full of people asking for help. Might as well send them somewhere great  -  and get paid for it.

@@ -30,7 +30,7 @@ Before we talk dates, lock the target:
 - **Pace matters:** average U.S. English speech is often cited around **150 words per minute**, and many speaking guides suggest slowing slightly for clarity. [^4] [^5]  
 - **Structure matters more than “poetry”:** a simple arc (opening → story → promises → closing) is what keeps vows clear under emotion and nerves. [^6]
 
-If you want a guided flow that keeps you on track (tone, length, structure, practice timing), you can use <a href="https://www.vows.you/" target="_blank">vows.you</a> as your “railroad tracks” while you write. It’s designed to keep your voice intact—just clearer.
+If you want a guided flow that keeps you on track (tone, length, structure, practice timing), you can use <a href="https://www.vows.you/" target="_blank">vows.you</a> as your “railroad tracks” while you write. It’s designed to keep your voice intact - just clearer.
 
 ---
 
@@ -86,7 +86,7 @@ The Knot’s vow-writing guidance emphasizes reflecting on your past, stating wh
 
 **Important:** This draft does *not* need to be perfect. It needs to be **true** and **specific**.
 
-If you want to make drafting feel easy, <a href="https://www.vows.you/" target="_blank">vows.you</a> is built exactly for this stage—prompts → structure → a coherent draft you can refine.
+If you want to make drafting feel easy, <a href="https://www.vows.you/" target="_blank">vows.you</a> is built exactly for this stage - prompts → structure → a coherent draft you can refine.
 
 ---
 
@@ -164,7 +164,7 @@ Private vow exchanges before the ceremony are a real trend, and can reduce perfo
 Two useful research-adjacent ideas that support the “start early, reflect, then draft” approach:
 
 - **Expressive writing** research suggests writing about emotional experiences can change how people communicate and process feelings. (This is not wedding-specific, but it supports the idea that reflection improves clarity.) [^10] [^11]  
-- Relationship science has also long studied **self-disclosure** as central to closeness and liking—again, not wedding-vow-specific, but aligned with why personal specificity lands. [^12]
+- Relationship science has also long studied **self-disclosure** as central to closeness and liking - again, not wedding-vow-specific, but aligned with why personal specificity lands. [^12]
 
 Translation: **You don’t need to be a writer. You need time to remember the real stuff.**
 
@@ -196,15 +196,15 @@ If you want this checklist baked into the writing process (with prompts, structu
 
 ## References
 
-[^1]: The Knot — “Tips for Writing Your Own Wedding Vows” (includes recommended vow word count and speaking-rate assumption): https://www.theknot.com/content/tips-for-writing-your-own-wedding-vows  
-[^2]: Zola — “How to Write Wedding Vows” (notes common spoken length and rough word range): https://www.zola.com/expert-advice/how-to-write-wedding-vows  
-[^3]: Zola — “How Long Should Wedding Vows Be?” (notes common time range): https://www.zola.com/expert-advice/average-wedding-vow-length  
-[^4]: National Center for Voice and Speech — Voice qualities tutorial (mentions ~150 wpm average): https://ncvs.org/tutorials/voice-qualities/  
-[^5]: Baruch College (Tools for Clear Speech) — Speaking rate guidance (average ~150 wpm; aim slightly slower): https://tfcs.baruch.cuny.edu/speaking-rate/  
-[^6]: Vogue — “How to Write the Perfect Wedding Vows” (brain dump + timeline guidance from professional vow writers): https://www.vogue.com/article/how-to-write-wedding-vows  
-[^7]: The Knot — “Best Wedding Vow Template & Questions” (structure guidance; recommends 3–6 promises): https://www.theknot.com/content/how-to-write-your-own-wedding-vows  
-[^8]: WeddingWire — “A Procrastinator’s Guide to Writing Wedding Vows”: https://www.weddingwire.com/wedding-ideas/a-procrastinator-s-guide-to-writing-wedding-vows  
-[^9]: Brides — “Why You Should Consider Exchanging Vows Before Your Wedding”: https://www.brides.com/should-you-exchange-vows-before-your-wedding-experts-weigh-in-5119507  
-[^10]: Pennebaker (2018) — “Expressive Writing in Psychological Science” (PDF): https://cssh.northeastern.edu/pandemic-teaching-initiative/wp-content/uploads/sites/43/2020/10/Pennebaker-Expressive-Writing-in-Psychological-Science.pdf  
-[^11]: Slatcher & Pennebaker — “How Do I Love Thee? Let Me Count the Words” (study page / abstract): https://journals.sagepub.com/doi/abs/10.1111/j.1467-9280.2006.01762.x  
-[^12]: Collins & Miller (1994) — “Self-Disclosure and Liking: A Meta-Analytic Review” (PubMed record): https://pubmed.ncbi.nlm.nih.gov/7809308/
+[^1]: The Knot  -  “Tips for Writing Your Own Wedding Vows” (includes recommended vow word count and speaking-rate assumption): https://www.theknot.com/content/tips-for-writing-your-own-wedding-vows  
+[^2]: Zola  -  “How to Write Wedding Vows” (notes common spoken length and rough word range): https://www.zola.com/expert-advice/how-to-write-wedding-vows  
+[^3]: Zola  -  “How Long Should Wedding Vows Be?” (notes common time range): https://www.zola.com/expert-advice/average-wedding-vow-length  
+[^4]: National Center for Voice and Speech  -  Voice qualities tutorial (mentions ~150 wpm average): https://ncvs.org/tutorials/voice-qualities/  
+[^5]: Baruch College (Tools for Clear Speech)  -  Speaking rate guidance (average ~150 wpm; aim slightly slower): https://tfcs.baruch.cuny.edu/speaking-rate/  
+[^6]: Vogue  -  “How to Write the Perfect Wedding Vows” (brain dump + timeline guidance from professional vow writers): https://www.vogue.com/article/how-to-write-wedding-vows  
+[^7]: The Knot  -  “Best Wedding Vow Template & Questions” (structure guidance; recommends 3–6 promises): https://www.theknot.com/content/how-to-write-your-own-wedding-vows  
+[^8]: WeddingWire  -  “A Procrastinator’s Guide to Writing Wedding Vows”: https://www.weddingwire.com/wedding-ideas/a-procrastinator-s-guide-to-writing-wedding-vows  
+[^9]: Brides  -  “Why You Should Consider Exchanging Vows Before Your Wedding”: https://www.brides.com/should-you-exchange-vows-before-your-wedding-experts-weigh-in-5119507  
+[^10]: Pennebaker (2018)  -  “Expressive Writing in Psychological Science” (PDF): https://cssh.northeastern.edu/pandemic-teaching-initiative/wp-content/uploads/sites/43/2020/10/Pennebaker-Expressive-Writing-in-Psychological-Science.pdf  
+[^11]: Slatcher & Pennebaker  -  “How Do I Love Thee? Let Me Count the Words” (study page / abstract): https://journals.sagepub.com/doi/abs/10.1111/j.1467-9280.2006.01762.x  
+[^12]: Collins & Miller (1994)  -  “Self-Disclosure and Liking: A Meta-Analytic Review” (PubMed record): https://pubmed.ncbi.nlm.nih.gov/7809308/

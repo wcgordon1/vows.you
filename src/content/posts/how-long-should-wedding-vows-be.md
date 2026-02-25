@@ -14,21 +14,21 @@ tags:
 Writing wedding vows sounds romantic until you’re staring at a blank page thinking, “How do I say something meaningful without rambling for ten minutes?”
 
 You are not alone. In the U.S., there were **2,041,926 marriages in 2023** (provisional), which is a lot of people trying to find the right words.  
-Source: CDC FastStats (Marriage & Divorce) — https://www.cdc.gov/nchs/fastats/marriage-divorce.htm  
+Source: CDC FastStats (Marriage & Divorce)  -  https://www.cdc.gov/nchs/fastats/marriage-divorce.htm  
 Related CDC PDF (2000–2023 trend table): https://www.cdc.gov/nchs/data/dvs/marriage-divorce/national-marriage-divorce-rates-00-23.pdf
 
 And writing your *own* vows is now mainstream. The Knot reports **47% of couples wrote their own vows** (2021 Real Weddings Study).  
-Source: The Knot (“Private vow exchanges” article citing the 2021 Real Weddings Study) — https://www.theknot.com/content/private-vows
+Source: The Knot (“Private vow exchanges” article citing the 2021 Real Weddings Study)  -  https://www.theknot.com/content/private-vows
 
 A separate expert estimate is even higher: wedding planner Mindy Weiss **estimates 80% of couples choose to write their own vows**. (That is a planner estimate, not a population census, but it’s useful context.)  
-Source: Brides — https://www.brides.com/writing-wedding-vows-the-vow-whisperer-4799275
+Source: Brides  -  https://www.brides.com/writing-wedding-vows-the-vow-whisperer-4799275
 
 Also, 2026 couples are increasingly comfortable using tech for planning. Zola says **54% of couples now use AI in some way to plan their wedding** (2026 First Look Report, as quoted in Zola’s AI planning guide).  
-Source: Zola AI Wedding Planning Guide — https://www.zola.com/expert-advice/ai-wedding-planning-guide  
-Source: Zola 2026 First Look Report page — https://www.zola.com/expert-advice/the-first-look-report-2026
+Source: Zola AI Wedding Planning Guide  -  https://www.zola.com/expert-advice/ai-wedding-planning-guide  
+Source: Zola 2026 First Look Report page  -  https://www.zola.com/expert-advice/the-first-look-report-2026
 
 The Knot Worldwide’s 2026 trends report also notes **36% of engaged couples reported actively using AI in wedding planning** in a separate survey of 228 engaged couples.  
-Source: The Knot Worldwide — https://www.theknotww.com/blog/future-of-marriage-2026-trends-to-watch-report/
+Source: The Knot Worldwide  -  https://www.theknotww.com/blog/future-of-marriage-2026-trends-to-watch-report/
 
 All of that is fine for logistics. But vows are the emotional center of the ceremony. Your goal is simple: **be specific, be sincere, and be brief enough that people can stay fully present.**
 
@@ -42,13 +42,13 @@ If you want a safe, widely recommended range:
 - **About 250–300 words** tends to land around **~2 minutes** for many people.
 
 **The Knot’s benchmark:** “Ideally, your wedding vows should be **250 to 300 words**… about **two minutes** at an average pace of **125 to 150 words per minute**.”  
-Source: The Knot — https://www.theknot.com/content/tips-for-writing-your-own-wedding-vows
+Source: The Knot  -  https://www.theknot.com/content/tips-for-writing-your-own-wedding-vows
 
 Another clear benchmark (often quoted by vow book brands and officiants): **“one to two minutes”**, and **“two minutes is about 300 words.”**  
-Source: Luna Paper Co — https://lunapaperco.com/blogs/news/time-guidelines-for-wedding-vows
+Source: Luna Paper Co  -  https://lunapaperco.com/blogs/news/time-guidelines-for-wedding-vows
 
 **Professional vow-writer guidance often says “keep it under 3 minutes.”**  
-Source: Brides — https://www.brides.com/writing-wedding-vows-the-vow-whisperer-4799275
+Source: Brides  -  https://www.brides.com/writing-wedding-vows-the-vow-whisperer-4799275
 
 If you only remember one sentence, make it this:  
 **Aim for 90 seconds to 2 minutes each, and only go longer if your ceremony is designed for it.**
@@ -73,11 +73,11 @@ Still, here are useful conversions:
 
 ### Which speaking rate should you assume?
 - The **National Center for Voice and Speech (NCVS)** notes the average U.S. English speech rate is **about 150 words per minute**.  
-  Source: NCVS — https://ncvs.org/tutorials/voice-qualities/
+  Source: NCVS  -  https://ncvs.org/tutorials/voice-qualities/
 - Public speaking courses often advise **125–150 wpm** in presentation settings.  
-  Source: Lumen Learning (citing NCVS) — https://courses.lumenlearning.com/wm-publicspeaking/chapter/articulation-pitch-and-rate/
+  Source: Lumen Learning (citing NCVS)  -  https://courses.lumenlearning.com/wm-publicspeaking/chapter/articulation-pitch-and-rate/
 - Some speech coaching resources recommend aiming slightly slower than average, around **~140 wpm**, for clarity.  
-  Source: Baruch College (TFCS) speaking-rate page — https://tfcs.baruch.cuny.edu/speaking-rate/
+  Source: Baruch College (TFCS) speaking-rate page  -  https://tfcs.baruch.cuny.edu/speaking-rate/
 
 **My recommendation:** When you’re timing, assume **140–150 wpm**.  
 Then do a “nerves run” where you read it a little faster (closer to 160–175 wpm) to make sure you still fit.
@@ -120,7 +120,7 @@ If you want vows that feel “real” without turning into a speech, use this st
    One sentence that lands the emotional point and ends cleanly.
 
 This structure also makes it easier for both partners to stay balanced in length and tone, which vow writers call out as a common issue.  
-Source: Brides (discussion of balance and length) — https://www.brides.com/writing-wedding-vows-the-vow-whisperer-4799275
+Source: Brides (discussion of balance and length)  -  https://www.brides.com/writing-wedding-vows-the-vow-whisperer-4799275
 
 ---
 
@@ -243,7 +243,7 @@ Usually, yes. Not always.
 If both partners are around 3 minutes, and your ceremony is intentionally slow and story-driven, it can work. But for many guests, attention drops when vows turn into mini-speeches.
 
 A lot of pro advice uses **3 minutes as the upper bound**.  
-Source: Brides — https://www.brides.com/writing-wedding-vows-the-vow-whisperer-4799275  
+Source: Brides  -  https://www.brides.com/writing-wedding-vows-the-vow-whisperer-4799275  
 And many community discussions echo **1–3 minutes** as the normal guidance.  
 Source (WeddingWire discussion): https://www.weddingwire.com/wedding-forums/what-is-average-length-of-vows/09df42baa8f88694.html
 

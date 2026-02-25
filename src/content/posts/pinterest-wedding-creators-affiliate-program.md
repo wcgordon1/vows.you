@@ -13,13 +13,13 @@ tags:
 
 Pinterest is weird compared to every other platform. A pin you post today can drive traffic 18 months from now. There's no algorithm decay the way there is on Instagram or TikTok. Wedding pins, specifically, have some of the longest lifespans on the entire platform because engaged couples are constantly searching for the same things.
 
-That makes Pinterest quietly perfect for affiliate marketing — especially for a product like Vows.you where the buyer isn't in a rush.
+That makes Pinterest quietly perfect for affiliate marketing  -  especially for a product like Vows.you where the buyer isn't in a rush.
 
 ---
 
 ## The affiliate program in 30 seconds
 
-Vows.you helps couples write personalized wedding vows through guided prompts. It costs $129. As an affiliate, you earn 40% — that's $51.60 — for every sale that comes through your link. The cookie window is 90 days, meaning if someone clicks your pin and buys anytime in the next three months, you get paid.
+Vows.you helps couples write personalized wedding vows through guided prompts. It costs $129. As an affiliate, you earn 40%  -  that's $51.60  -  for every sale that comes through your link. The cookie window is 90 days, meaning if someone clicks your pin and buys anytime in the next three months, you get paid.
 
 Free to join. No minimums. Monthly payouts.
 
@@ -31,7 +31,7 @@ Three things make this combination work:
 
 **1. Intent is baked into the platform.**
 
-People on Pinterest aren't scrolling to kill time (okay, some are). But the majority of users who land on wedding content are actively planning. They're looking for ideas, tools, checklists, and resources. They're in buying mode — or at least in "save this for later" mode, which the 90-day cookie covers.
+People on Pinterest aren't scrolling to kill time (okay, some are). But the majority of users who land on wedding content are actively planning. They're looking for ideas, tools, checklists, and resources. They're in buying mode  -  or at least in "save this for later" mode, which the 90-day cookie covers.
 
 **2. Pins don't die.**
 
@@ -49,11 +49,11 @@ Let's talk specifics. Here are pin types that drive affiliate clicks:
 
 ### Idea pins with vow-writing tips
 
-Create a multi-slide idea pin: "5 Prompts to Help You Start Writing Your Wedding Vows." Give real value. On the last slide: "For the full guided process, try Vows.you — link in bio" or link directly if the format allows it.
+Create a multi-slide idea pin: "5 Prompts to Help You Start Writing Your Wedding Vows." Give real value. On the last slide: "For the full guided process, try Vows.you  -  link in bio" or link directly if the format allows it.
 
 ### Infographic pins
 
-Design a clean, vertical infographic: "How Long Should Wedding Vows Be?" or "Wedding Vow Writing Timeline — When to Start and When to Finish." Include your affiliate link as the destination URL. These get saved and reshared constantly.
+Design a clean, vertical infographic: "How Long Should Wedding Vows Be?" or "Wedding Vow Writing Timeline  -  When to Start and When to Finish." Include your affiliate link as the destination URL. These get saved and reshared constantly.
 
 ### Blog post pins
 
@@ -84,7 +84,7 @@ Pinterest is a search engine. Treat it like one. Use these keywords in your pin 
 - wedding ceremony vows
 - DIY wedding vows
 
-Sprinkle these naturally through your pin descriptions. Don't keyword-stuff — Pinterest's algorithm is smarter than that now. Write descriptions that read like helpful sentences, not keyword lists.
+Sprinkle these naturally through your pin descriptions. Don't keyword-stuff  -  Pinterest's algorithm is smarter than that now. Write descriptions that read like helpful sentences, not keyword lists.
 
 ---
 
@@ -112,7 +112,7 @@ A Pinterest account focused on wedding content with 50,000 monthly impressions:
 - Assuming **3% of clicks** go to your affiliate link = 15 affiliate clicks
 - **5% conversion** = 0.75 sales/month
 
-That's about $39/month or **$464/year** — and those numbers grow as your pin library grows. Creators with 200,000+ monthly impressions can realistically 4x–5x those figures.
+That's about $39/month or **$464/year**  -  and those numbers grow as your pin library grows. Creators with 200,000+ monthly impressions can realistically 4x–5x those figures.
 
 The key insight: you're not relying on any single pin to go viral. You're building a library. Each pin is a small, persistent traffic source. They add up.
 
@@ -120,11 +120,11 @@ The key insight: you're not relying on any single pin to go viral. You're buildi
 
 ## How to get started
 
-1. **[Apply to the Vows.you affiliate program](https://vows.affonso.io/)** — free, takes two minutes
-2. **Create your first 5 pins** — use the content ideas above
-3. **Optimize your boards** — create or rename a board for vow-writing content
-4. **Link everything properly** — direct pins to your affiliate URL or to blog posts with embedded affiliate links
-5. **Keep pinning** — 3-5 new pins per week is plenty. Consistency over volume.
+1. **[Apply to the Vows.you affiliate program](https://vows.affonso.io/)**  -  free, takes two minutes
+2. **Create your first 5 pins**  -  use the content ideas above
+3. **Optimize your boards**  -  create or rename a board for vow-writing content
+4. **Link everything properly**  -  direct pins to your affiliate URL or to blog posts with embedded affiliate links
+5. **Keep pinning**  -  3-5 new pins per week is plenty. Consistency over volume.
 
 Pinterest is a slow build, but it's a durable one. Every pin you create today is an asset that can drive affiliate income for the next two years. In a space as evergreen as wedding planning, that's about as close to passive income as it gets.
 

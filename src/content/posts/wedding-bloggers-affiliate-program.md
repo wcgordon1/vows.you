@@ -2,7 +2,7 @@
 pubDate: 2026-02-25
 team: "david-lee"
 title: "Monetize Your Wedding Blog with the Vows.you Affiliate Program"
-description: "Display ads pay pennies. A single affiliate link in a vow-writing article can earn $51.60 per conversion — and your content already attracts the right readers."
+description: "Display ads pay pennies. A single affiliate link in a vow-writing article can earn $51.60 per conversion  -  and your content already attracts the right readers."
 image:
   url: "../../images/affiliate/wedding-blogger.jpg"
   alt: "Wedding blogger writing at a laptop with coffee"
@@ -23,7 +23,7 @@ Here's a better option.
 
 Vows.you pays 40% commission on every sale. The product costs $129. That's $51.60 in your pocket per conversion.
 
-The cookie window is 90 days. When a reader clicks your affiliate link, they have three full months to come back and purchase. You still get credited. This matters because people reading "how to write wedding vows" are usually months away from their wedding. They're researching. They're not buying today. But they will buy — and when they do, your referral tracks.
+The cookie window is 90 days. When a reader clicks your affiliate link, they have three full months to come back and purchase. You still get credited. This matters because people reading "how to write wedding vows" are usually months away from their wedding. They're researching. They're not buying today. But they will buy  -  and when they do, your referral tracks.
 
 No sign-up fee. No monthly cost. You apply, get approved, place your links, and earn.
 
@@ -33,7 +33,7 @@ No sign-up fee. No monthly cost. You apply, get approved, place your links, and 
 
 The most effective placement isn't a banner ad at the top of your page. Readers are blind to those. What works:
 
-**In-content recommendations.** When you're writing about vow structure or prompts, that's where you say "Vows.you walks you through this step by step" with a link. It reads like a genuine recommendation because — ideally — it is one.
+**In-content recommendations.** When you're writing about vow structure or prompts, that's where you say "Vows.you walks you through this step by step" with a link. It reads like a genuine recommendation because  -  ideally  -  it is one.
 
 **Resource roundups.** If you have a "best wedding planning tools" or "wedding vow writing resources" post, add Vows.you with a short honest review. These posts rank well and attract high-intent readers.
 
@@ -72,7 +72,7 @@ Now imagine 500 of those visitors land on your vow-writing content. If 3% click 
 
 - 500 readers → 15 clicks → 0.75 sales/month
 
-That's roughly $39/month from one article. Not life-changing, but it's competitive with what your entire display ad setup earns — from a single post.
+That's roughly $39/month from one article. Not life-changing, but it's competitive with what your entire display ad setup earns  -  from a single post.
 
 And that's conservative. If your vow content gets 2,000 monthly visitors (very achievable for a post ranking on page one), the numbers scale:
 
@@ -86,16 +86,16 @@ From one article. With links you placed once.
 
 I've seen a lot of wedding affiliate programs. Most of them pay 5–10% on physical products with a 7-day cookie. You send someone to a registry site, they browse for three weeks, finally buy a $200 blender, and you get nothing because the cookie expired.
 
-Vows.you is digital, so the margins support a 40% payout. The 90-day cookie exists because the team understands how wedding planning timelines work. And the product itself — guided vow-writing prompts — is genuinely useful. Your readers will actually thank you for recommending it. That doesn't happen with most affiliate products.
+Vows.you is digital, so the margins support a 40% payout. The 90-day cookie exists because the team understands how wedding planning timelines work. And the product itself  -  guided vow-writing prompts  -  is genuinely useful. Your readers will actually thank you for recommending it. That doesn't happen with most affiliate products.
 
 ---
 
 ## Getting started
 
-1. **[Apply here](https://vows.affonso.io/)** — takes two minutes, no fee
-2. **Get your unique link** — you'll have dashboard access to track clicks and conversions
-3. **Add links to your existing vow content** — start with your highest-traffic posts
-4. **Write new content targeting vow-related keywords** — the long-tail stuff converts
+1. **[Apply here](https://vows.affonso.io/)**  -  takes two minutes, no fee
+2. **Get your unique link**  -  you'll have dashboard access to track clicks and conversions
+3. **Add links to your existing vow content**  -  start with your highest-traffic posts
+4. **Write new content targeting vow-related keywords**  -  the long-tail stuff converts
 
 You don't need to overhaul your blog. You need to add a few well-placed links to content that already exists and create one or two new posts targeting keywords your readers are already searching for.
 
