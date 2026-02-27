@@ -152,7 +152,7 @@ const articles = [
 					<Text tag="h1" variant="displayMD" class="font-serif font-medium tracking-tight text-base-900 mb-5">
 						Wedding Affiliate Program - Earn $51.60 Per Sale With Vows.you
 					</Text>
-					<Text tag="p" variant="textLG" class="text-base-600 leading-relaxed">
+					<Text tag="p" variant="textBase" class="mt-4 text-base-500">
 						Vows.you helps couples write wedding vows they're proud to read out loud. It costs $129. You earn 40% of that  -  $51.60  -  for every couple you send our way. And with a 90-day cookie window, they don't have to buy today for you to get paid.
 					</Text>
 					<div class="mt-8 flex flex-col sm:flex-row gap-4">
@@ -344,7 +344,7 @@ const articles = [
 			</div>
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 				{articles.map((article) => (
-					<a href={`/guides/${article.slug}/`} class="group block rounded-2xl border border-base-200 overflow-hidden hover:border-base-300 transition-colors">
+					<a href={`/guides/${article.slug}`} class="group block rounded-2xl border border-base-200 overflow-hidden hover:border-base-300 transition-colors">
 						<div class="aspect-[16/9] overflow-hidden bg-sand-100">
 							<Image src={article.img} alt={article.alt} width={600} height={338} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
 						</div>
