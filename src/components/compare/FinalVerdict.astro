@@ -18,6 +18,9 @@ const { competitorName, pickCompetitor, pickVowsYou } = Astro.props;
   </div>
 
   <div class="divide-y divide-base-200">
+    <div class="px-6 py-2.5 bg-sand-50/60">
+      <p class="text-xs font-medium uppercase tracking-wide text-base-400">Pick {competitorName}</p>
+    </div>
     {
       pickCompetitor.map((item) => (
         <div class="px-6 py-3.5 flex items-start gap-3">
@@ -28,6 +31,9 @@ const { competitorName, pickCompetitor, pickVowsYou } = Astro.props;
         </div>
       ))
     }
+    <div class="px-6 py-2.5 bg-accent-50/40">
+      <p class="text-xs font-medium uppercase tracking-wide text-accent-500">Pick vows.you</p>
+    </div>
     {
       pickVowsYou.map((item) => (
         <div class="px-6 py-3.5 flex items-start gap-3">

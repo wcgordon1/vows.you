@@ -26,8 +26,12 @@ export function buildArticleSchema({
     headline,
     description,
     image: `${SITE_URL}/og-image.jpg`,
-    datePublished,
-    dateModified,
+    datePublished: datePublished.includes("T")
+      ? datePublished
+      : `${datePublished}T00:00:00Z`,
+    dateModified: dateModified.includes("T")
+      ? dateModified
+      : `${dateModified}T00:00:00Z`,
     author: {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
@@ -46,13 +50,11 @@ export function buildArticleSchema({
         height: 118,
       },
     },
-    about: [
-      "wedding vows",
-      "vow writing",
-      "vow template",
-      "practice vows",
-      "personalized vows",
-    ],
+    about: {
+      "@type": "Thing",
+      name: "Wedding vow writing tool comparison",
+      description,
+    },
     inLanguage: "en-US",
   };
 }
