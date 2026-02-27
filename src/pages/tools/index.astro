@@ -1,0 +1,126 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import Text from "@/components/fundations/elements/Text.astro"
+import Wrapper from "@/components/fundations/containers/Wrapper.astro"
+import JsonLd from "@/components/fundations/head/JsonLd.astro"
+
+const SITE_URL = "https://vows.you"
+
+const breadcrumbSchema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{
+			"@type": "ListItem",
+			"position": 1,
+			"name": "Home",
+			"item": SITE_URL,
+		},
+		{
+			"@type": "ListItem",
+			"position": 2,
+			"name": "Tools",
+			"item": `${SITE_URL}/tools`,
+		},
+	],
+}
+
+const tools = [
+	{
+		title: "Wedding Vows Template",
+		href: "/wedding-vows-template",
+		description: "Answer prompts and generate ceremony-ready vows in minutes.",
+		icon: "template",
+	},
+	{
+		title: "Wedding Vow Review",
+		href: "/free-wedding-vow-review",
+		description: "Check length, timing, and detect clichéd phrases.",
+		icon: "review",
+	},
+	{
+		title: "Practice Your Vows",
+		href: "/practice-wedding-vows",
+		description: "Rehearse with a smooth-scrolling teleprompter.",
+		icon: "practice",
+	},
+	{
+		title: "Wedding Vow Cards",
+		href: "/wedding-vow-cards",
+		description: "Turn your vows into a beautiful, print-ready card.",
+		icon: "cards",
+	},
+]
+---
+
+<BaseLayout
+	title="Free Wedding Vow Tools | vows.you"
+	description="Free tools to write, review, practice, and print your wedding vows. No sign-up required. Privacy-first and fully in-browser."
+>
+	<JsonLd slot="head" data={breadcrumbSchema} />
+
+	<section>
+		<Wrapper variant="standard" class="pt-32 pb-4">
+			<div class="max-w-xl text-balance">
+				<Text
+					tag="h1"
+					variant="displayMD"
+					class="font-serif font-medium tracking-tight text-black"
+				>
+					Free Wedding Vow Tools
+				</Text>
+				<Text tag="p" variant="textBase" class="mt-4 text-base-500">
+					Everything you need to write, review, practice, and print your wedding vows. Free, private, and fully in-browser.
+				</Text>
+			</div>
+
+			<div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+				{tools.map((tool) => (
+					<a
+						href={tool.href}
+						class="group block rounded-2xl border border-base-200 p-6 hover:border-base-300 transition-colors"
+					>
+						<div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-accent-100 to-accent-50 text-accent-600 mb-5">
+							{tool.icon === "template" && (
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M12 20h9" />
+									<path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+								</svg>
+							)}
+							{tool.icon === "review" && (
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+									<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+								</svg>
+							)}
+							{tool.icon === "practice" && (
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<polygon points="6 3 20 12 6 21 6 3" />
+								</svg>
+							)}
+							{tool.icon === "cards" && (
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+									<polyline points="14 2 14 8 20 8" />
+								</svg>
+							)}
+						</div>
+						<Text tag="h2" variant="textLG" class="font-serif font-medium text-base-900 group-hover:text-accent-600 transition-colors">
+							{tool.title}
+						</Text>
+						<p class="mt-2 text-sm text-base-500 leading-relaxed">
+							{tool.description}
+						</p>
+						<span class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-accent-600 group-hover:gap-2.5 transition-all">
+							Try it free
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M5 12h14" />
+								<path d="m12 5 7 7-7 7" />
+							</svg>
+						</span>
+					</a>
+				))}
+			</div>
+		</Wrapper>
+	</section>
+</BaseLayout>

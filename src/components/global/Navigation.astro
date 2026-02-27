@@ -9,12 +9,12 @@ const navigationLinks = [
     href: "/about",
   },
   {
-    title: "Guides",
-    href: "/guides",
+    title: "Tools",
+    href: "/tools",
   },
   {
-    title: "Free Templates",
-    href: "/wedding-vows-template",
+    title: "Guides",
+    href: "/guides",
   },
   {
     title: "Support",
@@ -37,7 +37,7 @@ const navigationLinks = [
       class="relative flex flex-col md:items-center md:justify-between md:flex-row"
     >
       <div class="flex flex-row items-center justify-between">
-        <a href="/" class="flex items-center font-serif text-lg gap-2 text-base-900">
+        <a href="/" class="flex items-center font-serif text-2xl gap-2 text-base-900">
           <span class="sr-only">Go to homepage</span>
           <Logo class="h-6 text-base-800" />
           <span>Vows</span>
@@ -116,15 +116,7 @@ const navigationLinks = [
             }
           </div>
           <div class="flex flex-wrap items-center mt-auto gap-2">
-            <Button
-              isLink
-              size="xs"
-              variant="muted"
-              href="/free-wedding-vow-review"
-            >
-              Free Vow Review
-            </Button>
-            <Button isLink size="xs" variant="accent" href="https://app.vows.you/">
+            <Button isLink size="sm" variant="accent" href="https://app.vows.you/" class="text-lg">
               Start writing
             </Button>
           </div>
