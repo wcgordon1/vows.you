@@ -51,7 +51,7 @@ export function buildArticleSchema({
       "vow writing",
       "vow template",
       "practice vows",
-      "vow cards",
+      "personalized vows",
     ],
     inLanguage: "en-US",
   };
