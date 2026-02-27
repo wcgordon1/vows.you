@@ -10,56 +10,46 @@ interface Props {
 const { competitorName, pickCompetitor, pickVowsYou } = Astro.props;
 ---
 
-<div id="final-verdict" class="mt-12 p-6 bg-sand-100 rounded-xl">
-  <Text tag="h2" variant="textLG" class="font-medium text-base-800">
-    Final verdict: Vows.you or {competitorName}
-  </Text>
-
-  <div class="mt-5 grid gap-6 sm:grid-cols-2">
-    <div>
-      <p class="text-sm font-medium text-base-700 mb-2">
-        {competitorName} if you:
-      </p>
-      <ul class="space-y-1.5 list-none pl-0">
-        {
-          pickCompetitor.map((item) => (
-            <li class="text-sm text-base-500 flex gap-2">
-              <span class="text-base-400 shrink-0">&#8226;</span>
-              {item}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-    <div>
-      <p class="text-sm font-medium text-base-700 mb-2">
-        Pick vows.you if you:
-      </p>
-      <ul class="space-y-1.5 list-none pl-0">
-        {
-          pickVowsYou.map((item) => (
-            <li class="text-sm text-base-500 flex gap-2">
-              <span class="text-accent-500 shrink-0">&#8226;</span>
-              {item}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+<div id="final-verdict" class="mt-12 border border-base-200 rounded-xl overflow-hidden">
+  <div class="px-6 py-4 border-b border-base-200 bg-sand-50">
+    <Text tag="h2" variant="textLG" class="font-medium text-base-800">
+      Final verdict: Vows.you or {competitorName}
+    </Text>
   </div>
 
-  <div class="flex flex-wrap gap-3 mt-6">
-    <a
-      href="https://www.vows.you/free-wedding-vow-review"
-      class="inline-block px-5 py-2 text-sm font-medium text-white bg-accent-500 rounded-full hover:bg-accent-600 transition-colors"
-    >
-      Try the free vow review
-    </a>
+  <div class="divide-y divide-base-200">
+    {
+      pickCompetitor.map((item) => (
+        <div class="px-6 py-3.5 flex items-start gap-3">
+          <span class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-base-100 flex items-center justify-center">
+            <span class="text-xs text-base-400 font-medium">{competitorName.charAt(0)}</span>
+          </span>
+          <p class="text-sm text-base-600">{item}</p>
+        </div>
+      ))
+    }
+    {
+      pickVowsYou.map((item) => (
+        <div class="px-6 py-3.5 flex items-start gap-3">
+          <span class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-accent-50 flex items-center justify-center">
+            <span class="text-xs text-accent-500 font-medium">V</span>
+          </span>
+          <p class="text-sm text-base-600">{item}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="px-6 py-4 border-t border-base-200 bg-sand-50">
     <a
       href="https://app.vows.you"
-      class="inline-block px-5 py-2 text-sm font-medium text-base-700 bg-white border border-base-200 rounded-full hover:text-accent-500 transition-colors"
+      class="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-medium text-white bg-accent-500 rounded-full hover:bg-accent-600 transition-colors"
     >
       Start writing in the app
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </svg>
     </a>
   </div>
 </div>
