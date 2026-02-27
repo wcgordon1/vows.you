@@ -79,6 +79,11 @@
   --astro-code-token-italic: italic;
   --astro-code-token-underline: underline;
 }
+/* ── Scroll offset for anchor links beneath sticky nav ── */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
 /* ── Global: all buttons get pointer cursor ── */
 button,
 [role="button"] {
