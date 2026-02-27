@@ -9,6 +9,7 @@ import JsonLd from "@/components/fundations/head/JsonLd.astro";
 // Components
 import ShareButtons from "@/components/fundations/elements/ShareButtons.astro";
 import BlogCard from "@/components/blog/BlogCard.astro";
+import CtaSignUp from "@/components/ctas/CtaSignUp.astro";
 // Content
 const { frontmatter, slug } = Astro.props;
 import { getEntry } from "astro:content";
@@ -19,8 +20,6 @@ const allPosts = await getCollection("posts");
 const relatedPosts = allPosts.filter((post) =>
   post.data.tags.some((tag) => frontmatter.tags.includes(tag))
 );
-const isAffiliate = frontmatter.tags.includes("affiliate");
-
 // Structured data
 const SITE_URL = "https://vows.you";
 const postUrl = `${SITE_URL}/guides/${slug || Astro.url.pathname.split("/").filter(Boolean).pop()}`;
@@ -196,31 +195,7 @@ const breadcrumbSchema = {
           </Text>
           <ShareButtons description={frontmatter.description} />
         </div>
-        {isAffiliate ? (
-          <div class="p-6 mt-12 text-center bg-sand-100 rounded-xl">
-            <Text tag="p" variant="textBase" class="font-medium text-base-800">
-              Ready to start earning?
-            </Text>
-            <Text tag="p" variant="textSM" class="mt-2 text-base-500">
-              Apply to the Vows.you affiliate program  -  40% commission, 90-day cookie, no fees.
-            </Text>
-            <a href="https://vows.affonso.io/" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 px-4 py-2 text-sm font-medium text-white bg-accent-500 rounded-md hover:bg-accent-600">
-              Apply to the Affiliate Program
-            </a>
-          </div>
-        ) : (
-          <div class="p-6 mt-12 text-center bg-sand-100 rounded-xl">
-            <Text tag="p" variant="textBase" class="font-medium text-base-800">
-              Want help drafting yours?
-            </Text>
-            <Text tag="p" variant="textSM" class="mt-2 text-base-500">
-              Get guided prompts and structure to write vows that sound like you.
-            </Text>
-            <a href="/#pricing-section" class="inline-block mt-4 px-4 py-2 text-sm font-medium text-white bg-accent-500 rounded-md hover:bg-accent-600">
-              Start writing with vows.you
-            </a>
-          </div>
-        )}
+        <CtaSignUp variant="inline" />
       </div>
     </Wrapper>
   </section>

@@ -1,0 +1,52 @@
+---
+import Text from "@/components/fundations/elements/Text.astro"
+import Button from "@/components/fundations/elements/Button.astro"
+import Wrapper from "@/components/fundations/containers/Wrapper.astro"
+
+interface Props {
+	variant?: "banner" | "inline"
+}
+
+const { variant = "banner" } = Astro.props
+---
+
+{variant === "banner" ? (
+	<section class="border-t border-base-200 border-dashed">
+		<Wrapper variant="standard" class="py-4">
+			<div class="p-8 py-24 text-center rounded-xl bg-accent-500">
+				<div class="text-balance">
+					<Text
+						tag="h2"
+						variant="displayLG"
+						class="font-serif font-medium text-white"
+					>
+						Ready to write vows you'll be proud of?
+					</Text>
+					<Text tag="p" variant="textLG" class="mt-2 text-white/80">
+						Guided prompts, structure, and a teleprompter to practice. Free to start, no email required.
+					</Text>
+				</div>
+				<div class="flex justify-center mt-8">
+					<Button isLink gap="sm" size="base" variant="muted" href="https://app.vows.you/">
+						Start writing for free
+					</Button>
+				</div>
+			</div>
+		</Wrapper>
+	</section>
+) : (
+	<div class="p-6 mt-12 text-center bg-sand-100 rounded-xl">
+		<Text tag="p" variant="textBase" class="font-medium text-base-800">
+			Ready to write vows you'll be proud of?
+		</Text>
+		<Text tag="p" variant="textSM" class="mt-2 text-base-500">
+			Guided prompts and structure to help you write personal, meaningful vows. Free to start, no email required.
+		</Text>
+		<a
+			href="https://app.vows.you/"
+			class="inline-block mt-4 px-6 py-2.5 text-sm font-medium text-white bg-accent-500 rounded-full hover:bg-accent-600 transition-colors"
+		>
+			Start writing for free
+		</a>
+	</div>
+)}
