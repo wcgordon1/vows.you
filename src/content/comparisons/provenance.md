@@ -1,0 +1,193 @@
+---
+competitor: "Provenance"
+competitorUrl: "https://www.provenance.co/vows"
+competitorType: "tool"
+pageTitle: "Vows.you vs Provenance: Which Helps You Write Better Wedding Vows?"
+metaDescription: "An honest comparison of vows.you and Provenance for writing wedding vows. See which tool handles cliche detection, practice, vow cards, and ceremony readiness."
+publishedDate: "2026-02-27"
+modifiedDate: "2026-02-27"
+quickVerdict:
+  summary: "Provenance is a full ceremony planning suite that includes a vow builder. Vows.you focuses only on vows and goes deeper on writing quality, practice, and delivery. If you want one platform for your entire ceremony, Provenance is convenient. If you want the best vow-specific workflow, vows.you is built for that."
+  bestForCompetitor: "if you want a ceremony builder, officiant coordination, and vow writing in one account."
+  bestForVowsYou: "if you want focused vow writing with cliche detection, a practice teleprompter, and print-ready vow cards."
+qaItems:
+  - q: "Which is better for avoiding cliches?"
+    a: "Vows.you. It flags common vow cliches like 'you are my rock' and 'forever and always' and suggests stronger options. Provenance does not clearly advertise cliche filtering on its vows page."
+  - q: "Which is better if I freeze on a blank page?"
+    a: "Both offer prompts. Provenance lets you pick length and tone. Vows.you walks you through guided prompts that build a complete draft, so you never face an empty screen."
+  - q: "Which helps me keep vows to 1 to 2 minutes?"
+    a: "Vows.you gives you live read-time feedback as you write. Provenance lets you select a preferred length, but real-time pacing feedback is not clearly part of their vow builder."
+  - q: "Which helps me practice reading out loud?"
+    a: "Vows.you has a practice teleprompter with speed presets, fullscreen, and mirror mode. Provenance does not include a practice tool in its vow workflow."
+  - q: "Which helps me print vows cleanly?"
+    a: "Vows.you has a vow cards tool that exports PDF as a 4x6 card or half-letter booklet with background, overlay, and font options. Provenance does not offer a dedicated print formatting tool for vows."
+  - q: "Do my vows stay private?"
+    a: "On vows.you, your vows stay in the browser. Nothing is sent to a server. On Provenance, they mention privacy settings where your partner cannot see vow content unless you change settings."
+competitorStrengths:
+  - "Full ceremony planning suite with officiant coordination and timeline tools"
+  - "Partner can see vow length and tone (not content) for coordination"
+  - "Privacy settings let you control what your partner sees"
+  - "Established brand with a large user base in the wedding planning space"
+competitorDrawbacks:
+  - "Vows are one tool inside a larger suite, so the flow can feel less focused on just vows."
+  - "Length and tone coordination is useful, but cliche filtering is not clearly advertised on the vows page."
+  - "Less emphasis on delivery support in the same workflow, like practicing out loud and printing vow cards."
+  - "Some features depend on integrating with their ceremony builder and account setup."
+priceNote: "Free tier available for Provenance; paid plans for full ceremony features."
+pickCompetitor:
+  - "Want a single platform for ceremony planning, officiant coordination, and vows"
+  - "Need your partner to see vow length and tone for coordination"
+  - "Already use Provenance for other wedding planning tasks"
+pickVowsYou:
+  - "Want focused vow writing with cliche detection and weak phrase feedback"
+  - "Need a practice teleprompter to rehearse reading out loud"
+  - "Want print-ready vow cards you can hold during the ceremony"
+faqItems:
+  - q: "Are wedding vow generators worth it?"
+    a: "They can be, if they give you structure and feedback instead of just filling in blanks. A good tool helps you find your own voice, not replace it."
+  - q: "How do I avoid cliche wedding vows?"
+    a: "Start by cutting phrases you have heard before. 'You are my rock,' 'forever and always,' and 'you complete me' show up in most first drafts. Replace them with a specific memory or detail only your partner would recognize."
+  - q: "How long should vows be?"
+    a: "About 1 to 2 minutes when read out loud. That is roughly 150 to 300 words. Shorter vows tend to land better because they are easier to deliver without rushing."
+  - q: "How many promises should I include?"
+    a: "Two or three meaningful ones. More than that and your audience loses track. Pick the promises that matter most and say them clearly."
+  - q: "How do I practice vows without rushing?"
+    a: "Read them out loud at least five times. Use a teleprompter tool with speed presets so you can train yourself to slow down. Pausing between sections helps more than you expect."
+  - q: "Can I practice on my phone?"
+    a: "Yes. The vows.you practice tool works on any device with a browser. You can use fullscreen mode and mirror mode if you want to simulate reading from a podium."
+  - q: "Can I print vows as cards or a booklet?"
+    a: "Yes. Vows.you has a vow cards tool that generates a PDF in 4x6 card or half-letter booklet format. You choose the background, overlay, and font. Everything is generated in your browser."
+  - q: "Do my vows stay private?"
+    a: "On vows.you, yes. Your vows stay in the browser and nothing is sent to a server. The free tools do not require an account or login."
+  - q: "What if I am not a strong writer?"
+    a: "That is exactly who these tools are for. Vows.you uses guided prompts to ask you questions about your relationship. Your answers become the building blocks of your vows, and the tool helps you organize them."
+  - q: "What if my partner and I want similar length vows?"
+    a: "Aim for the same general range, like 1 to 2 minutes each. Vows.you shows read-time feedback so you can both check your length independently without sharing the actual content."
+---
+
+## Overview: Vows.you vs Provenance {#overview}
+
+[Provenance](https://www.provenance.co/vows) is a ceremony planning platform that includes a vow builder alongside tools for officiant coordination, timelines, and readings. Vows.you is built around one thing: helping you write, review, practice, and print wedding vows.
+
+Both tools help you avoid starting from a blank page. Provenance does this by letting you pick a length and tone, then generating a draft inside their ceremony builder. Vows.you does it with guided prompts that ask about your relationship and produce a structured vow you can edit and refine. The difference is focus. Provenance spreads across the whole ceremony. Vows.you stays on the vows and goes deeper into writing quality, cliche detection, and delivery prep. If you have ever written something that sounded great in your head and then felt flat when you read it out loud, that is the gap vows.you is designed to close.
+
+- Provenance is a ceremony suite. Vows are one feature inside it.
+- Vows.you is a vow-specific workflow: template, review, practice, and print.
+- Both have free tiers. Provenance adds more features with paid ceremony plans.
+
+## What Vows.you and Provenance each do well {#strengths}
+
+Provenance has real strengths. Their ceremony builder lets your partner see vow length and tone without seeing the content, which helps couples coordinate without spoiling the surprise. If you are also planning readings, selecting an officiant, or building a ceremony timeline, having everything in one platform reduces the number of tabs you keep open. Their privacy settings give you control over what your partner sees, and their brand has been in the wedding space long enough that many planners recommend it.
+
+Vows.you is narrower on purpose. Because it only handles vows, the workflow is tighter. You get cliche detection that flags phrases like "you are my rock" and suggests alternatives. You get length and read-time feedback while you write, not just a length preference setting. And after writing, you can practice with a teleprompter and print vow cards without leaving the tool. That end-to-end focus is where vows.you pulls ahead for people who care most about what they actually say and how they deliver it.
+
+- Provenance: ceremony coordination, partner length/tone visibility, officiant tools
+- Vows.you: cliche detection, live read-time feedback, practice teleprompter, vow cards PDF
+
+## Biggest drawbacks of Provenance {#drawbacks}
+
+Provenance is a big platform, and that is both its strength and its main limitation for vow writing specifically.
+
+Vows are one tool inside a larger suite, so the flow can feel less focused on just vows. Length and tone coordination is useful, but cliche filtering is not clearly advertised on the vows page. If it exists, it is not front and center. Less emphasis on delivery support in the same workflow means you would need separate tools for practicing out loud and printing vow cards. Some features depend on integrating with their ceremony builder and account setup, which adds steps before you can start writing. None of this makes Provenance bad. It makes it a ceremony platform that includes vow writing, rather than a vow-writing tool that goes deep.
+
+- The vow builder is one part of a larger ceremony suite
+- Cliche filtering is not clearly advertised on the vows page
+- No built-in practice teleprompter or vow card print tool
+- Account and ceremony builder setup required before writing
+
+## Vows.you features that matter in real ceremonies {#vows-you-features}
+
+The features that matter most are not the flashy ones. They are the ones that keep you from reading generic vows too fast while your hands shake.
+
+Cliche detection catches weak phrases before your partner hears them. Click highlights show you better options and prompt you to personalize. The [free vows template](https://www.vows.you/wedding-vows-template) walks you through prompts and produces a clear, modern vow about two minutes long. The [practice tool](https://www.vows.you/practice-wedding-vows) is a smooth-scrolling teleprompter with word-by-word highlighting, speed presets, fullscreen, and mirror mode. The [vow cards tool](https://www.vows.you/wedding-vow-cards) exports a PDF as a 4x6 card or half-letter booklet with background, overlay, and font choices. Everything runs in your browser. Your vows are never sent to a server.
+
+- Cliche detection and weak phrase highlighting
+- Length and read-time feedback while you write
+- Practice teleprompter with speed presets and mirror mode
+- Vow cards PDF in 4x6 or half-letter booklet format
+- Privacy: everything stays in your browser
+
+## Vows.you vs Provenance writing quality and "sounds like you" {#writing-quality}
+
+Writing quality is where the two tools diverge most. Provenance helps you select a tone and length, which is a good starting point. But selecting a tone is different from refining your actual words.
+
+Vows.you watches your draft as you write. It flags cliches, highlights weak phrases, and shows you where to add specific details. The goal is not to generate perfect prose. It is to help you sound like yourself instead of sounding like every other set of vows. After reading a lot of vows, the pattern is clear: the ones that land are specific, short, and personal. The ones that fall flat are full of borrowed phrases the couple never actually says to each other. Vows.you is built to catch that gap.
+
+- Provenance: tone and length selection as a starting point
+- Vows.you: real-time cliche detection, weak phrase feedback, and personalization prompts
+- The difference shows up most when you read the final draft out loud
+
+## Cliches and common vow mistakes: Vows.you vs Provenance {#cliches}
+
+"You are my rock." "Forever and always." "I promise to love you unconditionally." These phrases show up in nearly every first draft. They are not wrong, but they are not yours either. They are what people write when they are nervous and reaching for something safe.
+
+Vows.you flags these automatically and suggests where to swap in a real memory or detail. Instead of "you are my rock," try something like "you are the person I call when I do not know what to do." Instead of "forever and always," name a specific moment that made you sure. Provenance does not clearly advertise cliche filtering on their vows page. If their builder catches generic language, it is not a highlighted feature. That matters because cliches are the single biggest thing that makes vows sound impersonal.
+
+- "You are my rock" and "forever and always" are the two most common cliches in vow drafts
+- Vows.you flags them and suggests specific replacements
+- Provenance does not clearly feature cliche detection in their vow builder
+
+## Length and pacing: keeping vows to 1 to 2 minutes {#length}
+
+Most ceremonies move fast. If your vows run longer than two minutes, you risk losing the room. Shorter vows are also easier to deliver without rushing or losing your place.
+
+Vows.you shows you a live word count and estimated read time as you type. You can see exactly how long your vows will take before you ever stand up to practice. Provenance lets you select a preferred length when you start, which is helpful for setting expectations. But live pacing feedback during the writing process is not clearly part of their builder. The difference matters when you are editing. Knowing your draft is at 2 minutes and 40 seconds tells you exactly how many lines to cut. A length preference set at the start does not give you that same real-time signal.
+
+- Target: 150 to 300 words, about 1 to 2 minutes
+- Vows.you: live read-time feedback while you write
+- Provenance: length preference selection at the start
+
+## Practicing and delivery: reading out loud without rushing {#practice}
+
+Writing good vows is half the work. Delivering them is the other half, and most people underestimate it.
+
+The vows.you [practice tool](https://www.vows.you/practice-wedding-vows) is a teleprompter that scrolls your vows at a pace you choose. It highlights each word as you go, supports fullscreen for distraction-free practice, and has mirror mode if you want to simulate reading from a stage. Speed presets help you train yourself to slow down, because almost everyone reads too fast when they are nervous. Provenance does not include a practice tool in their vow workflow. You would need to copy your vows into a separate app or just read from your phone. That works, but it is not the same as a purpose-built practice experience.
+
+- Practice out loud at least five times before the ceremony
+- Use speed presets to train yourself to slow down
+- Fullscreen and mirror mode help simulate the real moment
+- Provenance does not include a practice teleprompter
+
+## Printing and vow cards: ceremony-friendly formatting {#printing}
+
+Nobody wants to read vows off a phone screen. A printed card or booklet looks better, feels better, and gives you something physical to hold when your hands are shaking.
+
+The vows.you [vow cards tool](https://www.vows.you/wedding-vow-cards) generates a PDF in 4x6 card or half-letter booklet format. You pick the background, overlay, and font. It supports basic formatting tags and everything is generated in your browser, so your vows never leave your device. Provenance does not offer a dedicated vow card or print formatting tool. You could copy and paste into a design app, but that is extra work on top of an already stressful process. Having print built into the same tool where you wrote and practiced saves time and keeps everything consistent.
+
+- 4x6 card or half-letter booklet PDF export
+- Background, overlay, and font customization
+- Generated in your browser for privacy
+- Provenance does not include a vow print tool
+
+## Pricing and access: Vows.you vs Provenance {#pricing}
+
+Provenance offers a free tier for basic ceremony planning, including access to their vow builder. Paid plans include more ceremony features like officiant coordination and additional customization. The full pricing depends on which ceremony plan you choose.
+
+Vows.you free tools, including the [vow template](https://www.vows.you/wedding-vows-template), [vow review](https://www.vows.you/free-wedding-vow-review), [practice tool](https://www.vows.you/practice-wedding-vows), and [vow cards](https://www.vows.you/wedding-vow-cards), do not require an account or login. You can start immediately. The tools run in your browser with no signup wall.
+
+- Provenance: free tier available, paid plans for full ceremony features
+- Vows.you: free tools with no account required
+- Neither requires a credit card to start
+
+## My take after reading a lot of vows {#author-take}
+
+After reading a lot of vows, one pattern keeps coming up. People write what they think vows should sound like instead of what they actually want to say. The result is a draft full of phrases like "you are my better half" and "I promise to love you through thick and thin." Those phrases are not bad. They are just not specific to anyone.
+
+The fix is almost always the same. Replace the generic phrase with a real moment. Instead of "you make me a better person," try "you are the reason I started cooking dinner instead of ordering takeout every night." That is a real detail. It is funny, it is personal, and it will land in a room full of people who know you.
+
+On the delivery side, nerves are real. Your voice will shake. Your hands will tremble. That is normal and expected. The best way to handle it is to practice reading out loud enough times that the words feel familiar in your mouth. A teleprompter with speed control helps because it forces you to slow down. Most people read 30 to 40 percent faster when they are nervous, and practicing at a controlled pace retrains your instinct.
+
+- Replace generic phrases with specific memories
+- "You are my rock" becomes "you are the person I call when I do not know what to do"
+- Practice out loud at least five times
+- Expect your voice to shake and plan for pauses
+
+## Who should pick Vows.you vs Provenance {#who-should-pick}
+
+Your choice depends on what you need most. If you are deep into ceremony planning and want vow writing, officiant tools, and timeline building in one place, Provenance makes sense. It is a good all-in-one platform.
+
+If your main concern is writing vows that sound like you and delivering them well, vows.you is the better fit. The focused workflow means less time navigating features you do not need and more time on the words you will actually say. People who freeze on blank pages, worry about cliches, or want to practice reading out loud will get the most value from vows.you.
+
+- Provenance is best for couples who want a full ceremony planning platform
+- Vows.you is best for people focused on writing and delivering great vows
+- You can use both if you want ceremony planning from Provenance and vow writing from vows.you

@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
+import remarkCustomHeadingId from 'remark-custom-heading-id';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,6 +12,7 @@ export default defineConfig({
   },
   markdown: {
     drafts: true,
+    remarkPlugins: [remarkCustomHeadingId],
     shikiConfig: {
       theme: "css-variables"
     }

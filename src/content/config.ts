@@ -106,6 +106,30 @@ const team = defineCollection({
     }),
 });
 
+const comparisons = defineCollection({
+  schema: z.object({
+    competitor: z.string(),
+    competitorUrl: z.string().url(),
+    competitorType: z.string(),
+    pageTitle: z.string(),
+    metaDescription: z.string(),
+    publishedDate: z.string(),
+    modifiedDate: z.string(),
+    quickVerdict: z.object({
+      summary: z.string(),
+      bestForCompetitor: z.string(),
+      bestForVowsYou: z.string(),
+    }),
+    qaItems: z.array(z.object({ q: z.string(), a: z.string() })),
+    competitorStrengths: z.array(z.string()),
+    competitorDrawbacks: z.array(z.string()),
+    priceNote: z.string(),
+    pickCompetitor: z.array(z.string()),
+    pickVowsYou: z.array(z.string()),
+    faqItems: z.array(z.object({ q: z.string(), a: z.string() })),
+  }),
+});
+
 const postsCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
@@ -129,4 +153,5 @@ export const collections = {
   helpcenter,
   posts: postsCollection,
   integrations,
+  comparisons,
 };

@@ -183,6 +183,16 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
+"comparisons": Record<string, {
+  id: string;
+  render(): Render[".md"];
+  slug: string;
+  body: string;
+  collection: "comparisons";
+  data: InferEntrySchema<"comparisons">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
 "customers": Record<string, {
   id: string;
   render(): Render[".md"];

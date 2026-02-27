@@ -1,0 +1,43 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+
+interface Props {
+  items: { q: string; a: string }[];
+  competitorName: string;
+}
+
+const { items, competitorName } = Astro.props;
+---
+
+<div id="faq" class="mt-12">
+  <Text tag="h2" variant="displaySM" class="font-serif font-medium text-base-800">
+    FAQ: Vows.you vs {competitorName}
+  </Text>
+
+  <div class="mt-6 space-y-4">
+    {
+      items.map((item) => (
+        <details class="text-left cursor-pointer group">
+          <summary class="flex items-center justify-between w-full pb-1 text-left select-none text-base-600 hover:text-accent-500">
+            {item.q}
+            <svg
+              class="w-5 h-5 duration-300 ease-out text-accent-500 transform group-open:-rotate-45 shrink-0 ml-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6v12m6-6H6"
+              />
+            </svg>
+          </summary>
+          <div class="py-4 pt-2 text-base-500 text-sm">{item.a}</div>
+        </details>
+      ))
+    }
+  </div>
+</div>

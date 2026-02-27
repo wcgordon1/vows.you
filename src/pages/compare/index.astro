@@ -1,0 +1,242 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import JsonLd from "@/components/fundations/head/JsonLd.astro";
+import Logo from "@/components/assets/Logo.astro";
+import CtaSignUp from "@/components/ctas/CtaSignUp.astro";
+import { getCollection } from "astro:content";
+
+function truncate(str: string, max: number) {
+  if (str.length <= max) return str;
+  return str.slice(0, max).trimEnd() + "...";
+}
+
+const allComparisons = await getCollection("comparisons");
+
+const SITE_URL = "https://vows.you";
+
+const tools = [
+  {
+    title: "Wedding Vows Template",
+    href: "https://www.vows.you/wedding-vows-template",
+    description: "Guided prompts that produce a clear, modern vow about two minutes long.",
+  },
+  {
+    title: "Free Wedding Vow Review",
+    href: "https://www.vows.you/free-wedding-vow-review",
+    description: "Paste your draft, get cliche and weak phrase feedback instantly.",
+  },
+  {
+    title: "Practice Wedding Vows",
+    href: "https://www.vows.you/practice-wedding-vows",
+    description: "Teleprompter with speed presets, fullscreen, and mirror mode.",
+  },
+  {
+    title: "Wedding Vow Cards",
+    href: "https://www.vows.you/wedding-vow-cards",
+    description: "PDF export as a 4x6 card or half-letter booklet for ceremony day.",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: SITE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Comparisons",
+      item: `${SITE_URL}/compare`,
+    },
+  ],
+};
+
+const collectionPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "How Vows.you compares",
+  description:
+    "Side-by-side comparisons of vows.you with other wedding vow writing tools. See which one fits your style and ceremony needs.",
+  url: `${SITE_URL}/compare`,
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: allComparisons.map((entry, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: `Vows.you vs ${entry.data.competitor}`,
+      url: `${SITE_URL}/compare/${entry.slug}`,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title="How vows.you compares | vows.you"
+  description="Side-by-side comparisons of vows.you with other wedding vow writing tools. See which one fits your style and ceremony needs."
+>
+  <JsonLd slot="head" data={breadcrumbSchema} />
+  <JsonLd slot="head" data={collectionPageSchema} />
+
+  <!-- Hero -->
+  <section>
+    <Wrapper variant="standard" class="pt-32 pb-4">
+      <div class="text-center text-balance">
+        <p class="text-sm font-medium uppercase tracking-wide text-accent-500 mb-4">
+          Honest comparisons
+        </p>
+        <Text
+          tag="h1"
+          variant="displayMD"
+          class="font-serif font-medium tracking-tight text-black"
+        >
+          How Vows.you compares
+        </Text>
+        <Text tag="p" variant="textBase" class="max-w-2xl mx-auto mt-4 text-base-500">
+          We looked at the most popular vow writing tools and compared them honestly. Where they are strong, where they fall short, and who each one is best for.
+        </Text>
+      </div>
+      <div class="flex flex-wrap items-center justify-center w-full mt-8 gap-2">
+        <Button isLink size="sm" variant="accent" href="https://app.vows.you/">
+          Start writing
+        </Button>
+        <Button isLink size="sm" variant="muted" href="/tools">
+          Free Tools
+        </Button>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- Comparison Cards -->
+  <section>
+    <Wrapper variant="standard" class="py-12 border-t border-base-200 border-dashed">
+      <div class="text-center text-balance mb-10">
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-black"
+        >
+          Side-by-side comparisons
+        </Text>
+        <Text tag="p" variant="textBase" class="max-w-xl mx-auto mt-4 text-base-500">
+          Pick a comparison to see how vows.you stacks up against each tool.
+        </Text>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {
+          allComparisons.map((entry) => (
+            <a
+              href={`/compare/${entry.slug}`}
+              class="group block rounded-2xl border border-base-200 p-6 hover:border-base-300 hover:shadow-lg transition-all duration-300"
+            >
+              <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-accent-100 to-accent-50 text-accent-600 mb-5 group-hover:-rotate-6 group-hover:-translate-y-1 transition-transform duration-300">
+                <Logo class="h-5 text-accent-600" />
+              </div>
+              <Text
+                tag="h3"
+                variant="textLG"
+                class="font-serif font-medium text-base-900 group-hover:text-accent-600 transition-colors"
+              >
+                Vows.you vs {entry.data.competitor}
+              </Text>
+              <p class="mt-2 text-sm text-base-500 leading-relaxed">
+                {truncate(entry.data.quickVerdict.summary, 150)}
+              </p>
+              <span class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-accent-600 group-hover:gap-2.5 transition-all">
+                Read the comparison
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- What We Compare -->
+  <section class="overflow-hidden">
+    <Wrapper variant="standard" class="py-16 border-t border-base-200 border-dashed">
+      <div class="text-center text-balance">
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-black"
+        >
+          What we look at in every comparison
+        </Text>
+        <Text tag="p" variant="textBase" class="max-w-xl mx-auto mt-4 text-base-500">
+          We test the same things every time. No cherry-picking. If a competitor does something better, we say so.
+        </Text>
+      </div>
+
+      <div class="grid gap-4 mt-12 md:grid-cols-2 lg:grid-cols-4">
+        {[
+          { num: "01", title: "Writing quality", desc: "Does it help you avoid cliches and sound like yourself, not a greeting card?" },
+          { num: "02", title: "Structure", desc: "Does it give you prompts so you do not freeze on a blank page?" },
+          { num: "03", title: "Practice tools", desc: "Can you rehearse reading out loud with pacing support?" },
+          { num: "04", title: "Ceremony readiness", desc: "Can you print vow cards or a booklet to hold on the day?" },
+        ].map((step) => (
+          <div class="relative p-6 bg-sand-50 rounded-2xl">
+            <span class="text-4xl font-serif text-sand-300">{step.num}</span>
+            <Text tag="h3" variant="textLG" class="mt-4 font-medium text-black">
+              {step.title}
+            </Text>
+            <Text tag="p" variant="textSM" class="mt-2 text-base-500">
+              {step.desc}
+            </Text>
+          </div>
+        ))}
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- Free Tools -->
+  <section>
+    <Wrapper variant="standard" class="pt-12 pb-4 border-t border-base-200 border-dashed">
+      <div class="text-center text-balance">
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-black"
+        >
+          Free tools to try right now
+        </Text>
+        <Text tag="p" variant="textBase" class="max-w-xl mx-auto mt-4 text-base-500">
+          No sign-up. No email. Everything runs in your browser and your vows stay private.
+        </Text>
+      </div>
+
+      <div class="grid gap-4 mt-12 md:grid-cols-2 lg:grid-cols-4">
+        {
+          tools.map((tool) => (
+            <a
+              href={tool.href}
+              class="group flex flex-col h-full p-5 bg-sand-100 rounded-xl hover:bg-white hover:shadow-2xl duration-300 outline-transparent hover:outline hover:outline-sand-100"
+            >
+              <Text tag="h3" variant="textSM" class="font-medium text-base-900 group-hover:text-accent-500 transition-colors">
+                {tool.title}
+              </Text>
+              <Text tag="p" variant="textSM" class="mt-2 text-base-500">
+                {tool.description}
+              </Text>
+            </a>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- CTA Banner -->
+  <CtaSignUp variant="banner" />
+</BaseLayout>

@@ -26,6 +26,7 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "reading-time": "^1.5.0",
+    "remark-custom-heading-id": "^2.0.0",
     "tailwind-scrollbar-hide": "^4.0.0",
     "tailwindcss": "^4.1.18"
   },

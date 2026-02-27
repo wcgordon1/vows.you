@@ -1,0 +1,41 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+
+interface Props {
+  items: { q: string; a: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="mt-10 border border-base-200 rounded-xl p-6">
+  <Text tag="h2" variant="textLG" class="font-medium text-base-800">
+    Quick Q&A
+  </Text>
+  <div class="mt-4 divide-y divide-base-200">
+    {
+      items.map((item) => (
+        <details class="group py-3 first:pt-0 last:pb-0">
+          <summary class="flex items-center justify-between w-full cursor-pointer select-none text-sm font-medium text-base-700 hover:text-accent-500 transition-colors">
+            {item.q}
+            <svg
+              class="w-4 h-4 shrink-0 ml-3 text-accent-500 transition-transform duration-300 ease-out group-open:rotate-45"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6v12m6-6H6"
+              />
+            </svg>
+          </summary>
+          <p class="pt-2 pb-1 text-sm text-base-500 leading-relaxed">{item.a}</p>
+        </details>
+      ))
+    }
+  </div>
+</div>

@@ -1,0 +1,124 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import JsonLd from "@/components/fundations/head/JsonLd.astro";
+import QuickVerdict from "@/components/compare/QuickVerdict.astro";
+import QuickQA from "@/components/compare/QuickQA.astro";
+import TOC from "@/components/compare/TOC.astro";
+import InternalLinks from "@/components/compare/InternalLinks.astro";
+import FinalVerdict from "@/components/compare/FinalVerdict.astro";
+import Faq from "@/components/compare/Faq.astro";
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+} from "@/lib/schema";
+
+interface Props {
+  frontmatter: {
+    competitor: string;
+    competitorUrl: string;
+    competitorType: string;
+    pageTitle: string;
+    metaDescription: string;
+    publishedDate: string;
+    modifiedDate: string;
+    quickVerdict: {
+      summary: string;
+      bestForCompetitor: string;
+      bestForVowsYou: string;
+    };
+    qaItems: { q: string; a: string }[];
+    competitorStrengths: string[];
+    competitorDrawbacks: string[];
+    priceNote: string;
+    pickCompetitor: string[];
+    pickVowsYou: string[];
+    faqItems: { q: string; a: string }[];
+  };
+  slug: string;
+}
+
+const { frontmatter, slug } = Astro.props;
+
+const SITE_URL = "https://vows.you";
+const pageUrl = `${SITE_URL}/compare/${slug}`;
+
+const articleSchema = buildArticleSchema({
+  url: pageUrl,
+  headline: frontmatter.pageTitle,
+  description: frontmatter.metaDescription,
+  datePublished: frontmatter.publishedDate,
+  dateModified: frontmatter.modifiedDate,
+});
+
+const breadcrumbSchema = buildBreadcrumbSchema({
+  url: pageUrl,
+  competitorName: frontmatter.competitor,
+});
+
+const faqSchema = buildFaqSchema(frontmatter.faqItems);
+---
+
+<BaseLayout
+  title={frontmatter.pageTitle}
+  description={frontmatter.metaDescription}
+  ogType="article"
+>
+  <JsonLd slot="head" data={articleSchema} />
+  <JsonLd slot="head" data={breadcrumbSchema} />
+  <JsonLd slot="head" data={faqSchema} />
+
+  <section>
+    <Wrapper variant="standard" class="pt-32 pb-4">
+      <div class="max-w-xl mx-auto">
+        <Text
+          tag="h1"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-base-900"
+        >
+          Vows.you vs {frontmatter.competitor}
+        </Text>
+        <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+          {frontmatter.metaDescription}
+        </Text>
+
+        <QuickVerdict
+          competitorName={frontmatter.competitor}
+          competitorUrl={frontmatter.competitorUrl}
+          summary={frontmatter.quickVerdict.summary}
+          bestForCompetitor={frontmatter.quickVerdict.bestForCompetitor}
+          bestForVowsYou={frontmatter.quickVerdict.bestForVowsYou}
+        />
+
+        <QuickQA items={frontmatter.qaItems} />
+
+        <TOC competitorName={frontmatter.competitor} />
+      </div>
+    </Wrapper>
+
+    <Wrapper variant="standard" class="py-4 border-t border-base-200 border-dashed">
+      <div class="max-w-xl mx-auto">
+        <Wrapper variant="prose">
+          <slot />
+        </Wrapper>
+
+        <InternalLinks />
+
+        <FinalVerdict
+          competitorName={frontmatter.competitor}
+          pickCompetitor={frontmatter.pickCompetitor}
+          pickVowsYou={frontmatter.pickVowsYou}
+        />
+
+        <div class="mt-12">
+          <Faq
+            items={frontmatter.faqItems}
+            competitorName={frontmatter.competitor}
+          />
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>
